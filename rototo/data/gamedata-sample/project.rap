@@ -1,0 +1,23 @@
+<project>
+ <scripts>
+  <file>animation_scene.rsc</file>
+  <file>game_scene.rsc</file>
+  <file>gui_scene.rsc</file>
+  <file>helloworld_scene.rsc</file>
+  <file>io_scene.rsc</file>
+  <file>main.rsc</file>
+  <file>menu_scene.rsc</file>
+  <file>music_scene.rsc</file>
+  <file>physics_scene.rsc</file>
+  <file>platform_scene.rsc</file>
+  <file>primitive_scene.rsc</file>
+  <file>sound_scene.rsc</file>
+  <file>sprite_scene.rsc</file>
+  <file>textbox_scene.rsc</file>
+  <file>tween_scene.rsc</file>
+  <file>dialog_scene.rsc</file>
+  <file>particle_scene.rsc</file>
+ </scripts>
+ <images/>
+ <sounds/>
+</project>
