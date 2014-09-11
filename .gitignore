@@ -1,3 +1,5 @@
+rototo/extern/*
+
 # Compiled Object files
 *.slo
 *.lo
@@ -19,3 +21,6 @@
 *.exe
 *.out
 *.app
+
+**/Debug*/
+**/Release*/
