@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E73DFCED-A072-44B0-9340-C0B0FEAABB46}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Rototo</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\..\bin\win32\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\..\bin\win32\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\extern\SDL2-2.0.3\include;..\extern\SDL2_mixer-2.0.0;..\extern\tinyxml2;..\extern\SDL2_image-2.0.0;..\extern\SDL2_ttf-2.0.12;..\extern\AngelScript-2.28.2\sdk\angelscript\include;..\extern\AngelScript-2.28.2\sdk\add_on;..\extern\efsw\include;..\extern\SDL2_net-2.0.0;..\extern\Fluid_Studios_Memory_Manager;..\extern\Box2D-2.3.1;..\extern\SDL2_gfx-1.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>global.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Debug;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Debug;..\extern\SDL2_mixer-2.0.0\VisualC\Debug;..\extern\tinyxml2\tinyxml2\bin\Win32-Debug-Lib;..\extern\SDL2_image-2.0.0\VisualC\Debug;..\extern\SDL2_ttf-2.0.12\VisualC\Win32\Debug;..\extern\AngelScript-2.28.2\sdk\angelscript\lib;..\extern\SDL2_net-2.0.0\VisualC\Debug;..\extern\Box2D-2.3.1\Build\vs2010\bin\Debug;..\extern\SDL2_gfx-1.0.0\Win32\Release;..\extern\efsw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2.lib;SDL2main.lib;SDL2_Mixer.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_gfx.lib;tinyxml2.lib;angelscriptd.lib;Box2D.lib;efsw-static-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\extern\SDL2-2.0.3\include;..\extern\SDL2_mixer-2.0.0;..\extern\tinyxml2;..\extern\SDL2_image-2.0.0;..\extern\SDL2_ttf-2.0.12;..\extern\AngelScript-2.28.2\sdk\angelscript\include;..\extern\AngelScript-2.28.2\sdk\add_on;..\extern\efsw\include;..\extern\SDL2_net-2.0.0;..\extern\Fluid_Studios_Memory_Manager;..\extern\Box2D-2.3.1;..\extern\SDL2_gfx-1.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>global.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sdl2.lib;SDL2main.lib;SDL2_Mixer.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_gfx.lib;tinyxml2.lib;angelscript.lib;Box2D.lib;efsw-static-release.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Release;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Release;..\extern\SDL2_mixer-2.0.0\VisualC\Release;..\extern\tinyxml2\tinyxml2\bin\Win32-Release-Lib;..\extern\SDL2_image-2.0.0\VisualC\Release;..\extern\SDL2_ttf-2.0.12\VisualC\Win32\Release;..\extern\AngelScript-2.28.2\sdk\angelscript\lib;..\extern\SDL2_net-2.0.0\VisualC\Release;..\extern\Box2D-2.3.1\Build\vs2010\bin\Release;..\extern\SDL2_gfx-1.0.0\Win32\Release;..\extern\efsw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptarray\scriptarray.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptbuilder\scriptbuilder.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptdictionary\scriptdictionary.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scripthandle\scripthandle.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptmath\scriptmath.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptstdstring\scriptstdstring.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\extern\Fluid_Studios_Memory_Manager\mmgr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Atlas.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="global.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="GUIManager.cpp" />
+    <ClCompile Include="Label.cpp" />
+    <ClCompile Include="ListBox.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="Particles.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="ScriptManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="TextBox.cpp" />
+    <ClCompile Include="TextManager.cpp" />
+    <ClCompile Include="TiledMap.cpp" />
+    <ClCompile Include="TweenManager2.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="WatchManager.cpp" />
+    <ClCompile Include="Widget.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Atlas.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Client.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="GUIManager.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="ListBox.h" />
+    <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="Particles.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Server.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="ScriptManager.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="TextBox.h" />
+    <ClInclude Include="TextManager.h" />
+    <ClInclude Include="TiledMap.h" />
+    <ClInclude Include="TweenManager2.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="WatchManager.h" />
+    <ClInclude Include="Widget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icon1.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

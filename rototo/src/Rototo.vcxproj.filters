@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\asaddons">
+      <UniqueIdentifier>{b2127675-f855-44ac-b215-263113d5a58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\gui">
+      <UniqueIdentifier>{e555e5ac-8d9f-4646-99a2-d66a59dc3e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\FluidMemoryManager">
+      <UniqueIdentifier>{e5d166a8-2ff4-41a4-9e22-85975f595ba5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Atlas.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WatchManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Client.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TweenManager2.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledMap.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBox.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Primitive.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scripthandle\scripthandle.cpp">
+      <Filter>Fichiers sources\asaddons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptbuilder\scriptbuilder.cpp">
+      <Filter>Fichiers sources\asaddons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptmath\scriptmath.cpp">
+      <Filter>Fichiers sources\asaddons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptstdstring\scriptstdstring.cpp">
+      <Filter>Fichiers sources\asaddons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptarray\scriptarray.cpp">
+      <Filter>Fichiers sources\asaddons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptdictionary\scriptdictionary.cpp">
+      <Filter>Fichiers sources\asaddons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\Fluid_Studios_Memory_Manager\mmgr.cpp">
+      <Filter>Fichiers sources\FluidMemoryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="global.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Atlas.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="WatchManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="TweenManager2.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledMap.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBox.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextBox.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Primitive.h">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icon1.ico" />
+  </ItemGroup>
+</Project>
