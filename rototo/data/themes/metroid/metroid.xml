@@ -1,0 +1,16 @@
+<settings>
+<font name = "metroid.ttf" size = "48"/>
+<primary_text_color r="11" g="51" b="60" a="255" />
+<disable_text_color r="91" g="103" b="112" a="255" />
+<background_color r="19" g="23" b="26" a="255" />
+<button_up name = "ppg_button-up-skin" nine = "yes" x="8" y="8" w="15" h="49"/>
+<button_disabled name = "ppg_button-disabled-skin" nine = "yes" x="8" y="8" w="15" h="49"/>
+<list_normal name = "ppg_list-item-up-skin" nine = "no"/>
+<list_selected name = "ppg_list-item-down-skin" nine = "no"/>
+
+<checkbox_up name = "ppg_check-up-icon" nine = "no"/>
+<checkbox_down name = "ppg_check-selected-down-icon" nine = "no"/>
+<checkbox_disabled name = "ppg_check-disabled-icon" nine = "no"/>
+
+
+</settings>

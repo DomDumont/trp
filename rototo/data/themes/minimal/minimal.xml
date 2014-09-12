@@ -1,0 +1,14 @@
+<settings>
+<font name = "pf_ronda_seven.ttf" size = "32"/>
+<primary_text_color r="102" g="102" b="102" a="255" />
+<disable_text_color r="153" g="153" b="153" a="255" />
+<background_color r="243" g="243" b="243" a="255" />
+<button_up name = "button-up-skin" nine = "yes" x="5" y="5" w="1" h="1"/>
+<button_disabled name = "button-disabled-skin" nine = "yes" x="5" y="5" w="1" h="1"/>
+<list_normal name = "list-item-up" nine = "yes" x="5" y="5" w="1" h="1"/>
+<list_selected name = "list-item-selected" nine = "yes" x="5" y="5" w="1" h="1"/>
+<checkbox_up name = "check-icon" nine = "no"/>
+<checkbox_down name = "check-selected-icon" nine = "no"/>
+<checkbox_disabled name = "check-disabled-icon" nine = "no"/>
+
+</settings>

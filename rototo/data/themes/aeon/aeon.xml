@@ -1,0 +1,15 @@
+<settings>
+<font name = "aeon_main.ttf" size = "48"/>
+<primary_text_color r="11" g="51" b="60" a="255" />
+<disable_text_color r="91" g="103" b="112" a="255" />
+<background_color r="134" g="156" b="167" a="255" />
+<button_up name = "button-up-skin" nine = "yes" x="6" y="6" w="70" h="10"/>
+<button_down name = "button-down-skin" nine = "yes" x="6" y="6" w="70" h="10"/>
+<button_disabled name = "button-disabled-skin" nine = "yes" x="6" y="6" w="70" h="10"/>
+<checkbox_up name = "check-up-icon" nine = "no"/>
+<checkbox_down name = "check-selected-down-icon" nine = "no"/>
+<checkbox_disabled name = "check-disabled-icon" nine = "no"/>
+
+<list_normal name = "item-renderer-up-skin" nine = "no" />
+<list_selected name = "item-renderer-selected-up-skin" nine = "no" />
+</settings>

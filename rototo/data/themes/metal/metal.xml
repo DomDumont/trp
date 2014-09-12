@@ -1,0 +1,16 @@
+<settings>
+<font name = "SourceSansPro-Semibold.ttf" size = "32"/>
+<primary_text_color r="229" g="229" b="229" a="255" />
+<disable_text_color r="56" g="52" b="48" a="255" />
+<background_color r="74" g="65" b="55" a="255" />
+<button_up name = "button-up-skin" nine = "yes" x="5" y="5" w="50" h="50" />
+<button_disabled name = "button-disabled-skin" nine = "yes" x="5" y="5" w="50" h="50"  />
+<!-- -->
+<list_normal name = "list-item-up-skin" nine = "yes" x="13" y="0" w="2" h="82" />
+<list_selected name = "list-item-selected-skin" nine = "yes" x="13" y="0" w="2" h="82" />
+
+<checkbox_up name = "background-skin" nine = "no"/>
+<checkbox_down name = "check-selected-down-icon" nine = "no"/>
+<checkbox_disabled name = "background-disabled-skin" nine = "no"/>
+
+</settings>

@@ -1,0 +1,15 @@
+<settings>
+<position x = "50" y = "100"/>
+<size w = "768" h="576"/>
+<editor url="D:\tools\Sublime Text Build 3 3021 x64\sublime_text.exe" args="%s:%d:%d"/>
+<datafolder2 directory="gamedata-shooter"/>
+<datafolder2 directory="gamedata-amilate"/>
+<datafolder2 directory="gamedata-cocci"/>
+<datafolder directory="gamedata-sample"/>
+<datafolder2 directory="gamedata-naked"/>
+<autorestart value="1"/>
+<allowdebug value="1"/>
+<verbose value="0"/>
+<logtofile value="1"/>
+<serrver ip="10.31.4.168"/>
+</settings>
