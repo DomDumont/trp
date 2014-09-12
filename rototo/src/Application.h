@@ -30,10 +30,8 @@
 
 #include "SoundManager.h"
 #include "TextManager.h"
-#include "SceneManager.h"
 #include "ScriptManager.h"
-//#include "TweenManager.h"
-#include "TweenManager2.h"
+#include "TweenManager.h"
 #include "ResourceManager.h"
 #include "WatchManager.h"
 #include "NetworkManager.h"

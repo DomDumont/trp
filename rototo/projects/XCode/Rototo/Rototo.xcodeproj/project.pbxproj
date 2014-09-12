@@ -66,7 +66,7 @@
 		0BE97D5517FDBE5300FDD3A4 /* TiledMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BE97D5217FDBE5300FDD3A4 /* TiledMap.cpp */; };
 		9E45AB6E19672DA100D7D964 /* webp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BC7197E17F97989009994E4 /* webp.framework */; };
 		9E7D064B17EF622C0063302F /* scripthandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E7D064917EF622C0063302F /* scripthandle.cpp */; };
-		9ED4D67917F34AD6007D921D /* TweenManager2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED4D67717F34AD6007D921D /* TweenManager2.cpp */; };
+		9ED4D67917F34AD6007D921D /* TweenManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9ED4D67717F34AD6007D921D /* TweenManager.cpp */; };
 		C0FD5E3B18216A6200B63346 /* scriptmath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0FD5E3918216A6200B63346 /* scriptmath.cpp */; };
 		C0FD5E4D18219AE300B63346 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C0FD5E4B18219AE300B63346 /* Vector2D.cpp */; };
 /* End PBXBuildFile section */
@@ -192,8 +192,8 @@
 		9E3170EC19672A73004785D7 /* libSDL2_net.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_net.a; path = "../../../extern/SDL2_net-2.0.0/Xcode/build/Release/libSDL2_net.a"; sourceTree = "<group>"; };
 		9E45AB6319672B7D00D7D964 /* pkg-support */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "pkg-support"; path = "../../../extern/SDL2_net-2.0.0/Xcode/pkg-support"; sourceTree = "<group>"; };
 		9E7D064917EF622C0063302F /* scripthandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scripthandle.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scripthandle/scripthandle.cpp"; sourceTree = "<group>"; };
-		9ED4D67717F34AD6007D921D /* TweenManager2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TweenManager2.cpp; path = ../../../../src/TweenManager2.cpp; sourceTree = "<group>"; };
-		9ED4D67817F34AD6007D921D /* TweenManager2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweenManager2.h; path = ../../../../src/TweenManager2.h; sourceTree = "<group>"; };
+		9ED4D67717F34AD6007D921D /* TweenManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TweenManager.cpp; path = ../../../../src/TweenManager.cpp; sourceTree = "<group>"; };
+		9ED4D67817F34AD6007D921D /* TweenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweenManager.h; path = ../../../../src/TweenManager.h; sourceTree = "<group>"; };
 		9ED4D67E17F34C7C007D921D /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../../../src/Application.h; sourceTree = "<group>"; };
 		C0FD5E3918216A6200B63346 /* scriptmath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptmath.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scriptmath/scriptmath.cpp"; sourceTree = "<group>"; };
 		C0FD5E4B18219AE300B63346 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector2D.cpp; path = ../../../src/Vector2D.cpp; sourceTree = SOURCE_ROOT; };
@@ -377,8 +377,8 @@
 				0BE97D5117FDBE5300FDD3A4 /* Animation.h */,
 				0BE97D5217FDBE5300FDD3A4 /* TiledMap.cpp */,
 				0BE97D5317FDBE5300FDD3A4 /* TiledMap.h */,
-				9ED4D67717F34AD6007D921D /* TweenManager2.cpp */,
-				9ED4D67817F34AD6007D921D /* TweenManager2.h */,
+				9ED4D67717F34AD6007D921D /* TweenManager.cpp */,
+				9ED4D67817F34AD6007D921D /* TweenManager.h */,
 				0B98CF8B17D7403500C2D7EE /* TextManager.cpp */,
 				0B706D4B17F1C9DB005980A0 /* TextManager.h */,
 				0B60333D17E9A22E00A05E6E /* Utils.cpp */,
@@ -527,7 +527,7 @@
 				0B534BF117E72F9C009B1E63 /* NetworkManager.cpp in Sources */,
 				0B534BF217E72F9C009B1E63 /* WatchManager.cpp in Sources */,
 				0B7D67D9192CECF40060BA19 /* SDL2_imageFilter.c in Sources */,
-				9ED4D67917F34AD6007D921D /* TweenManager2.cpp in Sources */,
+				9ED4D67917F34AD6007D921D /* TweenManager.cpp in Sources */,
 				0BC4E2E31805A377004552FF /* Label.cpp in Sources */,
 				0B1C566017E8799D004A9945 /* Client.cpp in Sources */,
 				0B1C566117E8799D004A9945 /* Server.cpp in Sources */,
