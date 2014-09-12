@@ -6,6 +6,6 @@
 * T.R.P. cannot compete with other engines like Cocos2dx or LibGDX but it should be enough to make small games in a relatively good environment.
 * T.R.P. makes you feel at home. You work on Windows, osx or linux with your preferred text editor (or with ratata, the IDE). You can then connect as many clients as you want (ios and/or android) to see the final result in real time.
  
-T.R.P. is in an early alpha stage with lots of stuff missing and cradhes but it starts to be fun ;-)
-You can follow my tasklist on Trello : [here](https://trello.com/b/BuZnyeq9)
+T.R.P. is in an early alpha stage with lots of stuff missing and crashes but it starts to be fun ;-)
+You can see my tasklist on Trello : [here](https://trello.com/b/BuZnyeq9)
 
