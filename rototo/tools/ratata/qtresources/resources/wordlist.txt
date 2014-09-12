@@ -1,0 +1,17 @@
+TMXLayerAttribZlib
+TMXPropertyLayer
+TMXPropertyMap
+TMXPropertyNone
+TMXPropertyObject
+TMXPropertyObjectGroup
+TMXPropertyTile
+tonumber
+tostring
+unpack
+UTI_Log
+vertex2
+vertex3
+WND_ClearWithColor
+WND_GetLogicalSize
+WND_SetWindowTitle
+xpcall

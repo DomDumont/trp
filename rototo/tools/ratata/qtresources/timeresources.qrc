@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/open_project.png</file>
+        <file>images/save.png</file>
+        <file>images/time_machine.png</file>
+        <file>images/copy.png</file>
+        <file>images/cut.png</file>
+        <file>images/paste.png</file>
+        <file>images/debug.png</file>
+        <file>images/step.png</file>
+        <file>images/stop.png</file>
+        <file>images/folder_open.png</file>
+        <file>images/folder_closed.png</file>
+        <file>images/music.png</file>
+        <file>images/image.png</file>
+        <file>images/script.png</file>
+        <file>images/home.png</file>
+        <file>images/initial.png</file>
+        <file>images/new_project.png</file>
+        <file>images/missing.png</file>
+        <file>resources/wordlist.txt</file>
+        <file>resources/fps_images.png</file>
+        <file>resources/fps_images-hd.png</file>
+        <file>resources/fps_images-ipadhd.png</file>
+        <file>images/connect.png</file>
+        <file>images/disconnect.png</file>
+		<file>images/arrow-refresh.png</file>
+		<file>images/arrow-step-out.png</file>
+		<file>images/arrow-step-over.png</file>
+		<file>images/television.png</file>
+    </qresource>
+</RCC>
