@@ -87,7 +87,7 @@ SRCS = $(ROTOTO_PATH)/Main.cpp \
 	$(ROTOTO_PATH)/GUIManager.cpp\
 	$(ROTOTO_PATH)/TiledMap.cpp\
 	$(ROTOTO_PATH)/TextManager.cpp\
-	$(ROTOTO_PATH)/TweenManager2.cpp\
+	$(ROTOTO_PATH)/TweenManager.cpp\
 	$(ROTOTO_PATH)/Utils.cpp\
 	$(ROTOTO_PATH)/WatchManager.cpp\
 	$(ROTOTO_PATH)/Font.cpp\
