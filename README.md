@@ -9,3 +9,7 @@
 T.R.P. is in an early alpha stage with lots of stuff missing and crashes but it starts to be fun ;-)
 You can see my tasklist on Trello : [here](https://trello.com/b/BuZnyeq9)
 
+
+## Binaries 
+
+First public osx binaries for the crazy ones ;-) [here](http://www.mediafire.com/download/169xn3fidbntdse/trp.dmg)
