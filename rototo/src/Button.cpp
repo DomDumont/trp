@@ -59,14 +59,23 @@ void RegisterButton()
 	g_app->scriptManager->RegisterClassMethod("Button","void SetSize(int _w,int _h)", asMETHOD(Button, SetSize));
 	///func:void SetPosition(int x,int y,int from=0)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetPosition(int _x,int _y,int _from=0)", asMETHOD(Button, SetPosition));
+	///func:void SetFont(Font @ font)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetFont(Font @ _font)", asMETHOD(Button, SetFont));
+	///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", asMETHOD(Button, SetSprite));
+	///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Button, SetTextColor));
+	///func:void SetRotation(float angle)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetRotation(float _angle)", asMETHOD(Button, SetRotation));
+	///func:bool Touched(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Button","bool Touched(int _x,int _y)", asMETHOD(Button, Touched));
+	///func:void SetScale(double xFactor,double yFactor)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Button, SetScale));
+	///func:void SetEnabled(bool value)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetEnabled(bool _value)", asMETHOD(Button, SetEnabled));
+	///func:void SetType(int type)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetType(int _type)", asMETHOD(Button, SetType));
+	///func:void SetState(int state)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetState(int _state)", asMETHOD(Button, SetState));
 	r = g_app->scriptManager->engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler)); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data)); SDL_assert( r >= 0 );
