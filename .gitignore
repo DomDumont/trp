@@ -25,6 +25,15 @@ rototo/extern/*
 **/Debug*/
 **/Release*/
 
+**/moc/
+**/osx-version/
+**/doc/en/out/
+**/doc/fr/out/
+**/doc/en/generated*
+**/doc/fr/generated*
+
+
+
 # Xcode
 .DS_Store
 build/
