@@ -65,8 +65,8 @@ rsync -r  ../data/gamedata-sample ./osx-version/
 rsync -r  ../data/helpers ./osx-version/
 rsync -r  ../data/themes ./osx-version/
 rsync   ../data/settings.xml ./osx-version/
-rsync   ../data/README.md ./osx-version/
-rsync   ../data/LISEZMOI.md ./osx-version/
+rsync   ../doc/en/README-OSX.md ./osx-version/
+rsync   ../doc/fr/LISEZMOI-OSX.md ./osx-version/
 
 #--------------------
 # DMG Creation
