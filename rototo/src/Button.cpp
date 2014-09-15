@@ -341,17 +341,17 @@ void Button::SetPosition(int _x,int _y,int _from)
 
          //Now position the text within the button
         if (this->type == TYPE_BUTTON)
-        {
+            {
             int centerX = this->position.x + this->position.w/2; 
             int centerY = this->position.y + this->position.h/2; 
             label.SetPosition(centerX,centerY,0);
-        }
+            }
         else
-        {
+            {
             int centerX = this->position.x + CHECKBOX_SIZE + 20; 
             int centerY = this->position.y + ((this->position.h-CHECKBOX_SIZE) /4);
             label.SetPosition(centerX,centerY,1);
-        }
+            }
         }
         break;
     }
