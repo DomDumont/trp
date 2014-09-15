@@ -55,9 +55,6 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="TweenManager2.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -124,6 +121,9 @@
     <ClCompile Include="Particles.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="TweenManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -163,9 +163,6 @@
       <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Fichiers sources</Filter>
-    </ClInclude>
-    <ClInclude Include="TweenManager2.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
@@ -209,6 +206,9 @@
       <Filter>Fichiers sources</Filter>
     </ClInclude>
     <ClInclude Include="Particles.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="TweenManager.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
   </ItemGroup>
