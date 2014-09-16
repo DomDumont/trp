@@ -35,10 +35,12 @@ const unsigned int Client::CONNECTION_TIMEOUT_PERIOD = 5000;        // 5 second 
 const unsigned int Client::SOCKET_SET_POLL_PERIOD    = 0;          // 10ms, so poll 100 times/second
 
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 Client::Client(std::string _theServerAddress, unsigned int _theServerPort, unsigned int _theBufferSize)
 {
-
-
 
 	// The host name of the server.
 	// This can be either a dot-quad like 127.0.0.1 or a hostname like "localhost" or "foo.com" etc.
@@ -63,6 +65,10 @@ Client::Client(std::string _theServerAddress, unsigned int _theServerPort, unsig
 
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 Client::~Client()
 {
 	// Close our server and client sockets
@@ -79,7 +85,11 @@ Client::~Client()
 
 
 
-// Function to poll for clients connecting
+
+/*----------------------------------------------------------------------------*/
+/* Function to poll for clients connecting                                    */
+/*----------------------------------------------------------------------------*/
+
 void Client::ConnectToServer()
 {
 	// Try to resolve the hostname to an IP address, if it's already an IP address then that's fine
@@ -96,19 +106,19 @@ void Client::ConnectToServer()
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"SDLNet_ResolveHost OK 2\n");
 		}
 
-    Uint8 * dotQuad = (Uint8*)&serverIP.host;
-    
-    dotQuadString  = toString( (unsigned short)dotQuad[0] );
-    dotQuadString += ".";
-    dotQuadString += toString( (unsigned short)dotQuad[1] );
-    dotQuadString += ".";
-    dotQuadString += toString( (unsigned short)dotQuad[2] );
-    dotQuadString += ".";
-    dotQuadString += toString( (unsigned short)dotQuad[3] );
-    
-    SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Successfully resolved server to IP: %s \n",dotQuadString.c_str());
+	Uint8 * dotQuad = (Uint8*)&serverIP.host;
+	
+	dotQuadString  = toString( (unsigned short)dotQuad[0] );
+	dotQuadString += ".";
+	dotQuadString += toString( (unsigned short)dotQuad[1] );
+	dotQuadString += ".";
+	dotQuadString += toString( (unsigned short)dotQuad[2] );
+	dotQuadString += ".";
+	dotQuadString += toString( (unsigned short)dotQuad[3] );
+	
+	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Successfully resolved server to IP: %s \n",dotQuadString.c_str());
 
-    
+	
 	// Try to open a connection between the client and the server - quit out if we can't connect
 	clientSocket = SDLNet_TCP_Open(&serverIP);
 	if (!clientSocket)
@@ -166,95 +176,109 @@ void Client::ConnectToServer()
 		} // End of if we managed to open a connection to the server condition
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 void Client::MakeDir(SDL_RWops * _rw)
 {
-    char dirName[20];
+	char dirName[20];
 
-    int ret;
-    ret = (int) SDL_RWread(_rw,dirName,1,20);
-    SDL_assert(ret == 20);
-    char * pFind = strchr(dirName,' ');
-    SDL_assert(pFind != NULL);
-    *pFind = 0;
+	int ret;
+	ret = (int) SDL_RWread(_rw,dirName,1,20);
+	SDL_assert(ret == 20);
+	char * pFind = strchr(dirName,' ');
+	SDL_assert(pFind != NULL);
+	*pFind = 0;
 
-    std::string tempString = "Server asks to makedir ";
-    tempString += dirName;
-    SDL_Log(tempString.c_str());
+	std::string tempString = "Server asks to makedir ";
+	tempString += dirName;
+	SDL_Log(tempString.c_str());
 
-    
+	
 #ifdef TRP_IOS
-    std::string fullDirPath;
-    
-    fullDirPath =  "..//Documents//" + g_app->settings_gamedataURL+"//";
-    
-    ret = mkdir(fullDirPath.c_str(), S_IRWXU);
-    if (ret != 0)
-        SDL_Log("Cannot create gamedata Directory");
-    
-    fullDirPath += dirName;
+	std::string fullDirPath;
+	
+	fullDirPath =  "..//Documents//" + g_app->settings_gamedataURL+"//";
+	
+	ret = mkdir(fullDirPath.c_str(), S_IRWXU);
+	if (ret != 0)
+		SDL_Log("Cannot create gamedata Directory");
+	
+	fullDirPath += dirName;
 
-    ret = mkdir(fullDirPath.c_str(), S_IRWXU);
-    if (ret != 0)
-        SDL_Log("Cannot create Directory");
+	ret = mkdir(fullDirPath.c_str(), S_IRWXU);
+	if (ret != 0)
+		SDL_Log("Cannot create Directory");
 #endif
 
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 void Client::ReceiveFile(SDL_RWops * _rw)
 {
-    char fileName[20];
+	char fileName[20];
 
-    int ret;
-    ret = SDL_RWread(_rw,fileName,1,20);
-    SDL_assert(ret == 20);
-    char * pFind = strchr(fileName,' ');
-    SDL_assert(pFind != NULL);
-    *pFind = 0;
-    SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"FILENAME RECEIVED = %s",fileName);
-    int length;
-    ret = SDL_RWread(_rw,&length,1,4);
-    if (ret != 4)
-        {
-        //Not enough data in the stream, ask myself for more (blocking)
-        int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, &length, 4);
-        SDL_assert(serverResponseByteCount == 4);
-        }
-    SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"LENGTH OF THE RECEIVED FILE = %d \n",length);
+	int ret;
+	ret = (int) SDL_RWread(_rw,fileName,1,20);
+	SDL_assert(ret == 20);
+	char * pFind = strchr(fileName,' ');
+	SDL_assert(pFind != NULL);
+	*pFind = 0;
+	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"FILENAME RECEIVED = %s",fileName);
+	int length;
+	ret = (int) SDL_RWread(_rw,&length,1,4);
+	if (ret != 4)
+		{
+		//Not enough data in the stream, ask myself for more (blocking)
+		int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, &length, 4);
+		SDL_assert(serverResponseByteCount == 4);
+	}
+	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"LENGTH OF THE RECEIVED FILE = %d \n",length);
 
-    
+	
 
-    SDL_RWops *out = g_app->resourceManager->Save(fileName,GAMEDATA|BOTH);
+	SDL_RWops *out = g_app->resourceManager->Save(fileName,GAMEDATA|BOTH);
 
 
-    char *tempBuffer = NULL;
-    tempBuffer = new char[bufferSize]; //Violent
-    
-    //First try to read everything
-    ret = SDL_RWread(_rw,tempBuffer,1,length);
-    if (ret != length)
-        {
-        //Write at least what we have
-        SDL_RWwrite(out, tempBuffer, ret, 1);
-        //We don't have anything try to read the rest
-        int remain = length - ret;
-        do {
-            int nbToread =  MYMIN(remain,bufferSize);
-            int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, tempBuffer, nbToread);
-            SDL_RWwrite(out, tempBuffer, serverResponseByteCount, 1);
-            remain = remain - serverResponseByteCount;
-        
-        } while (remain);
-        }
-    else
-        {
-        //We got evrything, just write it to disk
-        SDL_RWwrite(out, tempBuffer, length, 1);
-        }
+	char *tempBuffer = NULL;
+	tempBuffer = new char[bufferSize]; //Violent
+	
+	//First try to read everything
+	ret = (int) SDL_RWread(_rw,tempBuffer,1,length);
+	if (ret != length)
+		{
+		//Write at least what we have
+		SDL_RWwrite(out, tempBuffer, ret, 1);
+		//We don't have anything try to read the rest
+		int remain = length - ret;
+		do
+			{
+			int nbToread =  MYMIN(remain,bufferSize);
+			int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, tempBuffer, nbToread);
+			SDL_RWwrite(out, tempBuffer, serverResponseByteCount, 1);
+			remain = remain - serverResponseByteCount;
+		
+			}
+		while (remain);
+		}
+	else
+		{
+		//We got evrything, just write it to disk
+		SDL_RWwrite(out, tempBuffer, length, 1);
+		}
 
-    SDL_RWclose(out);
-
-    delete []tempBuffer;
+	SDL_RWclose(out);
+	delete []tempBuffer;
 }
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 SDL_RWops* Client::CheckForIncomingMessages()
 {
@@ -268,17 +292,17 @@ SDL_RWops* tempFile = NULL;
 	//if (debug) { cout << "There are " << activeSockets << " socket(s) with data on them at the moment." << endl; }
 
 	if (activeSockets != 0)
-	{
+		{
 		// Check if we got a message from the server
 		int gotMessage = SDLNet_SocketReady(clientSocket);
 
 		if (gotMessage != 0)
-		{
+			{
 			int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, pBuffer, bufferSize);
 
 			if (serverResponseByteCount > 0)
 				{
-                SDL_Log("serverResponseByteCount %d\n",serverResponseByteCount);
+				SDL_Log("serverResponseByteCount %d\n",serverResponseByteCount);
 				tempFile = SDL_RWFromMem(pBuffer,serverResponseByteCount);
 				}
 			else // If we've received a 0 byte message from the server then we've lost the connection!
@@ -286,9 +310,9 @@ SDL_RWops* tempFile = NULL;
 				SDL_Log("Lost connection to the server!\n");
 				}
 
-		} // End of if (gotMessage != 0) section
+			} // End of if (gotMessage != 0) section
 
-	} // End of if (activeSockets != 0) section
+		} // End of if (activeSockets != 0) section
 
 	// Return the message, whether the actually is a message, or whether it's blank
 	return tempFile;
