@@ -12,4 +12,7 @@ You can see my tasklist on Trello : [here](https://trello.com/b/BuZnyeq9)
 
 ## Binaries 
 
-First public osx binaries for the crazy ones ;-) [here](http://www.mediafire.com/download/169xn3fidbntdse/trp.dmg)
+First public binaries for the crazy ones ;-) 
+
+* OSX   : [here](http://www.mediafire.com/download/169xn3fidbntdse/trp.dmg)
+* Win32 : [here](http://www.mediafire.com/download/42nx7mju6ub2g0o/trp-win32.zip)
