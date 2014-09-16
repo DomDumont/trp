@@ -1,7 +1,7 @@
 REM ----------------------------------------------------------------------------
 REM  Build Documentation
 REM ----------------------------------------------------------------------------
-REM to skip building goto tralala
+REM activate this line to skip compilation goto tralala
 
 PUSHD .\doc
 call extract_api.bat
@@ -44,6 +44,9 @@ REM  Copy Ratata
 REM --------------------
 robocopy  ./ratata_distrib/bin ./win32-version/ ratata.exe
 robocopy   C:/Qt/4.8.6/bin   ./win32-version/ QtNetwork4.dll
+robocopy   C:/Qt/4.8.6/bin   ./win32-version/ QtCore4.dll
+robocopy   C:/Qt/4.8.6/bin   ./win32-version/ QtGui4.dll
+robocopy   C:/Qt/4.8.6/bin   ./win32-version/ QtXml4.dll
 
 REM --------------------
 REM  Copy Rototo
@@ -73,7 +76,10 @@ rem robocopy ../Rototo/rototo/themes ./trp/themes /e
 
 
 del  trp-win32.zip
-7za a -tzip  trp-win32.zip ./win32-version
+cd win32-version
+"../7za" a -tzip  ../trp-win32.zip .
+cd ..
+
 rem "C:\Program Files (x86)\NSIS\makensis.exe" trp.nsi
 
 
