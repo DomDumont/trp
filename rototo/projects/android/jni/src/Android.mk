@@ -10,8 +10,8 @@ SDL_IMAGE_PATH := ../SDL2_image
 SDL_TTF_PATH := ../SDL2_ttf
 SDL_NET_PATH := ../SDL2_net-2.0.0
 SDL_GFX_PATH := ../SDL2_gfx-1.0.0
-ANGELSCRIPT_PATH := ../AngelScript-2.28.2/sdk/angelscript/include
-ANGELSCRIPT_ADDON_PATH := ../AngelScript-2.28.2/sdk/add_on
+ANGELSCRIPT_PATH := ../AngelScript-2.29.0/sdk/angelscript/include
+ANGELSCRIPT_ADDON_PATH := ../AngelScript-2.29.0/sdk/add_on
 TINYXML_PATH := ../tinyxml2
 ROTOTO_PATH := ../../../../src
 BOX2D_PATH := ../Box2D-2.3.1
@@ -45,7 +45,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.c \
 	$(ROTOTO_PATH)/GUIManager.cpp\
 	$(ROTOTO_PATH)/TiledMap.cpp\
 	$(ROTOTO_PATH)/TextManager.cpp\
-	$(ROTOTO_PATH)/TWeenManager2.cpp\
+	$(ROTOTO_PATH)/TWeenManager.cpp\
 	$(ROTOTO_PATH)/Utils.cpp\
 	$(ROTOTO_PATH)/WatchManager.cpp\
 	$(ROTOTO_PATH)/Font.cpp\
@@ -56,6 +56,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.c \
 	$(ROTOTO_PATH)/Widget.cpp\
 	$(ROTOTO_PATH)/Vector2D.cpp\
 	$(ROTOTO_PATH)/Debug.cpp\
+	$(ROTOTO_PATH)/Particles.cpp\
 	$(SDL_GFX_PATH)/SDL2_gfxPrimitives.c\
 	$(SDL_GFX_PATH)/SDL2_rotozoom.c\
 	$(ANGELSCRIPT_ADDON_PATH)/scriptstdstring/scriptstdstring.cpp\
