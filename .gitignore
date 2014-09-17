@@ -32,6 +32,8 @@ rototo/extern/*
 **/doc/fr/out/
 **/doc/en/generated*
 **/doc/fr/generated*
+**/Android/obj
+**/Android/bin
 
 
 
