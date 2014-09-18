@@ -66,18 +66,18 @@ SoundManager::~SoundManager()
 void SoundManager::Init()
 {
 	if (Mix_OpenAudio(rate, format, channels, buffers) < 0)
-	{
-	SDL_Log("Couldn't open audio: %s\n", SDL_GetError());
-	}
+		{
+		SDL_Log("Couldn't open audio: %s\n", SDL_GetError());
+		}
 	else
-	{
+		{
 		Mix_QuerySpec(&rate, &format, &channels);
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Opened audio at %d Hz %d bit %s (%s), %d bytes audio buffer\n", rate,
 			(format&0xFF),
 			(channels > 2) ? "surround" : (channels > 1) ? "stereo" : "mono",
 			(format&0x1000) ? "BE" : "LE",
 			buffers );
-	}
+		}
 	
 	initialized = 1;
 	Mix_VolumeMusic(volume);
@@ -268,8 +268,8 @@ void DestructSound(Sound *thisPointer)
 /*----------------------------------------------------------------------------*/
 
 Sound::Sound(): sample(NULL),channel(-1),volume(MIX_MAX_VOLUME)
-	{
-	}
+{
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

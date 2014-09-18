@@ -49,16 +49,16 @@ void ScanGameData(const std::string & _path);
 template<class A, class B>
 B* refCast(A* a)
 {
-    // If the handle already is a null handle, then just return the null handle
-    if( !a ) return 0;
-    // Now try to dynamically cast the pointer to the wanted type
-    B* b = dynamic_cast<B*>(a);
-    if( b != 0 )
-    {
-        // Since the cast was made, we need to increase the ref counter for the returned handle
-        b->AddRef();
-    }
-    return b;
+	// If the handle already is a null handle, then just return the null handle
+	if( !a ) return 0;
+	// Now try to dynamically cast the pointer to the wanted type
+	B* b = dynamic_cast<B*>(a);
+	if( b != 0 )
+		{
+		// Since the cast was made, we need to increase the ref counter for the returned handle
+		b->AddRef();
+		}
+	return b;
 }
 
 std::string LoadTextFile(const std::string& _file, unsigned int _flags);
@@ -78,6 +78,7 @@ void UTI_CloseLogFile();
 void UTI_Exit();
 void UTI_SRand(unsigned int _seed);
 int  UTI_Rand(int _min,int _max);
+std::string UTI_GetVersion();
 
 Uint64 IO_Open(const std::string& _name,const std::string& _mode);
 int  IO_WriteString(Uint64  _handle,const std::string& _string);

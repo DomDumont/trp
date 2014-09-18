@@ -57,21 +57,24 @@ void Init()
     fpsLabel.SetText("FPS : ",true);
     fpsLabel.SetPosition(100,740);    
 
-
+    string tempText;
+    tempText = "T.R.P. Samples";
 	//monLabel.SetFont(fonte35);
 #if OSX
-	monLabel.SetText("T.R.P. Samples");
+	tempText += " OSX Version ";
 #endif
 #if WIN32
-	monLabel.SetText("T.R.P. Samples");
+	tempText += " Win Version ";
 #endif
 #if IOS
-	monLabel.SetText("T.R.P. Samples");
+	tempText += " IOS Version ";
 #endif
 
 #if ANDROID
-    monLabel.SetText("T.R.P. Samples");
+    tempText += " Android Version ";
 #endif    
+	tempText += UTI_GetVersion();
+	monLabel.SetText(tempText);
 	monLabel.SetShaded(false);
 	monLabel.SetPosition(260,100);
 	monLabel.SetRotation(-5);

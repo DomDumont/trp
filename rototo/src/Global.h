@@ -47,5 +47,6 @@ class CApplication;
 extern CApplication *g_app;
 
 #define MY_SAFE_RELEASE(p) { if ( (p) ) { (p)->Release(); (p) = 0; } }
+#define TRP_VERSION "0.8.0"
 
 #endif
