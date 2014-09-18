@@ -67,6 +67,7 @@ rsync -r  ../data/themes ./osx-version/
 rsync   ../data/settings.xml ./osx-version/
 rsync   ../doc/en/README-OSX.md ./osx-version/
 rsync   ../doc/fr/LISEZMOI-OSX.md ./osx-version/
+rsync   ../doc/VERSION.md ./osx-version/
 
 #--------------------
 # DMG Creation

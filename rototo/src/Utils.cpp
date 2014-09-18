@@ -263,7 +263,7 @@ void WND_SetLogicalSize(int _w,int _h)
 std::string UTI_GetVersion()
 {
 	std::string contents;
-	contents = TRP_VERSION;
+	contents = ROTOTO_VERSION;
 	return contents;
 }
 

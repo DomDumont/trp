@@ -63,6 +63,7 @@ robocopy   ../data/themes ./win32-version/themes /e
 robocopy   ../data ./win32-version settings.xml
 robocopy   ../doc/en ./win32-version README-WIN32.md
 robocopy   ../doc/fr ./win32-version LISEZMOI-WIN32.md 
+robocopy   ../doc ./win32-version VERSION.md 
 
 rem robocopy ../data/gamedata-sample ./win32-version/data/gamedata-sample /e
 rem robocopy ../doc/out ./win32-version/docs /e
