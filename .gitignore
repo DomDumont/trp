@@ -28,7 +28,7 @@ rototo/extern/*
 **/moc/
 **/osx-version/
 **/win32-version/
-**/doc/en/out/
+# **/doc/en/out/
 **/doc/fr/out/
 **/doc/en/generated*
 **/doc/fr/generated*

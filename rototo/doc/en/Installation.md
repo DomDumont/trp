@@ -1,8 +1,25 @@
 
 # Installation
 
-T.R.P. don't really need to be "installed". However, it comes with a set of tools which, in turn, need to be. These tools are optional but T.R.P. was thought to use them. So your life will be much simpler if you do;-)
+T.R.P. don't really need to be "installed". 
 
+## OSX 
+
+Under OSX, T.R.P. comes as a disk image (dmg file). Just click on this dmg file to mount it.
+You will see something like this
+
+![Alt text](./raw/images/osx-installer.png)\
+
+Copy everything to a location of your choice
+Launch Rototo just to see the samples.
+
+## Windows
+
+On Windows, T.R.P. comes as a zip file.
+Copy the content of the zip file to a location of your choice
+Launch Rototo just to see the samples.
+
+However, it comes with a set of tools which, in turn, need to be. These tools are optional but T.R.P. was thought to use them. So your life will be much simpler if you do;-)
 
 ## ShoeBox
 
@@ -29,13 +46,6 @@ take a version of Tiled directly on their website :
 [http://www.mapeditor.org](http://www.mapeditor.org)
 
 
-## SublimeText T.R.P. Plugin
-
-T.R.P.'s scripts (*.rsc files) can be edited with any text editor but if you use Sublime Text 3 you will benefit of the T.R.P. plugin to ease your life.
-This plugin is included in the Tools directory.
-It offers snippets and code generators that can enhance your T.R.P. experience.
-
-[http://www.sublimetext.com/3](http://www.sublimetext.com/3)
 
 
 

@@ -1,5 +1,10 @@
-# Revisions
+# Documentation Revisions
 
+## Version 3:
+
+	- Remove Sublime Plugin
+	- Add Build Section
+	- The version is now on GitHub So a lot of small things changed.
 
 ## Version 2:
     

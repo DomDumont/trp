@@ -111,6 +111,8 @@ BuildSite
 
 --------------------------------------------------"""    
 def BuildSite (_source_dir,_out_dir) :
+    global out_html
+    out_html = "# Script Reference \n\n"
     ConvertDirectory(_source_dir,_out_dir,_source_dir)
     if (ApplyTemplate(OSPJ(_out_dir,'generated-ref.md')) == False):
         return False
