@@ -43,16 +43,25 @@ mkdir -p ./en
 mkdir -p ./fr
 popd
 
+rm -rf osx-version
+mkdir osx-version
 
 #--------------------
 # Copy Documentation
 #--------------------
+cd osx-version
+mkdir doc
+cd doc
+mkdir en
+mkdir fr
+cd ..
+cd ..
 rsync -r  ../doc/en/out/* ./osx-version/doc/en
 rsync -r  ../doc/fr/out/* ./osx-version/doc/fr
 #--------------------
 # Copy Ratata
 #--------------------
-rsync -r ./ratata_distrib/bin/ratata.app ./osx-version/
+rsync -r ./ratata_distrib/bin/Ratata.app ./osx-version/
 
 #--------------------
 # Copy Rototo
