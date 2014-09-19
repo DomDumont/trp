@@ -18,6 +18,8 @@ nmake clean -f .\Makefile.Release
 nmake  -f .\Makefile.Release
 POPD
 
+pause
+
 REM ----------------------------------------------------------------------------
 REM  Build Rototo
 REM ----------------------------------------------------------------------------
