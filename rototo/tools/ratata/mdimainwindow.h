@@ -27,6 +27,7 @@
 
 #include <QMainWindow>
 
+#define RATATA_VERSION "0.2.3"
 
 class MdiChild;
 class QAction;

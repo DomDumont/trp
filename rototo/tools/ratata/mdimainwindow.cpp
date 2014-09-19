@@ -568,8 +568,10 @@ void MDIMainWindow::openRecentFile()
 
  void MDIMainWindow::about()
  {
-    QMessageBox::about(this, tr("About Ratata"),
-             tr("Ratata, the rototo IDE @Dominique Dumont"));
+    QString tempMsg = tr("Ratata, the rototo IDE @Dominique Dumont\nVersion : ");
+    tempMsg += RATATA_VERSION;
+
+    QMessageBox::about(this, tr("About Ratata"),tempMsg);
  }
 
  void MDIMainWindow::updateMenus()

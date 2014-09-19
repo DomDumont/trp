@@ -51,17 +51,20 @@ RESOURCES += \
 RC_FILE = myapp.rc
 ICON = myicon.icns
 
+
 DESTDIR = ../ratata_distrib/bin
 UI_DIR = .
 
 CONFIG(debug, debug|release) {
-        TARGET = ratatad
+        QMAKE_INFO_PLIST = RatataD.plist
+        TARGET = RatataDebug
         OBJECTS_DIR = ../ratata_distrib/obj
         MOC_DIR = ../ratata_distrib/moc
 }
 
 CONFIG(release, debug|release) {
-        TARGET = ratata
+        QMAKE_INFO_PLIST = Ratata.plist
+        TARGET = Ratata
         OBJECTS_DIR = ../ratata_distrib/obj
         MOC_DIR = ../ratata_distrib/moc
 }
