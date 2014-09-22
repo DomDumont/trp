@@ -51,8 +51,8 @@ void Init()
 	
 
 
-    helpLabel.SetText("Press F12 to see scripts\nPress F1 for Help",true);
-    helpLabel.SetPosition(windowX/2,700);    
+    helpLabel.SetText("Ctrl-R to restart scripts\nCtrl-F to explore scripts\nCtrl-H for Help",true);
+    helpLabel.SetPosition(windowX * 3/4,600);    
 
     fpsLabel.SetText("FPS : ",true);
     fpsLabel.SetPosition(100,740);    

@@ -98,7 +98,7 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 		
 			//F6 Restart
 
-			if (event->key.keysym.scancode == SDL_SCANCODE_F6)
+			if ((event->key.keysym.mod & KMOD_CTRL) && (event->key.keysym.scancode == SDL_SCANCODE_R))
 				{
 				*done = DONECODE_RESTART_ONLY; //! \TODO change this
 				networkManager->SendMessageToAllClients("R>\n"); //Restart
@@ -107,7 +107,7 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 			// F7 Change Screen Orientation
 
 			else
-			if (event->key.keysym.scancode == SDL_SCANCODE_F7)
+			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_O))
 				{
 				if (this->orientation == ORIENTATION_PORTRAIT)
 					{
@@ -124,43 +124,53 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 				}
 			else
 			// F12 Launch GameDataFolder ?
-			if (event->key.keysym.scancode == SDL_SCANCODE_F12)
+			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_F))
 				{
 #ifdef WIN32
 				{
-				char currentDir[512];
-				GetBundlePath(currentDir,512);
-
 				std::string tempPath;
 				tempPath = "explorer ";
-				tempPath += currentDir;
+				tempPath += g_app->settings_configURL;
 				tempPath = tempPath + "\\"+g_app->settings_gamedataURL+"\\";
+				system(tempPath.c_str());
+				}
+#endif
+#ifdef TRP_OSX
+				{
+				std::string tempPath;
+				tempPath = "open ";
+				tempPath += g_app->settings_configURL + "//" + g_app->settings_gamedataURL + "//";
 				system(tempPath.c_str());
 				}
 #endif
 				}
 			else
-			if (event->key.keysym.scancode == SDL_SCANCODE_F1)
+			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_H))
 				{
 #ifdef WIN32
-				{
-				char currentDir[512];
-				GetBundlePath(currentDir,512);
-					
+				{					
 				std::string tempPath;
 				tempPath = "explorer ";
-				tempPath += currentDir;
-				tempPath = tempPath + "\\docs\\trp-manual.html";
+				tempPath += g_app->settings_configURL;
+				tempPath = tempPath + "\\docs\\en\\trp-manual.html";
+				system(tempPath.c_str());
+				}
+#endif
+#ifdef TRP_OSX
+				{
+				std::string tempPath;
+				tempPath = "open ";
+				tempPath += g_app->settings_configURL + "//docs//en//trp-manual.html";
 				system(tempPath.c_str());
 				}
 #endif
 				}
 			else
 			if (event->key.keysym.scancode == SDL_SCANCODE_S)
-			{
-			std::string pathToScan = ".//"+g_app->settings_gamedataURL+"//";
-			ScanGameData(pathToScan);
-			}
+				{
+				std::string pathToScan = ".//"+g_app->settings_gamedataURL+"//";
+				ScanGameData(pathToScan);
+				}
 
 			scriptManager->RunScript("void OnKeyUp(uint32 _scancode)",(char*)"d",event->key.keysym.scancode);
 			

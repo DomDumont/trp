@@ -40,92 +40,116 @@
 
 #if defined WIN32 || defined TRP_OSX
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 class UpdateListener : public efsw::FileWatchListener
 {
 public:
 	UpdateListener() {}
 
 
-    void handleFileAction( efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename = ""  )    
+	void handleFileAction( efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename = ""  )
 	{
-        std::string tempString;
+		std::string tempString;
 
-        
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"%s %d\n",filename.c_str(),action);
-        tempString = filename;
+		tempString = filename;
 #ifdef TRP_OSX
-        //TODO REMOVE THIS ANTIBUG OSX
-        //tempString = filename.substr(11);
-        tempString = basename((char*)filename.c_str());
+		//TODO REMOVE THIS ANTIBUG OSX
+		//tempString = filename.substr(11);
+		tempString = basename((char*)filename.c_str());
 #endif
 
-        if (StartsWith(tempString,"save_")== false)
-        {
-		g_app->networkManager->SendFileToAllClients(tempString);
-        if (g_app->settings_autorestart)
-            {
-		    g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
-		    g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
-            }
-        }
+		if (StartsWith(tempString,"save_")== false)
+			{
+			g_app->networkManager->SendFileToAllClients(tempString);
+			if (g_app->settings_autorestart)
+				{
+				g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
+				g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
+				}
+			}
 		//std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << action << std::endl;
 	}
 };
 
 #endif
 
-	WatchManager::WatchManager()
-	{
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+WatchManager::WatchManager()
+{
 #if defined WIN32 || defined TRP_OSX
-		fileWatcher = NULL;
+	fileWatcher = NULL;
 #endif
-	}
-	WatchManager::~WatchManager()
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+WatchManager::~WatchManager()
 	{
 	}
 
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 void WatchManager::Init()
 {
-    
-    
-    
+	
 #if defined WIN32
-		char pathbuf[512];
-		fileWatcher = new efsw::FileWatcher();
-		// add a watch to the system
-		watcherListener = new UpdateListener();
-        strcpy(pathbuf,"./");
-        strcat(pathbuf,g_app->settings_gamedataURL.c_str());
-		efsw::WatchID watchID = fileWatcher->addWatch(pathbuf,watcherListener);
+	char pathbuf[512];
+	fileWatcher = new efsw::FileWatcher();
+	// add a watch to the system
+	watcherListener = new UpdateListener();
+	strcpy(pathbuf,"./");
+	strcat(pathbuf,g_app->settings_gamedataURL.c_str());
+	efsw::WatchID watchID = fileWatcher->addWatch(pathbuf,watcherListener);
 #endif
 
 #if  defined TRP_OSX
 	char pathbuf[512];
 	Uint32  bufsize = sizeof(pathbuf);
-    //GetBundlePath(pathbuf,bufsize);
-    strcpy(pathbuf,g_app->settings_configURL.c_str());
-    strcat(pathbuf,"//");
-    strcat(pathbuf,g_app->settings_gamedataURL.c_str());
-    fileWatcher = new efsw::FileWatcher();
-    // add a watch to the system
-    watcherListener = new UpdateListener();
-    efsw::WatchID watchID = fileWatcher->addWatch(pathbuf,watcherListener,true /*recursive*/);
+
+	strcpy(pathbuf,g_app->settings_configURL.c_str());
+	strcat(pathbuf,"//");
+	strcat(pathbuf,g_app->settings_gamedataURL.c_str());
+	fileWatcher = new efsw::FileWatcher();
+	// add a watch to the system
+	watcherListener = new UpdateListener();
+	efsw::WatchID watchID = fileWatcher->addWatch(pathbuf,watcherListener,true /*recursive*/);
 #endif
 
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
-	void WatchManager::Update(Uint64 _elapsed)
-	{
-    #if defined WIN32 || defined TRP_OSX
-		//fileWatcher->update(); //TODO Check where the update is done now.
-    #endif
-	}
-	void WatchManager::Shutdown()
-	{
-    #if defined WIN32 || defined TRP_OSX
-		delete fileWatcher;
-		delete watcherListener;
-		fileWatcher = NULL;
-    #endif
-	}
+void WatchManager::Update(Uint64 _elapsed)
+{
+#if defined WIN32 || defined TRP_OSX
+	//fileWatcher->update(); //TODO Check where the update is done now.
+#endif
+}
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void WatchManager::Shutdown()
+{
+#if defined WIN32 || defined TRP_OSX
+	delete fileWatcher;
+	delete watcherListener;
+	fileWatcher = NULL;
+#endif
+}
