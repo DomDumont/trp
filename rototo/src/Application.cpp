@@ -137,10 +137,17 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 #endif
 #ifdef TRP_OSX
 				{
+                char currentDir[512];
+                GetBundlePath(currentDir,512);
+                    
 				std::string tempPath;
-				tempPath = "open ";
-				tempPath += g_app->settings_configURL + "//" + g_app->settings_gamedataURL + "//";
-				system(tempPath.c_str());
+                std::string command;
+                tempPath = currentDir;
+                tempPath+= "//" + g_app->settings_gamedataURL + "//";
+                command = "osascript -e 'tell app \"Finder\" to open POSIX file \""+ tempPath+"\"'";
+                system(command.c_str());
+                command = "osascript -e 'tell application \"Finder\" to activate'";
+                system(command.c_str());
 				}
 #endif
 				}
