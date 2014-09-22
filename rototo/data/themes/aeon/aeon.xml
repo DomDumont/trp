@@ -9,7 +9,9 @@
 <checkbox_up name = "check-up-icon" nine = "no"/>
 <checkbox_down name = "check-selected-down-icon" nine = "no"/>
 <checkbox_disabled name = "check-disabled-icon" nine = "no"/>
-
+<radiobox_up name = "radio-up-icon" nine = "no"/>
+<radiobox_down name = "radio-selected-down-icon" nine = "no"/>
+<radiobox_disabled name = "radio-disabled-icon" nine = "no"/>
 <list_normal name = "item-renderer-up-skin" nine = "no" />
 <list_selected name = "item-renderer-selected-up-skin" nine = "no" />
 </settings>

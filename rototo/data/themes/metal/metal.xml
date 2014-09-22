@@ -13,4 +13,8 @@
 <checkbox_down name = "check-selected-down-icon" nine = "no"/>
 <checkbox_disabled name = "background-disabled-skin" nine = "no"/>
 
+<radiobox_up name = "radio-selected-up-icon" nine = "no"/>
+<radiobox_down name = "radio-selected-down-icon" nine = "no"/>
+<radiobox_disabled name = "radio-selected-disabled-icon" nine = "no"/>
+
 </settings>

@@ -207,6 +207,16 @@ switch(this->type)
 			this->sprite_disable = *(g_app->guiManager->checkbox_disable);
 		break;
 
+	case TYPE_RADIOBOX :
+		if ((this->sprite_up.entry == NULL) && (g_app->guiManager->radiobox_up != NULL))
+			this->sprite_up = *(g_app->guiManager->radiobox_up);
+		
+		if ((this->sprite_down.entry == NULL) && (g_app->guiManager->radiobox_down != NULL))
+			this->sprite_down = *(g_app->guiManager->radiobox_down);
+		
+		if ((this->sprite_disable.entry == NULL) && (g_app->guiManager->radiobox_disable != NULL))
+			this->sprite_disable = *(g_app->guiManager->radiobox_disable);
+		break;
 	default:
 		SDL_assert(0);
 		break;
@@ -284,6 +294,14 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 		else
 			this->state = STATE_UP;
 		}
+	else
+	if (this->type == TYPE_RADIOBOX)
+		{
+		if (this->state == STATE_UP)
+			this->state = STATE_DOWN;
+		else
+			this->state = STATE_UP;
+		}
 	//Call Callback
 
 	if (this->on_click_handler != NULL)
@@ -318,10 +336,18 @@ void Button::SetPosition(int _x,int _y,int _from)
 			this->sprite_disable.SetPosition(_x,_y,0);
 			}
 		else
+		if (this->type == TYPE_CHECKBOX)
 			{
 			this->sprite_up.SetPosition(_x,_y+((this->position.h-CHECKBOX_SIZE)/2),1);
 			this->sprite_down.SetPosition(_x,_y+((this->position.h-CHECKBOX_SIZE)/2),1);
 			this->sprite_disable.SetPosition(_x,_y+((this->position.h-CHECKBOX_SIZE)/2),1);
+			}
+		else
+		if (this->type == TYPE_RADIOBOX)
+			{
+			this->sprite_up.SetPosition(_x,_y+((this->position.h-RADIOBOX_SIZE)/2),1);
+			this->sprite_down.SetPosition(_x,_y+((this->position.h-RADIOBOX_SIZE)/2),1);
+			this->sprite_disable.SetPosition(_x,_y+((this->position.h-RADIOBOX_SIZE)/2),1);
 			}
 
 		//Now position the text within the button
@@ -333,9 +359,17 @@ void Button::SetPosition(int _x,int _y,int _from)
 			label.SetPosition(centerX,centerY,0);
 			}
 		else
+		if (this->type == TYPE_CHECKBOX)
 			{
 			int centerX = this->position.x + CHECKBOX_SIZE + 20;
 			int centerY = this->position.y + ((this->position.h-CHECKBOX_SIZE) /4);
+			label.SetPosition(centerX,centerY,1);
+			}
+		else
+		if (this->type == TYPE_RADIOBOX)
+			{
+			int centerX = this->position.x + RADIOBOX_SIZE + 20;
+			int centerY = this->position.y + ((this->position.h-RADIOBOX_SIZE) /4);
 			label.SetPosition(centerX,centerY,1);
 			}
 
@@ -358,11 +392,20 @@ void Button::SetPosition(int _x,int _y,int _from)
 			label.SetPosition(centerX,centerY,0);
 			}
 		else
+		if (this->type == TYPE_CHECKBOX)
 			{
 			int centerX = this->position.x + CHECKBOX_SIZE + 20;
 			int centerY = this->position.y + ((this->position.h-CHECKBOX_SIZE) /4);
 			label.SetPosition(centerX,centerY,1);
 			}
+		else
+		if (this->type == TYPE_RADIOBOX)
+			{
+			int centerX = this->position.x + RADIOBOX_SIZE + 20;
+			int centerY = this->position.y + ((this->position.h-RADIOBOX_SIZE) /4);
+			label.SetPosition(centerX,centerY,1);
+			}
+
 		}
 		break;
 	}
@@ -395,6 +438,21 @@ void Button::SetScale(double _xFactor,double _yFactor)
 		this->sprite_disable.position.y += ((this->position.h-CHECKBOX_SIZE) /2);
 
 		}
+	else
+	if (this->type == TYPE_RADIOBOX)
+		{
+		this->sprite_up.position.w = RADIOBOX_SIZE;
+		this->sprite_down.position.w = RADIOBOX_SIZE;
+		this->sprite_disable.position.w = RADIOBOX_SIZE;
+		this->sprite_up.position.h = RADIOBOX_SIZE;
+		this->sprite_down.position.h = RADIOBOX_SIZE;
+		this->sprite_disable.position.h = RADIOBOX_SIZE;
+		
+		this->sprite_up.position.y += ((this->position.h-RADIOBOX_SIZE) /2);
+		this->sprite_down.position.y += ((this->position.h-RADIOBOX_SIZE) /2);
+		this->sprite_disable.position.y += ((this->position.h-RADIOBOX_SIZE) /2);
+		
+		}
 	label.SetScale(_xFactor, _yFactor);
 }
 
@@ -424,9 +482,17 @@ void Button::SetSize(int _w,int _h)
 		label.SetPosition(centerX,centerY,0);
 		}
 	else
+	if (this->type == TYPE_CHECKBOX)
 		{
 		int centerX = this->position.x + CHECKBOX_SIZE + 20;
 		int centerY = this->position.y + ((this->position.h-CHECKBOX_SIZE) /4);
+		label.SetPosition(centerX,centerY,1);
+		}
+	else
+	if (this->type == TYPE_RADIOBOX)
+		{
+		int centerX = this->position.x + RADIOBOX_SIZE + 20;
+		int centerY = this->position.y + ((this->position.h-RADIOBOX_SIZE) /4);
 		label.SetPosition(centerX,centerY,1);
 		}
 }

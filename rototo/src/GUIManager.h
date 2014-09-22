@@ -41,42 +41,46 @@ class GUIManager
 
 public:
 
-    GUIManager         ();
-    ~GUIManager        ();
-    
-    void Init           ();
-    void Shutdown       ();
-    void HandleEvent    ( SDL_Event * event);	
-    void AddWidget      (Widget *_widget);
-    void RemoveWidget   (Widget *_widget);
-    void LoadTheme      (const std::string& _file);
-    void UnLoadTheme    ();
+	GUIManager	();
+	~GUIManager	();
+	
+	void Init		();
+	void Shutdown		();
+	void HandleEvent	( SDL_Event * event);
+	void AddWidget		(Widget *_widget);
+	void RemoveWidget	(Widget *_widget);
+	void LoadTheme		(const std::string& _file);
+	void UnLoadTheme	();
 
 private:
-    Sprite *  LoadSprite     (void* _elem);
+	Sprite *  LoadSprite	(void* _elem);
 
 public:
-    Font	                *font;
-    Atlas                   *atlas;
+	Font			*font;
+	Atlas			*atlas;
 
-    Sprite                  *button_up;
-    Sprite                  *button_down;
-    Sprite                  *button_disable;
-    Sprite                  *list_normal_item;
-    Sprite                  *list_selected_item;
-    Sprite                  *checkbox_up;
-    Sprite                  *checkbox_down;
-    Sprite                  *checkbox_disable;
+	Sprite			*button_up;
+	Sprite			*button_down;
+	Sprite			*button_disable;
+	Sprite			*list_normal_item;
+	Sprite			*list_selected_item;
+	
+	Sprite			*checkbox_up;
+	Sprite			*checkbox_down;
+	Sprite			*checkbox_disable;
 
+	Sprite			*radiobox_up;
+	Sprite			*radiobox_down;
+	Sprite			*radiobox_disable;
 
-    SDL_Color               primary_text_color;
-    SDL_Color               disable_text_color;
-    SDL_Color               background_color;
+	SDL_Color		primary_text_color;
+	SDL_Color		disable_text_color;
+	SDL_Color		background_color;
 
 private:
 
-    std::vector<Widget*>                widgets; 
-    std::vector<Widget *>::iterator     widgetsIT;
+	std::vector<Widget*>			widgets;
+	std::vector<Widget *>::iterator		widgetsIT;
 
 };
 

@@ -38,7 +38,8 @@
     {
     TYPE_BUTTON,
     TYPE_CHECKBOX,
-    TYPE_ONOFF        
+    TYPE_ONOFF,
+    TYPE_RADIOBOX        
     }
 
     enum BUTTON_STATE

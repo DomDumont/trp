@@ -33,61 +33,64 @@
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
 
-#define STATE_UP        0
-#define STATE_DOWN      1
-#define STATE_DISABLE   2
+#define STATE_UP	0
+#define STATE_DOWN	1
+#define STATE_DISABLE	2
 
-#define TYPE_BUTTON     0
-#define TYPE_CHECKBOX   1
-#define TYPE_ONOFF      2
+#define TYPE_BUTTON	0
+#define TYPE_CHECKBOX	1
+#define TYPE_ONOFF	2
+#define TYPE_RADIOBOX	3
 
-#define CHECKBOX_SIZE   20  
+
+#define CHECKBOX_SIZE	20
+#define RADIOBOX_SIZE	20
 
 
 class Button : public Widget
 {
- public:
+public:
 
-    Button                  ();
-    ~Button                 ();
+	Button			();
+	~Button			();
 
-    void Render             ();
-    void SetText            (const std::string& _newText);
-    void SetFont            (Font & _font);
-    void ApplyTheme         ();
-    void SetSprite          (int _index,Atlas * _atlas, const std::string& _name, bool _ninePatch = false);
-    void SetPosition        (int _x,int _y,int _from = 0);
-    void SetSize            (int _w,int _h);
-    void SetTextColor       (unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
-    void SetRotation        (float _angle);
-    void SetScale           (double _xFactor,double _yFactor);
-    void SetEnabled         (bool _value);
-    int  OnMouseButtonDown  ( SDL_Event * event);
-    void SetType            (int _type);
-    void SetState           (int _state);
+	void Render		();
+	void SetText		(const std::string& _newText);
+	void SetFont		(Font & _font);
+	void ApplyTheme		();
+	void SetSprite		(int _index,Atlas * _atlas, const std::string& _name, bool _ninePatch = false);
+	void SetPosition	(int _x,int _y,int _from = 0);
+	void SetSize		(int _w,int _h);
+	void SetTextColor	(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
+	void SetRotation	(float _angle);
+	void SetScale		(double _xFactor,double _yFactor);
+	void SetEnabled		(bool _value);
+	int  OnMouseButtonDown	( SDL_Event * event);
+	void SetType		(int _type);
+	void SetState		(int _state);
 
- public:
+public:
 
-    asIScriptFunction *     on_click_handler;
-    CScriptHandle           user_data;
-    CScriptHandle           sender;
+	asIScriptFunction *	on_click_handler;
+	CScriptHandle		user_data;
+	CScriptHandle		sender;
 
 
- private:
+private:
 
-    Label                   label;
-    Sprite                  sprite_up;
-    Sprite                  sprite_down;
-    Sprite                  sprite_disable;
+	Label			label;
+	Sprite			sprite_up;
+	Sprite			sprite_down;
+	Sprite			sprite_disable;
 
-    int                     state;
-    int                     type;
+	int			state;
+	int			type;
 
 
 
 };
 
-Button *ButtonFactory();
-void    RegisterButton();
+Button	*ButtonFactory();
+void	RegisterButton();
 
 #endif

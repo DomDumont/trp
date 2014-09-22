@@ -2,8 +2,11 @@ class GUIScene:Scene
     {
 
     Label  monLabel;
+
     Button buttonBack; 
     Button checkboxTest;
+    Button radioboxTest;
+
     Atlas  myAtlas;
 
     bool OnClickHandler(ref @ _sender,ref @ _userData)
@@ -44,6 +47,16 @@ class GUIScene:Scene
 
         GUI_AddWidget(checkboxTest);
 
+        radioboxTest.SetType(TYPE_RADIOBOX);
+        radioboxTest.SetText("Test Radiobox");        
+        radioboxTest.SetSize(350,100);
+        radioboxTest.SetPosition(200,300);        
+        radioboxTest.SetEnabled(true);
+        radioboxTest.SetScale(1.0,1.0);
+
+        GUI_AddWidget(radioboxTest);
+
+
         }
         
     void OnUpdate(uint64 _delta)
@@ -57,6 +70,7 @@ class GUIScene:Scene
         monLabel.Render();
         buttonBack.Render();
         checkboxTest.Render();
+        radioboxTest.Render();
         }
 
     void OnShutdown()
@@ -67,6 +81,7 @@ class GUIScene:Scene
         @buttonBack.user_data = null;    
         GUI_RemoveWidget(buttonBack);   
         GUI_RemoveWidget(checkboxTest);   
+        GUI_RemoveWidget(radioboxTest);           
         myAtlas.UnLoad();
         }
         

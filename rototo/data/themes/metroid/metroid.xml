@@ -12,5 +12,8 @@
 <checkbox_down name = "ppg_check-selected-down-icon" nine = "no"/>
 <checkbox_disabled name = "ppg_check-disabled-icon" nine = "no"/>
 
+<radiobox_up name = "ppg_radio-up-icon" nine = "no"/>
+<radiobox_down name = "ppg_radio-down-icon" nine = "no"/>
+<radiobox_disabled name = "ppg_radio-disabled-icon" nine = "no"/>
 
 </settings>

@@ -7,8 +7,13 @@
 <button_disabled name = "button-disabled-skin" nine = "yes" x="5" y="5" w="1" h="1"/>
 <list_normal name = "list-item-up" nine = "yes" x="5" y="5" w="1" h="1"/>
 <list_selected name = "list-item-selected" nine = "yes" x="5" y="5" w="1" h="1"/>
+
 <checkbox_up name = "check-icon" nine = "no"/>
 <checkbox_down name = "check-selected-icon" nine = "no"/>
 <checkbox_disabled name = "check-disabled-icon" nine = "no"/>
+
+<radiobox_up name = "radio-icon" nine = "no"/>
+<radiobox_down name = "radio-selected-icon" nine = "no"/>
+<radiobox_disabled name = "radio-disabled-icon" nine = "no"/>
 
 </settings>
