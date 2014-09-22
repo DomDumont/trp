@@ -56,66 +56,66 @@ class CApplication
 public:
 	CApplication();
 	~CApplication();
-    
-	void    Init();
-	int     Run();
-	void    Shutdown();
-	void    HandleEvent( SDL_Event * event, Uint32 *done);
+	
+	void	Init();
+	int	Run();
+	void	Shutdown();
+	void	HandleEvent( SDL_Event * event, Uint32 *done);
 
 #ifdef TRP_ANDROID
-    void PrepareAndroidEnvironment();
+	void PrepareAndroidEnvironment();
 #endif
 #ifdef TRP_IOS
-    void PrepareIOSEnvironment();
+	void PrepareIOSEnvironment();
 #endif
 
 private:
 
-    void ReadSettings();
-    void WriteSettings();
-    
+	void ReadSettings();
+	void WriteSettings();
+	
 public:
-	PhysicsManager     *physicsManager;
+	PhysicsManager		*physicsManager;
 	SoundManager		*soundManager;
 	TextManager		*textManager;
 	ScriptManager		*scriptManager;
-    ResourceManager    *resourceManager;
+	ResourceManager		*resourceManager;
 	WatchManager		*watchManager;
 	NetworkManager		*networkManager;
-	GUIManager			*guiManager;
+	GUIManager		*guiManager;
 
-	SDL_Window			*sdlWindow;
+	SDL_Window		*sdlWindow;
 	SDL_Renderer		*sdlRenderer;
 	TweenManager		*tweenManager; //TODO rename to tweenManager
 
-	std::string			platform;
-    
-	Uint32				doneCode;
+	std::string		platform;
+	
+	Uint32			doneCode;
 
-	int					orientation;
+	int			orientation;
 
-    int                 capFPS;
+	int			capFPS;
 
-	std::string			settings_editorURL; //TODO put all settings in a settings class
-	std::string			settings_editorArgs;
-    std::string         settings_gamedataURL;
-    std::string         settings_configURL;
-    int                 settings_autorestart;
-    int                 settings_allowdebug;
-    int                 settings_verbose;
-    int                 settings_logtofile;
-    std::string         settings_serverIP;
+	std::string		settings_editorURL; //TODO put all settings in a settings class
+	std::string		settings_editorArgs;
+	std::string		settings_gamedataURL;
+	std::string		settings_configURL;
+	int			settings_autorestart;
+	int			settings_allowdebug;
+	int			settings_verbose;
+	int			settings_logtofile;
+	std::string		settings_serverIP;
 
 private:
 	SDL_Event			event;
-    int                 settings_winpos_x;
-    int                 settings_winpos_y;
-    int                 settings_winsize_w;
-    int                 settings_winsize_h;
+	int			settings_winpos_x;
+	int			settings_winpos_y;
+	int			settings_winsize_w;
+	int			settings_winsize_h;
 	
-    FunctionEntry       *on_init_func;
-    FunctionEntry       *on_update_func;
-    FunctionEntry       *on_render_func;
+	FunctionEntry		*on_init_func;
+	FunctionEntry		*on_update_func;
+	FunctionEntry		*on_render_func;
 };
 
 #endif

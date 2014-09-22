@@ -62,8 +62,8 @@ void OnInit()
 
     //WND_SetLogicalSize(windowX,windowY);
 
-    GUI_LoadTheme("aeon");
-    //GUI_LoadTheme("metal");
+    //GUI_LoadTheme("aeon");
+    GUI_LoadTheme("metal");
     //GUI_LoadTheme("minimal");
     //GUI_LoadTheme("metroid");
     //GUI_LoadTheme("castlevania");
