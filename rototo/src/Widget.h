@@ -31,24 +31,24 @@ public:
 	Widget();
 	virtual ~Widget();
 
-   	virtual void Render();
+	virtual void Render();
 	virtual void SetSize(int _w,int _h);
 	virtual void SetPosition(int _x,int _y,int _from = 0);
 	virtual bool Touched(int _x,int _y);
-    virtual void SetRotation(float _angle);
-    virtual double GetRotation();
-    virtual void SetScale(double _xFactor,double _yFactor);
+	virtual void SetRotation(float _angle);
+	virtual double GetRotation();
+	virtual void SetScale(double _xFactor,double _yFactor);
 	virtual void Update(Uint64 _elapsed);
 	virtual int OnMouseButtonDown( SDL_Event * event);
 	virtual void OnMouseButtonUp( SDL_Event * event);
 	virtual void OnMouseMotion( SDL_Event * event);
-    virtual void OnKeyUp( SDL_Event * event);
+	virtual void OnKeyUp( SDL_Event * event);
 	virtual void SetEnabled(bool _value);
-    
-    void Show();
-    void Hide();
+	
+	void Show();
+	void Hide();
 
- 
+
 	void AddRef()
 	{
 		// Increase the reference counter
@@ -59,16 +59,16 @@ public:
 	void Release()
 	{
 		// Decrease ref count and delete if it reaches 0
-        refCount --;
+	refCount --;
 		if ( refCount == 0 )
 			delete this;
 		else
-        if ( refCount > 0 )
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x Release : nb active ref = %d\n",this, refCount);
-        else
-            SDL_assert(0);
+	if ( refCount > 0 )
+		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x Release : nb active ref = %d\n",this, refCount);
+	else
+		SDL_assert(0);
 	}
-    
+	
 public:
 	SDL_Rect	frame;
 	SDL_Rect	position;
@@ -76,12 +76,14 @@ public:
 	double		xScale;
 	double		yScale;
 	bool		enabled;
-    bool        shown;
+	bool		shown;
 
 protected:
 
 	int refCount;
 };
+
 Widget *Widget_Factory();
 void RegisterWidget();
+
 #endif

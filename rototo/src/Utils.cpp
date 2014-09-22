@@ -290,7 +290,7 @@ void UTI_Log(const std::string& _toto)
 
 	if (g_app->settings_logtofile != 0)
 	{
-	unsigned int tmpSize = tmp.length();
+	unsigned int tmpSize = (unsigned int) tmp.length();
 	
 	rwLogFile = fopen("trp.log", "a+");
 	if (rwLogFile != NULL)
@@ -394,22 +394,22 @@ void WND_SetOrientation(int _orientation)
 
 Uint64 IO_Open(const std::string& _name,const std::string& _mode)
 {
-std::string modifiedFilename;
+	std::string modifiedFilename;
 
-modifiedFilename = "save_"+_name;
-if (_mode == "r")
-	{
-	SDL_RWops * handle;
-	handle = g_app->resourceManager->Load(modifiedFilename,GAMEDATA|BOTH);
-	return (Uint64)(handle);
-	}
-else
-	{
-	SDL_RWops * handle;
-	handle = g_app->resourceManager->Save(modifiedFilename,GAMEDATA|BOTH);
-	return (Uint64)(handle);
-	}
-return -1;
+	modifiedFilename = "save_"+_name;
+	if (_mode == "r")
+		{
+		SDL_RWops * handle;
+		handle = g_app->resourceManager->Load(modifiedFilename,GAMEDATA|BOTH);
+		return (Uint64)(handle);
+		}
+	else
+		{
+		SDL_RWops * handle;
+		handle = g_app->resourceManager->Save(modifiedFilename,GAMEDATA|BOTH);
+		return (Uint64)(handle);
+		}
+	return -1;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -418,7 +418,7 @@ return -1;
 
 int  IO_WriteString(Uint64 _handle,const std::string& _string)
 {
-	unsigned int len = _string.size();
+	unsigned int len = (unsigned int)_string.size();
 	
 	if (_handle == 0)
 		return -1;

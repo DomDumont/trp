@@ -163,7 +163,7 @@ void Server::CheckForConnections()
 
 				// Send a message to the client saying "OK" to indicate the incoming connection has been accepted
 				strcpy( pBuffer, SERVER_NOT_FULL.c_str() );
-				int msgLength = strlen(pBuffer) + 1;
+				int msgLength = (int) strlen(pBuffer) + 1;
 				SDLNet_TCP_Send(pClientSocket[freeSpot], (void *)pBuffer, msgLength);
 
 
@@ -179,7 +179,7 @@ void Server::CheckForConnections()
 
 				// Send a message to the client saying "FULL" to tell the client to go away
 				strcpy( pBuffer, SERVER_FULL.c_str() );
-				int msgLength = strlen(pBuffer) + 1;
+				int msgLength = (int) strlen(pBuffer) + 1;
 				SDLNet_TCP_Send(tempSock, (void *)pBuffer, msgLength);
 
 				// Shutdown, disconnect, and close the socket to the client
