@@ -89,6 +89,7 @@ public:
 
        void openWithFileName(const QString& fileName);
        MdiChild *activeMdiChild();
+       void openProjectFromFilename(QString fileName);
 
 
 protected:

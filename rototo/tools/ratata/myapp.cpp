@@ -21,17 +21,34 @@
 
   ==============================================================================
 */
-#include "mdimainwindow.h"
 
 #include "myapp.h"
+#include "mdimainwindow.h"
 
-int main(int argc, char *argv[])
+MyApp::MyApp( int &argc, char **argv )
+ : QApplication(argc, argv)
 {
-    MyApp a(argc, argv);
-    //MainWindow w;
-    MDIMainWindow w;
-    a.m_mainWindow = &w;
-    w.show();
 
-    return a.exec();
+}
+
+
+bool MyApp::event(QEvent *ev)
+{
+    ///////LogEvents( QString("normal event first  ev->type() = %1").arg(ev->type()));
+    /* http://doc.trolltech.com/4.2/qevent.html#Type-enum 170 event resize context ecc...*/
+    bool eaten;
+    switch (ev->type()) {
+    case QEvent::FileOpen:
+    {
+        QString osfile = static_cast<QFileOpenEvent *>(ev)->file();
+        this->m_mainWindow->openProjectFromFilename(osfile);
+        eaten = true;
+        break;
+    }
+
+    default:
+        eaten = QApplication::event(ev);
+        break;
+    }
+    return eaten;
 }

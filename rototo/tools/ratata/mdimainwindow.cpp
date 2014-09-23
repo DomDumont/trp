@@ -412,22 +412,26 @@ else
 
 }
 
+void MDIMainWindow::openProjectFromFilename(QString fileName)
+{
+    if (!fileName.isEmpty())
+       {
+       m_projectWidget->loadProject(fileName);
+
+       //Update recent project here
+       recentProjects.removeAll(fileName);
+       recentProjects.prepend(fileName);
+       updateRecentProjectActions();
+       updateMenus(); //TODODOMDOM Should not be here
+
+       }
+}
  void MDIMainWindow::openProject()
  {
 
      QString fileName = QFileDialog::getOpenFileName(this, tr("Open Project"),NULL, tr("Project files (*.rap);;"));
 
-     if (!fileName.isEmpty())
-        {
-        m_projectWidget->loadProject(fileName);
-
-        //Update recent project here
-        recentProjects.removeAll(fileName);
-        recentProjects.prepend(fileName);
-        updateRecentProjectActions();
-        updateMenus(); //TODODOMDOM Should not be here
-
-        }
+     openProjectFromFilename(fileName);
 
  }
 

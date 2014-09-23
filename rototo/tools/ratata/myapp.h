@@ -21,17 +21,26 @@
 
   ==============================================================================
 */
-#include "mdimainwindow.h"
 
-#include "myapp.h"
+#ifndef __MYAPP_H__
+#define __MYAPP_H__
 
-int main(int argc, char *argv[])
+#include <QApplication>
+#include <QtGui>
+
+class MDIMainWindow;
+class MyApp : public QApplication
 {
-    MyApp a(argc, argv);
-    //MainWindow w;
-    MDIMainWindow w;
-    a.m_mainWindow = &w;
-    w.show();
+    Q_OBJECT
+//
+public:
+    MyApp( int &argc, char **argv );
 
-    return a.exec();
-}
+protected:
+    bool event(QEvent *ev);
+
+public:
+        MDIMainWindow *m_mainWindow;
+};
+
+#endif
