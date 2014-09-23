@@ -128,26 +128,29 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 				{
 #ifdef WIN32
 				{
+				char currentDir[512];
+				GetBundlePath(currentDir,512);
+					
 				std::string tempPath;
 				tempPath = "explorer ";
-				tempPath += g_app->settings_configURL;
+				tempPath += currentDir;
 				tempPath = tempPath + "\\"+g_app->settings_gamedataURL+"\\";
 				system(tempPath.c_str());
 				}
 #endif
 #ifdef TRP_OSX
 				{
-                char currentDir[512];
-                GetBundlePath(currentDir,512);
-                    
+				char currentDir[512];
+				GetBundlePath(currentDir,512);
+			
 				std::string tempPath;
-                std::string command;
-                tempPath = currentDir;
-                tempPath+= "//" + g_app->settings_gamedataURL + "//";
-                command = "osascript -e 'tell app \"Finder\" to open POSIX file \""+ tempPath+"\"'";
-                system(command.c_str());
-                command = "osascript -e 'tell application \"Finder\" to activate'";
-                system(command.c_str());
+				std::string command;
+				tempPath = currentDir;
+				tempPath+= "//" + g_app->settings_gamedataURL + "//";
+				command = "osascript -e 'tell app \"Finder\" to open POSIX file \""+ tempPath+"\"'";
+				system(command.c_str());
+				command = "osascript -e 'tell application \"Finder\" to activate'";
+				system(command.c_str());
 				}
 #endif
 				}
@@ -155,20 +158,30 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_H))
 				{
 #ifdef WIN32
-				{					
+				{
+				char currentDir[512];
+				GetBundlePath(currentDir,512);
+					
 				std::string tempPath;
 				tempPath = "explorer ";
-				tempPath += g_app->settings_configURL;
-				tempPath = tempPath + "\\docs\\en\\trp-manual.html";
+				tempPath += currentDir;
+				tempPath = tempPath + "\\doc\\en\\trp-manual.html";
 				system(tempPath.c_str());
 				}
 #endif
 #ifdef TRP_OSX
 				{
+				char currentDir[512];
+				GetBundlePath(currentDir,512);
+				
 				std::string tempPath;
-				tempPath = "open ";
-				tempPath += g_app->settings_configURL + "//docs//en//trp-manual.html";
-				system(tempPath.c_str());
+				std::string command;
+				tempPath = currentDir;
+				tempPath+= "//doc//en//trp-manual.html";
+				command = "osascript -e 'tell app \"Finder\" to open POSIX file \""+ tempPath+"\"'";
+				system(command.c_str());
+				//command = "osascript -e 'tell application \"Finder\" to activate'";
+				//system(command.c_str());
 				}
 #endif
 				}

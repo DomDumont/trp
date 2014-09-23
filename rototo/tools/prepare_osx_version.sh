@@ -30,7 +30,7 @@ popd
 pushd .
 cd ../projects/XCode/Rototo
 xcodebuild clean
-xcodebuild
+xcodebuild -target Rototo -configuration Release
 popd
 
 pushd .

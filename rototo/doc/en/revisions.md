@@ -1,3 +1,13 @@
+# Rototo Revisions
+
+- Version 0.1.1 : 
+	- Add RadioBox
+	- Fix Shorcuts under OSX
+
+# Ratata Revisions
+
+- Version ???
+
 # Documentation Revisions
 
 ## Version 3:

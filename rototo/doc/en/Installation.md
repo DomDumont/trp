@@ -94,9 +94,19 @@ Here are the different options available :
 * logtofile     : Every T.R.P. log is written to a file called trp.log
 * server        : IP Address of the T.R.P. server (only if you want to connect to it as a client)
 
+## Keyboard Shortcuts
+
+- Ctrl-R : restart
+- Ctrl-F : Open the explorer (or Finder) into the script directory
+- Ctrl-H : Open the HTML Help File
+
 ## How to see Debug Logs
 
-### Pro way
+### With Ratata
+
+Simply open Ratata and connect it to Rototo. Then go to the console widget to see your logs.
+
+### Without Ratata - Pro way
 
 If you want to see all logs (included TRP internal logs), the best option is to
 see OutputDebugString (and eventually turn on the verbose mode)
@@ -112,7 +122,7 @@ Use the application Dbgview.exe located in the Tools directory
 
 Use the OSX Console Application located in Utility/Console.
 
-### Easy way
+### The Easy way
 
 If you only want to see your logs, it's easier to turn on the logtofile option
 and use a file logger to see trp.log modifications in real time.
