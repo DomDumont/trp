@@ -30,7 +30,7 @@ popd
 pushd .
 cd ../projects/XCode/Rototo
 xcodebuild clean
-xcodebuild -target Rototo -configuration Release
+xcodebuild -target Rototo -configuration Release | egrep -A 5 "(error|warning):"
 popd
 
 pushd .
