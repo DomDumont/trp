@@ -25,6 +25,11 @@ make
 popd
 
 #--------------------
+# Embed QT Librairies
+#--------------------
+/Developer/Tools/QT/macdeployqt ./ratata_distrib/bin/Ratata.app
+
+#--------------------
 # Build Rototo
 #--------------------
 pushd .
