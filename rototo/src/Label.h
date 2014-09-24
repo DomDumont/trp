@@ -28,6 +28,7 @@
 #include "Widget.h"
 
 class Font;
+
 class Label : public Widget
 {
 public:
@@ -41,21 +42,21 @@ public:
 	void SetColor(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	void SetText(const std::string& _text,bool _justified = true);
 	void SetShaded(bool _value);
-    void SetEnabled(bool _value);
+	void SetEnabled(bool _value);
 
 private:
 
-    void BuildInternalTexture(const std::string& _text,bool _justified);
+	void BuildInternalTexture(const std::string& _text,bool _justified);
 
 public:
 
-	Font	*               font;
-	SDL_Texture *           texture;
+	Font	*		font;
+	SDL_Texture *		texture;
 
-    	SDL_Color               primary_text_color;
-    	SDL_Color               disable_text_color;
+	SDL_Color		primary_text_color;
+	SDL_Color		disable_text_color;
 
-	SDL_Color	        color_background;
+	SDL_Color		color_background;
 	std::string 		text;
 private:
 	
@@ -64,7 +65,7 @@ private:
 
 };
 
-Label *Label_Factory();
-void RegisterLabel();
+Label		*Label_Factory();
+void		RegisterLabel();
 
 #endif

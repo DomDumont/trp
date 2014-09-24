@@ -34,32 +34,32 @@ class Sprite : public Widget
 public:
 	
 	Sprite();
-    Sprite(const Sprite &other);
+	Sprite(const Sprite &other);
 	~Sprite();
 
-    void operator= (const Sprite & other);
-    
-    void Load(Atlas * _atlas, const std::string& _name);
+	void operator= (const Sprite & other);
+	
+	void Load(Atlas * _atlas, const std::string& _name);
 	void SetColor(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	void Render();
-    void UnLoad();
-    void SetNinePatch(bool _value);
-    void SetNinePatchRect(int _x,int _y,int _w,int _h);
+	void UnLoad();
+	void SetNinePatch(bool _value);
+	void SetNinePatchRect(int _x,int _y,int _w,int _h);
 
 public:
 
-    Atlas			*atlas;
-    AtlasEntry		*entry;
+	Atlas			*atlas;
+	AtlasEntry		*entry;
 
 private:
 	SDL_Color		color;
-    bool            nine_patch;
-    SDL_Rect        nine_rect;
+	bool			nine_patch;
+	SDL_Rect		nine_rect;
 
 };
 
-Sprite *Sprite_Factory();
-void RegisterSprite();
+Sprite		*Sprite_Factory();
+void		RegisterSprite();
 
 
 #endif
