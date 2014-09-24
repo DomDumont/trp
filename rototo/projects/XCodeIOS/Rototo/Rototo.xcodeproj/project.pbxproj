@@ -32,7 +32,8 @@
 		0B7FD48E193CAEB500BCF843 /* scriptdictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B7FD48D193CAEB500BCF843 /* scriptdictionary.cpp */; };
 		0B8AA07117E7061000BCAF05 /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0B8AA06F17E7061000BCAF05 /* SoundManager.cpp */; };
 		0BA4F42A17E1C28D0088AF0E /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BA4F42917E1C28D0088AF0E /* ResourceManager.cpp */; };
-		0BBA4E6D17F4597100800B35 /* TweenManager2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BBA4E6B17F4597100800B35 /* TweenManager2.cpp */; };
+		0BB3ED4F19D31DE7005AC4D5 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3ED1719D319A6005AC4D5 /* libangelscript.a */; };
+		0BBA4E6D17F4597100800B35 /* TweenManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BBA4E6B17F4597100800B35 /* TweenManager.cpp */; };
 		0BC4E2FF1805A430004552FF /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4E2F71805A430004552FF /* Button.cpp */; };
 		0BC4E3001805A430004552FF /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4E2F91805A430004552FF /* Font.cpp */; };
 		0BC4E3011805A430004552FF /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4E2FB1805A430004552FF /* Label.cpp */; };
@@ -46,7 +47,6 @@
 		0BF482A8193C817200AF1127 /* tinyxml2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF482A6193C817200AF1127 /* tinyxml2.cpp */; };
 		0BF482AB193C819C00AF1127 /* debugger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF482AA193C819C00AF1127 /* debugger.cpp */; };
 		0BF482AD193C81A900AF1127 /* scripthandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF482AC193C81A900AF1127 /* scripthandle.cpp */; };
-		0BF482BC193C856A00AF1127 /* libangelscript.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1DD9D6193C7BAA001BAE7E /* libangelscript.a */; };
 		0BF482BD193C856A00AF1127 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B636F27193C7A0C00764744 /* libSDL2_image.a */; };
 		0BF482BE193C856A00AF1127 /* libSDL2_mixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B636F21193C79F200764744 /* libSDL2_mixer.a */; };
 		0BF482BF193C856A00AF1127 /* libSDL2_net.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B636F33193C7A4200764744 /* libSDL2_net.a */; };
@@ -61,7 +61,6 @@
 		0BF4C6C117DA17D500011D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BF4C6C017DA17D500011D0F /* CoreGraphics.framework */; };
 		0BF4C6ED17DA1B3B00011D0F /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4C6E417DA1B3B00011D0F /* Application.cpp */; };
 		0BF4C6EE17DA1B3B00011D0F /* Atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4C6E517DA1B3B00011D0F /* Atlas.cpp */; };
-		0BF4C6F117DA1B3B00011D0F /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4C6E817DA1B3B00011D0F /* SceneManager.cpp */; };
 		0BF4C6F217DA1B3B00011D0F /* ScriptManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4C6E917DA1B3B00011D0F /* ScriptManager.cpp */; };
 		0BF4C6F317DA1B3B00011D0F /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4C6EA17DA1B3B00011D0F /* Sprite.cpp */; };
 		0BF4C6F517DA1B3B00011D0F /* TextManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4C6EC17DA1B3B00011D0F /* TextManager.cpp */; };
@@ -72,20 +71,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0B1DD9D3193C7BAA001BAE7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC07E0554694100DB518D;
-			remoteInfo = "angelscript OSX";
-		};
-		0B1DD9D5193C7BAA001BAE7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E91FFE31823DA0D00D59009;
-			remoteInfo = "angelscript iOS";
-		};
 		0B636F1A193C79D300764744 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0B636F15193C79D200764744 /* SDL.xcodeproj */;
@@ -135,6 +120,20 @@
 			remoteGlobalIDString = 0B7FD3F1193CADEF00BCF843;
 			remoteInfo = Box2DIOS;
 		};
+		0BB3ED1619D319A6005AC4D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "angelscript OSX";
+		};
+		0BB3ED1819D319A6005AC4D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6E91FFE31823DA0D00D59009;
+			remoteInfo = "angelscript iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,9 +180,9 @@
 		0B1C07C5193CA25F0009CCBA /* SDL2_gfxPrimitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDL2_gfxPrimitives.h; path = "../../../extern/SDL2_gfx-1.0.0/SDL2_gfxPrimitives.h"; sourceTree = "<group>"; };
 		0B1C07C6193CA25F0009CCBA /* SDL2_imageFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL2_imageFilter.c; path = "../../../extern/SDL2_gfx-1.0.0/SDL2_imageFilter.c"; sourceTree = "<group>"; };
 		0B1C07C7193CA25F0009CCBA /* SDL2_rotozoom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SDL2_rotozoom.c; path = "../../../extern/SDL2_gfx-1.0.0/SDL2_rotozoom.c"; sourceTree = "<group>"; };
-		0B1C07CB193CA27D0009CCBA /* scriptbuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptbuilder.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/scriptbuilder/scriptbuilder.cpp"; sourceTree = "<group>"; };
-		0B1C07CD193CA2AD0009CCBA /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptarray.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/scriptarray/scriptarray.cpp"; sourceTree = "<group>"; };
-		0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = angelscript.xcodeproj; path = "../../../extern/AngelScript-2.28.2/sdk/angelscript/projects/xcode/angelscript.xcodeproj"; sourceTree = "<group>"; };
+		0B1C07CB193CA27D0009CCBA /* scriptbuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptbuilder.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scriptbuilder/scriptbuilder.cpp"; sourceTree = "<group>"; };
+		0B1C07CD193CA2AD0009CCBA /* scriptarray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptarray.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scriptarray/scriptarray.cpp"; sourceTree = "<group>"; };
+		0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = angelscript.xcodeproj; path = "../../../extern/AngelScript-2.29.0/sdk/angelscript/projects/xcode/angelscript.xcodeproj"; sourceTree = "<group>"; };
 		0B2C71F3180D322600A889B1 /* TextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextBox.cpp; path = ../../../../src/TextBox.cpp; sourceTree = "<group>"; };
 		0B2C71F4180D322600A889B1 /* TextBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextBox.h; path = ../../../../src/TextBox.h; sourceTree = "<group>"; };
 		0B2DA9281827B4FF00B75BA0 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector2D.cpp; path = ../../../../src/Vector2D.cpp; sourceTree = "<group>"; };
@@ -217,19 +216,18 @@
 		0B636F28193C7A2500764744 /* SDL_ttf.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL_ttf.xcodeproj; path = "../../../extern/SDL2_ttf-2.0.12/Xcode-iOS/SDL_ttf.xcodeproj"; sourceTree = "<group>"; };
 		0B636F2E193C7A4200764744 /* SDL_net.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL_net.xcodeproj; path = "../../../extern/SDL2_net-2.0.0/Xcode-iOS/SDL_net.xcodeproj"; sourceTree = "<group>"; };
 		0B7FD483193CAE8A00BCF843 /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Box2D.xcodeproj; path = "../../../extern/Box2D-2.3.1/Build/xcode5/Box2D.xcodeproj"; sourceTree = "<group>"; };
-		0B7FD48D193CAEB500BCF843 /* scriptdictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptdictionary.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/scriptdictionary/scriptdictionary.cpp"; sourceTree = "<group>"; };
+		0B7FD48D193CAEB500BCF843 /* scriptdictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptdictionary.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scriptdictionary/scriptdictionary.cpp"; sourceTree = "<group>"; };
 		0B8AA06F17E7061000BCAF05 /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoundManager.cpp; path = ../../../../src/SoundManager.cpp; sourceTree = "<group>"; };
 		0B8AA07017E7061000BCAF05 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundManager.h; path = ../../../../src/SoundManager.h; sourceTree = "<group>"; };
 		0BA4F41A17E1B38D0088AF0E /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = ../../../../src/Application.h; sourceTree = "<group>"; };
 		0BA4F41B17E1B38D0088AF0E /* Atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atlas.h; path = ../../../../src/Atlas.h; sourceTree = "<group>"; };
-		0BA4F41F17E1B38D0088AF0E /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneManager.h; path = ../../../../src/SceneManager.h; sourceTree = "<group>"; };
 		0BA4F42017E1B38D0088AF0E /* ScriptManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScriptManager.h; path = ../../../../src/ScriptManager.h; sourceTree = "<group>"; };
 		0BA4F42117E1B38D0088AF0E /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sprite.h; path = ../../../../src/Sprite.h; sourceTree = "<group>"; };
 		0BA4F42317E1B38D0088AF0E /* TextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextManager.h; path = ../../../../src/TextManager.h; sourceTree = "<group>"; };
 		0BA4F42817E1C26C0088AF0E /* ResourceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ResourceManager.h; path = ../../../../src/ResourceManager.h; sourceTree = "<group>"; };
 		0BA4F42917E1C28D0088AF0E /* ResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ResourceManager.cpp; path = ../../../../src/ResourceManager.cpp; sourceTree = "<group>"; };
-		0BBA4E6B17F4597100800B35 /* TweenManager2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TweenManager2.cpp; path = ../../../../src/TweenManager2.cpp; sourceTree = "<group>"; };
-		0BBA4E6C17F4597100800B35 /* TweenManager2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweenManager2.h; path = ../../../../src/TweenManager2.h; sourceTree = "<group>"; };
+		0BBA4E6B17F4597100800B35 /* TweenManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TweenManager.cpp; path = ../../../../src/TweenManager.cpp; sourceTree = "<group>"; };
+		0BBA4E6C17F4597100800B35 /* TweenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TweenManager.h; path = ../../../../src/TweenManager.h; sourceTree = "<group>"; };
 		0BC4E2F71805A430004552FF /* Button.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Button.cpp; path = ../../../../src/Button.cpp; sourceTree = "<group>"; };
 		0BC4E2F81805A430004552FF /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Button.h; path = ../../../../src/Button.h; sourceTree = "<group>"; };
 		0BC4E2F91805A430004552FF /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font.cpp; path = ../../../../src/Font.cpp; sourceTree = "<group>"; };
@@ -252,10 +250,10 @@
 		0BE97D3917FDBDE400FDD3A4 /* TiledMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiledMap.h; path = ../../../../src/TiledMap.h; sourceTree = "<group>"; };
 		0BF482A6193C817200AF1127 /* tinyxml2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tinyxml2.cpp; path = ../../../extern/tinyxml2/tinyxml2.cpp; sourceTree = "<group>"; };
 		0BF482A7193C817200AF1127 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyxml2.h; path = ../../../extern/tinyxml2/tinyxml2.h; sourceTree = "<group>"; };
-		0BF482AA193C819C00AF1127 /* debugger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = debugger.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/debugger/debugger.cpp"; sourceTree = "<group>"; };
-		0BF482AC193C81A900AF1127 /* scripthandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scripthandle.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/scripthandle/scripthandle.cpp"; sourceTree = "<group>"; };
-		0BF482D3193C89AF00AF1127 /* scriptstdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptstdstring.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/scriptstdstring/scriptstdstring.cpp"; sourceTree = "<group>"; };
-		0BF482D5193C8A1100AF1127 /* scriptmath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptmath.cpp; path = "../../../extern/AngelScript-2.28.2/sdk/add_on/scriptmath/scriptmath.cpp"; sourceTree = "<group>"; };
+		0BF482AA193C819C00AF1127 /* debugger.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = debugger.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/debugger/debugger.cpp"; sourceTree = "<group>"; };
+		0BF482AC193C81A900AF1127 /* scripthandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scripthandle.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scripthandle/scripthandle.cpp"; sourceTree = "<group>"; };
+		0BF482D3193C89AF00AF1127 /* scriptstdstring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptstdstring.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scriptstdstring/scriptstdstring.cpp"; sourceTree = "<group>"; };
+		0BF482D5193C8A1100AF1127 /* scriptmath.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = scriptmath.cpp; path = "../../../extern/AngelScript-2.29.0/sdk/add_on/scriptmath/scriptmath.cpp"; sourceTree = "<group>"; };
 		0BF4C6B917DA17D500011D0F /* Rototo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rototo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF4C6BC17DA17D500011D0F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0BF4C6BE17DA17D500011D0F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -267,7 +265,6 @@
 		0BF4C6D217DA17D500011D0F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0BF4C6E417DA1B3B00011D0F /* Application.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Application.cpp; path = ../../../../src/Application.cpp; sourceTree = "<group>"; };
 		0BF4C6E517DA1B3B00011D0F /* Atlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Atlas.cpp; path = ../../../../src/Atlas.cpp; sourceTree = "<group>"; };
-		0BF4C6E817DA1B3B00011D0F /* SceneManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneManager.cpp; path = ../../../../src/SceneManager.cpp; sourceTree = "<group>"; };
 		0BF4C6E917DA1B3B00011D0F /* ScriptManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScriptManager.cpp; path = ../../../../src/ScriptManager.cpp; sourceTree = "<group>"; };
 		0BF4C6EA17DA1B3B00011D0F /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sprite.cpp; path = ../../../../src/Sprite.cpp; sourceTree = "<group>"; };
 		0BF4C6EC17DA1B3B00011D0F /* TextManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextManager.cpp; path = ../../../../src/TextManager.cpp; sourceTree = "<group>"; };
@@ -285,8 +282,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BB3ED4F19D31DE7005AC4D5 /* libangelscript.a in Frameworks */,
 				0B7FD48C193CAE9C00BCF843 /* libBox2DIOS.a in Frameworks */,
-				0BF482BC193C856A00AF1127 /* libangelscript.a in Frameworks */,
 				0BF482BD193C856A00AF1127 /* libSDL2_image.a in Frameworks */,
 				0BF482BE193C856A00AF1127 /* libSDL2_mixer.a in Frameworks */,
 				0BF482BF193C856A00AF1127 /* libSDL2_net.a in Frameworks */,
@@ -316,15 +313,6 @@
 				0B1C07C7193CA25F0009CCBA /* SDL2_rotozoom.c */,
 			);
 			name = primitives;
-			sourceTree = "<group>";
-		};
-		0B1DD9CF193C7BAA001BAE7E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0B1DD9D4193C7BAA001BAE7E /* libangelscript.a */,
-				0B1DD9D6193C7BAA001BAE7E /* libangelscript.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		0B396EFB17DF45C3008BE558 /* Resources */ = {
@@ -382,6 +370,15 @@
 			children = (
 				0B7FD489193CAE8A00BCF843 /* libBox2D.a */,
 				0B7FD48B193CAE8A00BCF843 /* libBox2DIOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0BB3ED1219D319A6005AC4D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BB3ED1719D319A6005AC4D5 /* libangelscript.a */,
+				0BB3ED1919D319A6005AC4D5 /* libangelscript.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -488,8 +485,8 @@
 				0BE97D3717FDBDE400FDD3A4 /* Animation.h */,
 				0BE97D3817FDBDE400FDD3A4 /* TiledMap.cpp */,
 				0BE97D3917FDBDE400FDD3A4 /* TiledMap.h */,
-				0BBA4E6B17F4597100800B35 /* TweenManager2.cpp */,
-				0BBA4E6C17F4597100800B35 /* TweenManager2.h */,
+				0BBA4E6B17F4597100800B35 /* TweenManager.cpp */,
+				0BBA4E6C17F4597100800B35 /* TweenManager.h */,
 				0B60336317E9B8DD00A05E6E /* Utils.cpp */,
 				0B60336417E9B8DD00A05E6E /* Utils.h */,
 				0B60335D17E9B8BB00A05E6E /* Client.cpp */,
@@ -508,12 +505,10 @@
 				0BA4F42817E1C26C0088AF0E /* ResourceManager.h */,
 				0BF4C6EC17DA1B3B00011D0F /* TextManager.cpp */,
 				0BA4F42317E1B38D0088AF0E /* TextManager.h */,
-				0BA4F41F17E1B38D0088AF0E /* SceneManager.h */,
 				0BA4F42017E1B38D0088AF0E /* ScriptManager.h */,
 				0BA4F42117E1B38D0088AF0E /* Sprite.h */,
 				0BF4C6E417DA1B3B00011D0F /* Application.cpp */,
 				0BF4C6E517DA1B3B00011D0F /* Atlas.cpp */,
-				0BF4C6E817DA1B3B00011D0F /* SceneManager.cpp */,
 				0BF4C6E917DA1B3B00011D0F /* ScriptManager.cpp */,
 				0BF4C6EA17DA1B3B00011D0F /* Sprite.cpp */,
 				0BD9D157193C76A5006CA20C /* Main.cpp */,
@@ -613,7 +608,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 0B1DD9CF193C7BAA001BAE7E /* Products */;
+					ProductGroup = 0BB3ED1219D319A6005AC4D5 /* Products */;
 					ProjectRef = 0B1DD9CE193C7BAA001BAE7E /* angelscript.xcodeproj */;
 				},
 				{
@@ -649,20 +644,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		0B1DD9D4193C7BAA001BAE7E /* libangelscript.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libangelscript.a;
-			remoteRef = 0B1DD9D3193C7BAA001BAE7E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B1DD9D6193C7BAA001BAE7E /* libangelscript.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libangelscript.a;
-			remoteRef = 0B1DD9D5193C7BAA001BAE7E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		0B636F1B193C79D300764744 /* libSDL2.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -712,6 +693,20 @@
 			remoteRef = 0B7FD48A193CAE8A00BCF843 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		0BB3ED1719D319A6005AC4D5 /* libangelscript.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libangelscript.a;
+			remoteRef = 0BB3ED1619D319A6005AC4D5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0BB3ED1919D319A6005AC4D5 /* libangelscript.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libangelscript.a;
+			remoteRef = 0BB3ED1819D319A6005AC4D5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -740,7 +735,6 @@
 				0BF4C6EE17DA1B3B00011D0F /* Atlas.cpp in Sources */,
 				0B4FCB38180824F600425E8A /* GUIManager.cpp in Sources */,
 				0BC4E3011805A430004552FF /* Label.cpp in Sources */,
-				0BF4C6F117DA1B3B00011D0F /* SceneManager.cpp in Sources */,
 				0BF482AD193C81A900AF1127 /* scripthandle.cpp in Sources */,
 				0BF4C6F217DA1B3B00011D0F /* ScriptManager.cpp in Sources */,
 				0BF482A8193C817200AF1127 /* tinyxml2.cpp in Sources */,
@@ -753,7 +747,7 @@
 				0BF4C6F517DA1B3B00011D0F /* TextManager.cpp in Sources */,
 				0B4769F819658F5700F86C82 /* Particles.cpp in Sources */,
 				0B1C07CA193CA25F0009CCBA /* SDL2_rotozoom.c in Sources */,
-				0BBA4E6D17F4597100800B35 /* TweenManager2.cpp in Sources */,
+				0BBA4E6D17F4597100800B35 /* TweenManager.cpp in Sources */,
 				0BF482D6193C8A1100AF1127 /* scriptmath.cpp in Sources */,
 				0B0ABE90180D768E00BF99AE /* PhysicsManager.cpp in Sources */,
 				0BA4F42A17E1C28D0088AF0E /* ResourceManager.cpp in Sources */,
@@ -860,8 +854,8 @@
 					"../../../extern/SDL2_ttf-2.0.12",
 					"../../../extern/SDL2_net-2.0.0",
 					../../../extern/tinyxml2,
-					"../../../extern/AngelScript-2.28.2/sdk/angelscript/include",
-					"../../../extern/AngelScript-2.28.2/sdk/add_on",
+					"../../../extern/AngelScript-2.29.0/sdk/angelscript/include",
+					"../../../extern/AngelScript-2.29.0/sdk/add_on",
 					../../../simplefilewatcher/includes,
 					"../../../extern/Box2D-2.3.1",
 					"../../../extern/SDL2_gfx-1.0.0",

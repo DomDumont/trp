@@ -44,30 +44,27 @@ Widget::Widget():refCount(1)
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget Constructor\n");
 
-	this->position.x = 0;
-	this->position.y = 0;
-	this->position.w = 0;
-	this->position.h = 0;
-	this->frame.x   = 0;
-	this->frame.y   = 0;
-	this->frame.w   = 0;
-	this->frame.h   = 0;
-	this->angle     = 0;
+	this->position.x	= 0;
+	this->position.y	= 0;
+	this->position.w	= 0;
+	this->position.h	= 0;
+	this->frame.x		= 0;
+	this->frame.y		= 0;
+	this->frame.w		= 0;
+	this->frame.h		= 0;
+	this->angle		= 0;
 
-	this->xScale    = 1;
-	this->yScale    = 1;
+	this->xScale		= 1;
+	this->yScale		= 1;
 
-	this->enabled   = true;
-    this->shown     = true;
+	this->enabled		= true;
+	this->shown		= true;
 
-	// Now done in script g_app->GUIManager->AddWidget(this);
 }
 
 Widget::~Widget()
 {
-SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget Destructor\n");
-
-// Now done in script  g_app->GUIManager->RemoveWidget(this);
+	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget Destructor\n");
 }
 
 void Widget::Show()
