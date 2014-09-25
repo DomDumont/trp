@@ -77,7 +77,9 @@ void ErrorWidget::AddErrorLine(QString & _type, QString & _file, QString & _line
 
         if (_type == "[ERR]")
         {
-                QFont font("" , 9 , QFont::Bold );
+                //QFont font("" , 9 , QFont::Bold );
+                QFont font;
+                font.setBold(true);
                 QBrush b (Qt::red);
                 for(int i=0;i<5;i++)
                 {
