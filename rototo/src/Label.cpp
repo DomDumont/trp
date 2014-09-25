@@ -65,6 +65,8 @@ void RegisterLabel()
 	g_app->scriptManager->RegisterClassMethod("Label","bool Touched(int _x,int _y)", asMETHOD(Label, Touched));
 	///func:void SetRotation(float angle)
 	g_app->scriptManager->RegisterClassMethod("Label","void SetRotation(float _angle)", asMETHOD(Label, SetRotation));
+	///func:double GetRotation()
+	g_app->scriptManager->RegisterClassMethod("Label","double GetRotation()", asMETHOD(Label, GetRotation));
 	///func:void SetShaded(bool value)
 	g_app->scriptManager->RegisterClassMethod("Label","void SetShaded(bool _value)", asMETHOD(Label, SetShaded));
 

@@ -46,8 +46,8 @@ public:
 	Animation();
 	~Animation();
 	Animation(const Animation &other);
-    void Load(Atlas * _atlas, const std::string& _name,const std::string& _format,int _nbFrames);
-    void UnLoad();
+	void Load(Atlas * _atlas, const std::string& _name,const std::string& _format,int _nbFrames);
+	void UnLoad();
 	void Update(Uint64 _elapsed);
 	void Render();
 
@@ -64,24 +64,24 @@ public:
 	CScriptHandle		userData;
 	CScriptHandle		sender;
 private:
-    Atlas *                atlas;
-	std::vector<Sprite *>  sprites;
-    std::vector<Sprite *>::iterator spritesIT;
-	float					timeElapsed;
-	int					currentFrame;
-	int					nbFrames;
-	float					msPerFrame;
-	int					playing;
-    int                     mode;
-    int                     sens;
-    bool                    stopASAP;
+	Atlas *			atlas;
+	std::vector<Sprite *>	sprites;
+	std::vector<Sprite *>::iterator spritesIT;
+	float			timeElapsed;
+	int			currentFrame;
+	int			nbFrames;
+	float			msPerFrame;
+	int			playing;
+	int			mode;
+	int			sens;
+	bool			stopASAP;
 	std::string				name;
 		
 	
 
 };
 
-Animation *Animation_Factory();
-void RegisterAnimation();
+Animation	*Animation_Factory();
+void		RegisterAnimation();
 
 #endif

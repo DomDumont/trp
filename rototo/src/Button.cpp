@@ -67,6 +67,8 @@ void RegisterButton()
 	g_app->scriptManager->RegisterClassMethod("Button","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Button, SetTextColor));
 	///func:void SetRotation(float angle)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetRotation(float _angle)", asMETHOD(Button, SetRotation));
+	///func:double GetRotation()
+	g_app->scriptManager->RegisterClassMethod("Button","double GetRotation()", asMETHOD(Button, GetRotation));
 	///func:bool Touched(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Button","bool Touched(int _x,int _y)", asMETHOD(Button, Touched));
 	///func:void SetScale(double xFactor,double yFactor)
