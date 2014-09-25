@@ -34,6 +34,10 @@
 const std::string Server::SERVER_NOT_FULL = "OK\n";
 const std::string Server::SERVER_FULL     = "FULL";
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSockets)
 	{
 	port       = _port;                      // The port number on the server we're connecting to
@@ -92,6 +96,10 @@ Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSo
 	}
 
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 Server::~Server()
 	{
 	// Close all the open client sockets
@@ -116,6 +124,10 @@ Server::~Server()
 	delete [] pBuffer;
 	}
 
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void Server::CheckForConnections()
 {
@@ -191,105 +203,122 @@ void Server::CheckForConnections()
 
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 void Server::MakeDirToAllClients(const std::string& _dirname)
 {
-//Send Command
-std::string msg;
-std::string paddedFileName = _dirname ;
-PadTo(paddedFileName,20);
-msg = "D>"+ paddedFileName;
+	//Send Command
+	std::string msg;
+	std::string paddedFileName = _dirname ;
+	PadTo(paddedFileName,20);
+	msg = "D>"+ paddedFileName;
 
-SendMessageToAllClients(msg);
+	SendMessageToAllClients(msg);
 }
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void Server::SendFileToAllClients(const std::string& _filename)
 {
 
 
 
-SDL_RWops *rw = g_app->resourceManager->Load(_filename,GAMEDATA|BOTH);
-if (rw == NULL)
-	{
-	SDL_Log("bizarre %s\n",SDL_GetError());
-	return;
-	}
-
-//Send Command
-std::string msg;
-std::string paddedFileName = _filename ;
-PadTo(paddedFileName,20);
-msg = "U>"+ paddedFileName;
-
-SendMessageToAllClients(msg);
-
-
-//Send Length
-unsigned int length = (unsigned int) SDL_RWseek(rw,0,SEEK_END);
-SDL_RWseek(rw,0,SEEK_SET);// ON retourne au début
-
-SDL_Log("LENGTH SENT = %d 0x%x\n",length,length);
-for (unsigned int loop = 0; loop < maxClients; loop++)
-	{
-	if (pSocketIsFree[loop] == false)
+	SDL_RWops *rw = g_app->resourceManager->Load(_filename,GAMEDATA|BOTH);
+	if (rw == NULL)
 		{
-		SDLNet_TCP_Send(pClientSocket[loop], (void *)&length, 4);						
+		SDL_Log("bizarre %s\n",SDL_GetError());
+		return;
 		}
-	}
+
+	//Send Command
+	std::string msg;
+	std::string paddedFileName = _filename ;
+	PadTo(paddedFileName,20);
+	msg = "U>"+ paddedFileName;
+
+	SendMessageToAllClients(msg);
 
 
-int nbbytes = 0;
- 
-while ((nbbytes = SDL_RWread(rw,pBuffer,1,bufferSize)) != 0)
-	{
-	SDL_Log("Send %d bytes of file\n",nbbytes);
+	//Send Length
+	unsigned int length = (unsigned int) SDL_RWseek(rw,0,SEEK_END);
+	SDL_RWseek(rw,0,SEEK_SET);// ON retourne au début
+
+	SDL_Log("LENGTH SENT = %d 0x%x\n",length,length);
 	for (unsigned int loop = 0; loop < maxClients; loop++)
 		{
 		if (pSocketIsFree[loop] == false)
 			{
-			SDLNet_TCP_Send(pClientSocket[loop], (void *)pBuffer, nbbytes);						
+			SDLNet_TCP_Send(pClientSocket[loop], (void *)&length, 4);						
 			}
 		}
-	}
-SDL_RWclose(rw);
+
+
+	int nbbytes = 0;
+	 
+	while ((nbbytes = SDL_RWread(rw,pBuffer,1,bufferSize)) != 0)
+		{
+		SDL_Log("Send %d bytes of file\n",nbbytes);
+		for (unsigned int loop = 0; loop < maxClients; loop++)
+			{
+			if (pSocketIsFree[loop] == false)
+				{
+				SDLNet_TCP_Send(pClientSocket[loop], (void *)pBuffer, nbbytes);						
+				}
+			}
+		}
+	SDL_RWclose(rw);
 
 }
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 void Server::SendMessageToAllClients(const std::string& _msg)
 {
-    //SDL_assert(_msg.length()<this->bufferSize);
-    std::string stringToSend;
-    int msgLength;
-    
-    stringToSend = _msg; // Copie inutile ?
-    
-    while (stringToSend.length())
-        {
-        if (stringToSend.length()<this->bufferSize)
-            {
-            // Sent everything then
-            strcpy( pBuffer, stringToSend.c_str() );
-            msgLength = strlen(pBuffer);
-            stringToSend = "";
-            }
-        else
-            {
-            strcpy( pBuffer, stringToSend.substr(0,this->bufferSize-1).c_str() );
-            msgLength = this->bufferSize-1;
-            stringToSend = stringToSend.substr(this->bufferSize-1);
-            }
-        for (unsigned int loop = 0; loop < maxClients; loop++)
-            {
-                if (pSocketIsFree[loop] == false)
-                {
-                    SDLNet_TCP_Send(pClientSocket[loop], (void *)pBuffer, msgLength);						
-                }
-            }
+	//SDL_assert(_msg.length()<this->bufferSize);
+	std::string stringToSend;
+	int msgLength;
+	
+	stringToSend = _msg; // Copie inutile ?
+	
+	while (stringToSend.length())
+	{
+	if (stringToSend.length()<this->bufferSize)
+		{
+		// Sent everything then
+		strcpy( pBuffer, stringToSend.c_str() );
+		msgLength = strlen(pBuffer);
+		stringToSend = "";
+		}
+	else
+		{
+		strcpy( pBuffer, stringToSend.substr(0,this->bufferSize-1).c_str() );
+		msgLength = this->bufferSize-1;
+		stringToSend = stringToSend.substr(this->bufferSize-1);
+		}
+	for (unsigned int loop = 0; loop < maxClients; loop++)
+		{
+		if (pSocketIsFree[loop] == false)
+			{
+			SDLNet_TCP_Send(pClientSocket[loop], (void *)pBuffer, msgLength);
+			}
+		}
 
-        }
+	}
 }
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 SDL_RWops * Server::CheckForActivity()
 {
-    SDL_RWops* tempFile = NULL;
+	SDL_RWops* tempFile = NULL;
 
 	// Loop to check all possible client sockets for activity
 	for (unsigned int clientNumber = 0; clientNumber < maxClients; clientNumber++)
@@ -328,12 +357,12 @@ SDL_RWops * Server::CheckForActivity()
 			else // If we read some data from the client socket...
 				{
 				// ... return the active client number to be processed by the dealWithActivity function
-                tempFile = SDL_RWFromMem(pBuffer,receivedByteCount);				
+				tempFile = SDL_RWFromMem(pBuffer,receivedByteCount);
 				}
 
 			} // End of if client socket is active check
 
-	} // End of server socket check sockets loop
+		} // End of server socket check sockets loop
 
 	// If we got here then there are no more clients with activity to process!
 	return tempFile;
