@@ -116,15 +116,21 @@ void WatchManager::Init()
 
 #if  defined TRP_OSX
 	char pathbuf[512];
-	Uint32  bufsize = sizeof(pathbuf);
 
 	strcpy(pathbuf,g_app->settings_configURL.c_str());
-	strcat(pathbuf,"//");
+	strcat(pathbuf,"/");
 	strcat(pathbuf,g_app->settings_gamedataURL.c_str());
+	
+	SDL_Log("Path to watch %s\n",pathbuf);
 	fileWatcher = new efsw::FileWatcher();
 	// add a watch to the system
 	watcherListener = new UpdateListener();
 	efsw::WatchID watchID = fileWatcher->addWatch(pathbuf,watcherListener,true /*recursive*/);
+	if (watchID == 0)
+		{
+		SDL_Log("Hum Hum cannot watch path %s ...",pathbuf);
+		}
+		
 #endif
 
 }

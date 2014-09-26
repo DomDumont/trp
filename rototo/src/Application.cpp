@@ -227,12 +227,17 @@ CApplication::CApplication()
 #if defined DEBUG
 	this->settings_configURL = ".";
 #else
-	this->settings_configURL = "../../..";
+	{
+	char currentDir[512];
+	GetBundlePath(currentDir,512);
+	this->settings_configURL = currentDir;
+	}
 #endif
 #endif
 	
 #endif
 
+	
 	this->settings_gamedataURL = "gamedata";
 	this->settings_autorestart = 1;
 	this->settings_verbose = 1;
