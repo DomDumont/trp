@@ -2,21 +2,34 @@
 import os
 import posixpath
 import codecs
+import re
+import string
 
 OSPJ = posixpath.join
 OSPR = posixpath.relpath
 
 out_html = ""
+out_wordlist = set()
+
 lang_id = ""
 
 def AppendClass(_name):
     global lang_id
+    global out_wordlist
+
+    out_wordlist.add(_name)
+
     if (lang_id == "en"):    
         return '\n## Class '+ _name + '\n\nMembers:\n\n' 
     if (lang_id == "fr"):    
         return '\n## Classe '+ _name + '\n\nMembres:\n\n' 
 
-def AppendFunc(_name):    
+def AppendFunc(_name):  
+    global out_wordlist
+    for item in re.findall('[%s]+' % string.ascii_letters, _name):
+        if (len(item)> 2):
+            out_wordlist.add(item)    
+
     return '\n**'+ _name + '**\n\n' 
 
 def AppendRole(_name):    
@@ -51,6 +64,28 @@ def ApplyTemplate(_path):
 
     return True
     
+"""--------------------------------------------------
+
+WriteWordList
+
+--------------------------------------------------"""    
+
+def WriteWordList(_path):
+
+    global out_wordlist
+    list = []
+
+    for item in out_wordlist:
+        list.append(item)
+
+    list.sort()
+    with codecs.open(_path, 'w','utf8' ) as fOut:
+        for item in list:
+            toto = item + '\n'
+            fOut.write(toto.decode('utf-8'))
+
+    return True
+
 """--------------------------------------------------
 
 ScanFile
@@ -110,13 +145,14 @@ def ConvertDirectory (_in_dir,_out_dir,_cur_dir) :
 BuildSite
 
 --------------------------------------------------"""    
-def BuildSite (_source_dir,_out_dir) :
+def BuildSite (_source_dir,_out_dir, _word_dir) :
     global out_html
     out_html = "# Script Reference \n\n"
     ConvertDirectory(_source_dir,_out_dir,_source_dir)
     if (ApplyTemplate(OSPJ(_out_dir,'generated-ref.md')) == False):
         return False
-
+    if (WriteWordList(OSPJ(_word_dir,'wordlist.txt')) == False):
+        return False
     return True
 
 """--------------------------------------------------
@@ -128,13 +164,13 @@ Main
 def main(argv):
     global lang_id
     #print 'GCD = '+ GCD    
-    if len(argv) != 3:
-        print ('usage : python extract_api lang_id source_dir dest_dir')
+    if len(argv) != 4:
+        print ('usage : python extract_api lang_id source_dir dest_dir word_dir')
         return
 
     lang_id = argv[0]
 
-    if (BuildSite(argv[1],argv[2])== True) :
+    if (BuildSite(argv[1],argv[2],argv[3])== True) :
         print('Done with grace and subtility')
     else:
         print('Failed with panache')
