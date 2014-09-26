@@ -10,7 +10,7 @@
 				<string>rap</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>@ICON@</string>
+			<string>myiconrap.icns</string>
 			<key>CFBundleTypeMIMETypes</key>
 			<array>
 				<string>text/plain</string>
@@ -20,10 +20,30 @@
 			<key>CFBundleTypeName</key>
 			<string>Ratata Project</string>
 			<key>CFBundleTypeRole</key>
-			<string>@EXECUTABLE@</string>
+			<string>Editor</string>
 		        <key>LSIsAppleDefaultForType</key>
 			<true/>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rsc</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>myiconrsc.icns</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>text/plain</string>
+				<string>text/xml</string>
+                <string>text/xhtml</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Rototo Scripts</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		        <key>LSIsAppleDefaultForType</key>
+			<true/>
+		</dict>		
 	</array>	
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>

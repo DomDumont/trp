@@ -70,3 +70,9 @@ CONFIG(release, debug|release) {
         OBJECTS_DIR = ../ratata_distrib/obj
         MOC_DIR = ../ratata_distrib/moc
 }
+
+macx: {
+EXTRA_ICONS.files = myiconrap.icns myiconrsc.icns
+EXTRA_ICONS.path = Contents/Resources
+QMAKE_BUNDLE_DATA += EXTRA_ICONS
+}
