@@ -127,85 +127,88 @@ void ScriptManager::Init()
 
 void ScriptManager::Prepare()
 {
-    int r;
+	int r;
 
-    RegisterUtils();
+	RegisterUtils();
 
-    RegisterSoundManager();
-    RegisterMusic();
-    RegisterSound();
+	RegisterSoundManager();
+	RegisterMusic();
+	RegisterSound();
 
-    RegisterAtlas();
+	RegisterAtlas();
 
-    RegisterSprite();
-    RegisterTiledMap();
-    RegisterAnimation();
-
-
+	RegisterSprite();
+	RegisterTiledMap();
+	RegisterAnimation();
 
 
 
 
-    r = engine->RegisterObjectType("TweenedFloat", 0, asOBJ_REF); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_FACTORY, "TweenedFloat@ f()", asFUNCTION(TweenedFloat_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_ADDREF, "void f()", asMETHOD(TweenedFloat,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_RELEASE, "void f()", asMETHOD(TweenedFloat,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectProperty("TweenedFloat", "float value", asOFFSET(TweenedFloat,value)); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectProperty("TweenedFloat", "float targetValue", asOFFSET(TweenedFloat,targetValue)); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectProperty("TweenedFloat", "float initialValue", asOFFSET(TweenedFloat,initialValue)); SDL_assert( r >= 0 );
 
 
-    r = engine->RegisterObjectType("Tween", 0, asOBJ_REF); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", asFUNCTION(Tween_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_ADDREF, "void f()", asMETHOD(Tween,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_RELEASE, "void f()", asMETHOD(Tween,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectProperty("Tween", "CallbackHandler @onComplete", asOFFSET(Tween, onCompleteHandler)); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectProperty("Tween", "ref @userData", asOFFSET(Tween, userData)); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectType("TweenedFloat", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_FACTORY, "TweenedFloat@ f()", asFUNCTION(TweenedFloat_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_ADDREF, "void f()", asMETHOD(TweenedFloat,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_RELEASE, "void f()", asMETHOD(TweenedFloat,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectProperty("TweenedFloat", "float value", asOFFSET(TweenedFloat,value)); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectProperty("TweenedFloat", "float targetValue", asOFFSET(TweenedFloat,targetValue)); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectProperty("TweenedFloat", "float initialValue", asOFFSET(TweenedFloat,initialValue)); SDL_assert( r >= 0 );
 
-    this->RegisterClassMethod("Tween","void AddProp(TweenedFloat @)", asMETHOD(Tween, AddProp));
-    this->RegisterClassMethod("Tween","void Init(float _duration,int _effect,int _easeMode)", asMETHOD(Tween, Init));
 
-    r = engine->RegisterGlobalFunction("void TWN_AddTween(Tween @)", asMETHOD(TweenManager,AddTween), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);SDL_assert(r>0);
+	r = engine->RegisterObjectType("Tween", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", asFUNCTION(Tween_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_ADDREF, "void f()", asMETHOD(Tween,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_RELEASE, "void f()", asMETHOD(Tween,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectProperty("Tween", "CallbackHandler @onComplete", asOFFSET(Tween, onCompleteHandler)); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectProperty("Tween", "ref @userData", asOFFSET(Tween, userData)); SDL_assert( r >= 0 );
 
-    RegisterVector2D();
-    
-    //GUI Related
-    RegisterWidget();
-    RegisterFont();
-    RegisterButton();
-    RegisterLabel();
-    RegisterListBox();
-    RegisterTextBox();
-    RegisterPrimitive();
+	this->RegisterClassMethod("Tween","void AddProp(TweenedFloat @)", asMETHOD(Tween, AddProp));
+	this->RegisterClassMethod("Tween","void Init(float _duration,int _effect,int _easeMode)", asMETHOD(Tween, Init));
 
-    r = engine->RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asMETHOD(GUIManager,AddWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asMETHOD(GUIManager,RemoveWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asMETHOD(GUIManager,LoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager,UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("void TWN_AddTween(Tween @)", asMETHOD(TweenManager,AddTween), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);SDL_assert(r>0);
 
-    r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "Button@ f()", asFUNCTION((refCast<Widget,Button>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("Button", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<Button,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	RegisterVector2D();
+	
+	//GUI Related
+	RegisterWidget();
+	RegisterFont();
+	RegisterButton();
+	RegisterLabel();
+	RegisterListBox();
+	RegisterTextBox();
+	RegisterPrimitive();
 
-    r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "Label@ f()", asFUNCTION((refCast<Widget,Label>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("Label", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<Label,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asMETHOD(GUIManager,AddWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asMETHOD(GUIManager,RemoveWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asMETHOD(GUIManager,LoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager,UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
 
-    r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "ListBox@ f()", asFUNCTION((refCast<Widget,ListBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("ListBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<ListBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "Button@ f()", asFUNCTION((refCast<Widget,Button>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Button", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<Button,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 
-    r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "TextBox@ f()", asFUNCTION((refCast<Widget,TextBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
-    r = engine->RegisterObjectBehaviour("TextBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<TextBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "Label@ f()", asFUNCTION((refCast<Widget,Label>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("Label", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<Label,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 
-    //Physics Related
+	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "ListBox@ f()", asFUNCTION((refCast<Widget,ListBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("ListBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<ListBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 
-    RegisterBody();
+	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "TextBox@ f()", asFUNCTION((refCast<Widget,TextBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("TextBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<TextBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 
-    r = engine->RegisterGlobalFunction("void PHY_ShowDebugDraw(bool _value)", asMETHOD(PhysicsManager,ShowDebugDraw), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("void PHY_SetGravity(float _x,float _y)", asMETHOD(PhysicsManager,SetGravity), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("Body @ PHY_GetContactA()", asMETHOD(PhysicsManager,GetContactA), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
-    r = engine->RegisterGlobalFunction("Body @ PHY_GetContactB()", asMETHOD(PhysicsManager,GetContactB), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+	//Physics Related
 
-    RegisterEmitter();
+	RegisterBody();
+
+	///sect:PHYSIC
+	///glob:void PHY_ShowDebugDraw(bool value)
+	r = engine->RegisterGlobalFunction("void PHY_ShowDebugDraw(bool _value)", asMETHOD(PhysicsManager,ShowDebugDraw), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+	///glob:void PHY_SetGravity(float x,float y)
+	r = engine->RegisterGlobalFunction("void PHY_SetGravity(float _x,float _y)", asMETHOD(PhysicsManager,SetGravity), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("Body @ PHY_GetContactA()", asMETHOD(PhysicsManager,GetContactA), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+	r = engine->RegisterGlobalFunction("Body @ PHY_GetContactB()", asMETHOD(PhysicsManager,GetContactB), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+
+	RegisterEmitter();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -503,7 +506,6 @@ void ScriptManager::RunScript(const std::string& _prototype, char * _fmt, ...)
 		}
 	va_end(ap);
 
-   
 
 
 

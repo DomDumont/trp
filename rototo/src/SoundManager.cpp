@@ -119,7 +119,10 @@ void SoundManager::Shutdown()
 void RegisterSoundManager()
 {
 	int r;
+	///sect:Sound
+	///glob:void SND_SetMusicVolume(int newVolume)
 	r = g_app->scriptManager->engine->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", asMETHOD(SoundManager,SetMusicVolume), asCALL_THISCALL_ASGLOBAL, g_app->soundManager);SDL_assert(r>0);
+	///glob:void SND_SetSFXVolume(int newVolume)
 	r = g_app->scriptManager->engine->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", asMETHOD(SoundManager,SetSFXVolume), asCALL_THISCALL_ASGLOBAL, g_app->soundManager);SDL_assert(r>0);
 
 }
