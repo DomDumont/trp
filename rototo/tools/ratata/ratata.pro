@@ -57,6 +57,7 @@ ICON = myicon.icns
 DESTDIR = ../ratata_distrib/bin
 UI_DIR = .
 
+
 CONFIG(debug, debug|release) {
         QMAKE_INFO_PLIST = RatataD.plist
         TARGET = RatataDebug
@@ -75,4 +76,9 @@ macx: {
 EXTRA_ICONS.files = myiconrap.icns myiconrsc.icns
 EXTRA_ICONS.path = Contents/Resources
 QMAKE_BUNDLE_DATA += EXTRA_ICONS
+}
+
+win32: {
+    # CONFIG += embed_manifest_exe
+    CONFIG-=embed_manifest_dll
 }

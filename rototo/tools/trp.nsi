@@ -23,6 +23,13 @@ InstallDirRegKey HKLM "Software\trp" "Install_Dir"
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
 
+!include "LogicLib.nsh"
+;--------------------------------
+;Definitions
+
+!define SHCNE_ASSOCCHANGED 0x8000000
+!define SHCNF_IDLIST 0
+
 ;--------------------------------
 
 ; Pages
@@ -46,7 +53,7 @@ Section "T.R.P. (required)"
   
   ; Put file there
   
-  File /r trp\*.*
+  File /r win32-version\*.*
 
   
   ; Write the installation path into the registry
@@ -58,6 +65,26 @@ Section "T.R.P. (required)"
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\trp" "NoModify" 1
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\trp" "NoRepair" 1
   WriteUninstaller "uninstall.exe"
+  
+  WriteRegStr HKCR ".rsc" "" "TRP.Script"
+  WriteRegStr HKCR ".rsc" "PerceivedType" "text"
+  WriteRegStr HKCR "TRP.Script" "" "TRP Script File"
+  WriteRegStr HKCR "TRP.Script\DefaultIcon" "" "$INSTDIR\ratata.exe,2"
+  ReadRegStr $R0 HKCR "TRP.Script\shell\open\command" ""
+  ${If} $R0 == ""
+    WriteRegStr HKCR "TRP.Script\shell" "" "open"
+    WriteRegStr HKCR "TRP.Script\shell\open\command" "" '$INSTDIR\ratata.exe "%1"'
+  ${EndIf}
+
+  WriteRegStr HKCR ".rap" "" "TRP.Project"
+  WriteRegStr HKCR ".rap" "PerceivedType" "text"
+  WriteRegStr HKCR "TRP.Project" "" "TRP Project File"
+  WriteRegStr HKCR "TRP.Project\DefaultIcon" "" "$INSTDIR\ratata.exe,1"
+  ReadRegStr $R0 HKCR "TRP.Project\shell\open\command" ""
+  ${If} $R0 == ""
+    WriteRegStr HKCR "TRP.Project\shell" "" "open"
+    WriteRegStr HKCR "TRP.Project\shell\open\command" "" '$INSTDIR\ratata.exe "%1"'
+  ${EndIf}
   
 SectionEnd
 
@@ -78,6 +105,19 @@ SectionEnd
 ; Uninstaller
 
 Section "Uninstall"
+
+  ReadRegStr $R0 HKCR ".rsc" ""
+  StrCmp $R0 "TRP.Script" 0 +2
+  DeleteRegKey HKCR ".rsc"
+
+  ReadRegStr $R0 HKCR ".rap" ""
+  StrCmp $R0 "TRP.Project" 0 +2
+  DeleteRegKey HKCR ".rap"
+
+  DeleteRegKey HKCR "TRP.Script"
+  DeleteRegKey HKCR "TRP.Project"
+  
+  System::Call 'Shell32::SHChangeNotify(i ${SHCNE_ASSOCCHANGED}, i ${SHCNF_IDLIST}, i 0, i 0)'
   
   ; Remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\trp"

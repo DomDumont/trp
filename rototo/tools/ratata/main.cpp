@@ -28,6 +28,9 @@
 int main(int argc, char *argv[])
 {
     MyApp a(argc, argv);
+#if defined(Q_OS_WINDOW)
+    a.addLibraryPath(a.applicationDirPath());
+#endif
     //MainWindow w;
     MDIMainWindow w;
     a.m_mainWindow = &w;

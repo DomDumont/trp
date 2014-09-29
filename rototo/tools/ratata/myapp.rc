@@ -1,1 +1,3 @@
 IDI_ICON1               ICON    DISCARDABLE     "myicon.ico"
+IDI_ICON2               ICON    DISCARDABLE     "myiconrap.ico"
+IDI_ICON3               ICON    DISCARDABLE     "myiconrsc.ico"

@@ -1,3 +1,4 @@
+call "c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
 REM ----------------------------------------------------------------------------
 REM  Build Documentation
 REM ----------------------------------------------------------------------------
@@ -83,7 +84,7 @@ cd win32-version
 "../7za" a -tzip  ../trp-win32.zip .
 cd ..
 
-rem "C:\Program Files (x86)\NSIS\makensis.exe" trp.nsi
+"C:\Program Files (x86)\NSIS\makensis.exe" trp.nsi
 
 
 
