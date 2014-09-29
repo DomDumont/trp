@@ -39,7 +39,7 @@ REM  Copy Documentation
 REM --------------------
 
 robocopy  ../doc/en/out ./win32-version/doc/en  /e
-robocopy  ../doc/fr/out ./win32-version/doc/fr  /e
+REM Too soon, french docs are not ready robocopy  ../doc/fr/out ./win32-version/doc/fr  /e
 
 REM --------------------
 REM  Copy Ratata

@@ -62,7 +62,7 @@ mkdir fr
 cd ..
 cd ..
 rsync -r  ../doc/en/out/* ./osx-version/doc/en
-rsync -r  ../doc/fr/out/* ./osx-version/doc/fr
+# Too Soon french docs are not ready rsync -r  ../doc/fr/out/* ./osx-version/doc/fr
 #--------------------
 # Copy Ratata
 #--------------------

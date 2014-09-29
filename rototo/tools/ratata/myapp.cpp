@@ -41,7 +41,15 @@ bool MyApp::event(QEvent *ev)
     case QEvent::FileOpen:
     {
         QString osfile = static_cast<QFileOpenEvent *>(ev)->file();
-        this->m_mainWindow->openProjectFromFilename(osfile);
+        if (osfile.endsWith(".rap") == true)
+            {
+            this->m_mainWindow->openProjectFromFilename(osfile);
+            }
+        else
+            {
+            this->m_mainWindow->openFileFromFilename(osfile);
+            }
+
         eaten = true;
         break;
     }

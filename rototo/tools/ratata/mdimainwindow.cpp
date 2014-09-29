@@ -534,6 +534,12 @@ void MDIMainWindow::openRecentFile()
 
 }
 
+void MDIMainWindow::openFileFromFilename(QString fileName)
+{
+    openWithFileName(fileName);
+}
+
+
  void MDIMainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this);
