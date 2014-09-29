@@ -27,14 +27,36 @@
 
 int main(int argc, char *argv[])
 {
-    MyApp a(argc, argv);
-#if defined(Q_OS_WINDOW)
-    a.addLibraryPath(a.applicationDirPath());
+    MyApp app(argc, argv);
+#if defined(Q_OS_WIN32)
+    app.addLibraryPath(app.applicationDirPath());
 #endif
-    //MainWindow w;
-    MDIMainWindow w;
-    a.m_mainWindow = &w;
-    w.show();
 
-    return a.exec();
+    MDIMainWindow win;
+    app.m_mainWindow = &win;
+
+#if defined(Q_OS_WIN32)
+
+
+    int my_argc = app.arguments().count();
+
+
+    if (my_argc == 2)
+    {
+
+     QString osfile = app.arguments().at(1);
+     if (osfile.endsWith(".rap") == true)
+         {
+         win.openProjectFromFilename(osfile);
+         }
+     else
+         {
+         win.openFileFromFilename(osfile);
+         }
+
+    }
+#endif
+    win.show();
+
+    return app.exec();
 }

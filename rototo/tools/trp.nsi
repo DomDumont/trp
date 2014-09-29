@@ -94,6 +94,7 @@ Section "Start Menu Shortcuts"
   CreateDirectory "$SMPROGRAMS\trp"
   CreateShortCut "$SMPROGRAMS\trp\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
   CreateShortCut "$SMPROGRAMS\trp\Rototo.lnk" "$INSTDIR\rototo.exe" "" "$INSTDIR\rototo.exe" 0
+  CreateShortCut "$SMPROGRAMS\trp\Ratata.lnk" "$INSTDIR\ratata.exe" "" "$INSTDIR\ratata.exe" 0
   CreateShortCut "$SMPROGRAMS\trp\HTML Manual.lnk" "$INSTDIR\docs\trp-manual.html" "" "$INSTDIR\docs\trp-manual.html" 0  
   CreateShortCut "$SMPROGRAMS\trp\PDF Manual.lnk" "$INSTDIR\docs\trp-manual.pdf" "" "$INSTDIR\docs\trp-manual.pdf" 0  
   CreateShortCut "$SMPROGRAMS\trp\Version.lnk" "$INSTDIR\version.txt" "" "$INSTDIR\version.txt" 0  
