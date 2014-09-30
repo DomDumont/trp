@@ -38,6 +38,7 @@
 		0BC4E3001805A430004552FF /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4E2F91805A430004552FF /* Font.cpp */; };
 		0BC4E3011805A430004552FF /* Label.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4E2FB1805A430004552FF /* Label.cpp */; };
 		0BC4E3021805A430004552FF /* Widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4E2FD1805A430004552FF /* Widget.cpp */; };
+		0BCF0F6C19DAE3B70035FB6D /* ComboBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BCF0F6A19DAE3B70035FB6D /* ComboBox.cpp */; };
 		0BD9D156193C7692006CA20C /* Global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BD9D154193C7692006CA20C /* Global.cpp */; };
 		0BD9D158193C76A5006CA20C /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BD9D157193C76A5006CA20C /* Main.cpp */; };
 		0BE09C1517DA1F4F002A7584 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE09C1417DA1F4F002A7584 /* AudioToolbox.framework */; };
@@ -236,6 +237,8 @@
 		0BC4E2FC1805A430004552FF /* Label.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Label.h; path = ../../../../src/Label.h; sourceTree = "<group>"; };
 		0BC4E2FD1805A430004552FF /* Widget.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Widget.cpp; path = ../../../../src/Widget.cpp; sourceTree = "<group>"; };
 		0BC4E2FE1805A430004552FF /* Widget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Widget.h; path = ../../../../src/Widget.h; sourceTree = "<group>"; };
+		0BCF0F6A19DAE3B70035FB6D /* ComboBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ComboBox.cpp; path = ../../../../src/ComboBox.cpp; sourceTree = "<group>"; };
+		0BCF0F6B19DAE3B70035FB6D /* ComboBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComboBox.h; path = ../../../../src/ComboBox.h; sourceTree = "<group>"; };
 		0BD9D154193C7692006CA20C /* Global.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Global.cpp; path = ../../../../src/Global.cpp; sourceTree = "<group>"; };
 		0BD9D155193C7692006CA20C /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = ../../../../src/Global.h; sourceTree = "<group>"; };
 		0BD9D157193C76A5006CA20C /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../../../src/Main.cpp; sourceTree = "<group>"; };
@@ -457,6 +460,8 @@
 		0BF4C6C217DA17D500011D0F /* Rototo */ = {
 			isa = PBXGroup;
 			children = (
+				0BCF0F6A19DAE3B70035FB6D /* ComboBox.cpp */,
+				0BCF0F6B19DAE3B70035FB6D /* ComboBox.h */,
 				0B4769F319658F5700F86C82 /* Debug.cpp */,
 				0B4769F419658F5700F86C82 /* Debug.h */,
 				0B4769F519658F5700F86C82 /* Particles.cpp */,
@@ -764,6 +769,7 @@
 				0B60336117E9B8BB00A05E6E /* Client.cpp in Sources */,
 				0B60336217E9B8BB00A05E6E /* Server.cpp in Sources */,
 				0B2C71F5180D322600A889B1 /* TextBox.cpp in Sources */,
+				0BCF0F6C19DAE3B70035FB6D /* ComboBox.cpp in Sources */,
 				0B60336517E9B8DD00A05E6E /* Utils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -67,6 +67,7 @@ LOCAL_SRC_FILES := $(SDL_PATH)/src/main/android/SDL_android_main.c \
 	$(ANGELSCRIPT_ADDON_PATH)/scriptarray/scriptarray.cpp\
 	$(ANGELSCRIPT_ADDON_PATH)/debugger/debugger.cpp\
 	$(ROTOTO_PATH)/ListBox.cpp\
+	$(ROTOTO_PATH)/ComboBox.cpp\
 	$(TINYXML_PATH)/tinyxml2.cpp
 
 LOCAL_CFLAGS += -DTRP_ANDROID
