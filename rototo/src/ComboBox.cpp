@@ -65,9 +65,10 @@ void RegisterComboBox()
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetTextColor));
 	///func:double GetRotation()
 	g_app->scriptManager->RegisterClassMethod("ComboBox","double GetRotation()", asMETHOD(ComboBox, GetRotation));
-	
-	r = g_app->scriptManager->engine->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler)); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData)); SDL_assert( r >= 0 );
+	///prop:CallbackHandler @onSelectionChangedHandler
+	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler));
+	///prop:ref @userData
+	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData));
 	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
 }
 

@@ -65,9 +65,10 @@ void RegisterListBox()
 	g_app->scriptManager->RegisterClassMethod("ListBox","void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetTextColor));
 	///func:double GetRotation()
 	g_app->scriptManager->RegisterClassMethod("ListBox","double GetRotation()", asMETHOD(ListBox, GetRotation));
-	
-	r = g_app->scriptManager->engine->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler)); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData)); SDL_assert( r >= 0 );
+	///prop:CallbackHandler @onSelectionChangedHandler
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler));
+	///prop:ref @userData
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData));
 	//g_app->scriptManager->RegisterClassMethod("ListBox","void Update(uint64 _elapsed)", asMETHOD(ListBox, Update));
 }
 

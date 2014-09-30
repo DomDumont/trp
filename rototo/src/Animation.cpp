@@ -402,7 +402,9 @@ void RegisterAnimation()
 	g_app->scriptManager->RegisterClassMethod("Animation","double GetRotation()", asMETHOD(Animation, GetRotation));
 	///func:void UnLoad()
 	g_app->scriptManager->RegisterClassMethod("Animation","void UnLoad()", asMETHOD(Animation, UnLoad));
-	r = g_app->scriptManager->engine->RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler)); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData)); SDL_assert( r >= 0 );
+	///prop:CallbackHandler @onComplete
+	g_app->scriptManager->RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler));
+	///prop:ref @userData
+	g_app->scriptManager->RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData));
 
 }

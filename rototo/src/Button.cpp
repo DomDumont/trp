@@ -79,8 +79,10 @@ void RegisterButton()
 	g_app->scriptManager->RegisterClassMethod("Button","void SetType(int _type)", asMETHOD(Button, SetType));
 	///func:void SetState(int state)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetState(int _state)", asMETHOD(Button, SetState));
-	r = g_app->scriptManager->engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler)); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data)); SDL_assert( r >= 0 );
+	///prop:CallbackHandler @on_click_handler
+	g_app->scriptManager->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler));
+	///prop:ref @user_data
+	g_app->scriptManager->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data));
 }
 
 

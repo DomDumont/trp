@@ -157,6 +157,7 @@
 		0B98CF8817D7403500C2D7EE /* ScriptManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScriptManager.cpp; path = ../../../../src/ScriptManager.cpp; sourceTree = "<group>"; };
 		0B98CF8917D7403500C2D7EE /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sprite.cpp; path = ../../../../src/Sprite.cpp; sourceTree = "<group>"; };
 		0B98CF8B17D7403500C2D7EE /* TextManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextManager.cpp; path = ../../../../src/TextManager.cpp; sourceTree = "<group>"; };
+		0BA2D39F19DAF5720069D93F /* ScriptManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScriptManager.h; path = ../../../../src/ScriptManager.h; sourceTree = "<group>"; };
 		0BB1024D1966FAD40016D728 /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = "../../../extern/SDL2-2.0.3/Xcode/SDL/build/Release/libSDL2.a"; sourceTree = "<group>"; };
 		0BB1024F1966FAF20016D728 /* libSDL2_ttf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_ttf.a; path = "../../../extern/SDL2_ttf-2.0.12/Xcode/build/Release/libSDL2_ttf.a"; sourceTree = "<group>"; };
 		0BB102801966FCAF0016D728 /* libSDL2_image.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2_image.a; path = "../../../extern/SDL2_image-2.0.0/Xcode/build/Release/libSDL2_image.a"; sourceTree = "<group>"; };
@@ -355,6 +356,7 @@
 				9ED4D67E17F34C7C007D921D /* Application.h */,
 				0B98CF8517D7403500C2D7EE /* Atlas.cpp */,
 				0BC8606B17FEBBEE00E57FC2 /* Atlas.h */,
+				0BA2D39F19DAF5720069D93F /* ScriptManager.h */,
 				0B98CF8817D7403500C2D7EE /* ScriptManager.cpp */,
 				0B706D4917F1C9DB005980A0 /* Sprite.h */,
 				0B98CF8917D7403500C2D7EE /* Sprite.cpp */,

@@ -705,3 +705,9 @@ void ScriptManager::RegisterClassMethod(const std::string& class_name, const std
 	SDL_assert(r>0);
 
 }
+
+void ScriptManager::RegisterObjectProperty(const std::string& class_name, const std::string& function_definition,  int byteOffset)
+{
+	int r= engine->RegisterObjectProperty(class_name.c_str(), function_definition.c_str(), byteOffset);
+	SDL_assert( r >= 0 );
+}
