@@ -9,6 +9,7 @@ OSPJ = posixpath.join
 OSPR = posixpath.relpath
 
 out_html = ""
+out_globals = ""
 out_wordlist = set()
 
 lang_id = ""
@@ -24,9 +25,25 @@ def AppendClass(_name):
     if (lang_id == "fr"):    
         return '\n## Classe '+ _name + '\n\nMembres:\n\n' 
 
+def AppendSection(_name):
+    global lang_id
+
+    if (lang_id == "en"):    
+        return '\n## Section '+ _name + '\n\n' 
+    if (lang_id == "fr"):    
+        return '\n## Section '+ _name + '\n\n' 
+
+def AppendGlobal(_name):  
+    global out_wordlist
+    for item in re.findall('[%s]+_*[%s]*' % (string.ascii_letters,string.ascii_letters), _name):
+        if (len(item)> 2):
+            out_wordlist.add(item)    
+
+    return '\n**'+ _name + '**\n\n' 
+
 def AppendFunc(_name):  
     global out_wordlist
-    for item in re.findall('[%s]+' % string.ascii_letters, _name):
+    for item in re.findall('[%s]+_*[%s]*' % (string.ascii_letters,string.ascii_letters), _name):
         if (len(item)> 2):
             out_wordlist.add(item)    
 
@@ -58,9 +75,11 @@ ApplyTemplate
 def ApplyTemplate(_path):
 
     global out_html
+    global out_globals
 
     with codecs.open(_path, 'w','utf8' ) as fOut:
         fOut.write(out_html.decode('utf-8'))
+        fOut.write(out_globals.decode('utf-8'))
 
     return True
     
@@ -78,7 +97,7 @@ def WriteWordList(_path):
     for item in out_wordlist:
         list.append(item)
 
-    list.sort()
+    list.sort(key=lambda s: s.lower())
     with codecs.open(_path, 'w','utf8' ) as fOut:
         for item in list:
             toto = item + '\n'
@@ -94,6 +113,8 @@ ScanFile
 
 def ScanFile(_path):
     global out_html
+    global out_globals
+
     with open(_path, 'r') as inF:
         for line in inF:
             if '///class:' in line:
@@ -106,6 +127,10 @@ def ScanFile(_path):
                 out_html += AppendArg(line[line.index('///arg:')+7:-1])                
             if '///sample:' in line:
                 out_html += AppendSample(line[line.index('///sample:')+10:-1])                
+            if '///sect:' in line:
+                out_globals += AppendSection(line[line.index('///sect:')+8:-1]) 
+            if '///glob:' in line:
+                out_globals += AppendGlobal(line[line.index('///glob:')+8:-1])                  
 
 """--------------------------------------------------
 
