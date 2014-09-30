@@ -39,6 +39,7 @@
 #include "Font.h" //Registration
 #include "Label.h" //Registration
 #include "ListBox.h" //Registration
+#include "ComboBox.h" //Registration
 #include "TextBox.h" //Registration
 #include "Primitive.h" //Registration
 
@@ -176,6 +177,7 @@ void ScriptManager::Prepare()
 	RegisterButton();
 	RegisterLabel();
 	RegisterListBox();
+	RegisterComboBox();
 	RegisterTextBox();
 	RegisterPrimitive();
 
@@ -193,6 +195,9 @@ void ScriptManager::Prepare()
 	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "ListBox@ f()", asFUNCTION((refCast<Widget,ListBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("ListBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<ListBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 
+	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "ComboBox@ f()", asFUNCTION((refCast<Widget,ComboBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	r = engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<ComboBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	
 	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "TextBox@ f()", asFUNCTION((refCast<Widget,TextBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("TextBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<TextBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 

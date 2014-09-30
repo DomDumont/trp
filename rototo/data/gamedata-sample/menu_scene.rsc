@@ -3,6 +3,11 @@
 
 class MenuScene:Scene
 {
+bool OnSelectionChangedHandlerCB(ref @ _sender,ref @ _userData)
+	{
+	UTI_Log("comboBox Selection Changed");
+	return false; //Not fully handle, continue
+	}
 
 bool OnSelectionChangedHandler(ref @ _sender,ref @ _userData)
 	{
@@ -17,7 +22,7 @@ bool OnSelectionChangedHandler(ref @ _sender,ref @ _userData)
 			tempScene.labelChosen.SetText(tempLB.GetItemText(sel));
 
 	tempScene.buttonStart.SetEnabled(true);
-	UTI_Log("rototo Selection Changed");
+	UTI_Log("listbox Selection Changed");
 	return false; //Not fully handle, continue
 	};
 
@@ -129,6 +134,21 @@ void Init()
 	GUI_AddWidget(listBox);
 	
 
+	// Setup Combobox
+
+	comboBox.SetSize(400,100);
+	comboBox.SetPosition(800,150);
+
+	
+    comboBox.AddItem("English");
+    comboBox.AddItem("French");
+ 
+ 	@comboBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandlerCB);
+	@comboBox.userData = @this;       
+
+	comboBox.SetEnabled(true);
+	GUI_AddWidget(comboBox);
+
     accu = 0;
 
 	}
@@ -146,6 +166,7 @@ void OnRender(uint64 _delta)
 	labelChosen.Render();
 	buttonStart.Render();
 	listBox.Render();
+	comboBox.Render();
 
     accu += _delta;
     if (accu > 1000)
@@ -169,11 +190,17 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 	void OnShutdown()
 	{
 	UTI_Log("====> menuScene Shutdown");	
+	
 	listBox.ResetContent();
 	@listBox.onSelectionChangedHandler = null;
 	@listBox.userData = null;
-
 	GUI_RemoveWidget(listBox);
+
+	comboBox.ResetContent();
+	@comboBox.onSelectionChangedHandler = null;
+	@comboBox.userData = null;
+	GUI_RemoveWidget(comboBox);
+
 	@buttonStart.on_click_handler = null;
 	@buttonStart.user_data = null;
 	GUI_RemoveWidget(buttonStart);
@@ -209,6 +236,7 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 	Button buttonStart;
 
 	ListBox listBox;
+	ComboBox comboBox;
 }
 
 
