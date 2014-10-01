@@ -81,15 +81,15 @@ class Atlas
 
 	public:
 	
-	std::vector <AtlasEntry *> atlasEntries;
-	SDL_Texture *texture;
+	std::vector <AtlasEntry *>	atlasEntries;
+	SDL_Texture *			texture;
 
 	private:
 
 	//Now in utils.cpp std::string LoadString(const std::string& _sourceFile);
 	 
-	SDL_Rect size;
-	int	refCount;
+	SDL_Rect	size;
+	int		refCount;
 };
 
 Atlas *Atlas_Factory();

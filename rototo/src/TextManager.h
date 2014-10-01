@@ -25,6 +25,8 @@
 #ifndef __TEXT_MANAGER_H__
 #define __TEXT_MANAGER_H__
 
+#include <map>
+#include <string>
 
 class TextManager
 {
@@ -37,12 +39,15 @@ public:
 	void Shutdown();
 	
 	void Load(const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
-	std::string GetString(int _id);
+	std::string GetString(const std::string& _id);
 	void UnLoad();
 
 public:
 	//TTF_Font *font;
 	SDL_Color color;
+	
+private:
+	std::map<std::string,std::string> mapStrings;
 };
 
 

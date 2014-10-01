@@ -42,8 +42,8 @@ void RegisterTextManager()
 {
 	
 	///sect:Text
-	///glob:void TXT_GetString(int id)
-	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(int _id)", asMETHOD(TextManager,GetString), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
+	///glob:string TXT_GetString(string &id)
+	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(string &in id)", asMETHOD(TextManager,GetString), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
 	///glob:void TXT_Load(string &in file,int flags=13)
 	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asMETHOD(TextManager,Load), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
 	g_app->scriptManager->RegisterGlobalFunction("string TXT_UnLoad()", asMETHOD(TextManager,UnLoad), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
@@ -105,9 +105,18 @@ void TextManager::Shutdown()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-std::string TextManager::GetString(int _id)
+std::string TextManager::GetString(const std::string& _id)
 {
-	
+	std::map<std::string,std::string>::iterator it = mapStrings.find(_id);
+	std::string result;
+	if(it != mapStrings.end())
+	{
+		//element found;
+		result = it->second;
+		return result;
+	}
+	else
+		return "NOT FOUND";
 }
 
 /*----------------------------------------------------------------------------*/
@@ -131,19 +140,9 @@ void TextManager::Load(const std::string& _file,int _flags)
 	doc.Parse( loadedString.c_str());
 	XMLElement* root = doc.FirstChildElement();
 	for(XMLElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
-	{
-		/*
-		AtlasEntry *pTemp = new AtlasEntry();
-		pTemp->name = elem->Attribute("name");
-		pTemp->frame.x = atoi(elem->Attribute("x"));
-		pTemp->frame.y = atoi(elem->Attribute("y"));
-		pTemp->frame.w = atoi(elem->Attribute("width"));
-		pTemp->frame.h = atoi(elem->Attribute("height"));
-		pTemp->atlas = this;
-		
-		atlasEntries.push_back(pTemp);
-		*/
-	}
+		{
+		mapStrings[elem->Attribute("id")] = elem->Attribute("value");
+		}
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Text Dico <%s> loaded successfully \n",_file.c_str());
 }
@@ -154,5 +153,5 @@ void TextManager::Load(const std::string& _file,int _flags)
 
 void TextManager::UnLoad()
 {
-	
+	mapStrings.clear();
 }

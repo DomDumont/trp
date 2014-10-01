@@ -42,6 +42,14 @@ void OnShutdown()
 
 class SceneManager
 {
+	void RestartScene()
+	{
+		if (currentScene !is null) 
+			{
+			currentScene.OnShutdown();
+			currentScene.Init();
+			}
+	}	
 
 	void ChangeScene(Scene @ _newScene)
 	{

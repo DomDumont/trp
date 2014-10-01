@@ -67,6 +67,8 @@ void OnInit()
     //GUI_LoadTheme("minimal");
     //GUI_LoadTheme("metroid");
     //GUI_LoadTheme("castlevania");
+
+    TXT_Load("strings/fr");
     
     fonte35.Load("fonts/casual.ttf",50);
     fonte8.Load("fonts/casual.ttf",25);

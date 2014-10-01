@@ -1,3 +1,5 @@
 <dico>
 	<string id="STR_HELLO" value="Good Morning"/>
+	<string id="STR_TITLE" value="T.R.P. Samples"/>
+	<string id="STR_START" value="Start"/>
 </dico>

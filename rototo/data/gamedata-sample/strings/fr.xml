@@ -1,3 +1,5 @@
 <dico>
 	<string id="STR_HELLO" value="Bonjour"/>
+	<string id="STR_TITLE" value="Exemples T.R.P."/>
+	<string id="STR_START" value="Commencer"/>	
 </dico>

@@ -6,7 +6,21 @@ class MenuScene:Scene
 bool OnSelectionChangedHandlerCB(ref @ _sender,ref @ _userData)
 	{
 	UTI_Log("comboBox Selection Changed");
-	return false; //Not fully handle, continue
+	ComboBox @tempCB = cast<ComboBox>(_sender);
+
+	int sel = tempCB.GetSelectedIndex();
+
+	if (sel == 0)
+		{
+		TXT_Load("strings/en");
+		}
+	else
+	if (sel == 1)
+		{
+		TXT_Load("strings/fr");
+		}
+	theSceneManager.RestartScene();
+	return true; //We change scene so it's fully handled
 	}
 
 bool OnSelectionChangedHandler(ref @ _sender,ref @ _userData)
@@ -63,8 +77,9 @@ void Init()
     fpsLabel.SetPosition(100,740);    
 
     string tempText;
-    tempText = "T.R.P. Samples";
-	//monLabel.SetFont(fonte35);
+
+    tempText = TXT_GetString("STR_TITLE");
+
 #if OSX
 	tempText += " OSX Version ";
 #endif
@@ -93,7 +108,7 @@ void Init()
 
 
 	//buttonStart.SetFont(fonte35);
-	buttonStart.SetText("Start");
+	buttonStart.SetText(TXT_GetString("STR_START"));
 	//buttonStart.SetSprite(myAtlas,"button9.png",true);
 	buttonStart.SetSize(300,100);
 	buttonStart.SetPosition(750,windowY/2);	
