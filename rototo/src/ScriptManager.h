@@ -61,6 +61,7 @@ public:
 	bool RegisterClass(const std::string& class_name);
 	void RegisterClassMethod(const std::string& class_name, const std::string& function_definition, const asSFuncPtr &funcPointer);
 	void RegisterObjectProperty(const std::string& class_name, const std::string& function_definition, int byteOffset);
+	void RegisterGlobalFunction(const std::string& function_definition, const asSFuncPtr &funcPointer,asDWORD callConv, void * objFOrThisCall = 0);
 
 
 	// Contexts is what you use to call AngelScript functions and methods. They say you must pool them to avoid overhead. So I do as they say.

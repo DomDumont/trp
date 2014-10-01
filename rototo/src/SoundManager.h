@@ -35,17 +35,17 @@ class Sound
 public:
 	Sound();
 	~Sound();
-	void Load(const std::string & _file);
-	void Play(int _nbLoops=0);
-    void UnLoad();
-    void Stop();
-    void SetVolume(int _newVolume);
+	void	Load(const std::string & _file);
+	void	Play(int _nbLoops=0);
+	void	UnLoad();
+	void	Stop();
+	void	SetVolume(int _newVolume);
 
 private:
 
-	Mix_Chunk*  sample;
-    int         channel;
-    int		    volume;
+	Mix_Chunk*	sample;
+	int		channel;
+	int		volume;
 
 };
 
@@ -57,12 +57,15 @@ void RegisterSound();
 class Music
 {
 public:
+	
 	Music();
 	~Music();
-	void Load(const std::string & _file);
-	void Play(int _nbLoops=-1, int _timeFadeIn=1000);
-    void UnLoad();
-    void Stop();
+	
+	void	Load(const std::string & _file);
+	void	Play(int _nbLoops=-1, int _timeFadeIn=1000);
+	void	UnLoad();
+	void	Stop();
+	
 private:
 
 	Mix_Music *music;
@@ -78,24 +81,25 @@ public:
 	SoundManager();
 	~SoundManager();
 
-	void Init();
-	void Shutdown();
-    
-    void SetMusicVolume(int _newVolume);
-    void SetSFXVolume(int _newVolume);
+	void	Init();
+	void	Shutdown();
+	
+	void	SetMusicVolume(int _newVolume);
+	void	SetSFXVolume(int _newVolume);
 
 	
 public:
-    int     volumeSFX;
-    int		volume;
+	
+	int	volumeSFX;
+	int	volume;
 
 private:
-	int		rate;
-	Uint16	format;
-	int		channels;
-	int		buffers;
 	
-	int		initialized;
+	int	rate;
+	Uint16	format;
+	int	channels;
+	int	buffers;
+	int	initialized;
 
 
 

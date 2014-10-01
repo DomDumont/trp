@@ -151,7 +151,7 @@ void ScriptManager::Prepare()
 	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_FACTORY, "TweenedFloat@ f()", asFUNCTION(TweenedFloat_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_ADDREF, "void f()", asMETHOD(TweenedFloat,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_RELEASE, "void f()", asMETHOD(TweenedFloat,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectProperty("TweenedFloat", "float value", asOFFSET(TweenedFloat,value)); SDL_assert( r >= 0 );
+	this->RegisterObjectProperty("TweenedFloat", "float value", asOFFSET(TweenedFloat,value));
 	r = engine->RegisterObjectProperty("TweenedFloat", "float targetValue", asOFFSET(TweenedFloat,targetValue)); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectProperty("TweenedFloat", "float initialValue", asOFFSET(TweenedFloat,initialValue)); SDL_assert( r >= 0 );
 
@@ -166,8 +166,11 @@ void ScriptManager::Prepare()
 	this->RegisterClassMethod("Tween","void AddProp(TweenedFloat @)", asMETHOD(Tween, AddProp));
 	this->RegisterClassMethod("Tween","void Init(float _duration,int _effect,int _easeMode)", asMETHOD(Tween, Init));
 
-	r = engine->RegisterGlobalFunction("void TWN_AddTween(Tween @)", asMETHOD(TweenManager,AddTween), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);SDL_assert(r>0);
-	r = engine->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);SDL_assert(r>0);
+	///sect:Tweens
+	///glob:void TWN_AddTween(Tween @)
+	this->RegisterGlobalFunction("void TWN_AddTween(Tween @)", asMETHOD(TweenManager,AddTween), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
+	///glob:void TWN_CancelTweens()
+	this->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
 
 	RegisterVector2D();
 	
@@ -181,10 +184,15 @@ void ScriptManager::Prepare()
 	RegisterTextBox();
 	RegisterPrimitive();
 
-	r = engine->RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asMETHOD(GUIManager,AddWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
-	r = engine->RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asMETHOD(GUIManager,RemoveWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
-	r = engine->RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asMETHOD(GUIManager,LoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
-	r = engine->RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager,UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);SDL_assert(r>0);
+	///sect:GUI
+	///glob:void GUI_AddWidget(Widget @)
+	this->RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asMETHOD(GUIManager,AddWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+	///glob:void GUI_RemoveWidget(Widget @)
+	this->RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asMETHOD(GUIManager,RemoveWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+	///glob:void GUI_LoadTheme(string &in file)
+	this->RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asMETHOD(GUIManager,LoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+	///glob:void GUI_UnLoadTheme()
+	this->RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager,UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
 
 	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "Button@ f()", asFUNCTION((refCast<Widget,Button>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("Button", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<Button,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
@@ -205,13 +213,15 @@ void ScriptManager::Prepare()
 
 	RegisterBody();
 
-	///sect:PHYSIC
+	///sect:Physic
 	///glob:void PHY_ShowDebugDraw(bool value)
-	r = engine->RegisterGlobalFunction("void PHY_ShowDebugDraw(bool _value)", asMETHOD(PhysicsManager,ShowDebugDraw), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+	this->RegisterGlobalFunction("void PHY_ShowDebugDraw(bool _value)", asMETHOD(PhysicsManager,ShowDebugDraw), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);
 	///glob:void PHY_SetGravity(float x,float y)
-	r = engine->RegisterGlobalFunction("void PHY_SetGravity(float _x,float _y)", asMETHOD(PhysicsManager,SetGravity), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
-	r = engine->RegisterGlobalFunction("Body @ PHY_GetContactA()", asMETHOD(PhysicsManager,GetContactA), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
-	r = engine->RegisterGlobalFunction("Body @ PHY_GetContactB()", asMETHOD(PhysicsManager,GetContactB), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);SDL_assert(r>0);
+	this->RegisterGlobalFunction("void PHY_SetGravity(float _x,float _y)", asMETHOD(PhysicsManager,SetGravity), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);
+	///glob:Body @ PHY_GetContactA()
+	this->RegisterGlobalFunction("Body @ PHY_GetContactA()", asMETHOD(PhysicsManager,GetContactA), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);
+	///glob:Body @ PHY_GetContactB()
+	this->RegisterGlobalFunction("Body @ PHY_GetContactB()", asMETHOD(PhysicsManager,GetContactB), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);
 
 	RegisterEmitter();
 }
@@ -706,8 +716,23 @@ void ScriptManager::RegisterClassMethod(const std::string& class_name, const std
 
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
 void ScriptManager::RegisterObjectProperty(const std::string& class_name, const std::string& function_definition,  int byteOffset)
 {
 	int r= engine->RegisterObjectProperty(class_name.c_str(), function_definition.c_str(), byteOffset);
 	SDL_assert( r >= 0 );
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void ScriptManager::RegisterGlobalFunction(const std::string& function_definition, const asSFuncPtr &funcPointer,asDWORD callConv, void * objForThisCall)
+{
+	int r = engine->RegisterGlobalFunction(function_definition.c_str(), funcPointer, callConv,objForThisCall);
+	SDL_assert( r >= 0 );
+	
 }
