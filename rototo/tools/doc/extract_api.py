@@ -49,6 +49,14 @@ def AppendFunc(_name):
 
     return '\n**'+ _name + '**\n\n' 
 
+def AppendProperty(_name):  
+    global out_wordlist
+    for item in re.findall('[%s]+_*[%s]*' % (string.ascii_letters,string.ascii_letters), _name):
+        if (len(item)> 2):
+            out_wordlist.add(item)    
+
+    return '\n**'+ _name + ' (property) **\n\n'     
+
 def AppendRole(_name):    
     global lang_id
     if (lang_id == "en"):        
@@ -130,7 +138,9 @@ def ScanFile(_path):
             if '///sect:' in line:
                 out_globals += AppendSection(line[line.index('///sect:')+8:-1]) 
             if '///glob:' in line:
-                out_globals += AppendGlobal(line[line.index('///glob:')+8:-1])                  
+                out_globals += AppendGlobal(line[line.index('///glob:')+8:-1])     
+            if '///prop:' in line:
+                out_html += AppendProperty(line[line.index('///prop:')+8:-1])                                  
 
 """--------------------------------------------------
 
