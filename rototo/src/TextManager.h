@@ -35,10 +35,15 @@ public:
 
 	void Init();
 	void Shutdown();
+	
+	std::string GetString(int _id);
 
 public:
 	//TTF_Font *font;
 	SDL_Color color;
 };
+
+
+void RegisterTextManager();
 
 #endif

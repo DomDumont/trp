@@ -29,70 +29,70 @@
 #include <string>
 
 class Atlas;
+
 class AtlasEntry
 {
-public:
-	Atlas *atlas; 
-    std::string name;
-	SDL_Rect frame;
+	public:
+	
+	Atlas *		atlas;
+	std::string	name;
+	SDL_Rect	frame;
 
 	AtlasEntry()
-		{
+	{
 		name = "";
 		atlas = NULL;
-		}
+	}
 
 };
 
 class Atlas
 {
 	public:
-		Atlas();
-		~Atlas();
+	
+	Atlas();
+	~Atlas();
 
-		void Load(const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
-		void LoadFromImage(const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
-        void UnLoad();
-		AtlasEntry * FindEntry(const std::string& _name);
+	void Load(const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
+	void LoadFromImage(const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
+	void UnLoad();
+	AtlasEntry * FindEntry(const std::string& _name);
 
-		void AddRef()
-		{
-			// Increase the reference counter
-			refCount++;
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x AddRef : nb active ref = %d\n",this,refCount);
-		}
+	void AddRef()
+	{
+		// Increase the reference counter
+		refCount++;
+		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x AddRef : nb active ref = %d\n",this,refCount);
+	}
 
-		void Release()
-		{
-			// Decrease ref count and delete if it reaches 0
-            refCount--;
-			if ( refCount == 0 )
-				delete this;
-			else
-            if ( refCount > 0 )
-				SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x Release : nb active ref = %d\n",this,refCount);
-            else
-                SDL_assert(0);
-				
-		}
+	void Release()
+	{
+		// Decrease ref count and delete if it reaches 0
+		refCount--;
+		if ( refCount == 0 )
+			delete this;
+		else
+		if ( refCount > 0 )
+			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x Release : nb active ref = %d\n",this,refCount);
+		else
+			SDL_assert(0);
+			
+	}
 
 	public:
-    std::vector <AtlasEntry *> atlasEntries;
+	
+	std::vector <AtlasEntry *> atlasEntries;
 	SDL_Texture *texture;
 
 	private:
 
-        //Now in utils.cpp std::string LoadString(const std::string& _sourceFile);
-		 
-		SDL_Rect size;
-		int	refCount;
+	//Now in utils.cpp std::string LoadString(const std::string& _sourceFile);
+	 
+	SDL_Rect size;
+	int	refCount;
 };
 
 Atlas *Atlas_Factory();
 void RegisterAtlas();
-/*
-void ConstructAtlas(Atlas *thisPointer);
-void DestructAtlas(Atlas *thisPointer);
-void CopyConstructAtlas(const Atlas &other, Atlas *thisPointer);
-*/
+
 #endif

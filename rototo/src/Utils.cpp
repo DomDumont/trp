@@ -541,8 +541,11 @@ void WND_ClearWithColor(unsigned char _r,unsigned char _g,unsigned char _b,unsig
 void RegisterUtils()
 {
 	int r;
+
+///sect:Utils
 r = g_app->scriptManager->engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert( r >= 0 );
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", asFUNCTION(WND_SetWindowTitle), asCALL_CDECL); SDL_assert(r>0);
+///glob:void WND_SetWindowTitle(string &in title)
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", asFUNCTION(WND_SetWindowTitle), asCALL_CDECL);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", asFUNCTION(WND_SetLogicalSize), asCALL_CDECL); SDL_assert(r>0);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", asFUNCTION(WND_GetLogicalSize), asCALL_CDECL); SDL_assert(r>0);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", asFUNCTION(WND_SetOrientation), asCALL_CDECL); SDL_assert(r>0);

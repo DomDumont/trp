@@ -133,6 +133,7 @@ void ScriptManager::Prepare()
 	RegisterUtils();
 
 	RegisterSoundManager();
+	RegisterTextManager();
 	RegisterMusic();
 	RegisterSound();
 
