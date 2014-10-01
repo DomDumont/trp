@@ -85,6 +85,7 @@ private:
 	std::vector<Label*> 		labels;
 	std::vector<Label *>::iterator 	labelsIT;
 	int 				selectedIndex;
+	int				state;
 	
 	
 };

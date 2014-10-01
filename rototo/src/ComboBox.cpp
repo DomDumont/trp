@@ -77,7 +77,7 @@ void RegisterComboBox()
 /*----------------------------------------------------------------------------*/
 
 ComboBox::ComboBox():
-onSelectionChangedHandler(NULL),bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1)
+onSelectionChangedHandler(NULL),bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
 {
 	
 	
@@ -200,22 +200,45 @@ void ComboBox::Render()
 {
 	if (this->shown == false)
 		return;
-	
-	//Draw Background Normal
-	//SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, (this->backgroundColor.a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(g_app->sdlRenderer,this->backgroundColor.r,this->backgroundColor.g,this->backgroundColor.b,this->backgroundColor.a);
-	SDL_RenderFillRect(g_app->sdlRenderer,&this->position);
-	
-	SDL_Rect sourceRect;
-	sourceRect.x = 0;
-	sourceRect.y = this->offsetBG;
-	sourceRect.h = this->position.h;
-	sourceRect.w = this->position.w;
-	
-	SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, &sourceRect, &this->position); // On copy la textuer
-	
-	SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
+	if (this->state == 1)
+		{
+		//Draw Background Normal
+		//SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, (this->backgroundColor.a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(g_app->sdlRenderer,this->backgroundColor.r,this->backgroundColor.g,this->backgroundColor.b,this->backgroundColor.a);
+		SDL_RenderFillRect(g_app->sdlRenderer,&this->position);
+		
+		SDL_Rect sourceRect;
+		sourceRect.x = 0;
+		sourceRect.y = this->offsetBG;
+		sourceRect.h = this->position.h;
+		sourceRect.w = this->position.w;
+		
+		SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, &sourceRect, &this->position); // On copy la textuer
+		
+		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
+		}
+	else
+		{
+		// Closed State
+		SDL_Rect	closedPosition;
+		closedPosition  = this->position;
+		closedPosition.h = this->sizeItemBG - 5; //Todo change this
+			
+		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_BLEND);
+		SDL_SetRenderDrawColor(g_app->sdlRenderer,this->backgroundColor.r,this->backgroundColor.g,this->backgroundColor.b,this->backgroundColor.a);
+		SDL_RenderFillRect(g_app->sdlRenderer,&closedPosition);
+		
+		SDL_Rect sourceRect;
+		sourceRect.x = 0;
+		sourceRect.y = this->selectedIndex * this->sizeItemBG;
+		sourceRect.h = this->sizeItemBG-5;
+		sourceRect.w = this->position.w;
+		
+		SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, &sourceRect, &closedPosition); // On copy la textuer
+		
+		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
+		}
 }
 
 /*----------------------------------------------------------------------------*/
@@ -424,9 +447,17 @@ void ComboBox::BuildInternalTexture()
 
 int ComboBox::OnMouseButtonDown( SDL_Event * event)
 {
-	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox OnMouseButtonDown\n");
-	this->dragState = 1;
-	return false;
+	if (state == 1)
+		{
+		this->dragState = 1;
+		return false;
+		}
+	else
+		{
+		this->state = 1; // Open the combobox
+		return false;
+		}
+	
 }
 
 /*----------------------------------------------------------------------------*/
@@ -457,6 +488,7 @@ void ComboBox::OnMouseButtonUp( SDL_Event * event)
 			g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
 			this->sender.Set(NULL,NULL);
 		}
+		this->state = 0; //Close the comboBox
 		
 	}
 	this->dragState = 0;

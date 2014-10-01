@@ -136,12 +136,15 @@ void Init()
 
 	// Setup Combobox
 
-	comboBox.SetSize(400,100);
+	comboBox.SetSize(400,200);
 	comboBox.SetPosition(800,150);
 
 	
     comboBox.AddItem("English");
     comboBox.AddItem("French");
+    comboBox.AddItem("Italian");
+    comboBox.AddItem("Portuguese");
+    comboBox.AddItem("Lithuania");
  
  	@comboBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandlerCB);
 	@comboBox.userData = @this;       
