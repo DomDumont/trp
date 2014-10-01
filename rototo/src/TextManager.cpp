@@ -29,16 +29,25 @@
 #include "TextManager.h"
 #include "Application.h"
 
+#include "Utils.h"
+
+#include "tinyxml2.h"
+using namespace tinyxml2;
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void RegisterTextManager()
 {
-	int r;
+	
 	///sect:Text
 	///glob:void TXT_GetString(int id)
 	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(int _id)", asMETHOD(TextManager,GetString), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
+	///glob:void TXT_Load(string &in file,int flags=13)
+	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asMETHOD(TextManager,Load), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
+	g_app->scriptManager->RegisterGlobalFunction("string TXT_UnLoad()", asMETHOD(TextManager,UnLoad), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
+
 	
 }
 
@@ -97,6 +106,53 @@ void TextManager::Shutdown()
 /*----------------------------------------------------------------------------*/
 
 std::string TextManager::GetString(int _id)
+{
+	
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void TextManager::Load(const std::string& _file,int _flags)
+{
+	// First load and create the Texture
+	
+	std::string fullPath;
+	std::string loadedString;
+	
+	
+	
+	fullPath = _file + ".xml";
+	
+	loadedString = LoadTextFile(fullPath,_flags);
+	
+	XMLDocument doc;
+	doc.Parse( loadedString.c_str());
+	XMLElement* root = doc.FirstChildElement();
+	for(XMLElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+	{
+		/*
+		AtlasEntry *pTemp = new AtlasEntry();
+		pTemp->name = elem->Attribute("name");
+		pTemp->frame.x = atoi(elem->Attribute("x"));
+		pTemp->frame.y = atoi(elem->Attribute("y"));
+		pTemp->frame.w = atoi(elem->Attribute("width"));
+		pTemp->frame.h = atoi(elem->Attribute("height"));
+		pTemp->atlas = this;
+		
+		atlasEntries.push_back(pTemp);
+		*/
+	}
+	
+	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Text Dico <%s> loaded successfully \n",_file.c_str());
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void TextManager::UnLoad()
 {
 	
 }

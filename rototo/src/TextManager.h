@@ -36,7 +36,9 @@ public:
 	void Init();
 	void Shutdown();
 	
+	void Load(const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
 	std::string GetString(int _id);
+	void UnLoad();
 
 public:
 	//TTF_Font *font;

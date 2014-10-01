@@ -196,6 +196,7 @@ void Atlas::Load(const std::string& _file,int _flags)
 		}
 
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas <%s> loaded successfully \n",_file.c_str());
+	
 }
 
 
