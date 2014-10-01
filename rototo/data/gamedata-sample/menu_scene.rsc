@@ -1,5 +1,5 @@
 
-
+int thisIsBad = 1;
 
 class MenuScene:Scene
 {
@@ -9,7 +9,7 @@ bool OnSelectionChangedHandlerCB(ref @ _sender,ref @ _userData)
 	ComboBox @tempCB = cast<ComboBox>(_sender);
 
 	int sel = tempCB.GetSelectedIndex();
-
+	thisIsBad = sel;
 	if (sel == 0)
 		{
 		TXT_Load("strings/en");
@@ -56,6 +56,7 @@ bool OnClickHandler(ref @ _sender,ref @ _userData)
 
 void Init()
 	{
+
 
 	UTI_Log("====> menuScene Init");
 
@@ -160,7 +161,8 @@ void Init()
     comboBox.AddItem("Italian");
     comboBox.AddItem("Portuguese");
     comboBox.AddItem("Lithuania");
- 
+	comboBox.SetSelectedIndex(thisIsBad);
+
  	@comboBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandlerCB);
 	@comboBox.userData = @this;       
 

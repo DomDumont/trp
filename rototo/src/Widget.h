@@ -40,7 +40,7 @@ public:
 	virtual void SetScale(double _xFactor,double _yFactor);
 	virtual void Update(Uint64 _elapsed);
 	virtual int OnMouseButtonDown( SDL_Event * event);
-	virtual void OnMouseButtonUp( SDL_Event * event);
+	virtual int OnMouseButtonUp( SDL_Event * event);
 	virtual void OnMouseMotion( SDL_Event * event);
 	virtual void OnKeyUp( SDL_Event * event);
 	virtual void SetEnabled(bool _value);

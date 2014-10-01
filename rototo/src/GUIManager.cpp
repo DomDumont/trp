@@ -103,7 +103,8 @@ void GUIManager::HandleEvent( SDL_Event * event)
 		{
 		Widget *pTemp;
 		pTemp = *widgetsIT;
-		pTemp->OnMouseButtonUp(event);
+		if (pTemp->OnMouseButtonUp(event) != 0)
+			break;
 
 		/*
 		if (pTemp->Touched(event->button.x,event->button.y))

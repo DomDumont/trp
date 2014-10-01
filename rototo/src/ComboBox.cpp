@@ -57,6 +57,7 @@ void RegisterComboBox()
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void RemoveItem(int _index)", asMETHOD(ComboBox, RemoveItem));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void ResetContent()", asMETHOD(ComboBox, ResetContent));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","int GetSelectedIndex()", asMETHOD(ComboBox, GetSelectedIndex));
+	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetSelectedIndex(int _index)", asMETHOD(ComboBox, SetSelectedIndex));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","string GetItemText(int _index)", asMETHOD(ComboBox, GetItemText));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetEnabled(bool _value)", asMETHOD(ComboBox, SetEnabled));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetBackgroundColor));
@@ -464,11 +465,13 @@ int ComboBox::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void ComboBox::OnMouseButtonUp( SDL_Event * event)
+int ComboBox::OnMouseButtonUp( SDL_Event * event)
 {
+	int ret = 0;
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox OnMouseButtonUp\n");
 	if (this->dragState == 1)
-	{
+		{
+
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox Select on button up\n");
 		//Only Drag not motion
 		//Compute selected item
@@ -483,15 +486,18 @@ void ComboBox::OnMouseButtonUp( SDL_Event * event)
 		
 		//Call Callback
 		if (this->onSelectionChangedHandler != NULL)
-		{
+			{
+
 			this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ComboBox"));
-			g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
+			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
 			this->sender.Set(NULL,NULL);
-		}
+
+			}
 		this->state = 0; //Close the comboBox
 		
-	}
+		}
 	this->dragState = 0;
+	return ret;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -512,6 +518,13 @@ void ComboBox::OnMouseMotion( SDL_Event * event)
 }
 
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void ComboBox::SetSelectedIndex(int _newIndex)
+{
+	this->selectedIndex = _newIndex; //TODO add check
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

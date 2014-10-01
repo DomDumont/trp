@@ -53,10 +53,11 @@ public:
 	
 	
 	int				OnMouseButtonDown( SDL_Event * event);
-	void				OnMouseButtonUp( SDL_Event * event);
+	int				OnMouseButtonUp( SDL_Event * event);
 	void				OnMouseMotion( SDL_Event * event);
 	
 	int				GetSelectedIndex();
+	void				SetSelectedIndex(int _newIndex);
 	std::string			GetItemText(int _index);
 	
 public:

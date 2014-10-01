@@ -211,8 +211,9 @@ int TextBox::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void TextBox::OnMouseButtonUp( SDL_Event * event)
+int TextBox::OnMouseButtonUp( SDL_Event * event)
 {
+	return false;
 }
 
 /*----------------------------------------------------------------------------*/

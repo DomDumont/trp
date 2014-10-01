@@ -243,9 +243,10 @@ int Widget::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Widget::OnMouseButtonUp( SDL_Event * event)
+int Widget::OnMouseButtonUp( SDL_Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget OnMouseButtonUp\n");
+	return false;
 }
 
 /*----------------------------------------------------------------------------*/

@@ -433,8 +433,9 @@ int ListBox::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void ListBox::OnMouseButtonUp( SDL_Event * event)
+int ListBox::OnMouseButtonUp( SDL_Event * event)
 {
+	int ret = 0;
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox OnMouseButtonUp\n");
 	if (this->dragState == 1)
 		{
@@ -454,12 +455,13 @@ void ListBox::OnMouseButtonUp( SDL_Event * event)
 		if (this->onSelectionChangedHandler != NULL)
 			{			
 			this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ListBox"));
-			g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
+			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
 			this->sender.Set(NULL,NULL);
 			}
 
 		}
 	this->dragState = 0;
+	return ret ;
 }
 
 /*----------------------------------------------------------------------------*/

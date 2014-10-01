@@ -44,7 +44,7 @@ public:
 	
 
 	int OnMouseButtonDown( SDL_Event * event);
-	void OnMouseButtonUp( SDL_Event * event);
+	int OnMouseButtonUp( SDL_Event * event);
 	void OnMouseMotion( SDL_Event * event);
     void OnKeyUp( SDL_Event * event);
 
@@ -52,7 +52,7 @@ public:
 
 private:
 	SDL_Color	color;
-    SDL_Color	backup_text_color;
+	SDL_Color	backup_text_color;
 	Label label; 
 	int state;
 	int cursor;
