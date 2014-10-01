@@ -546,8 +546,10 @@ void RegisterUtils()
 r = g_app->scriptManager->engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert( r >= 0 );
 ///glob:void WND_SetWindowTitle(string &in title)
 g_app->scriptManager->RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", asFUNCTION(WND_SetWindowTitle), asCALL_CDECL);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", asFUNCTION(WND_SetLogicalSize), asCALL_CDECL); SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", asFUNCTION(WND_GetLogicalSize), asCALL_CDECL); SDL_assert(r>0);
+///glob:void WND_SetLogicalSize(int w,int h)
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", asFUNCTION(WND_SetLogicalSize), asCALL_CDECL);
+///glob:void WND_GetLogicalSize(int &out w,int &out h)
+g_app->scriptManager->RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", asFUNCTION(WND_GetLogicalSize), asCALL_CDECL);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", asFUNCTION(WND_SetOrientation), asCALL_CDECL); SDL_assert(r>0);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", asFUNCTION(WND_SetCapFPS), asCALL_CDECL); SDL_assert(r>0);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void UTI_Log(string &in _toto)", asFUNCTION(UTI_Log), asCALL_CDECL);SDL_assert(r>0);
@@ -563,8 +565,10 @@ r = g_app->scriptManager->engine->RegisterGlobalFunction("void IO_Close(uint64 _
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asFUNCTION(WND_ClearWithColor), asCALL_CDECL);SDL_assert(r>0);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_Clear()", asFUNCTION(WND_Clear), asCALL_CDECL);SDL_assert(r>0);
 r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", asFUNCTION(WND_ClearRect), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("string UTI_GetLanguage()", asFUNCTION(UTI_GetLanguage), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("string UTI_GetVersion()", asFUNCTION(UTI_GetVersion), asCALL_CDECL);SDL_assert(r>0);
+///glob:string UTI_GetLanguage()
+g_app->scriptManager->RegisterGlobalFunction("string UTI_GetLanguage()", asFUNCTION(UTI_GetLanguage), asCALL_CDECL);
+///glob:string UTI_GetVersion()
+g_app->scriptManager->RegisterGlobalFunction("string UTI_GetVersion()", asFUNCTION(UTI_GetVersion), asCALL_CDECL);
 
 }
 
