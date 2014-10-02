@@ -57,10 +57,16 @@ MdiChild::MdiChild(QWidget *parent) : QPlainTextEdit(parent), c(0)
 
      highlighter = new Highlighter(this->document());
 
-     setTabStopWidth( fontMetrics().width( " " ) * 4); //TODODOMDOM should do this also when font changed ?
+    this->SetTabWidth();
 
-     latestTextToFind = "";
+    latestTextToFind = "";
     }
+
+void MdiChild::SetTabWidth()
+{
+    const int tabwidth = fontMetrics().width(' ') * 8;
+    setTabStopWidth(tabwidth);
+}
 
 void MdiChild::findBackwardCurrentWord()
 {
@@ -474,7 +480,7 @@ latestTextToFind = textUnderCursor();
      bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
      QString completionPrefix = textUnderCursor();
 
-     if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
+     if (!isShortcut && ((e->key() == Qt::Key_Tab)||hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
                        || eow.contains(e->text().right(1)))) {
          c->popup()->hide();
          return;

@@ -54,6 +54,7 @@ class MDIMainWindow;
      bool saveFile(const QString &fileName);
      QString userFriendlyCurrentFile();
      QString currentFile() { return curFile; }
+     void SetTabWidth();
 
  protected:
      void closeEvent(QCloseEvent *event);

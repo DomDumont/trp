@@ -498,12 +498,13 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
  {
      if (!fileName.isEmpty())
         {
-         QMdiSubWindow *existing = findMdiChild(fileName);
+         MdiChild *existing = (MdiChild *)findMdiChild(fileName);
          if (existing)
             {
             existing->setFont(m_globalFont);
-             mdiArea->setActiveSubWindow(existing);
-             return;
+            existing->SetTabWidth();
+            mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);
+            return;
             }
         //Update recent file here
         recentFiles.removeAll(fileName);
@@ -517,6 +518,7 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
              statusBar()->showMessage(tr("File loaded"), 2000);
              child->setCompleter(completer);
              child->setFont(m_globalFont);
+             child->SetTabWidth();
              child->show();
             }
          else
