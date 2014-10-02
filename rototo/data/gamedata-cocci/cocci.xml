@@ -1,0 +1,12 @@
+<TextureAtlas imagePath="sheet.png">
+	<SubTexture name="cocci_00000.png" x="0" y="0" width="136" height="109"/>
+	<SubTexture name="cocci_00001.png" x="0" y="111" width="136" height="117"/>
+	<SubTexture name="cocci_00002.png" x="0" y="230" width="135" height="123"/>
+	<SubTexture name="cocci_00003.png" x="0" y="355" width="134" height="130"/>
+	<SubTexture name="cocci_00004.png" x="136" y="355" width="133" height="135"/>
+	<SubTexture name="cocci_00005.png" x="138" y="0" width="132" height="141"/>
+	<SubTexture name="cocci_00006.png" x="402" y="0" width="130" height="147"/>
+	<SubTexture name="cocci_00007.png" x="138" y="143" width="130" height="153"/>
+	<SubTexture name="cocci_00008.png" x="270" y="143" width="130" height="159"/>
+	<SubTexture name="cocci_00009.png" x="271" y="304" width="130" height="165"/>
+</TextureAtlas>

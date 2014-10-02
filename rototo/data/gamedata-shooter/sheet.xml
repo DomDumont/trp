@@ -1,0 +1,7 @@
+<TextureAtlas imagePath="sheet.png">
+	<SubTexture name="Bullet.png" x="0" y="116" width="28" height="9"/>
+	<SubTexture name="Player.png" x="0" y="74" width="39" height="40"/>
+	<SubTexture name="Pointer.png" x="41" y="74" width="22" height="31"/>
+	<SubTexture name="Seeker.png" x="0" y="0" width="40" height="30"/>
+	<SubTexture name="Wanderer.png" x="0" y="32" width="40" height="40"/>
+</TextureAtlas>

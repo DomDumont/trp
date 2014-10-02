@@ -118,7 +118,7 @@ void SoundManager::Shutdown()
 
 void RegisterSoundManager()
 {
-	int r;
+
 	///sect:Sound
 	///glob:void SND_SetMusicVolume(int newVolume)
 	g_app->scriptManager->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", asMETHOD(SoundManager,SetMusicVolume), asCALL_THISCALL_ASGLOBAL, g_app->soundManager);
