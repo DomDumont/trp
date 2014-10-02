@@ -404,7 +404,11 @@ latestTextToFind = textUnderCursor();
  QString MdiChild::textUnderCursor() const
  {
      QTextCursor tc = textCursor();
-     tc.select(QTextCursor::WordUnderCursor);
+     QString currentSelection = tc.selectedText();
+     if (currentSelection.isEmpty())
+        {
+        tc.select(QTextCursor::WordUnderCursor);
+        }
      return tc.selectedText();
  }
 
