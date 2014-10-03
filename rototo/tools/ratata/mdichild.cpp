@@ -284,6 +284,123 @@ latestTextToFind = textUnderCursor();
      setExtraSelections(extraSelections);
  }
 
+
+
+ void MdiChild::IncreaseSelectionIndent()
+ {
+     QTextCursor curs = textCursor();
+
+     // Do nothing if we don't have a selection.
+
+     if(!curs.hasSelection())
+        {
+         curs.insertText("\t");
+         curs.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor);
+         return;
+        }
+
+     // Get the first and count of lines to indent.
+
+     int spos = curs.anchor();
+     int epos = curs.position();
+
+     if(spos > epos)
+     {
+        std::swap(spos, epos);
+     }
+
+     curs.setPosition(spos, QTextCursor::MoveAnchor);
+     int sblock = curs.block().blockNumber();
+
+     curs.setPosition(epos, QTextCursor::MoveAnchor);
+     int eblock = curs.block().blockNumber();
+
+     // Do the indent.
+
+     curs.setPosition(spos, QTextCursor::MoveAnchor);
+
+     curs.beginEditBlock();
+
+     const int blockDifference = eblock - sblock;
+
+     for (int i = 0; i <= blockDifference; ++i)
+     {
+         curs.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
+
+         curs.insertText("\t");
+
+         curs.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor);
+     }
+
+     curs.endEditBlock();
+
+     // Set our cursor's selection to span all of the involved lines.
+
+     curs.setPosition(spos, QTextCursor::MoveAnchor);
+     curs.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
+
+     while(curs.block().blockNumber() < eblock)
+     {
+         curs.movePosition(QTextCursor::NextBlock, QTextCursor::KeepAnchor);
+     }
+
+     curs.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+
+     // Done!
+
+     setTextCursor(curs);
+ }
+
+ void MdiChild::DecreaseSelectionIndent()
+ {
+     QString prefix = "\t";
+     QTextCursor cursor = this->textCursor();
+       cursor.beginEditBlock();
+       // Get selection to work on
+       int cursorPos = cursor.position();
+       int selStart = cursor.selectionStart();
+       int selEnd = cursor.selectionEnd();
+       // extend selection to start and end at block boundaries (i.e., line breaks)
+       // this is reasonable since we work on full lines only
+       cursor.setPosition(selStart);
+       if (!cursor.atBlockStart()) {
+               cursor.movePosition(QTextCursor::StartOfBlock);
+               selStart = cursor.position();
+       }
+       cursor.setPosition(selEnd);
+       if (!cursor.atBlockEnd() || cursor.atBlockStart()) {
+               if(cursor.atBlockStart() && cursorPos != selEnd) {
+                       // the selection ends right after an end-of-block, and the cursor
+                       // is not there; thus, the block starting at selEnd doesn't belong
+                       // to the selection and should not be prefixed
+                       cursor.movePosition(QTextCursor::PreviousBlock);
+               }
+               cursor.movePosition(QTextCursor::EndOfBlock);
+               selEnd = cursor.position();
+       }
+       // unprefix lines, starting at the end (because otherwise positions would
+       // change constantly). Operate as long as we're inside the selection, or
+       // until we cannot move back (i.e., we reached the beginning of the document)
+       cursor.movePosition(QTextCursor::StartOfBlock);
+       while (cursor.position() >= selStart) {
+               int oldPos = cursor.position();
+               if(cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor, prefix.size())) {
+                       QString str = cursor.selectedText();
+                       if (str == prefix) {
+                               cursor.removeSelectedText();
+                               selEnd -= prefix.length();
+                       }
+               }
+               cursor.setPosition(oldPos);
+               if(!cursor.movePosition(QTextCursor::PreviousBlock)) break;
+       }
+       // restore the (extended) selection
+       cursor.setPosition(selStart);
+       cursor.setPosition(selEnd, QTextCursor::KeepAnchor);
+       this->setTextCursor(cursor);
+       cursor.endEditBlock();
+ }
+
  void MdiChild::highlightLine(int _lineNumber)
  {
      QList<QTextEdit::ExtraSelection> extraSelections;
@@ -442,8 +559,20 @@ latestTextToFind = textUnderCursor();
             default:
                 break;
             }
-     }
+         }
 
+     switch (e->key())
+         {
+         case Qt::Key_Tab:
+            this->IncreaseSelectionIndent();
+            return;
+            break;
+         case Qt::Key_Backtab:
+            this->DecreaseSelectionIndent();
+            return; // let the completer do default behavior
+         default:
+             break;
+         }
      bool ctrlf3Shortcut =  (! (e->modifiers() & Qt::ShiftModifier) &&(e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_F3); // CTRL+F3
      if (ctrlf3Shortcut)
          {
@@ -495,7 +624,9 @@ latestTextToFind = textUnderCursor();
                  + c->popup()->verticalScrollBar()->sizeHint().width());
      c->complete(cr); // popup it up!
  }
-    int MdiChild::getTopLine()
+
+
+ int MdiChild::getTopLine()
     {
          QTextBlock block = firstVisibleBlock();
      return block.blockNumber()+1;

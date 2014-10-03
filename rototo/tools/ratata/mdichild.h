@@ -55,6 +55,8 @@ class MDIMainWindow;
      QString userFriendlyCurrentFile();
      QString currentFile() { return curFile; }
      void SetTabWidth();
+     void IncreaseSelectionIndent();
+     void DecreaseSelectionIndent();
 
  protected:
      void closeEvent(QCloseEvent *event);
