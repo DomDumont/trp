@@ -544,31 +544,51 @@ void RegisterUtils()
 
 ///sect:Utils
 r = g_app->scriptManager->engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert( r >= 0 );
+
+///glob:void UTI_Log(string &in toto)
+g_app->scriptManager->RegisterGlobalFunction("void UTI_Log(string &in _toto)", asFUNCTION(UTI_Log), asCALL_CDECL);
+///glob:void UTI_Exit()
+g_app->scriptManager->RegisterGlobalFunction("void UTI_Exit()", asFUNCTION(UTI_Exit), asCALL_CDECL);
+///glob:void UTI_SRand(uint seed)
+g_app->scriptManager->RegisterGlobalFunction("void UTI_SRand(uint _seed)", asFUNCTION(UTI_SRand), asCALL_CDECL);
+///glob:int  UTI_Rand(int min,int max)
+g_app->scriptManager->RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", asFUNCTION(UTI_Rand), asCALL_CDECL);
+///glob:string UTI_GetLanguage()
+g_app->scriptManager->RegisterGlobalFunction("string UTI_GetLanguage()", asFUNCTION(UTI_GetLanguage), asCALL_CDECL);
+///glob:string UTI_GetVersion()
+g_app->scriptManager->RegisterGlobalFunction("string UTI_GetVersion()", asFUNCTION(UTI_GetVersion), asCALL_CDECL);
+
+///sect:Window
 ///glob:void WND_SetWindowTitle(string &in title)
 g_app->scriptManager->RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", asFUNCTION(WND_SetWindowTitle), asCALL_CDECL);
 ///glob:void WND_SetLogicalSize(int w,int h)
 g_app->scriptManager->RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", asFUNCTION(WND_SetLogicalSize), asCALL_CDECL);
 ///glob:void WND_GetLogicalSize(int &out w,int &out h)
 g_app->scriptManager->RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", asFUNCTION(WND_GetLogicalSize), asCALL_CDECL);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", asFUNCTION(WND_SetOrientation), asCALL_CDECL); SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", asFUNCTION(WND_SetCapFPS), asCALL_CDECL); SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void UTI_Log(string &in _toto)", asFUNCTION(UTI_Log), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void UTI_Exit()", asFUNCTION(UTI_Exit), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void UTI_SRand(uint _seed)", asFUNCTION(UTI_SRand), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", asFUNCTION(UTI_Rand), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", asFUNCTION(IO_Open), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", asFUNCTION(IO_WriteString), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", asFUNCTION(IO_ReadString), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", asFUNCTION(IO_WriteInt), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", asFUNCTION(IO_ReadInt), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void IO_Close(uint64 _handle)", asFUNCTION(IO_Close), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asFUNCTION(WND_ClearWithColor), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_Clear()", asFUNCTION(WND_Clear), asCALL_CDECL);SDL_assert(r>0);
-r = g_app->scriptManager->engine->RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", asFUNCTION(WND_ClearRect), asCALL_CDECL);SDL_assert(r>0);
-///glob:string UTI_GetLanguage()
-g_app->scriptManager->RegisterGlobalFunction("string UTI_GetLanguage()", asFUNCTION(UTI_GetLanguage), asCALL_CDECL);
-///glob:string UTI_GetVersion()
-g_app->scriptManager->RegisterGlobalFunction("string UTI_GetVersion()", asFUNCTION(UTI_GetVersion), asCALL_CDECL);
+///glob:void WND_SetOrientation(int orientation)
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", asFUNCTION(WND_SetOrientation), asCALL_CDECL);
+///glob:void WND_SetCapFPS(int capFPS)
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", asFUNCTION(WND_SetCapFPS), asCALL_CDECL);
+///glob:void WND_ClearWithColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
+g_app->scriptManager->RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asFUNCTION(WND_ClearWithColor), asCALL_CDECL);
+///glob:void WND_Clear()
+g_app->scriptManager->RegisterGlobalFunction("void WND_Clear()", asFUNCTION(WND_Clear), asCALL_CDECL);
+///glob:void WND_ClearRect(int x,int y,int w,int h)
+g_app->scriptManager->RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", asFUNCTION(WND_ClearRect), asCALL_CDECL);
 
+
+///sect:IO
+///glob:uint64  IO_Open(string &in name,string &in mode)
+g_app->scriptManager->RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", asFUNCTION(IO_Open), asCALL_CDECL);
+///glob:int  IO_WriteString(uint64 handle,string &in string)
+g_app->scriptManager->RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", asFUNCTION(IO_WriteString), asCALL_CDECL);
+///glob:int  IO_ReadString(uint64 handle,string &out string)
+g_app->scriptManager->RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", asFUNCTION(IO_ReadString), asCALL_CDECL);
+///glob:int  IO_WriteInt(uint64 handle,int value)
+g_app->scriptManager->RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", asFUNCTION(IO_WriteInt), asCALL_CDECL);
+///glob:int  IO_ReadInt(uint64 handle,int &out value)
+g_app->scriptManager->RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", asFUNCTION(IO_ReadInt), asCALL_CDECL);
+///glob:void IO_Close(uint64 handle)
+g_app->scriptManager->RegisterGlobalFunction("void IO_Close(uint64 _handle)", asFUNCTION(IO_Close), asCALL_CDECL);
 }
 
