@@ -54,7 +54,7 @@ class PhysicsScene:Scene
 		
 		buttonBack.SetSize(250,100);
 		buttonBack.SetPosition(800,650);			
-		buttonBack.SetRotation(5);
+		buttonBack.set_Rotation(5);
 		buttonBack.SetEnabled(true);
 		@buttonBack.on_click_handler = CallbackHandler(physicsScene.OnClickHandler);
 		@buttonBack.user_data = @this;
@@ -71,7 +71,7 @@ class PhysicsScene:Scene
 		
 		buttonDebugDraw.SetSize(380,50);
 		buttonDebugDraw.SetPosition(300,600);			
-		buttonDebugDraw.SetRotation(0);
+		buttonDebugDraw.set_Rotation(0);
 		buttonDebugDraw.SetEnabled(true);
 		@buttonDebugDraw.on_click_handler = CallbackHandler(physicsScene.OnClickHandlerDD);
 		@buttonDebugDraw.user_data = @this;
@@ -82,7 +82,7 @@ class PhysicsScene:Scene
 		buttonRestart.SetText("Restart");		
 		buttonRestart.SetSize(380,50);
 		buttonRestart.SetPosition(300,700);	
-		buttonRestart.SetRotation(0);
+		buttonRestart.set_Rotation(0);
 		buttonRestart.SetEnabled(true);
 		@buttonRestart.on_click_handler = CallbackHandler(physicsScene.OnClickHandlerRestart);
 		@buttonRestart.user_data = @this;
@@ -117,7 +117,7 @@ class PhysicsScene:Scene
 		int x,y;
 		box.GetPosition(x,y);
 		monSprite.SetPosition(x,y);
-		monSprite.SetRotation(box.GetAngle());
+		monSprite.set_Rotation(box.GetAngle());
 		
 		}
 

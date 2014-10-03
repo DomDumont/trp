@@ -23,7 +23,7 @@ class PrimitiveScene:Scene
         buttonBack.SetText("Back");
         buttonBack.SetSize(250,100);
         buttonBack.SetPosition(800,650);    
-        buttonBack.SetRotation(5);
+        buttonBack.set_Rotation(5);
         buttonBack.SetEnabled(true);
         @buttonBack.on_click_handler = CallbackHandler(primitiveScene.OnClickHandler);
         @buttonBack.user_data = @this;
@@ -33,7 +33,7 @@ class PrimitiveScene:Scene
         myPrimitive.SetColor(255,250,250,50);       
         myPrimitive.SetSize(500,500);
         myPrimitive.SetPosition(500,350);    
-        //myPrimitive.SetRotation(5);
+        //myPrimitive.set_Rotation(5);
         myPrimitive.SetShape(1);        
 
         }

@@ -358,9 +358,9 @@ void RegisterSprite()
 	///func:void SetScale(double xFactor,double yFactor)
 	g_app->scriptManager->RegisterClassMethod("Sprite","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Sprite, SetScale));
 	///func:void SetRotation(float angle)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetRotation(float _angle)", asMETHOD(Sprite, SetRotation));
-	///func:double GetRotation()
-	g_app->scriptManager->RegisterClassMethod("Sprite","double GetRotation()", asMETHOD(Sprite, GetRotation));
+	g_app->scriptManager->RegisterClassMethod("Sprite","void set_Rotation(float _angle)", asMETHOD(Sprite, SetRotation));
+	///func:float get_Rotation()
+	g_app->scriptManager->RegisterClassMethod("Sprite","float get_Rotation()", asMETHOD(Sprite, GetRotation));
 	///func:void Render()
 	g_app->scriptManager->RegisterClassMethod("Sprite","void Render()", asMETHOD(Sprite, Render));
 	///func:void UnLoad()

@@ -16,7 +16,7 @@ class MusicScene:Scene
         buttonBack.SetText("Back");
         buttonBack.SetSize(250,100);
         buttonBack.SetPosition(800,650);    
-        buttonBack.SetRotation(5);
+        buttonBack.set_Rotation(5);
         buttonBack.SetEnabled(true);
         @buttonBack.on_click_handler = CallbackHandler(musicScene.OnClickHandler);
         @buttonBack.user_data = @this;

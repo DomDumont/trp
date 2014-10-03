@@ -158,7 +158,7 @@ void Widget::SetRotation(float _angle)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-double Widget::GetRotation()
+float Widget::GetRotation()
 {
 	return this->angle;
 }

@@ -58,9 +58,9 @@ void RegisterPrimitive()
 	///func:void SetPosition(int x,int y,int from = 0)
 	g_app->scriptManager->RegisterClassMethod("Primitive","void SetPosition(int _x,int _y,int _from = 0)", asMETHOD(Primitive, SetPosition));
 	g_app->scriptManager->RegisterClassMethod("Primitive","bool Touched(int _x,int _y)", asMETHOD(Primitive, Touched));
-	g_app->scriptManager->RegisterClassMethod("Primitive","void SetRotation(float _angle)", asMETHOD(Primitive, SetRotation));
-	///func:double GetRotation()
-	g_app->scriptManager->RegisterClassMethod("Primitive","double GetRotation()", asMETHOD(Primitive, GetRotation));
+	g_app->scriptManager->RegisterClassMethod("Primitive","void set_Rotation(float _angle)", asMETHOD(Primitive, SetRotation));
+	///func:float GetRotation()
+	g_app->scriptManager->RegisterClassMethod("Primitive","float get_Rotation()", asMETHOD(Primitive, GetRotation));
 	g_app->scriptManager->RegisterClassMethod("Primitive","void SetSize(int _w,int _h)", asMETHOD(Primitive, SetSize));
 	g_app->scriptManager->RegisterClassMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Primitive, SetScale));
 	g_app->scriptManager->RegisterClassMethod("Primitive","void SetShape(int _shape)", asMETHOD(Primitive, SetShape));

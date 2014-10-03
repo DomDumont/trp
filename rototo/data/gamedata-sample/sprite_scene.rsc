@@ -22,7 +22,7 @@ class SpriteScene:Scene
         buttonBack.SetText("Back");        
         buttonBack.SetSize(250,100);
         buttonBack.SetPosition(800,650);            
-        buttonBack.SetRotation(5);
+        buttonBack.set_Rotation(5);
         buttonBack.SetEnabled(true);
         @buttonBack.on_click_handler = CallbackHandler(spriteScene.OnClickHandler);
         @buttonBack.user_data = @this;
@@ -39,10 +39,8 @@ class SpriteScene:Scene
 
     void OnMultiGesture(int _numFingers, double _x, double _y, double _theta, double _dist )
         {
-
-           //mySprite.SetScale(_dist,_dist);         
-            float tempAngle = mySprite.GetRotation();
-            mySprite.SetRotation(tempAngle + _theta);
+      
+            mySprite.Rotation = mySprite.Rotation + _theta;
             mySprite.SetPosition( _x * windowX, _y * windowY);
             currentScale += (_dist * 10);
             mySprite.SetScale(currentScale,currentScale);

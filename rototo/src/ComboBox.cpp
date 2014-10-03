@@ -64,8 +64,8 @@ void RegisterComboBox()
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetItemColor));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetSelectedItemColor));
 	g_app->scriptManager->RegisterClassMethod("ComboBox","void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetTextColor));
-	///func:double GetRotation()
-	g_app->scriptManager->RegisterClassMethod("ComboBox","double GetRotation()", asMETHOD(ComboBox, GetRotation));
+	///func:float GetRotation()
+	g_app->scriptManager->RegisterClassMethod("ComboBox","float get_Rotation()", asMETHOD(ComboBox, GetRotation));
 	///prop:CallbackHandler @onSelectionChangedHandler
 	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler));
 	///prop:ref @userData

@@ -56,8 +56,8 @@ void RegisterTextBox()
 	g_app->scriptManager->RegisterClassMethod("TextBox","void SetText(string &in _newText)", asMETHOD(TextBox, SetText));
 	g_app->scriptManager->RegisterClassMethod("TextBox","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(TextBox, SetTextColor));
 	g_app->scriptManager->RegisterClassMethod("TextBox","string GetText()", asMETHOD(TextBox, GetText));
-	///func:double GetRotation()
-	g_app->scriptManager->RegisterClassMethod("TextBox","double GetRotation()", asMETHOD(TextBox, GetRotation));
+	///func:float GetRotation()
+	g_app->scriptManager->RegisterClassMethod("TextBox","float get_Rotation()", asMETHOD(TextBox, GetRotation));
 	//g_app->scriptManager->RegisterClassMethod("TextBox","void Update(uint64 _elapsed)", asMETHOD(TextBox, Update));
 }
 

@@ -397,9 +397,9 @@ void RegisterAnimation()
 	///func:void SetScale(double xFactor,double yFactor)
 	g_app->scriptManager->RegisterClassMethod("Animation","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Animation, SetScale));
 	///func:void SetRotation(float angle)
-	g_app->scriptManager->RegisterClassMethod("Animation","void SetRotation(float _angle)", asMETHOD(Animation, SetRotation));
-	///func:double GetRotation()
-	g_app->scriptManager->RegisterClassMethod("Animation","double GetRotation()", asMETHOD(Animation, GetRotation));
+	g_app->scriptManager->RegisterClassMethod("Animation","void set_Rotation(float _angle)", asMETHOD(Animation, SetRotation));
+	///func:float get_Rotation()
+	g_app->scriptManager->RegisterClassMethod("Animation","float get_Rotation()", asMETHOD(Animation, GetRotation));
 	///func:void UnLoad()
 	g_app->scriptManager->RegisterClassMethod("Animation","void UnLoad()", asMETHOD(Animation, UnLoad));
 	///prop:CallbackHandler @onComplete

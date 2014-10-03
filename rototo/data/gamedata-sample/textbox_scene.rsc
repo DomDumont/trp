@@ -31,7 +31,7 @@ class CTextboxScene:CScene
 		buttonBack.SetSize(250,100);
 		buttonBack.SetCenterPosition(800,650);	
 		buttonBack.SetTextColor(255,150,150);		
-		buttonBack.SetRotation(5);
+		buttonBack.set_Rotation(5);
 		buttonBack.SetEnabled(true);
 		@buttonBack.onClickHandler = CallbackHandler(textboxScene.OnClickHandler);
 		@buttonBack.userData = @this;

@@ -36,7 +36,7 @@ public:
 	virtual void SetPosition(int _x,int _y,int _from = 0);
 	virtual bool Touched(int _x,int _y);
 	virtual void SetRotation(float _angle);
-	virtual double GetRotation();
+	virtual float GetRotation();
 	virtual void SetScale(double _xFactor,double _yFactor);
 	virtual void Update(Uint64 _elapsed);
 	virtual int OnMouseButtonDown( SDL_Event * event);
@@ -72,7 +72,7 @@ public:
 public:
 	SDL_Rect	frame;
 	SDL_Rect	position;
-	double		angle;
+	float		angle;
 	double		xScale;
 	double		yScale;
 	bool		enabled;

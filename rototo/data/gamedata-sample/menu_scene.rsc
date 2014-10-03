@@ -98,7 +98,7 @@ void Init()
 	monLabel.SetText(tempText);
 	monLabel.SetShaded(false);
 	monLabel.SetPosition(260,100);
-	monLabel.SetRotation(-5);
+	monLabel.Rotation = -5;
 	
 	//labelChosen.SetFont(fonte8);
 
@@ -114,7 +114,7 @@ void Init()
 	buttonStart.SetSize(300,100);
 	buttonStart.SetPosition(750,windowY/2);	
 	//buttonStart.SetTextColor(255,150,150);		
-	buttonStart.SetRotation(5);
+	buttonStart.set_Rotation(5);
 	buttonStart.SetEnabled(false);
 	buttonStart.SetScale(1.0,1.0);
 	@buttonStart.on_click_handler = CallbackHandler(menuScene.OnClickHandler);
