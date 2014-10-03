@@ -55,7 +55,7 @@ public:
 	void Play(int _mode = 0, int _nbLoops = 1);
 	void Stop(bool _waitEnd = true);
 	bool Touched(int _x,int _y);
-	void SetPosition(int _x,int _y,int _from = 0);
+	void SetPosition(int _x,int _y);
 	void SetScale(double _xFactor,double _yFactor);
 	void SetRotation(float _angle);
 

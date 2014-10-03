@@ -55,8 +55,8 @@ void RegisterPrimitive()
 	g_app->scriptManager->RegisterClassMethod("Primitive","void Render()", asMETHOD(Primitive, Render));
 	///func:void SetColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
 	g_app->scriptManager->RegisterClassMethod("Primitive","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Primitive, SetColor));
-	///func:void SetPosition(int x,int y,int from = 0)
-	g_app->scriptManager->RegisterClassMethod("Primitive","void SetPosition(int _x,int _y,int _from = 0)", asMETHOD(Primitive, SetPosition));
+	///func:void SetPosition(int x,int y)
+	g_app->scriptManager->RegisterClassMethod("Primitive","void SetPosition(int _x,int _y)", asMETHODPR(Primitive, SetPosition,(int,int),void));
 	g_app->scriptManager->RegisterClassMethod("Primitive","bool Touched(int _x,int _y)", asMETHOD(Primitive, Touched));
 	g_app->scriptManager->RegisterClassMethod("Primitive","void set_Rotation(float _angle)", asMETHOD(Primitive, SetRotation));
 	///func:float GetRotation()
@@ -225,26 +225,4 @@ void Primitive::SetSize(int _w,int _h)
 	
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
-void Primitive::SetPosition(int _x,int _y,int _from)
-{
-	switch(_from)
-	{
-	case 0:
-		{
-		Widget::SetPosition(_x,_y,0);
-		}
-	break;
-
-	case 1:
-		{
-		Widget::SetPosition(_x,_y,1);
-		}
-
-	break;
-
-	}
-}

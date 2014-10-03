@@ -126,30 +126,30 @@ void TextBox::Render()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void TextBox::SetPosition(int _x,int _y,int _from)
+void TextBox::SetPosition(int _x,int _y)
 {
 	
-	switch(_from)
+	switch(this->anchor)
 	{
-	case 0:
+	case ANCHOR_CENTER:
 		{
-		Widget::SetPosition(_x,_y,0);
+		Widget::SetPosition(_x,_y);
 	
 		//Now position the text within the button
 		int centerX = this->position.x + this->position.w/2;
 		int centerY = this->position.y + this->position.h/2;
-		label.SetPosition(centerX,centerY,0);
+		label.SetPosition(centerX,centerY);
 		}
 	break;
 
-	case 1:
+	case ANCHOR_TOPLEFT:
 		{
-		Widget::SetPosition(_x,_y,1);
+		Widget::SetPosition(_x,_y);
 	
 		//Now position the text within the button
 		int centerX = this->position.x + this->position.w/2;
 		int centerY = this->position.y + this->position.h/2;
-		label.SetPosition(centerX,centerY,0);
+		label.SetPosition(centerX,centerY);
 		}
 
 	break;

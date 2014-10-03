@@ -33,16 +33,15 @@ public:
 	Primitive();
 	~Primitive();
 
-    void SetShape(int _shape);
-    void SetAngles(int _start,int _end);
-	void SetPosition(int _x,int _y,int _from = 0);
+	void SetShape(int _shape);
+	void SetAngles(int _start,int _end);
 	void SetSize(int _w,int _h);
-    void SetScale(double _xFactor,double _yFactor);
+	void SetScale(double _xFactor,double _yFactor);
 	void Render();
 	void SetColor(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 
 private:
-    void BuildInternalTexture();
+	void BuildInternalTexture();
 public:
 
 	SDL_Texture *   bgTexture;

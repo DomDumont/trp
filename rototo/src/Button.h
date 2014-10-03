@@ -60,6 +60,7 @@ public:
 	void ApplyTheme		();
 	void SetSprite		(int _index,Atlas * _atlas, const std::string& _name, bool _ninePatch = false);
 	void SetPosition	(int _x,int _y,int _from = 0);
+	void SetPosition	(Vector2D _pos);
 	void SetSize		(int _w,int _h);
 	void SetTextColor	(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	void SetRotation	(float _angle);

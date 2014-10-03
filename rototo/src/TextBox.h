@@ -36,7 +36,7 @@ public:
 
 
 	void Render();
-	void SetPosition(int _x,int _y,int _from = 0);
+	void SetPosition(int _x,int _y);
 	void SetSize(int _w,int _h);
 	void SetText(const std::string& _text);
 	void SetFont(Font & _font);

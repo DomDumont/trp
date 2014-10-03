@@ -305,28 +305,14 @@ bool Animation::Touched(int _x,int _y)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void  Animation::SetPosition(int _x,int _y,int _from)
+void  Animation::SetPosition(int _x,int _y)
 {
-	switch(_from)
-	{
-	case 0:
-		{
-		for (int i=0;i<this->nbFrames;i++)
-			{
-			sprites[i]->SetPosition(_x,_y,0);
-			}
-		}
-	break;
-	case 1:
-		{
-		for (int i=0;i<this->nbFrames;i++)
-			{
-			sprites[i]->SetPosition(_x,_y,1);
-			}
-		}
-	break;
 
-	}
+	for (int i=0;i<this->nbFrames;i++)
+		{
+		sprites[i]->SetPosition(_x,_y);
+		}
+
 }
 
 /*----------------------------------------------------------------------------*/

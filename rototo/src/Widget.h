@@ -25,25 +25,34 @@
 #ifndef __WIDGET_H__
 #define __WIDGET_H__
 
+class Vector2D;
+
+#define ANCHOR_CENTER  0
+#define ANCHOR_TOPLEFT 1
+
 class Widget
 {
 public:
 	Widget();
 	virtual ~Widget();
 
-	virtual void Render();
-	virtual void SetSize(int _w,int _h);
-	virtual void SetPosition(int _x,int _y,int _from = 0);
-	virtual bool Touched(int _x,int _y);
-	virtual void SetRotation(float _angle);
-	virtual float GetRotation();
-	virtual void SetScale(double _xFactor,double _yFactor);
-	virtual void Update(Uint64 _elapsed);
-	virtual int OnMouseButtonDown( SDL_Event * event);
-	virtual int OnMouseButtonUp( SDL_Event * event);
-	virtual void OnMouseMotion( SDL_Event * event);
-	virtual void OnKeyUp( SDL_Event * event);
-	virtual void SetEnabled(bool _value);
+	virtual void	Render();
+	virtual void	SetSize(int _w,int _h);
+	virtual void	SetPosition(int _x,int _y);
+	virtual void	SetPosition(Vector2D _pos);
+	virtual Vector2D GetPosition();
+	virtual bool	Touched(int _x,int _y);
+	virtual void	SetRotation(float _angle);
+	virtual float	GetRotation();
+	virtual void	SetScale(double _xFactor,double _yFactor);
+	virtual void	Update(Uint64 _elapsed);
+	virtual int	OnMouseButtonDown( SDL_Event * event);
+	virtual int	OnMouseButtonUp( SDL_Event * event);
+	virtual void	OnMouseMotion( SDL_Event * event);
+	virtual void	OnKeyUp( SDL_Event * event);
+	virtual void	SetEnabled(bool _value);
+	virtual void	SetAnchor(int _value);
+	virtual int	GetAnchor();
 	
 	void Show();
 	void Hide();
@@ -73,6 +82,7 @@ public:
 	SDL_Rect	frame;
 	SDL_Rect	position;
 	float		angle;
+	int		anchor;
 	double		xScale;
 	double		yScale;
 	bool		enabled;

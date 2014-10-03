@@ -66,8 +66,8 @@ Particle::~Particle()
 void Particle::Update(Uint64 _elapsed)
 {
     TTL--;
-    this->position.x += this->velocityX;
-    this->position.y += this->velocityY;
+    this->position.x += (int) this->velocityX;
+    this->position.y += (int) this->velocityY;
     this->angle += this->angularVelocity;
 }
 

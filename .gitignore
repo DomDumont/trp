@@ -34,6 +34,7 @@ rototo/extern/*
 **/doc/fr/generated*
 **/Android/obj
 **/Android/bin
+**/AS_DEBUG
 
 
 

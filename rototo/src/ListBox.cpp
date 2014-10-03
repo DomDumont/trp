@@ -51,7 +51,7 @@ void RegisterListBox()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_RELEASE, "void f()", asMETHOD(ListBox,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 	g_app->scriptManager->RegisterClassMethod("ListBox","void Render()", asMETHOD(ListBox, Render));
 	g_app->scriptManager->RegisterClassMethod("ListBox","void SetSize(int _w,int _h)", asMETHOD(ListBox, SetSize));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetPosition(int _x,int _y,int _from=0)", asMETHOD(ListBox, SetPosition));
+	g_app->scriptManager->RegisterClassMethod("ListBox","void SetPosition(int _x,int _y)", asMETHODPR(ListBox, SetPosition,(int,int),void));
 	g_app->scriptManager->RegisterClassMethod("ListBox","void SetFont(Font @ _font)", asMETHOD(ListBox, SetFont));
 	g_app->scriptManager->RegisterClassMethod("ListBox","int AddItem(const string &in _newText)", asMETHOD(ListBox, AddItem));
 	g_app->scriptManager->RegisterClassMethod("ListBox","void RemoveItem(int _index)", asMETHOD(ListBox, RemoveItem));
@@ -218,24 +218,6 @@ void ListBox::Render()
 	SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-void ListBox::SetPosition(int _x,int _y,int _from)
-{
-	switch(_from)
-	{
-	case 0:
-		Widget::SetPosition(_x,_y,0);
-		break;
-
-	case 1:
-		Widget::SetPosition(_x,_y,1);
-		break;
-	}
-
-}
 
 
 /*----------------------------------------------------------------------------*/
@@ -364,8 +346,8 @@ void ListBox::BuildInternalTexture()
 		Label *pTemp;
 		pTemp = *labelsIT;
 
-	
-		pTemp->SetPosition(posX + 20 ,posY,1); //TODO Change this
+		pTemp->SetAnchor(ANCHOR_TOPLEFT);
+		pTemp->SetPosition(posX + 20 ,posY); 
 		//Draw the item rectangle
 		SDL_Rect tempRect;
 		tempRect.x = posX;
@@ -377,7 +359,8 @@ void ListBox::BuildInternalTexture()
 			//Normal Item
 			if (this->sprite_item.entry != NULL)
 				{
-				this->sprite_item.SetPosition(tempRect.x,tempRect.y,1);
+				this->sprite_item.SetAnchor(ANCHOR_TOPLEFT);
+				this->sprite_item.SetPosition(tempRect.x,tempRect.y);
 				this->sprite_item.SetSize(tempRect.w,tempRect.h);
 				this->sprite_item.Render();
 				}
@@ -392,7 +375,8 @@ void ListBox::BuildInternalTexture()
 		//Selected Item
 		if (this->sprite_selected.entry != NULL)
 			{
-			this->sprite_selected.SetPosition(tempRect.x,tempRect.y,1);
+			this->sprite_selected.SetAnchor(ANCHOR_TOPLEFT);
+			this->sprite_selected.SetPosition(tempRect.x,tempRect.y);
 			this->sprite_selected.SetSize(tempRect.w,tempRect.h);
 			this->sprite_selected.Render();
 			}

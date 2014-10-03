@@ -351,8 +351,8 @@ void RegisterSprite()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_RELEASE, "void f()", asMETHOD(Sprite,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 	///func:void Load(Atlas @ atlas, string &in name)
 	g_app->scriptManager->RegisterClassMethod("Sprite","void Load(Atlas @ _atlas, string &in _name)", asMETHOD(Sprite, Load));
-	///func:void SetPosition(int x,int y,int from = 0)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetPosition(int _x,int _y,int _from = 0)", asMETHOD(Sprite, SetPosition));
+	///func:void SetPosition(int x,int y)
+	g_app->scriptManager->RegisterClassMethod("Sprite","void SetPosition(int _x,int _y)", asMETHODPR(Sprite, SetPosition,(int,int),void));
 	///func:bool Touched(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Sprite","bool Touched(int _x,int _y)", asMETHOD(Sprite, Touched));
 	///func:void SetScale(double xFactor,double yFactor)

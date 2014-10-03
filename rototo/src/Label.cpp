@@ -59,8 +59,8 @@ void RegisterLabel()
 	g_app->scriptManager->RegisterClassMethod("Label","void SetFont(Font @ _font)", asMETHOD(Label, SetFont));
 	///func:void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)
 	g_app->scriptManager->RegisterClassMethod("Label","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Label, SetColor));
-	///func:void SetPosition(int x,int y,int from = 0)
-	g_app->scriptManager->RegisterClassMethod("Label","void SetPosition(int _x,int _y,int _from = 0)", asMETHOD(Label, SetPosition));
+	///func:void SetPosition(int x,int y)
+	g_app->scriptManager->RegisterClassMethod("Label","void SetPosition(int _x,int _y)", asMETHODPR(Label, SetPosition,(int,int),void));
 	///func:bool Touched(int _x,int _y)
 	g_app->scriptManager->RegisterClassMethod("Label","bool Touched(int _x,int _y)", asMETHOD(Label, Touched));
 	///func:void SetRotation(float angle)

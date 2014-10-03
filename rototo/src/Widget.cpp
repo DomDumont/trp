@@ -23,8 +23,9 @@
 */
 
 #include "Global.h"
-#include "Widget.h"
 #include "Application.h"
+#include "Widget.h"
+#include "Vector2D.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -67,6 +68,7 @@ Widget::Widget():refCount(1)
 	this->frame.w		= 0;
 	this->frame.h		= 0;
 	this->angle		= 0;
+	this->anchor		= 0;
 
 	this->xScale		= 1;
 	this->yScale		= 1;
@@ -112,6 +114,22 @@ void Widget::Render()
 	//SDL_assert(false);
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void	Widget::SetAnchor(int _value)
+{
+	this->anchor = _value;
+}
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+int	Widget::GetAnchor()
+{
+	return this->anchor;
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -119,27 +137,48 @@ void Widget::Render()
 
 void Widget::SetSize(int _w,int _h)
 {
-this->position.w = _w;
-this->position.h = _h;
+	this->position.w = _w;
+	this->position.h = _h;
 }
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Widget::SetPosition(int _x,int _y,int _from)
+Vector2D Widget::GetPosition()
 {
-	switch(_from)
+	Vector2D temp;
+	temp.x = (float) this->position.x;
+	temp.y = (float) this->position.y;
+	return temp;
+}
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void Widget::SetPosition(Vector2D _pos)
+{
+	this->position.x = (int) _pos.x;
+	this->position.y = (int) _pos.y;
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void Widget::SetPosition(int _x,int _y)
+{
+	switch(this->anchor)
 	{
-	case 0: //Center
+	case ANCHOR_CENTER: //Center
 		this->position.x = _x - this->position.w/2;
 		this->position.y = _y - this->position.h/2;
-	break;
+		break;
 
-	case 1: //top left
+	case ANCHOR_TOPLEFT: //top left
 		this->position.x = _x;
 		this->position.y = _y;
-	break;
+		break;
 
 	}
 }
