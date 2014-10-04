@@ -376,8 +376,8 @@ void RegisterAnimation()
 	g_app->scriptManager->RegisterClassMethod("Animation","void Play(int _mode = 0, int _nbLoops = 1)", asMETHOD(Animation, Play));
 	///func:void Stop(bool waitEnd = true)
 	g_app->scriptManager->RegisterClassMethod("Animation","void Stop(bool _waitEnd = true)", asMETHOD(Animation, Stop));
-	///func:void SetPosition(int x,int y,int from = 0)
-	g_app->scriptManager->RegisterClassMethod("Animation","void SetPosition(int _x,int _y,int _from = 0)", asMETHOD(Animation, SetPosition));
+	///func:void SetPosition(int x,int y)
+	g_app->scriptManager->RegisterClassMethod("Animation","void SetPosition(int _x,int _y)", asMETHOD(Animation, SetPosition));
 	///func:bool Touched(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Animation","bool Touched(int _x,int _y)", asMETHOD(Animation, Touched));
 	///func:void SetScale(double xFactor,double yFactor)

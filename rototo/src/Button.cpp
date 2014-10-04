@@ -58,8 +58,8 @@ void RegisterButton()
 	g_app->scriptManager->RegisterClassMethod("Button","void Render()", asMETHOD(Button, Render));
 	///func:void SetSize(int w,int h)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetSize(int _w,int _h)", asMETHOD(Button, SetSize));
-	///func:void SetPosition(int x,int y,int from=0)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetPosition(int _x,int _y,int _from=0)", asMETHODPR(Button, SetPosition,(int,int,int),void));
+	///func:void SetPosition(int x,int y)
+	g_app->scriptManager->RegisterClassMethod("Button","void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition,(int,int),void));
 	///func:void set_Position(Vector2D vec)
 	g_app->scriptManager->RegisterClassMethod("Button","void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition,(Vector2D),void));
 	///func:void SetFont(Font @ font)
@@ -328,18 +328,18 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 
 void Button::SetPosition(Vector2D _pos)
 {
-	this->SetPosition((int)_pos.x,(int) _pos.y,0);
+	this->SetPosition((int)_pos.x,(int) _pos.y);
 }
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Button::SetPosition(int _x,int _y,int _from)
+void Button::SetPosition(int _x,int _y)
 {
-	switch(_from)
+	switch(this->anchor)
 	{
-	case 0:
+	case ANCHOR_CENTER:
 		{
 		Widget::SetPosition(_x,_y);
 
@@ -399,7 +399,7 @@ void Button::SetPosition(int _x,int _y,int _from)
 		}
 		break;
 
-	case 1:
+	case ANCHOR_TOPLEFT:
 		{
 		Widget::SetPosition(_x,_y);
 		//Now position the sprite
