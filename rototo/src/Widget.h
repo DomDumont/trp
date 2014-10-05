@@ -38,6 +38,8 @@ public:
 
 	virtual void	Render();
 	virtual void	SetSize(int _w,int _h);
+	virtual void	SetSize(Vector2D _pos);
+	virtual Vector2D GetSize();
 	virtual void	SetPosition(int _x,int _y);
 	virtual void	SetPosition(Vector2D _pos);
 	virtual Vector2D GetPosition();

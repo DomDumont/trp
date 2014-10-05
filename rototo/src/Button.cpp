@@ -57,7 +57,9 @@ void RegisterButton()
 	///func:void Render()
 	g_app->scriptManager->RegisterClassMethod("Button","void Render()", asMETHOD(Button, Render));
 	///func:void SetSize(int w,int h)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetSize(int _w,int _h)", asMETHOD(Button, SetSize));
+	g_app->scriptManager->RegisterClassMethod("Button","void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize,(int,int),void));
+	///func:void set_Position(Vector2D vec)
+	g_app->scriptManager->RegisterClassMethod("Button","void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize,(Vector2D),void));
 	///func:void SetPosition(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition,(int,int),void));
 	///func:void set_Position(Vector2D vec)
@@ -477,6 +479,16 @@ void Button::SetScale(double _xFactor,double _yFactor)
 		
 		}
 	label.SetScale(_xFactor, _yFactor);
+}
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void Button::SetSize(Vector2D _pos)
+{
+	this->SetSize((int)_pos.x,(int) _pos.y);
 }
 
 /*----------------------------------------------------------------------------*/

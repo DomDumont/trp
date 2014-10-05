@@ -368,7 +368,7 @@ void RegisterSprite()
 	///func:void SetColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
 	g_app->scriptManager->RegisterClassMethod("Sprite","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Sprite, SetColor));
 	///func:void SetSize(int w,int h)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetSize(int _w,int _h)", asMETHOD(Sprite, SetSize));
+	g_app->scriptManager->RegisterClassMethod("Sprite","void SetSize(int _w,int _h)", asMETHODPR(Sprite, SetSize,(int,int),void));
 	///func:void SetNinePatch(bool value)
 	g_app->scriptManager->RegisterClassMethod("Sprite","void SetNinePatch(bool _value)", asMETHOD(Sprite, SetNinePatch));
 	///func:void SetNinePatchRect(int x,int y,int w,int h)
