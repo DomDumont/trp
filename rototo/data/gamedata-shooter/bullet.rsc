@@ -28,8 +28,8 @@ class Bullet : Entity
 
 		Position += Velocity;
 		Orientation = Velocity.ToAngle();
-		Sprite.SetPosition(Position.x,Position.y);
-		Sprite.SetRotation(Orientation);
+		Sprite.Position = Position;
+		Sprite.Rotation = Orientation;
 
 		if ((Position.x<0)||(Position.x>screenSizeX)||(Position.y<0)||(Position.y>screenSizeY))
 			{

@@ -132,10 +132,13 @@ void ScriptManager::Prepare()
 
 	RegisterUtils();
 
+
 	RegisterSoundManager();
 	RegisterTextManager();
 	RegisterMusic();
 	RegisterSound();
+
+	RegisterVector2D();
 
 	RegisterAtlas();
 
@@ -173,7 +176,7 @@ void ScriptManager::Prepare()
 	///glob:void TWN_CancelTweens()
 	this->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
 
-	RegisterVector2D();
+
 	
 	//GUI Related
 	RegisterWidget();

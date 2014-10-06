@@ -23,7 +23,7 @@ void OnUpdate(uint64 _delta)
 	{
 		//UTI_Log("Entity Update");
 		Sprite.SetPosition(Position.x,Position.y);
-		Sprite.SetRotation(Orientation);
+		Sprite.Rotation = Orientation;
 	}
 
 

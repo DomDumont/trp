@@ -502,8 +502,8 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
          if (existing)
             {
             existing->setFont(m_globalFont);
-            existing->SetTabWidth();
-            mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);
+            //existing->SetTabWidth();
+            mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);            
             return;
             }
         //Update recent file here

@@ -353,6 +353,8 @@ void RegisterSprite()
 	g_app->scriptManager->RegisterClassMethod("Sprite","void Load(Atlas @ _atlas, string &in _name)", asMETHOD(Sprite, Load));
 	///func:void SetPosition(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Sprite","void SetPosition(int _x,int _y)", asMETHODPR(Sprite, SetPosition,(int,int),void));
+	///func:void set_Position(Vector2D pos)
+	g_app->scriptManager->RegisterClassMethod("Sprite","void set_Position(Vector2D _pos)", asMETHODPR(Sprite, SetPosition,(Vector2D),void));
 	///func:bool Touched(int x,int y)
 	g_app->scriptManager->RegisterClassMethod("Sprite","bool Touched(int _x,int _y)", asMETHOD(Sprite, Touched));
 	///func:void SetScale(double xFactor,double yFactor)

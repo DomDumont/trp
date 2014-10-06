@@ -1,0 +1,11 @@
+<project>
+ <scripts>
+  <file>bullet.rsc</file>
+  <file>entities.rsc</file>
+  <file>game_scene.rsc</file>
+  <file>main.rsc</file>
+  <file>player.rsc</file>
+ </scripts>
+ <images/>
+ <sounds/>
+</project>

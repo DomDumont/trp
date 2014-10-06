@@ -326,6 +326,7 @@ void Sound::Load(const std::string & _file)
 void Sound::Play(int _nbLoops)
 {
 	this->channel = Mix_PlayChannel(-1,this->sample,_nbLoops);
+	SDL_Log("Mix_PlayChannel returns : %d\n", this->channel);
 	Mix_Volume(this->channel, g_app->soundManager->volumeSFX);
 }
 

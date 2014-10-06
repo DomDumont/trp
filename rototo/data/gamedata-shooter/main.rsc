@@ -1,4 +1,4 @@
-﻿#include "~/helpers/trp_api.rsc" //Enums, Helpers, etc...
+#include "~/helpers/trp_api.rsc" //Enums, Helpers, etc...
 
 #include "~/helpers/scene_manager.rsc" //Minimal scene manager sample
 #include "game_scene.rsc"
@@ -24,6 +24,8 @@ UTI_Log(ts);
 SND_SetMusicVolume(128);
 SND_SetSFXVolume(20);		
 
+GUI_LoadTheme("metal");
+WND_SetCapFPS(30);
 theSceneManager.ChangeScene(gameScene);
 }
 
@@ -58,6 +60,7 @@ theSceneManager.OnTouch(_button,_x,_y);
 
 void OnShutdown()
 {
+   GUI_UnLoadTheme();
 UTI_Log("BYE BYE FROM SCRIPT");
 theSceneManager.OnShutdown();
 }
