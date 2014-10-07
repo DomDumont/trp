@@ -39,6 +39,7 @@ class WatchWidget : public QTabWidget
     void ClearAll();
     void AddLocalLine(QString & _name, QString & _value);
     void AddGlobalLine(QString & _name, QString & _value);
+    void AddMemberLine(QString & _name, QString & _value);
 
      QIcon groupIcon;
      QIcon keyIcon;
@@ -46,6 +47,7 @@ class WatchWidget : public QTabWidget
     private:
         QTreeWidget localVar;
         QTreeWidget globalVar;
+        QTreeWidget memberVar;
 
  };
 

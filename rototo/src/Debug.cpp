@@ -16,7 +16,7 @@ CDebug::CDebug()
 {
 	m_action = CONTINUE;
 	m_lastFunction = 0;
-    blocked = false;
+	blocked = false;
 }
 
 CDebug::~CDebug()
@@ -191,15 +191,15 @@ void CDebug::LineCallback(asIScriptContext *ctx)
 	int lineNbr = ctx->GetLineNumber(0, 0, &file);
 	s <<"[PC]"<< (file ? file : "{unnamed}") << ":" << lineNbr << "; " << ctx->GetFunction()->GetDeclaration() << endl;
 	LogToOutputAndNetwork(s.str());
-    this->blocked = true;
+	this->blocked = true;
 	TakeCommands(ctx);
 }
 
 bool CDebug::CheckBreakPoint(asIScriptContext *ctx)
 {
 	// TODO: Should cache the break points in a function by checking which possible break points
-	//       can be hit when entering a function. If there are no break points in the current function
-	//       then there is no need to check every line.
+	//	can be hit when entering a function. If there are no break points in the current function
+	//	then there is no need to check every line.
 
 	const char *tmp = 0;
 	int lineNbr = ctx->GetLineNumber(0, 0, &tmp);
@@ -280,48 +280,48 @@ bool CDebug::CheckBreakPoint(asIScriptContext *ctx)
 void CDebug::TakeCommands(asIScriptContext *ctx)
 {
 for(;;)
-    {
-        std::string contents = "";
+	{
+	std::string contents = "";
 
-        if (g_app->networkManager->command != NULL)
-            {
-            Sint64 length = SDL_RWseek(g_app->networkManager->command,0,SEEK_END);
-            SDL_RWseek(g_app->networkManager->command,0,SEEK_SET);// ON retourne au d?but
-             if (length > 0)
-                {
-                contents.resize((unsigned int)length);
-                if (SDL_RWread(g_app->networkManager->command,&contents[0], contents.size(),1) != 1)
-                    {
-                    }
-                }
-            SDL_RWclose(g_app->networkManager->command);
-            g_app->networkManager->command = NULL;
-            }
-        
-        std::vector<std::string> subCommands = split(contents, '\n');
-        unsigned int currentCommand = 0;        
-        
-        while (currentCommand<subCommands.size())
-            {        
-		    blocked = ! InterpretCommand(subCommands[currentCommand], ctx);
-            if (blocked == false)
-                return;
-            else
-                g_app->networkManager->Update();
-            currentCommand++;
-            }
-        if (blocked == false)
-            return;
-        else
-            g_app->networkManager->Update();
+	if (g_app->networkManager->command != NULL)
+	{
+	Sint64 length = SDL_RWseek(g_app->networkManager->command,0,SEEK_END);
+	SDL_RWseek(g_app->networkManager->command,0,SEEK_SET);// ON retourne au d?but
+		if (length > 0)
+		{
+		contents.resize((unsigned int)length);
+		if (SDL_RWread(g_app->networkManager->command,&contents[0], contents.size(),1) != 1)
+		{
+		}
+		}
+	SDL_RWclose(g_app->networkManager->command);
+	g_app->networkManager->command = NULL;
+	}
+	
+	std::vector<std::string> subCommands = split(contents, '\n');
+	unsigned int currentCommand = 0;
+	
+	while (currentCommand<subCommands.size())
+	{
+			blocked = ! InterpretCommand(subCommands[currentCommand], ctx);
+	if (blocked == false)
+		return;
+	else
+		g_app->networkManager->Update();
+	currentCommand++;
+	}
+	if (blocked == false)
+	return;
+	else
+	g_app->networkManager->Update();
 
-    }
+	}
 }
 
 bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 {
 	if  (( cmd.length() == 0 ) && (blocked == false))
-        return true;
+	return true;
 
 	switch( cmd[0] )
 	{
@@ -366,8 +366,8 @@ bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 			else
 			{
 				LogToOutputAndNetwork("Incorrect format for setting break point, expected one of:\n"
-				       "b <file name>:<line number>\n"
-				       "b <function name>\n");
+					"b <file name>:<line number>\n"
+					"b <function name>\n");
 			}
 		}
 		// continue execution
@@ -395,7 +395,7 @@ bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 			else
 			{
 				LogToOutputAndNetwork("Incorrect format for removing break points, expected:\n"
-				       "r <all|number of break point>\n");
+					"r <all|number of break point>\n");
 			}
 		}
 		// continue execution
@@ -430,21 +430,21 @@ bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 				else
 				{
 					LogToOutputAndNetwork("Unknown list option, expected one of:\n"
-					       "b - breakpoints\n"
-					       "v - local variables\n"
+						"b - breakpoints\n"
+						"v - local variables\n"
 						   "m - member properties\n"
-					       "g - global variables\n"
+						"g - global variables\n"
 						   "s - statistics\n");
 				}
 			}
 			else 
-			    {
+				{
 				LogToOutputAndNetwork("Incorrect format for list, expected:\n"
-				       "l <list option>\n");
-			    }
+					"l <list option>\n");
+				}
 		}
-        // take more commands, ie continue to block
-        return false;
+	// take more commands, ie continue to block
+	return false;
 
 	case 'h':
 		PrintHelp();
@@ -471,28 +471,28 @@ bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 	case 'w':
 		// Where am I?
 		PrintCallstack(ctx);
-        // take more commands, ie continue to block
-        return false;
+		// take more commands, ie continue to block
+		return false;
 
 	case 'a':
 		// abort the execution
 		ctx->Abort();
-        // take more commands
-        return false;
+	// take more commands
+	return false;
 		break;
 
-    case 'f':
-        // restart the engine        
-        g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
-        //Tells also all the clients to restart
-        g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
-        // Continue execution
-        return true;
-        break;
+	case 'f':
+	// restart the engine
+	g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
+	//Tells also all the clients to restart
+	g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
+	// Continue execution
+	return true;
+	break;
 
 	default:
-        // take more commands, ie continue to block
-        return false;
+	// take more commands, ie continue to block
+	return false;
 	}
 
 	// Continue execution
@@ -613,27 +613,27 @@ void CDebug::ListMemberProperties(asIScriptContext *ctx)
 		s << "this = " << ToString(ptr, ctx->GetThisTypeId(), true, ctx->GetEngine()) << endl;
 		LogToOutputAndNetwork(s.str());
 	}
-    else
-    {
-    LogToOutputAndNetwork("This pointer not found");
-    }
+	else
+	{
+	LogToOutputAndNetwork("This pointer not found");
+	}
 }
 
 void CDebug::ListLocalVariables(asIScriptContext *ctx)
 {
 	asIScriptFunction *func = ctx->GetFunction();
 	if( !func ) 
-        {
-        //LogToOutputAndNetwork("No Function");
-        return;
-        }
+	{
+	//LogToOutputAndNetwork("No Function");
+	return;
+	}
 
 	stringstream s;
 	for( asUINT n = 0; n < func->GetVarCount(); n++ )
-	    {
+		{
 		if( ctx->IsVarInScope(n) )
 			s <<"[LV]:"<< func->GetVarDecl(n) << ":" << ToString(ctx->GetAddressOfVar(n), ctx->GetVarTypeId(n), false, ctx->GetEngine())<<endl;
-	    }
+		}
 	LogToOutputAndNetwork(s.str());
 }
 
@@ -643,26 +643,26 @@ void CDebug::ListGlobalVariables(asIScriptContext *ctx)
 	// Determine the current module from the function
 	asIScriptFunction *func = ctx->GetFunction();
 	if( !func ) 
-        {
-        //LogToOutputAndNetwork("No Function");
-        return;
-        }
+	{
+	//LogToOutputAndNetwork("No Function");
+	return;
+	}
 
 	asIScriptModule *mod = func->GetModule();
 	if( !mod ) 
-        {
-        //LogToOutputAndNetwork("No Module");
-        return;
-        }
+	{
+	//LogToOutputAndNetwork("No Module");
+	return;
+	}
 
 
 	stringstream s;
 	for( asUINT n = 0; n < mod->GetGlobalVarCount(); n++ )
-	    {        
+		{
 		int typeId;
-		mod->GetGlobalVar(n, 0, 0, &typeId);                      
-		s <<"[GV]:"<< mod->GetGlobalVarDeclaration(n) << ":" << ToString(mod->GetAddressOfGlobalVar(n), typeId, false, ctx->GetEngine())<<endl;                
-	    }
+		mod->GetGlobalVar(n, 0, 0, &typeId);
+		s <<"[GV]:"<< mod->GetGlobalVarDeclaration(n) << ":" << ToString(mod->GetAddressOfGlobalVar(n), typeId, false, ctx->GetEngine())<<endl;
+		}
 	LogToOutputAndNetwork(s.str());
 }
 
@@ -738,24 +738,24 @@ void CDebug::AddFileBreakPoint(const string &file, int lineNbr)
 void CDebug::PrintHelp()
 {
 	LogToOutputAndNetwork("c - Continue\n"
-	       "s - Step into\n"
-	       "n - Next step\n"
-	       "o - Step out\n"
-	       "b - Set break point\n"
-	       "l - List various things\n"
-	       "r - Remove break point\n"
-	       "p - Print value\n"
-	       "w - Where am I?\n"
-	       "a - Abort execution\n"
-           "f - Restart engine\n"
-	       "h - Print this help text\n");
+		"s - Step into\n"
+		"n - Next step\n"
+		"o - Step out\n"
+		"b - Set break point\n"
+		"l - List various things\n"
+		"r - Remove break point\n"
+		"p - Print value\n"
+		"w - Where am I?\n"
+		"a - Abort execution\n"
+	"f - Restart engine\n"
+		"h - Print this help text\n");
 }
 
 /*
 void CDebug::Output(const string &str)
 {
-    SDL_Log(str.c_str());
-    g_app->networkManager->SendMessageToAllClients(str);
+	SDL_Log(str.c_str());
+	g_app->networkManager->SendMessageToAllClients(str);
 }
 */
 

@@ -51,9 +51,14 @@ WatchWidget::WatchWidget(QWidget *parent): QTabWidget(parent)
      globalVar.header()->setResizeMode(0, QHeaderView::Interactive);
      globalVar.header()->setResizeMode(1, QHeaderView::Interactive);
 
+     memberVar.setHeaderLabels(labels);
+     memberVar.header()->setResizeMode(0, QHeaderView::Interactive);
+     memberVar.header()->setResizeMode(1, QHeaderView::Interactive);
+
 
      this->addTab(&localVar,tr("Local"));
      this->addTab(&globalVar,tr("Global"));
+     this->addTab(&memberVar,tr("Member"));
  }
 
  void WatchWidget::AddLocalLine(QString & _name, QString & _value)
@@ -88,11 +93,27 @@ WatchWidget::WatchWidget(QWidget *parent): QTabWidget(parent)
 
  }
 
+ void WatchWidget::AddMemberLine(QString & _name, QString & _value)
+ {
+     QTreeWidgetItem *tempItem = new QTreeWidgetItem(&memberVar);
+
+ /*
+     QFont font = tempItem->font(0);
+     font.setPixelSize(10);
+     tempItem->setFont(0, font );
+*/
+
+     tempItem->setText(0, _name);
+     tempItem->setText(1, _value);
+
+
+ }
 
  void WatchWidget::ClearAll()
  {
      localVar.clear();
      globalVar.clear();
+     memberVar.clear();
  }
 
 

@@ -285,6 +285,8 @@ if (_line.startsWith("[PC]"))
     // Now ask for local variables
     m_watchWidget->ClearAll();
 
+    command = QString("l m");
+    this->m_tcpClient->SendText(command);
 
     command = QString("l v");
     this->m_tcpClient->SendText(command);
@@ -303,7 +305,7 @@ if (_line.startsWith("[COMPILATION_START]"))
     m_errorWidget->ClearAll();
     }
 
-if (_line.startsWith("[LV]")||_line.startsWith("[GV]"))
+if (_line.startsWith("[LV]")||_line.startsWith("[GV]")||_line.startsWith("[MV]"))
     {
     QString type = _line.left(_line.indexOf(':'));
     QString reste = _line.mid(_line.indexOf(':')+1);
@@ -313,7 +315,11 @@ if (_line.startsWith("[LV]")||_line.startsWith("[GV]"))
     if (type == "[LV]")
         m_watchWidget->AddLocalLine(name,value);
     else
+    if (type == "[GV]")
         m_watchWidget->AddGlobalLine(name,value);
+    else
+    if (type == "[MV]")
+        m_watchWidget->AddMemberLine(name,value);
 
     }
 
