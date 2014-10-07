@@ -44,6 +44,10 @@ class CDebug;
 class ScriptManager
 {
 public:
+
+	ScriptManager();
+	~ScriptManager();
+
 	void Init();
 	void Prepare();
 	void Shutdown();

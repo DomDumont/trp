@@ -7,6 +7,10 @@ class Bullet : Entity
 	{
 	Position = _position;
 	Velocity = _velocity;
+
+	mysprite.Position = Position;
+	mysprite.Rotation = Orientation;
+
 	Orientation = Velocity.ToAngle();
 	}
 
@@ -14,7 +18,9 @@ class Bullet : Entity
 	void Init() override
 		{
 		//UTI_Log("Bullet Init");
-		Sprite.Load(gameScene.atlas,"Bullet.png");
+		mysprite.Load(gameScene.atlas,"Bullet.png");
+		mysprite.Position = Position;
+		mysprite.Rotation = Orientation;
 		//Orientation = 0;
 		//Position.x = screenSizeX/2;
 		//Position.y = screenSizeY/2;
@@ -28,8 +34,8 @@ class Bullet : Entity
 
 		Position += Velocity;
 		Orientation = Velocity.ToAngle();
-		Sprite.Position = Position;
-		Sprite.Rotation = Orientation;
+		mysprite.Position = Position;
+		mysprite.Rotation = Orientation;
 
 		if ((Position.x<0)||(Position.x>screenSizeX)||(Position.y<0)||(Position.y>screenSizeY))
 			{

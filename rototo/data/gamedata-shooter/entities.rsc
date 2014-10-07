@@ -3,7 +3,7 @@ class Entity
 
 	// VARIABLES
 	float 		Radius = 20;
-	Sprite		Sprite;
+	Sprite		mysprite;
 	bool 		IsExpired;
 	Vector2D 	Position;
 	Vector2D 	Velocity;
@@ -16,20 +16,20 @@ Entity()
 void Init()
 	{
 	UTI_Log("Entity Init");
+	Position.x = 400;
+	Position.y = 350;
 	Orientation = 0;
 	}
 
 void OnUpdate(uint64 _delta)
 	{
-		//UTI_Log("Entity Update");
-		Sprite.SetPosition(Position.x,Position.y);
-		Sprite.Rotation = Orientation;
+        UTI_Log("Entity Update");
 	}
 
 
 void OnRender(uint64 _delta)
 	{
-		Sprite.Render();
+	mysprite.Render();
 	}	
 };
 
@@ -43,11 +43,12 @@ class EntityManager
 
 	array<Entity@> 	entities;
 	array<Entity@> 	addedEntities;
-	bool 			isUpdating;
+	bool 		isUpdating;
 
  EntityManager()
     {
     isUpdating = false;
+    UTI_Log("Entity Manager Constructor\n");
     }
 
 void Add(Entity @ tempEnt)
@@ -62,6 +63,7 @@ void Init()
 	{	
 	for (int i = 0;i< entities.length();i++)
 		entities[i].Init();
+	isUpdating = false;
 	}
 	
 

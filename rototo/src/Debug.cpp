@@ -85,7 +85,7 @@ string CDebug::ToString(void *value, asUINT typeId, bool expandMembers, asIScrip
 		asIScriptObject *obj = (asIScriptObject *)value;
 		
 		// Print the address of the object
-		s << "{" << obj << "}";
+		s << "{" << obj << "}"<< endl;
 
 		// Print the members
 		if( obj && expandMembers )
@@ -93,7 +93,7 @@ string CDebug::ToString(void *value, asUINT typeId, bool expandMembers, asIScrip
 			asIObjectType *type = obj->GetObjectType();
 			for( asUINT n = 0; n < obj->GetPropertyCount(); n++ )
 			{
-				s << endl << "  " << type->GetPropertyDeclaration(n) << " = " << ToString(obj->GetAddressOfProperty(n), obj->GetPropertyTypeId(n), false, engine);
+				s << "[MV]:" << type->GetPropertyDeclaration(n) << " : " << ToString(obj->GetAddressOfProperty(n), obj->GetPropertyTypeId(n), true, engine)<<endl;
 			}
 		}
 	}
@@ -610,7 +610,7 @@ void CDebug::ListMemberProperties(asIScriptContext *ctx)
 	if( ptr )
 	{
 		stringstream s;
-		s << "this = " << ToString(ptr, ctx->GetThisTypeId(), true, ctx->GetEngine()) << endl;
+		s <<"[MV]:"<<"this = " << ToString(ptr, ctx->GetThisTypeId(), true, ctx->GetEngine()) << endl;
 		LogToOutputAndNetwork(s.str());
 	}
 	else
@@ -632,7 +632,7 @@ void CDebug::ListLocalVariables(asIScriptContext *ctx)
 	for( asUINT n = 0; n < func->GetVarCount(); n++ )
 		{
 		if( ctx->IsVarInScope(n) )
-			s <<"[LV]:"<< func->GetVarDecl(n) << ":" << ToString(ctx->GetAddressOfVar(n), ctx->GetVarTypeId(n), false, ctx->GetEngine())<<endl;
+			s <<"[LV]:"<< func->GetVarDecl(n) << ":" << ToString(ctx->GetAddressOfVar(n), ctx->GetVarTypeId(n), true, ctx->GetEngine())<<endl;
 		}
 	LogToOutputAndNetwork(s.str());
 }

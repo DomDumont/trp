@@ -34,5 +34,6 @@ OutputWidget:: ~OutputWidget()
 
 void OutputWidget::AddText(QString _text)
     {
-    this->insertPlainText(_text);
+    if (_text.startsWith("[")== false)
+        this->insertPlainText(_text);
     }

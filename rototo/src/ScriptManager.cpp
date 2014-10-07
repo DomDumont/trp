@@ -62,6 +62,16 @@
 
 using namespace std;
 
+
+std::string Vector2DToString(void *obj, bool expandMembers, CDebug *dbg)
+{
+	Vector2D *v = reinterpret_cast<Vector2D*>(obj);
+	std::stringstream s;
+	s << "x = "<< v->x<<" , ";
+	s << "y = "<< v->y<<endl;
+	return s.str();
+
+}
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -85,7 +95,21 @@ int MyIncludeCallback(const char *include, const char *from, CScriptBuilder *bui
 	return 0;
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
+ScriptManager::ScriptManager():mydbg(NULL)
+{
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+ScriptManager::~ScriptManager()
+{
+}
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -105,6 +129,16 @@ void ScriptManager::Init()
 	hasCompileErrors = false;
 	
 
+	// Create the debugger instance
+	if (this->mydbg == NULL)
+		{
+		this->mydbg = new CDebug();
+		}
+	else
+		{
+		SDL_Log("Debugger not recreated to keep breakpoints");
+		}
+
 
 	this->Prepare();
 
@@ -114,8 +148,6 @@ void ScriptManager::Init()
 		contexts.push_back(engine->CreateContext());
 		}
 
-	// Create the debugger instance
-	this->mydbg = new CDebug();
 
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"CScriptManager Init Ok");
 
@@ -228,6 +260,11 @@ void ScriptManager::Prepare()
 	this->RegisterGlobalFunction("Body @ PHY_GetContactB()", asMETHOD(PhysicsManager,GetContactB), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);
 
 	RegisterEmitter();
+
+	if (this->mydbg != NULL)
+		{
+		this->mydbg->RegisterToStringCallback(engine->GetObjectTypeByName("Vector2D"), Vector2DToString);
+		}
 }
 
 /*----------------------------------------------------------------------------*/
@@ -256,12 +293,13 @@ void ScriptManager::Shutdown()
 	contexts.clear();
 	engine->Release();
 
+	/*
 	if( mydbg )
 		{
 		delete mydbg;
 		mydbg = NULL;
 		}
-
+	*/
 }
 
 /*----------------------------------------------------------------------------*/
