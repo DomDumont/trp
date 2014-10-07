@@ -40,11 +40,11 @@ SoundManager::SoundManager()
 	{
 	//TODO should be elsewhere
 
-	rate		= 22050;
-	//rate		= 44100;
+	//rate		= 22050;
+	rate		= 44100;
 	format		= AUDIO_S16;
 	channels	= 2;
-	buffers		= 4096;
+	buffers		= 1024;
 	volume		= MIX_MAX_VOLUME;
 	volumeSFX	= MIX_MAX_VOLUME;
 	initialized	= 0;
@@ -81,6 +81,9 @@ void SoundManager::Init()
 	
 	initialized = 1;
 	Mix_VolumeMusic(volume);
+
+	// allocate 16 mixing channels
+	Mix_AllocateChannels(16);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -322,11 +325,15 @@ void Sound::Load(const std::string & _file)
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-
+static Uint64 lasttime32; 
 void Sound::Play(int _nbLoops)
 {
+	Uint64 now = SDL_GetTicks();
+
+	//SDL_Log("play at %lu\n", now- lasttime32);
+	lasttime32 = now ;
 	this->channel = Mix_PlayChannel(-1,this->sample,_nbLoops);
-	SDL_Log("Mix_PlayChannel returns : %d\n", this->channel);
+	//SDL_Log("Mix_PlayChannel returns : %d\n", this->channel);
 	Mix_Volume(this->channel, g_app->soundManager->volumeSFX);
 }
 

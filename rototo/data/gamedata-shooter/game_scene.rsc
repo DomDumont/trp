@@ -25,11 +25,11 @@ void Init()
 
 	em.Add(p);
 	em.Init();
-	SND_SetMusicVolume(0);
+	SND_SetMusicVolume(60);
 	myMusic.Play();
 
 	fpsLabel.SetText("FPS : ",true);
-	fpsLabel.SetPosition(100,100); 
+	fpsLabel.SetPosition(100,50); 
 	//fpsLabel.SetColor(255,255,255,255);
 	accu = 0;
 	}

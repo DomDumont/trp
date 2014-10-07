@@ -1,4 +1,4 @@
-const int cooldownFrames = 250;
+const int cooldownFrames = 500;
 
 class Player : Entity
 {
