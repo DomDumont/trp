@@ -48,6 +48,7 @@ class OutputWidget;
 class ConsoleWidget;
 class ErrorWidget;
 class BreakpointWidget;
+class GrepWidget;
 
 class QModelIndex;
 
@@ -79,13 +80,14 @@ public:
        QCompleter *completer;
        QAbstractItemModel *modelFromFile(const QString& fileName);
 
-       ProjectWidget *m_projectWidget;
-       WatchWidget   *m_watchWidget;
-       ErrorWidget   *m_errorWidget;
-       CallstackWidget * m_callstackWidget;
-       OutputWidget * m_outputWidget;
-       ConsoleWidget * m_consoleWidget;
+       ProjectWidget    * m_projectWidget;
+       WatchWidget      * m_watchWidget;
+       ErrorWidget      * m_errorWidget;
+       CallstackWidget  * m_callstackWidget;
+       OutputWidget     * m_outputWidget;
+       ConsoleWidget    * m_consoleWidget;
        BreakpointWidget * m_breakpointWidget;
+       GrepWidget       * m_grepWidget;
 
        void openWithFileName(const QString& fileName);
        MdiChild *activeMdiChild();

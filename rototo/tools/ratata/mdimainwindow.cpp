@@ -37,6 +37,7 @@
 #include "consolewidget.h"
 #include "errorwidget.h"
 #include "breakpointwidget.h"
+#include "grepwidget.h"
 #include "prefdialog.h"
 
 
@@ -113,9 +114,18 @@
 void MDIMainWindow::createDockWindows()
 {
 
+    // Grep Dock
+    m_grepWidget = new GrepWidget();
+    QDockWidget *dock = new QDockWidget(tr("Grep View"), this);
+    dock->setObjectName("grepViewDock");
+    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    dock->setWidget(m_grepWidget);
+    addDockWidget(Qt::BottomDockWidgetArea, dock);
+    viewMenu->addAction(dock->toggleViewAction());
+
     // Breakpoint Dock
     m_breakpointWidget = new BreakpointWidget();
-    QDockWidget *dock = new QDockWidget(tr("Breakpoint View"), this);
+    dock = new QDockWidget(tr("Breakpoint View"), this);
     dock->setObjectName("breakpointViewDock");
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setWidget(m_breakpointWidget);

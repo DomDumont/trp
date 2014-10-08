@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     prefdialog.cpp \
     breakpoint.cpp \
     breakpointwidget.cpp \
-    myapp.cpp
+    myapp.cpp \
+    grepwidget.cpp
 
 HEADERS  += \
     highlighter.h \
@@ -45,7 +46,8 @@ HEADERS  += \
     prefdialog.h \
     breakpoint.h \
     breakpointwidget.h \
-    myapp.h
+    myapp.h \
+    grepwidget.h
 
 RESOURCES += \
     qtresources/timeresources.qrc
