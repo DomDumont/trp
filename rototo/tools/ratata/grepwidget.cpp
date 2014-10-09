@@ -42,6 +42,15 @@ GrepWidget::GrepWidget(QWidget *parent): QWidget(parent)
 
 }
 
+void GrepWidget::createOutput()
+{
+    output = new QTreeWidget();
+    output->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+
+     connect(output, SIGNAL(cellActivated(int,int)),
+             this, SLOT(openFileOfItem(int,int)));
+}
 
 GrepWidget::~GrepWidget()
 {
@@ -66,25 +75,54 @@ QComboBox *GrepWidget::createComboBox(const QString &text)
 
 void GrepWidget::InitWidget()
 {
-     textLabel = new QLabel(tr("Containing text:"));
+    textLabel = new QLabel(tr("Containing text:"));
     textComboBox = createComboBox();
-       findButton = createButton(tr("&Find"), SLOT(find()));
+    findButton = createButton(tr("&Find"), SLOT(find()));
+    createOutput();
 
-     QGridLayout *mainLayout = new QGridLayout;
+
+    QGridLayout *mainLayout = new QGridLayout;
     mainLayout->setSizeConstraint(QLayout::SetNoConstraint);
 
-     mainLayout->addWidget(textLabel, 1, 0);
-     mainLayout->addWidget(textComboBox, 1, 1, 1, 2);
-   mainLayout->addWidget(findButton, 4, 2);
-     setLayout(mainLayout);
+    mainLayout->addWidget(textLabel, 0, 0);
+    mainLayout->addWidget(textComboBox, 0, 1, 1, 2);
+    mainLayout->addWidget(output, 2, 0,1,3);
+    mainLayout->addWidget(findButton, 3, 2);
+    setLayout(mainLayout);
 }
 
 
-
-
-
-
-void GrepWidget::ClearAll()
+void GrepWidget::find()
 {
-   // this->clear();
+    output->clear();
+    QString text = textComboBox->currentText();
+    updateComboBox(textComboBox);
+/*
+
+
+
+
+
+
+
+
+    currentDir = QDir(path);
+    QStringList files;
+    if (fileName.isEmpty())
+        fileName = "*";
+    files = currentDir.entryList(QStringList(fileName),
+                                 QDir::Files | QDir::NoSymLinks);
+
+    if (!text.isEmpty())
+        files = findFiles(files, text);
+    showFiles(files);
+*/
+}
+
+
+void GrepWidget::openFileOfItem(int row, int /* column */)
+{
+    //QTreeWidgetItem *item = output->selectedItems()row, 0);
+
+    //QDesktopServices::openUrl(QUrl::fromLocalFile(currentDir.absoluteFilePath(item->text())));
 }

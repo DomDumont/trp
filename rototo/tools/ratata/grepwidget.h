@@ -26,11 +26,12 @@
 #define GREPWIDGET_H
 
 #include <QWidget>
-#include <QTreeWidget>
+
 
 class QLabel;
 class QComboBox;
 class QPushButton;
+class QTreeWidget;
 
 class GrepWidget : public QWidget
 {
@@ -39,24 +40,27 @@ public:
     GrepWidget(QWidget *parent = 0);
     ~GrepWidget();
    void InitWidget();
-   void ClearAll();
 
 
 
 
-    QIcon groupIcon;
-    QIcon keyIcon;
+
 
 signals:
 
-public slots:
+private slots:
+    void find();
+    void openFileOfItem(int row, int column);
+
 private:
     QLabel *textLabel;
     QComboBox *textComboBox;
     QPushButton *findButton;
+    QTreeWidget *output;
 
     QComboBox *createComboBox(const QString &text = QString());
-         QPushButton *createButton(const QString &text, const char *member);
+    QPushButton *createButton(const QString &text, const char *member);
+    void createOutput();
 
 };
 #endif // GREPWIDGET_H
