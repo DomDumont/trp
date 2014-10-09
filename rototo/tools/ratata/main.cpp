@@ -27,10 +27,10 @@
 
 int main(int argc, char *argv[])
 {
-    //QApplication::setStyle(new QPlastiqueStyle);
+    QApplication::setStyle(new QPlastiqueStyle);
     //QApplication::setStyle(new QCDEStyle);
     //QApplication::setStyle(new QCleanlooksStyle);
-    QApplication::setStyle(new QMotifStyle);
+    //QApplication::setStyle(new QMotifStyle);
 
 
     MyApp app(argc, argv);

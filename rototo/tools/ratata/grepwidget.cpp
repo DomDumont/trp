@@ -217,6 +217,9 @@ QStringList GrepWidget::findFiles(const QStringList &files, const QString &text)
             }
         }
     }
+    output->expandAll();
+    output->resizeColumnToContents(0);
+    output->resizeColumnToContents(1);
     return foundFiles;
 }
 

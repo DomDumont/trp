@@ -57,6 +57,7 @@ class MDIMainWindow;
      void SetTabWidth();
      void IncreaseSelectionIndent();
      void DecreaseSelectionIndent();
+     void GotoLine(int line);
 
  protected:
      void closeEvent(QCloseEvent *event);

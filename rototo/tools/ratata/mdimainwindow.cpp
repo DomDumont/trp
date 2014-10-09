@@ -518,22 +518,11 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
          MdiChild *existing = (MdiChild *)findMdiChild(fileName);
          if (existing)
             {
+            mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);
             existing->setFont(m_globalFont);
-            //existing->SetTabWidth();
-            mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);            
+            existing->SetTabWidth();
+            existing->GotoLine(line);
 
-            if (line != -1)
-                {
-                QPlainTextEdit *toto = (QPlainTextEdit *) existing;
-                QTextCursor *cursor = new QTextCursor(toto->textCursor());
-                int linenumber = cursor->blockNumber();
-                int linedif = line - linenumber;
-                if (linedif < 0)
-                cursor->movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor, -linedif);
-                else
-                cursor->movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, linedif);
-
-                }
             return;
             }
         //Update recent file here
@@ -549,20 +538,8 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
              child->setCompleter(completer);
              child->setFont(m_globalFont);
              child->SetTabWidth();
-                child->show();
-
-             if (line != -1)
-                 {
-                 QPlainTextEdit *toto = (QPlainTextEdit *) child;
-                 QTextCursor *cursor = new QTextCursor(toto->textCursor());
-                 int linenumber = cursor->blockNumber();
-                 int linedif = line - linenumber;
-                 if (linedif < 0)
-                 cursor->movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor, -linedif);
-                 else
-                 cursor->movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, linedif);
-                 }
-
+             child->GotoLine(line);
+             child->show();
 
             }
          else
@@ -712,6 +689,7 @@ void MDIMainWindow::openFileFromFilename(QString fileName,int line)
  {
      MdiChild *child = new MdiChild(this);
      mdiArea->addSubWindow(child);
+     child->showMaximized();
 
      connect(child, SIGNAL(copyAvailable(bool)),
              cutAct, SLOT(setEnabled(bool)));

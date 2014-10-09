@@ -68,6 +68,19 @@ void MdiChild::SetTabWidth()
     setTabStopWidth(tabwidth);
 }
 
+void MdiChild::GotoLine(int line)
+{
+    if (line != -1)
+        {
+        QTextCursor txtCursor = this->textCursor();
+        txtCursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+        txtCursor.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, line);
+        this->setFocus();
+        this->setTextCursor(txtCursor);
+        this->centerCursor();
+        }
+}
+
 void MdiChild::findBackwardCurrentWord()
 {
 latestTextToFind = textUnderCursor();
