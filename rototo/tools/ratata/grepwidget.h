@@ -26,21 +26,23 @@
 #define GREPWIDGET_H
 
 #include <QWidget>
-
+ #include <QDir>
 
 class QLabel;
 class QComboBox;
 class QPushButton;
 class QTreeWidget;
-
+class QTreeWidgetItem;
+class MDIMainWindow;
 class GrepWidget : public QWidget
 {
     Q_OBJECT
 public:
+
     GrepWidget(QWidget *parent = 0);
     ~GrepWidget();
-   void InitWidget();
-
+    void InitWidget();
+    MDIMainWindow *m_mainWindow;
 
 
 
@@ -50,7 +52,7 @@ signals:
 
 private slots:
     void find();
-    void openFileOfItem(int row, int column);
+    void openFileOfItem(QTreeWidgetItem *w,int col);
 
 private:
     QLabel *textLabel;
@@ -61,6 +63,8 @@ private:
     QComboBox *createComboBox(const QString &text = QString());
     QPushButton *createButton(const QString &text, const char *member);
     void createOutput();
-
+    QStringList findFiles(const QStringList &files, const QString &text);
+    QDir currentDir;
+    void showFiles(const QStringList &files);
 };
 #endif // GREPWIDGET_H

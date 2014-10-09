@@ -62,6 +62,7 @@ class ProjectWidget : public QTreeWidget
      void closeProject();
      bool saveProject();
      void ShowErrorMsg(QString &msg);
+     QStringList GetScriptFiles();
 
      public slots:
          void treeContextMenu(const QPoint& aPosition);

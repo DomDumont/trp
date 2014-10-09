@@ -89,10 +89,10 @@ public:
        BreakpointWidget * m_breakpointWidget;
        GrepWidget       * m_grepWidget;
 
-       void openWithFileName(const QString& fileName);
+       void openWithFileName(const QString& fileName,int line = -1);
        MdiChild *activeMdiChild();
        void openProjectFromFilename(QString fileName);
-       void openFileFromFilename(QString fileName);
+       void openFileFromFilename(QString fileName,int line = -1);
 
 
 protected:

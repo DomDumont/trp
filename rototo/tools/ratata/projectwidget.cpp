@@ -446,6 +446,17 @@ void ProjectWidget::closeProject()
     m_projectIsModified = false;
 }
 
+QStringList ProjectWidget::GetScriptFiles()
+{
+  QStringList foundFiles;
+
+  for (int i=0;i<scriptsNode->childCount();i++)
+      {
+      foundFiles << scriptsNode->child(i)->text(0);
+      }
+  return foundFiles;
+}
+
 bool ProjectWidget::saveProject()
 {
     QDomDocument doc;

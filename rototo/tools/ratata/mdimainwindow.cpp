@@ -113,10 +113,11 @@
 
 void MDIMainWindow::createDockWindows()
 {
+    QDockWidget *dock;
 
     // Grep Dock
-    m_grepWidget = new GrepWidget();
-    QDockWidget *dock = new QDockWidget(tr("Grep View"), this);
+    m_grepWidget = new GrepWidget(this);
+    dock = new QDockWidget(tr("Grep View"), this);
     dock->setObjectName("grepViewDock");
     dock->setAllowedAreas(Qt::AllDockWidgetAreas);
     dock->setWidget(m_grepWidget);
@@ -510,7 +511,7 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
      return QFileInfo(fullFileName).fileName();
  }
 
- void MDIMainWindow::openWithFileName(const QString& fileName)
+ void MDIMainWindow::openWithFileName(const QString& fileName,int line)
  {
      if (!fileName.isEmpty())
         {
@@ -520,6 +521,19 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
             existing->setFont(m_globalFont);
             //existing->SetTabWidth();
             mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);            
+
+            if (line != -1)
+                {
+                QPlainTextEdit *toto = (QPlainTextEdit *) existing;
+                QTextCursor *cursor = new QTextCursor(toto->textCursor());
+                int linenumber = cursor->blockNumber();
+                int linedif = line - linenumber;
+                if (linedif < 0)
+                cursor->movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor, -linedif);
+                else
+                cursor->movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, linedif);
+
+                }
             return;
             }
         //Update recent file here
@@ -535,7 +549,21 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
              child->setCompleter(completer);
              child->setFont(m_globalFont);
              child->SetTabWidth();
-             child->show();
+                child->show();
+
+             if (line != -1)
+                 {
+                 QPlainTextEdit *toto = (QPlainTextEdit *) child;
+                 QTextCursor *cursor = new QTextCursor(toto->textCursor());
+                 int linenumber = cursor->blockNumber();
+                 int linedif = line - linenumber;
+                 if (linedif < 0)
+                 cursor->movePosition(QTextCursor::PreviousBlock, QTextCursor::MoveAnchor, -linedif);
+                 else
+                 cursor->movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, linedif);
+                 }
+
+
             }
          else
             {
@@ -552,9 +580,9 @@ void MDIMainWindow::openRecentFile()
 
 }
 
-void MDIMainWindow::openFileFromFilename(QString fileName)
+void MDIMainWindow::openFileFromFilename(QString fileName,int line)
 {
-    openWithFileName(fileName);
+    openWithFileName(fileName,line);
 }
 
 

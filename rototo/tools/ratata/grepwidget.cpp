@@ -27,6 +27,8 @@
 #include <QtGui>
 #include <QDomDocument>
 #include <QFile>
+#include "mdimainwindow.h"
+#include "projectwidget.h"
 
 
 static void updateComboBox(QComboBox *comboBox)
@@ -38,6 +40,8 @@ static void updateComboBox(QComboBox *comboBox)
 
 GrepWidget::GrepWidget(QWidget *parent): QWidget(parent)
 {
+    m_mainWindow = qobject_cast<MDIMainWindow*>(parent);
+    Q_ASSERT(m_mainWindow != NULL);
     InitWidget();
 
 }
@@ -47,9 +51,21 @@ void GrepWidget::createOutput()
     output = new QTreeWidget();
     output->setSelectionBehavior(QAbstractItemView::SelectRows);
 
+    output->setHeaderLabel("Results");
 
+    QStringList headerLabels;
+    headerLabels.push_back(tr("File"));
+    headerLabels.push_back(tr("Line"));
+     headerLabels.push_back(tr("Text"));
+
+
+    output->setColumnCount(headerLabels.count());
+    output->setHeaderLabels(headerLabels);
+    connect(output, SIGNAL(itemDoubleClicked(QTreeWidgetItem *,int)),SLOT(openFileOfItem(QTreeWidgetItem *,int)));
+    /*
      connect(output, SIGNAL(cellActivated(int,int)),
              this, SLOT(openFileOfItem(int,int)));
+             */
 }
 
 GrepWidget::~GrepWidget()
@@ -97,6 +113,12 @@ void GrepWidget::find()
     output->clear();
     QString text = textComboBox->currentText();
     updateComboBox(textComboBox);
+    QStringList files;
+    currentDir = m_mainWindow->m_projectWidget->rootDir;
+    files = m_mainWindow->m_projectWidget->GetScriptFiles();
+    if (!text.isEmpty())
+        files = findFiles(files, text);
+    showFiles(files);
 /*
 
 
@@ -120,9 +142,108 @@ void GrepWidget::find()
 }
 
 
-void GrepWidget::openFileOfItem(int row, int /* column */)
+void GrepWidget::openFileOfItem(QTreeWidgetItem *w,int col)
 {
+  if (w->text(1).isEmpty())
+    m_mainWindow->openFileFromFilename(currentDir.absoluteFilePath(w->text(0)));
+  else
+      m_mainWindow->openFileFromFilename(currentDir.absoluteFilePath(w->text(0)),w->text(1).toInt());
+
+
+
+
     //QTreeWidgetItem *item = output->selectedItems()row, 0);
 
     //QDesktopServices::openUrl(QUrl::fromLocalFile(currentDir.absoluteFilePath(item->text())));
+}
+
+QStringList GrepWidget::findFiles(const QStringList &files, const QString &text)
+{
+    QProgressDialog progressDialog(this);
+    progressDialog.setCancelButtonText(tr("&Cancel"));
+    progressDialog.setRange(0, files.size());
+    progressDialog.setWindowTitle(tr("Find Files"));
+
+    QStringList foundFiles;
+
+    for (int i = 0; i < files.size(); ++i) {
+        progressDialog.setValue(i);
+        progressDialog.setLabelText(tr("Searching file number %1 of %2...")
+                                    .arg(i).arg(files.size()));
+        qApp->processEvents();
+
+        if (progressDialog.wasCanceled())
+            break;
+
+        QFile file(currentDir.absoluteFilePath(files[i]));
+
+        if (file.open(QIODevice::ReadOnly)) {
+            QString line;
+            QTextStream in(&file);
+            int lineNumber;
+            lineNumber = 0;
+            bool atLeastOneFind;
+            atLeastOneFind = false;
+            QTreeWidgetItem *topLevelItem;
+            topLevelItem = NULL;
+            while (!in.atEnd())
+            {
+                if (progressDialog.wasCanceled())
+                    break;
+                line = in.readLine();
+                if (line.contains(text))
+                {
+                    foundFiles << files[i];
+
+                    if (atLeastOneFind == false)
+                    {
+                        topLevelItem = new QTreeWidgetItem;
+                        topLevelItem->setText(0, files[i]);
+                        output->addTopLevelItem(topLevelItem);
+                    }
+                    else
+                    {
+                    QTreeWidgetItem *childItem = new QTreeWidgetItem;
+                                    childItem->setText(0, files[i]);
+                                    childItem->setText(1, QString::number(lineNumber));
+                                    childItem->setText(2, line.trimmed());
+
+                    topLevelItem->addChild(childItem);
+                    }
+                    atLeastOneFind = true;
+
+                }
+                lineNumber++;
+            }
+        }
+    }
+    return foundFiles;
+}
+
+void GrepWidget::showFiles(const QStringList &files)
+{
+    /*
+    for (int i = 0; i < files.size(); ++i)
+        {
+        QFile file(currentDir.absoluteFilePath(files[i]));
+        qint64 size = QFileInfo(file).size();
+
+        QTableWidgetItem *fileNameItem = new QTableWidgetItem(files[i]);
+        fileNameItem->setFlags(fileNameItem->flags() ^ Qt::ItemIsEditable);
+        QTableWidgetItem *sizeItem = new QTableWidgetItem(tr("%1 KB")
+                                             .arg(int((size + 1023) / 1024)));
+        sizeItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+        sizeItem->setFlags(sizeItem->flags() ^ Qt::ItemIsEditable);
+
+        int row = filesTable->rowCount();
+        filesTable->insertRow(row);
+        filesTable->setItem(row, 0, fileNameItem);
+        filesTable->setItem(row, 1, sizeItem);
+        }
+    filesFoundLabel->setText(tr("%1 file(s) found").arg(files.size()) +
+
+                             (" (Double click on a file to open it)"));
+
+    filesFoundLabel->setWordWrap(true);
+    */
 }
