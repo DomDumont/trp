@@ -88,6 +88,7 @@ public:
        ConsoleWidget    * m_consoleWidget;
        BreakpointWidget * m_breakpointWidget;
        GrepWidget       * m_grepWidget;
+       QDockWidget      * m_grepDock;
 
        void openWithFileName(const QString& fileName,int line = -1);
        MdiChild *activeMdiChild();
@@ -98,7 +99,12 @@ public:
 protected:
     void closeEvent(QCloseEvent *event);
 
+public slots:
+
+    void grep(QString text);
+
 private slots:
+
    void newFile();
    void newProject();
    void open();
@@ -208,6 +214,7 @@ private:
    QAction *restartEngineAct;
 
    QAction *connectDisconnectAct;
+   QAction *grepAct;
 
 
 };

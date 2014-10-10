@@ -141,6 +141,12 @@ void GrepWidget::find()
 */
 }
 
+void GrepWidget::SetText(QString text)
+{
+textComboBox->setEditText(text);
+updateComboBox(textComboBox);
+find();
+}
 
 void GrepWidget::openFileOfItem(QTreeWidgetItem *w,int col)
 {
@@ -181,7 +187,7 @@ QStringList GrepWidget::findFiles(const QStringList &files, const QString &text)
             QString line;
             QTextStream in(&file);
             int lineNumber;
-            lineNumber = 0;
+            lineNumber = 1;
             bool atLeastOneFind;
             atLeastOneFind = false;
             QTreeWidgetItem *topLevelItem;

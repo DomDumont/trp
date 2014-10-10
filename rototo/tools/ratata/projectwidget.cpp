@@ -59,6 +59,7 @@ ProjectWidget::ProjectWidget(QWidget *parent): QTreeWidget(parent)
      InitWidget();
 
      curFile = "";
+     this->scriptsNode = NULL;
      m_projectIsModified = false;
 
      this->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -66,7 +67,7 @@ ProjectWidget::ProjectWidget(QWidget *parent): QTreeWidget(parent)
      connect( this, SIGNAL( customContextMenuRequested( const QPoint& ) ),
          this, SLOT( treeContextMenu( const QPoint& ) ) );
 
-        connect(this,SIGNAL( itemChanged ( QTreeWidgetItem *, int) ), this,SLOT(onItemChanged(QTreeWidgetItem *,int)));
+     connect(this,SIGNAL( itemChanged ( QTreeWidgetItem *, int) ), this,SLOT(onItemChanged(QTreeWidgetItem *,int)));
  }
 
 
@@ -449,6 +450,8 @@ void ProjectWidget::closeProject()
 QStringList ProjectWidget::GetScriptFiles()
 {
   QStringList foundFiles;
+  if (this->scriptsNode == NULL)
+      return foundFiles;
 
   for (int i=0;i<scriptsNode->childCount();i++)
       {

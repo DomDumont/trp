@@ -80,7 +80,7 @@ void MdiChild::GotoLine(int line)
         QTextCursor txtCursor = this->textCursor();
         txtCursor.beginEditBlock();
         txtCursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
-        txtCursor.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, line);
+        txtCursor.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, line-1);
         txtCursor.endEditBlock();
         this->setFocus();
         this->setTextCursor(txtCursor);
@@ -607,6 +607,15 @@ latestTextToFind = textUnderCursor();
          findBackwardCurrentWord();
          return;
          }
+
+     bool shiftCtrlf =  ((e->modifiers() & Qt::ShiftModifier) && (e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_F); // CTRL+SHIFT+F
+      if (shiftCtrlf)
+          {
+          QString latestTextToFind = textUnderCursor();
+          this->m_mainWindow->grep(latestTextToFind);
+          return;
+          }
+
      bool f3Only =  (!(e->modifiers() & Qt::ShiftModifier) && !(e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_F3); // F3
      if ( f3Only)
          {

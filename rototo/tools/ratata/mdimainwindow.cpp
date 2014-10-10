@@ -117,12 +117,12 @@ void MDIMainWindow::createDockWindows()
 
     // Grep Dock
     m_grepWidget = new GrepWidget(this);
-    dock = new QDockWidget(tr("Grep View"), this);
-    dock->setObjectName("grepViewDock");
-    dock->setAllowedAreas(Qt::AllDockWidgetAreas);
-    dock->setWidget(m_grepWidget);
-    addDockWidget(Qt::BottomDockWidgetArea, dock);
-    viewMenu->addAction(dock->toggleViewAction());
+    m_grepDock = new QDockWidget(tr("Grep View"), this);
+    m_grepDock->setObjectName("grepViewDock");
+    m_grepDock->setAllowedAreas(Qt::AllDockWidgetAreas);
+    m_grepDock->setWidget(m_grepWidget);
+    addDockWidget(Qt::BottomDockWidgetArea, m_grepDock);
+    viewMenu->addAction(m_grepDock->toggleViewAction());
 
     // Breakpoint Dock
     m_breakpointWidget = new BreakpointWidget();
@@ -443,6 +443,12 @@ void MDIMainWindow::openProjectFromFilename(QString fileName)
 
        }
 }
+void MDIMainWindow::grep(QString text)
+{
+m_grepWidget->SetText(text);
+m_grepDock->show();
+m_grepDock->raise();
+}
  void MDIMainWindow::openProject()
  {
 
@@ -729,6 +735,11 @@ void MDIMainWindow::openFileFromFilename(QString fileName,int line)
     connect(newProjectAct, SIGNAL(triggered()), this, SLOT(newProject()));
 
 
+    grepAct = new QAction(tr("Grep ..."), this);
+   // grepAct->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_F);
+    grepAct->setStatusTip(tr("Grep"));
+    connect(grepAct, SIGNAL(triggered()), this, SLOT(grep()));
+
     openFileAct = new QAction(QIcon(":/images/open.png"), tr("File ..."), this);
     //TODODOMDOM openFileAct->setShortcuts(QKeySequence::Open);
     openFileAct->setStatusTip(tr("Open an existing file"));
@@ -937,6 +948,9 @@ void MDIMainWindow::openFileFromFilename(QString fileName,int line)
     editMenu->addAction(copyAct);
     editMenu->addAction(pasteAct);
     editMenu->addSeparator();
+    editMenu->addAction(grepAct);
+    editMenu->addSeparator();
+
     editMenu->addAction(prefDialogAct);
 
     debugMenu = menuBar()->addMenu(tr("&Debug"));

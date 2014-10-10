@@ -43,7 +43,7 @@ public:
     ~GrepWidget();
     void InitWidget();
     MDIMainWindow *m_mainWindow;
-
+    void SetText(QString text);
 
 
 
