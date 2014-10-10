@@ -64,6 +64,10 @@ MdiChild::MdiChild(QWidget *parent) : QPlainTextEdit(parent), c(0)
 
 void MdiChild::SetTabWidth()
 {
+      if (document()->isModified()) {
+
+      }
+    //QTextCursor cursor(document());
     const int tabwidth = fontMetrics().width(' ') * 8;
     setTabStopWidth(tabwidth);
 }
@@ -72,12 +76,16 @@ void MdiChild::GotoLine(int line)
 {
     if (line != -1)
         {
+        //QTextCursor txtCursor(document());
         QTextCursor txtCursor = this->textCursor();
+        txtCursor.beginEditBlock();
         txtCursor.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
         txtCursor.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, line);
+        txtCursor.endEditBlock();
         this->setFocus();
         this->setTextCursor(txtCursor);
         this->centerCursor();
+
         }
 }
 
@@ -151,6 +159,7 @@ latestTextToFind = textUnderCursor();
 
      connect(document(), SIGNAL(contentsChanged()),
              this, SLOT(documentWasModified()));
+
 
      return true;
  }

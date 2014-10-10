@@ -56,7 +56,7 @@ void GrepWidget::createOutput()
     QStringList headerLabels;
     headerLabels.push_back(tr("File"));
     headerLabels.push_back(tr("Line"));
-     headerLabels.push_back(tr("Text"));
+    headerLabels.push_back(tr("Text"));
 
 
     output->setColumnCount(headerLabels.count());
@@ -201,7 +201,8 @@ QStringList GrepWidget::findFiles(const QStringList &files, const QString &text)
                         topLevelItem->setText(0, files[i]);
                         output->addTopLevelItem(topLevelItem);
                     }
-                    else
+
+                    // De toutes façons add
                     {
                     QTreeWidgetItem *childItem = new QTreeWidgetItem;
                                     childItem->setText(0, files[i]);

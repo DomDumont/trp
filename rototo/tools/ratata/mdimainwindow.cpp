@@ -515,13 +515,28 @@ QString MDIMainWindow::strippedName(const QString &fullFileName)
  {
      if (!fileName.isEmpty())
         {
-         MdiChild *existing = (MdiChild *)findMdiChild(fileName);
+         MdiChild *existing = NULL;
+         QMdiSubWindow *titi = findMdiChild(fileName);
+         if (titi != NULL)
+            {
+            existing = qobject_cast<MdiChild *> (titi->widget());
+            }
+
          if (existing)
             {
+
+
             mdiArea->setActiveSubWindow((QMdiSubWindow *)existing);
+            existing->show();
+            existing->setFocus();
             existing->setFont(m_globalFont);
             existing->SetTabWidth();
             existing->GotoLine(line);
+
+
+
+
+
 
             return;
             }
