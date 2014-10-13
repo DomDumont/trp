@@ -42,6 +42,7 @@ GrepWidget::GrepWidget(QWidget *parent): QWidget(parent)
 {
     m_mainWindow = qobject_cast<MDIMainWindow*>(parent);
     Q_ASSERT(m_mainWindow != NULL);
+
     InitWidget();
 
 }
@@ -88,11 +89,19 @@ QComboBox *GrepWidget::createComboBox(const QString &text)
 
     return comboBox;
 }
-
+void GrepWidget::SlotTextEdited()
+{
+find();
+}
 void GrepWidget::InitWidget()
 {
     textLabel = new QLabel(tr("Containing text:"));
     textComboBox = createComboBox();
+
+    QLineEdit *edit = textComboBox->lineEdit();
+    Q_ASSERT(connect(edit, SIGNAL(returnPressed ()), this, SLOT(SlotTextEdited())));
+
+
     findButton = createButton(tr("&Find"), SLOT(find()));
     createOutput();
 

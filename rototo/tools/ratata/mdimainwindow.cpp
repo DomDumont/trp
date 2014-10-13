@@ -443,8 +443,13 @@ void MDIMainWindow::openProjectFromFilename(QString fileName)
 
        }
 }
-void MDIMainWindow::grep(QString text)
+void MDIMainWindow::grep()
 {
+    QString text;
+      if (activeMdiChild())
+      {
+          text = activeMdiChild()->textUnderCursor();
+      }
 m_grepWidget->SetText(text);
 m_grepDock->show();
 m_grepDock->raise();
@@ -736,7 +741,7 @@ void MDIMainWindow::openFileFromFilename(QString fileName,int line)
 
 
     grepAct = new QAction(tr("Grep ..."), this);
-   // grepAct->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_F);
+    grepAct->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_F);
     grepAct->setStatusTip(tr("Grep"));
     connect(grepAct, SIGNAL(triggered()), this, SLOT(grep()));
 

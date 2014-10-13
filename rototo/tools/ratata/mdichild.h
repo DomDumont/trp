@@ -88,6 +88,7 @@ public:
     int breakpointAreaWidth();
     void highlightLine(int _lineNumber);
     int getTopLine();
+    QString textUnderCursor() const;
 
 
 protected:
@@ -115,7 +116,7 @@ protected:
      void insertCompletion(const QString &completion);
 
  private:
-     QString textUnderCursor() const;
+
  private:
      QCompleter *c;
 

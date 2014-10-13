@@ -46,7 +46,8 @@ public:
     void SetText(QString text);
 
 
-
+public slots:
+    void SlotTextEdited();
 
 signals:
 

@@ -101,7 +101,7 @@ protected:
 
 public slots:
 
-    void grep(QString text);
+    void grep();
 
 private slots:
 

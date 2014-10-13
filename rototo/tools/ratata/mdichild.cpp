@@ -608,6 +608,7 @@ latestTextToFind = textUnderCursor();
          return;
          }
 
+     /*
      bool shiftCtrlf =  ((e->modifiers() & Qt::ShiftModifier) && (e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_F); // CTRL+SHIFT+F
       if (shiftCtrlf)
           {
@@ -615,6 +616,7 @@ latestTextToFind = textUnderCursor();
           this->m_mainWindow->grep(latestTextToFind);
           return;
           }
+     */
 
      bool f3Only =  (!(e->modifiers() & Qt::ShiftModifier) && !(e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_F3); // F3
      if ( f3Only)
