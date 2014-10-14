@@ -1,6 +1,6 @@
 # Versions
 
-* Rototo : 0.1.1
-* Ratata : 0.2.3
+* Rototo : 0.2.0
+* Ratata : 0.3.0
 
 

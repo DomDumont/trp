@@ -47,6 +47,6 @@ class CApplication;
 extern CApplication *g_app;
 
 #define MY_SAFE_RELEASE(p) { if ( (p) ) { (p)->Release(); (p) = 0; } }
-#define ROTOTO_VERSION "0.1.1"
+#define ROTOTO_VERSION "0.2.0"
 
 #endif
