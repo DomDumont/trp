@@ -904,11 +904,18 @@ void MDIMainWindow::openFileFromFilename(QString fileName,int line)
 
  void MDIMainWindow::launchRototo()
  {
+     bool result = false;
      QProcess *process = new QProcess();
      QString workingDir = QFileInfo(this->m_rototoPath).dir().absolutePath()+"/";
-     process->setWorkingDirectory(workingDir);
-     process->startDetached("open "+ this->m_rototoPath);
 
+#ifdef Q_OS_MAC
+     process->setWorkingDirectory(workingDir);
+     result = process->startDetached("open "+ this->m_rototoPath);
+#endif
+#ifdef Q_OS_WIN32
+     result = process->startDetached("\""+ this->m_rototoPath+ "\"",QStringList(),workingDir);
+#endif
+    qDebug()<<"Spawn result = "<<result<<" "<<process->errorString()+"\n";
  }
 
  void MDIMainWindow::closeProject()

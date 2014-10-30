@@ -86,6 +86,7 @@ Section "T.R.P. (required)"
     WriteRegStr HKCR "TRP.Project\shell\open\command" "" '$INSTDIR\ratata.exe "%1"'
   ${EndIf}
   
+  WriteRegStr HKCU "Software\Deliriom\Ratata" "rototo" "$INSTDIR"
 SectionEnd
 
 ; Optional section (can be disabled by the user)
@@ -106,6 +107,8 @@ SectionEnd
 ; Uninstaller
 
 Section "Uninstall"
+
+  ; DeleteRegKey HKCU "Software\Deliriom\Ratata "rototo"
 
   ReadRegStr $R0 HKCR ".rsc" ""
   StrCmp $R0 "TRP.Script" 0 +2
