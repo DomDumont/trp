@@ -38,9 +38,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a></li>
 <li><a href="#rototo-revisions"><span class="toc-section-number">2</span> Rototo Revisions</a><ul>
-<li><a href="#version-0.1.1"><span class="toc-section-number">2.1</span> Version 0.1.1 :</a></li>
+<li><a href="#version-0.2.0"><span class="toc-section-number">2.1</span> Version : 0.2.0</a></li>
+<li><a href="#version-0.1.1"><span class="toc-section-number">2.2</span> Version 0.1.1 :</a></li>
 </ul></li>
-<li><a href="#ratata-revisions"><span class="toc-section-number">3</span> Ratata Revisions</a></li>
+<li><a href="#ratata-revisions"><span class="toc-section-number">3</span> Ratata Revisions</a><ul>
+<li><a href="#version-0.3.0"><span class="toc-section-number">3.1</span> Version : 0.3.0</a></li>
+</ul></li>
 <li><a href="#documentation-revisions"><span class="toc-section-number">4</span> Documentation Revisions</a><ul>
 <li><a href="#version-3"><span class="toc-section-number">4.1</span> Version 3:</a></li>
 <li><a href="#version-2"><span class="toc-section-number">4.2</span> Version 2:</a></li>
@@ -106,13 +109,30 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>T.R.P. makes you feel at home. You work on Windows or osx with your preferred text editor. You can then connect as many clients as you want (ios and/or android) to see the final result in real time.</p>
 <p>Android and IOS versions are ready but still being tested and are not yet publicly available. But don’t wait and start playing with the Win32 or OSX versions.</p>
 <h1 id="rototo-revisions"><span class="header-section-number">2</span> Rototo Revisions</h1>
-<h2 id="version-0.1.1"><span class="header-section-number">2.1</span> Version 0.1.1 :</h2>
+<h2 id="version-0.2.0"><span class="header-section-number">2.1</span> Version : 0.2.0</h2>
+<pre><code>- Radiobox
+- Add GetRotation in all Widgets subclasses
+- Watcher is not working in OSX
+- Fix doc generation for global functions
+- Better properties registration via scriptmanager
+- Add property in generated doc
+- ComboBox
+- Localization system for Texts
+- Add Set/Get in AngelScript to have nice scripts
+- Add Vec2d versions of all AI functions</code></pre>
+<h2 id="version-0.1.1"><span class="header-section-number">2.2</span> Version 0.1.1 :</h2>
 <pre><code>- Add RadioBox
 - Fix Shorcuts under OSX</code></pre>
 <h1 id="ratata-revisions"><span class="header-section-number">3</span> Ratata Revisions</h1>
-<ul>
-<li>Version ???</li>
-</ul>
+<h2 id="version-0.3.0"><span class="header-section-number">3.1</span> Version : 0.3.0</h2>
+<pre><code>- Fix shorcuts on OSX (and in samples too)
+- register file extension for ratata projects (OSX)
+- See why errors are shown with a small font in ratata
+- Icon is bad on osx for .rap projects
+- Fix completion on Ratata
+- Add the possibility to open script file by clicking on them in the finder
+- Must better &quot;find under cursor&quot; in ratata
+- Find in files in ratata</code></pre>
 <h1 id="documentation-revisions"><span class="header-section-number">4</span> Documentation Revisions</h1>
 <h2 id="version-3"><span class="header-section-number">4.1</span> Version 3:</h2>
 <pre><code>- Remove Sublime Plugin
@@ -133,12 +153,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>However, it comes with a set of tools which, in turn, need to be. These tools are optional but T.R.P. was thought to use them. So your life will be much simpler if you do;-)</p>
 <h2 id="shoebox"><span class="header-section-number">5.3</span> ShoeBox</h2>
 <p>Shoebox is a freeware tool(made with the Adobe Air SDK) for generating sprites sheets. T.R.P. use it a lot for sprites and animations.</p>
-<p>To install it, you must first install the adobe air environment (if you don’t already have it of course) Just go to <a href="http://get.adobe.com/fr/air/">http://get.adobe.com/fr/air/</a> and follow the instructions.</p>
+<p>To install it, you must first install the adobe air environment (if you don’t already have it of course) Just go to <a href="http://get.adobe.com/fr/air/" class="uri">http://get.adobe.com/fr/air/</a> and follow the instructions.</p>
 <p>When the air environment is installed , take a version of Shoebox directly on the ShoeBox’s website :</p>
-<p><a href="http://renderhjs.net/shoebox/">http://renderhjs.net/shoebox/</a></p>
+<p><a href="http://renderhjs.net/shoebox/" class="uri">http://renderhjs.net/shoebox/</a></p>
 <h2 id="tiled"><span class="header-section-number">5.4</span> Tiled</h2>
 <p>Tiled is a well known tile editor. If you want to do a tile based game or just instantiate 2d objects with Tiled, take a version of Tiled directly on their website :</p>
-<p><a href="http://www.mapeditor.org">http://www.mapeditor.org</a></p>
+<p><a href="http://www.mapeditor.org" class="uri">http://www.mapeditor.org</a></p>
 <h2 id="configuration"><span class="header-section-number">5.5</span> Configuration</h2>
 <p>You can edit the file settings.xml to configure T.R.P. For example, you can set the initial position of the window, it’s scale, the default text editor, etc…</p>
 <p>win32 sample :</p>
@@ -536,7 +556,7 @@ A a;    // The object a is instantiated, it should be deleted at the end of the 
 <h1 id="script-reference"><span class="header-section-number">11</span> Script Reference</h1>
 <h2 id="class-animation"><span class="header-section-number">11.1</span> Class Animation</h2>
 <p>Members:</p>
-<p><strong>void Load(Atlas @ <em>atlas, string &amp;in </em>name,string &amp;in <em>format,int </em>nbFrames)</strong></p>
+<p>**void Load(Atlas @ _atlas, string &amp;in _name,string &amp;in _format,int _nbFrames)**</p>
 <p>Role : Load an animation sheet from an atlas given a specific format and a frame number</p>
 <ul>
 <li>_atlas : Reference to the atlas containing the animation</li>
@@ -555,31 +575,33 @@ tata</code></pre>
 <p><strong>void Render()</strong></p>
 <p><strong>void Play(int mode = 0, int nbLoops = 1)</strong></p>
 <p><strong>void Stop(bool waitEnd = true)</strong></p>
-<p><strong>void SetPosition(int x,int y,int from = 0)</strong></p>
+<p><strong>void SetPosition(int x,int y)</strong></p>
 <p><strong>bool Touched(int x,int y)</strong></p>
 <p><strong>void SetScale(double xFactor,double yFactor)</strong></p>
 <p><strong>void SetRotation(float angle)</strong></p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float get_Rotation()</strong></p>
 <p><strong>void UnLoad()</strong></p>
 <p><strong>CallbackHandler <span class="citation">@onComplete</span> (property) </strong></p>
 <p><strong>ref <span class="citation">@userData</span> (property) </strong></p>
 <h2 id="class-atlas"><span class="header-section-number">11.2</span> Class Atlas</h2>
 <p>Members:</p>
 <p><strong>Atlas()</strong></p>
-<p><strong>void Load(string &amp;in <em>file,int </em>flags=13)</strong></p>
-<p><strong>void LoadFromImage(string &amp;in <em>file,int </em>flags=13)</strong></p>
+<p>**void Load(string &amp;in _file,int _flags=13)**</p>
+<p>**void LoadFromImage(string &amp;in _file,int _flags=13)**</p>
 <p><strong>void UnLoad()</strong></p>
 <h2 id="class-button"><span class="header-section-number">11.3</span> Class Button</h2>
 <p>Members:</p>
 <p><strong>void SetText(string &amp;in newText)</strong></p>
 <p><strong>void Render()</strong></p>
 <p><strong>void SetSize(int w,int h)</strong></p>
-<p><strong>void SetPosition(int x,int y,int from=0)</strong></p>
+<p><strong>void set_Position(Vector2D vec)</strong></p>
+<p><strong>void SetPosition(int x,int y)</strong></p>
+<p><strong>void set_Position(Vector2D vec)</strong></p>
 <p><strong>void SetFont(Font @ font)</strong></p>
 <p><strong>void SetSprite(int index,Atlas @ atlas, string &amp;in name, bool ninePatch = false)</strong></p>
 <p><strong>void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)</strong></p>
 <p><strong>void SetRotation(float angle)</strong></p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float get_Rotation()</strong></p>
 <p><strong>bool Touched(int x,int y)</strong></p>
 <p><strong>void SetScale(double xFactor,double yFactor)</strong></p>
 <p><strong>void SetEnabled(bool value)</strong></p>
@@ -589,25 +611,25 @@ tata</code></pre>
 <p><strong>ref <span class="citation">@user_data</span> (property) </strong></p>
 <h2 id="class-combobox"><span class="header-section-number">11.4</span> Class ComboBox</h2>
 <p>Members:</p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float GetRotation()</strong></p>
 <p><strong>CallbackHandler <span class="citation">@onSelectionChangedHandler</span> (property) </strong></p>
 <p><strong>ref <span class="citation">@userData</span> (property) </strong></p>
 <h2 id="class-font"><span class="header-section-number">11.5</span> Class Font</h2>
 <p>Members:</p>
 <h2 id="class-label"><span class="header-section-number">11.6</span> Class Label</h2>
 <p>Members:</p>
-<p><strong>void SetText(string &amp;in <em>newText,bool </em>justified = true)</strong></p>
+<p>**void SetText(string &amp;in _newText,bool _justified = true)**</p>
 <p><strong>void Render()</strong></p>
 <p><strong>void SetFont(Font @ font)</strong></p>
-<p><strong>void SetColor(uint8 <em>r=255,uint8 </em>g=255,uint8 <em>b=255,uint8 </em>a=255)</strong></p>
-<p><strong>void SetPosition(int x,int y,int from = 0)</strong></p>
-<p><strong>bool Touched(int <em>x,int </em>y)</strong></p>
+<p>**void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)**</p>
+<p><strong>void SetPosition(int x,int y)</strong></p>
+<p>**bool Touched(int _x,int _y)**</p>
 <p><strong>void SetRotation(float angle)</strong></p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float GetRotation()</strong></p>
 <p><strong>void SetShaded(bool value)</strong></p>
 <h2 id="class-listbox"><span class="header-section-number">11.7</span> Class ListBox</h2>
 <p>Members:</p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float GetRotation()</strong></p>
 <p><strong>CallbackHandler <span class="citation">@onSelectionChangedHandler</span> (property) </strong></p>
 <p><strong>ref <span class="citation">@userData</span> (property) </strong></p>
 <h2 id="class-emitter"><span class="header-section-number">11.8</span> Class Emitter</h2>
@@ -623,8 +645,8 @@ tata</code></pre>
 <p>Members:</p>
 <p><strong>void Render()</strong></p>
 <p><strong>void SetColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)</strong></p>
-<p><strong>void SetPosition(int x,int y,int from = 0)</strong></p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>void SetPosition(int x,int y)</strong></p>
+<p><strong>float GetRotation()</strong></p>
 <h2 id="class-music"><span class="header-section-number">11.11</span> Class Music</h2>
 <p>Members:</p>
 <h2 id="class-sound"><span class="header-section-number">11.12</span> Class Sound</h2>
@@ -632,11 +654,12 @@ tata</code></pre>
 <h2 id="class-sprite"><span class="header-section-number">11.13</span> Class Sprite</h2>
 <p>Members:</p>
 <p><strong>void Load(Atlas @ atlas, string &amp;in name)</strong></p>
-<p><strong>void SetPosition(int x,int y,int from = 0)</strong></p>
+<p><strong>void SetPosition(int x,int y)</strong></p>
+<p><strong>void set_Position(Vector2D pos)</strong></p>
 <p><strong>bool Touched(int x,int y)</strong></p>
 <p><strong>void SetScale(double xFactor,double yFactor)</strong></p>
 <p><strong>void SetRotation(float angle)</strong></p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float get_Rotation()</strong></p>
 <p><strong>void Render()</strong></p>
 <p><strong>void UnLoad()</strong></p>
 <p><strong>void SetColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)</strong></p>
@@ -645,7 +668,7 @@ tata</code></pre>
 <p><strong>void SetNinePatchRect(int x,int y,int w,int h)</strong></p>
 <h2 id="class-textbox"><span class="header-section-number">11.14</span> Class TextBox</h2>
 <p>Members:</p>
-<p><strong>double GetRotation()</strong></p>
+<p><strong>float GetRotation()</strong></p>
 <h2 id="section-tweens"><span class="header-section-number">11.15</span> Section Tweens</h2>
 <p><strong>void TWN_AddTween(Tween @)</strong></p>
 <p><strong>void TWN_CancelTweens()</strong></p>

@@ -36,7 +36,12 @@ rototo/extern/*
 **/Android/bin
 **/AS_DEBUG
 
+# Android
 
+**/jni/SDL2*/
+**/jni/AngelScript*/
+**/jni/Box*/
+**/jni/tinyxml*/
 
 # Xcode
 .DS_Store
