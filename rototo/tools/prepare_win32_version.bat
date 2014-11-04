@@ -19,6 +19,17 @@ nmake clean -f .\Makefile.Release
 nmake  -f .\Makefile.Release
 POPD
 
+
+REM ----------------------------------------------------------------------------
+REM  Build Rototo Android
+REM ----------------------------------------------------------------------------
+
+PUSHD ..\projects\android
+call ndk-build.cmd clean
+call ndk-build.cmd
+call ant clean release
+POPD
+
 pause
 
 REM ----------------------------------------------------------------------------
