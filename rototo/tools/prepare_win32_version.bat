@@ -83,6 +83,7 @@ robocopy ../bin/win32/Release ./win32-version /e
 # Copy GameData
 #--------------------
 robocopy   ../data/gamedata-sample ./win32-version/gamedata-sample /e
+robocopy   ../data/gamedata-shooter ./win32-version/gamedata-shooter /e
 robocopy   ../data/helpers ./win32-version/helpers /e
 robocopy   ../data/themes ./win32-version/themes /e
 robocopy   ../data ./win32-version settings.xml
