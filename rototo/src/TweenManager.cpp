@@ -254,17 +254,18 @@ float TweenManager::RunEquation(int transition,int equation, float t,float b , f
 	/**** Expo ****/
 
 	float CExpoEffect::EaseIn (float t,float b , float c, float d) {
-		return (t==0) ? b : c * pow(2, 10 * (t/d - 1)) + b;
+		return (float)((t==0) ? b : c * pow(2, 10 * (t/d - 1)) + b);
 	}
 	float CExpoEffect::EaseOut(float t,float b , float c, float d) {
-		return (t==d) ? b+c : c * (-pow(2, -10 * t/d) + 1) + b;
+		return (float)((t == d) ? b + c : c * (-pow(2, -10 * t / d) + 1) + b);
 	}
 
 	float CExpoEffect::EaseInOut(float t,float b , float c, float d) {
 		if (t==0) return b;
 		if (t==d) return b+c;
-		if ((t/=d/2) < 1) return c/2 * pow(2, 10 * (t - 1)) + b;
-		return c/2 * (-pow(2, -10 * --t) + 2) + b;
+		if ((t/=d/2) < 1) 
+			return (float) (c/2 * pow(2, 10 * (t - 1)) + b);
+		return (float)(c/2 * (-pow(2, -10 * --t) + 2) + b);
 	}
 
 
@@ -275,7 +276,7 @@ float TweenManager::RunEquation(int transition,int equation, float t,float b , f
 		float p=d*.3f;
 		float a=c;
 		float s=p/4;
-		float postFix =a*pow(2,10*(t-=1)); // this is a fix, again, with post-increment operators
+		float postFix =(float)(a*pow(2,10*(t-=1))); // this is a fix, again, with post-increment operators
 		return (float)(-(postFix * sin((t*d-s)*(2*C_PI)/p )) + b);
 	}
 
@@ -294,10 +295,10 @@ float TweenManager::RunEquation(int transition,int equation, float t,float b , f
 		float s=p/4;
 
 		if (t < 1) {
-			float postFix =a*pow(2,10*(t-=1)); // postIncrement is evil
+			float postFix =(float)(a*pow(2,10*(t-=1))); // postIncrement is evil
 			return (float)(-.5f*(postFix* sin( (t*d-s)*(2*C_PI)/p )) + b);
 		}
-		float postFix =  a*pow(2,-10*(t-=1)); // postIncrement is evil
+		float postFix = (float)( a*pow(2,-10*(t-=1))); // postIncrement is evil
 		return (float)(postFix * sin( (t*d-s)*(2*C_PI)/p )*.5f + c + b);
 	}
 

@@ -94,24 +94,6 @@
     <ClCompile Include="Primitive.cpp">
       <Filter>Fichiers sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scripthandle\scripthandle.cpp">
-      <Filter>Fichiers sources\asaddons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptbuilder\scriptbuilder.cpp">
-      <Filter>Fichiers sources\asaddons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptmath\scriptmath.cpp">
-      <Filter>Fichiers sources\asaddons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptstdstring\scriptstdstring.cpp">
-      <Filter>Fichiers sources\asaddons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptarray\scriptarray.cpp">
-      <Filter>Fichiers sources\asaddons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.28.2\sdk\add_on\scriptdictionary\scriptdictionary.cpp">
-      <Filter>Fichiers sources\asaddons</Filter>
-    </ClCompile>
     <ClCompile Include="..\extern\Fluid_Studios_Memory_Manager\mmgr.cpp">
       <Filter>Fichiers sources\FluidMemoryManager</Filter>
     </ClCompile>
@@ -126,6 +108,24 @@
     </ClCompile>
     <ClCompile Include="ComboBox.cpp">
       <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.29.2\sdk\add_on\scriptarray\scriptarray.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.29.2\sdk\add_on\scriptbuilder\scriptbuilder.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.29.2\sdk\add_on\scriptdictionary\scriptdictionary.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.29.2\sdk\add_on\scripthandle\scripthandle.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.29.2\sdk\add_on\scriptmath\scriptmath.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\AngelScript-2.29.2\sdk\add_on\scriptstdstring\scriptstdstring.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

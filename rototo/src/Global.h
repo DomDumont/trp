@@ -26,6 +26,8 @@
 #ifndef __GLOBAL_H__
 #define __GLOBAL_H__
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,13 +37,16 @@
 #include <new> //For placement new
 
 #ifdef WIN32
-#include "mmgr.h"
+//#include "mmgr.h"
 #endif
+
+
 
 #include "SDL.h"
 #include "SDL_mixer.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+
 
 class CApplication;
 extern CApplication *g_app;
