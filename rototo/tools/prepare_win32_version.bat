@@ -46,7 +46,7 @@ REM ----------------------------------------------------------------------------
 
 :compil_rototo_win32
 
-call "c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" x86
+call "c:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\vcvarsall.bat" x86
 msbuild ..\projects\Visual2010\Rototo.sln /property:Configuration=Release /t:Clean;Rebuild
 if ERRORLEVEL 1 goto compil_error
 pause
