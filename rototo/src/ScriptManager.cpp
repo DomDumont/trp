@@ -230,6 +230,22 @@ void ScriptManager::Prepare()
 	///glob:void GUI_UnLoadTheme()
 	this->RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager,UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
 
+	r = engine->RegisterObjectMethod("Widget", "Button@ opCast()", asFUNCTION((refCast<Widget, Button>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Button", "Widget@ opImplCast()", asFUNCTION((refCast<Button, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+
+	r = engine->RegisterObjectMethod("Widget", "Label@ opCast()", asFUNCTION((refCast<Widget, Label>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Label", "Widget@ opImplCast()", asFUNCTION((refCast<Label, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+
+	r = engine->RegisterObjectMethod("Widget",  "ListBox@ opCast()", asFUNCTION((refCast<Widget, ListBox>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("ListBox",  "Widget@ opImplCast()", asFUNCTION((refCast<ListBox, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+
+	r = engine->RegisterObjectMethod("Widget",  "ComboBox@ opCast()", asFUNCTION((refCast<Widget, ComboBox>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("ComboBox" , "Widget@ opImplCast()", asFUNCTION((refCast<ComboBox, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+
+	r = engine->RegisterObjectMethod("Widget",  "TextBox@ opCast()", asFUNCTION((refCast<Widget, TextBox>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("TextBox",  "Widget@ opImplCast()", asFUNCTION((refCast<TextBox, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+
+	/*
 	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "Button@ f()", asFUNCTION((refCast<Widget,Button>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("Button", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<Button,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 
@@ -244,6 +260,7 @@ void ScriptManager::Prepare()
 	
 	r = engine->RegisterObjectBehaviour("Widget", asBEHAVE_REF_CAST, "TextBox@ f()", asFUNCTION((refCast<Widget,TextBox>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
 	r = engine->RegisterObjectBehaviour("TextBox", asBEHAVE_IMPLICIT_REF_CAST, "Widget@ f()", asFUNCTION((refCast<TextBox,Widget>)), asCALL_CDECL_OBJLAST); SDL_assert( r >= 0 );
+	*/
 
 	//Physics Related
 

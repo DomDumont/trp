@@ -503,7 +503,7 @@ void CDebug::PrintValue(const std::string &expr, asIScriptContext *ctx)
 {
 	asIScriptEngine *engine = ctx->GetEngine();
 
-	int len;
+	asUINT len;
 	asETokenClass t = engine->ParseToken(expr.c_str(), 0, &len);
 
 	// TODO: If the expression starts with :: we should only look for global variables
@@ -546,7 +546,7 @@ void CDebug::PrintValue(const std::string &expr, asIScriptContext *ctx)
 					const char *propName = 0;
 					int offset = 0;
 					bool isReference = 0;
-					type->GetProperty(n, &propName, &typeId, 0, &offset, &isReference);
+					type->GetProperty(n, &propName, &typeId, 0, 0, &offset, &isReference);
 					if( name == propName )
 					{
 						ptr = (void*)(((asBYTE*)ctx->GetThisPointer())+offset);
