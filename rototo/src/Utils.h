@@ -87,5 +87,7 @@ int  IO_WriteInt(Uint64 _handle,int _value);
 int  IO_ReadInt(Uint64 _handle,int& _value);
 void IO_Close(Uint64  _handle);
 
+SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer,SDL_RWops * _flow, bool _freesrc);
+
 void RegisterUtils();
 #endif

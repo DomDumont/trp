@@ -11,9 +11,6 @@
     <Filter Include="Fichiers sources\gui">
       <UniqueIdentifier>{e555e5ac-8d9f-4646-99a2-d66a59dc3e63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers sources\FluidMemoryManager">
-      <UniqueIdentifier>{e5d166a8-2ff4-41a4-9e22-85975f595ba5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,9 +90,6 @@
     </ClCompile>
     <ClCompile Include="Primitive.cpp">
       <Filter>Fichiers sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\Fluid_Studios_Memory_Manager\mmgr.cpp">
-      <Filter>Fichiers sources\FluidMemoryManager</Filter>
     </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>Fichiers sources</Filter>

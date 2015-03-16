@@ -35,6 +35,10 @@
 #include "CoreFoundation/CoreFoundation.h"
 #endif
 
+
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 FILE *rwLogFile = NULL;
 
 /*----------------------------------------------------------------------------*/
@@ -534,6 +538,69 @@ void WND_ClearWithColor(unsigned char _r,unsigned char _g,unsigned char _b,unsig
 	SDL_RenderClear(g_app->sdlRenderer);
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops  *_flow,bool _freesrc)
+  {
+  int x, y, comp;
+  unsigned char *data;
+
+  SDL_RWseek(_flow, 0, SEEK_END);
+  int size = (int) SDL_RWtell(_flow);
+  SDL_RWseek(_flow, 0, SEEK_SET);
+
+  unsigned char *raw = new unsigned char[size];
+  SDL_RWread(_flow, raw, size, 1);
+  data = stbi_load_from_memory(raw,size, &x, &y, &comp, 0);
+  delete[] raw;
+
+  Uint32 rmask, gmask, bmask, amask;
+
+  /* SDL interprets each pixel as a 32-bit number, so our masks must depend
+  on the endianness (byte order) of the machine */
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+  rmask = 0xff000000;
+  gmask = 0x00ff0000;
+  bmask = 0x0000ff00;
+  amask = 0x000000ff;
+#else
+  rmask = 0x000000ff;
+  gmask = 0x0000ff00;
+  bmask = 0x00ff0000;
+  amask = 0xff000000;
+#endif
+
+  SDL_Surface *surface;
+
+  if (comp == 4)
+    {
+    surface = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+    }
+  else if (comp == 3)
+    {
+    surface = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+    }
+  else
+    {
+    stbi_image_free(data);
+    return 0;
+    }
+
+  memcpy(surface->pixels, data, comp * x * y);
+  stbi_image_free(data);
+
+  SDL_Texture *texture = SDL_CreateTextureFromSurface(_renderer, surface);
+
+  if (texture == NULL)
+    {
+    //fprintf(stderr, "CreateTextureFromSurface failed: %s\n", SDL_GetError());
+    }
+
+  SDL_FreeSurface(surface);
+  surface = NULL;
+  return texture;
+  }
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/

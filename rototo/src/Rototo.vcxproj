@@ -53,15 +53,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\extern\SDL2-2.0.3\include;..\extern\SDL2_mixer-2.0.0;..\extern\PugiXml\src;..\extern\SDL2_image-2.0.0;..\extern\SDL2_ttf-2.0.12;..\extern\AngelScript-2.30.0\sdk\angelscript\include;..\extern\AngelScript-2.30.0\sdk\add_on;..\extern\efsw\include;..\extern\SDL2_net-2.0.0;..\extern\Fluid_Studios_Memory_Manager;..\extern\Box2D-2.3.1;..\extern\SDL2_gfx-1.0.0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\extern\SDL2-2.0.3\include;..\extern\SDL2_mixer-2.0.0;..\extern\PugiXml\src;..\extern\SDL2_image-2.0.0;..\extern\SDL2_ttf-2.0.12;..\extern\AngelScript-2.30.0\sdk\angelscript\include;..\extern\AngelScript-2.30.0\sdk\add_on;..\extern\efsw\include;..\extern\SDL2_net-2.0.0;..\extern\Fluid_Studios_Memory_Manager;..\extern\Box2D-2.3.1;..\extern\SDL2_gfx-1.0.0;..\extern\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>global.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Debug;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Debug;..\extern\SDL2_mixer-2.0.0\VisualC\Debug;..\extern\PugiXml\Debug;..\extern\SDL2_image-2.0.0\VisualC\Debug;..\extern\SDL2_ttf-2.0.12\VisualC\Win32\Debug;..\extern\AngelScript-2.30.0\sdk\angelscript\lib;..\extern\SDL2_net-2.0.0\VisualC\Debug;..\extern\Box2D-2.3.1\Build\vs2013\bin\x32\Debug;..\extern\SDL2_gfx-1.0.0\Win32\Release;..\extern\efsw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sdl2.lib;SDL2main.lib;SDL2_Mixer.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_gfx.lib;pugixml.lib;angelscriptd.lib;Box2D.lib;efsw-static-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Debug;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Debug;..\extern\SDL2_mixer-2.0.0\VisualC\Debug;..\extern\PugiXml\Debug;..\extern\SDL2_ttf-2.0.12\VisualC\Win32\Debug;..\extern\AngelScript-2.30.0\sdk\angelscript\lib;..\extern\SDL2_net-2.0.0\VisualC\Debug;..\extern\Box2D-2.3.1\Build\vs2013\bin\x32\Debug;..\extern\SDL2_gfx-1.0.0\Win32\Release;..\extern\efsw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2.lib;SDL2main.lib;SDL2_Mixer.lib;SDL2_ttf.lib;SDL2_net.lib;SDL2_gfx.lib;pugixml.lib;angelscriptd.lib;Box2D.lib;efsw-static-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
