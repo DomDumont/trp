@@ -4,7 +4,7 @@ Dependencies
 This directory must contains all these libraries : 
 
 
-* AngelScript-2.29.0
+* AngelScript-2.30.0
 * Box2D-2.3.1
 * efsw
 * Fluid_Studios_Memory_Manager
