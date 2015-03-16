@@ -30,11 +30,11 @@
 #include "Atlas.h"
 
 
-#include "tinyxml2.h"
+#include "pugixml.hpp"
 #include "Application.h"
 #include "Utils.h"
 
-using namespace tinyxml2;
+
 
 /*
 void ConstructSprite(Sprite *thisPointer)

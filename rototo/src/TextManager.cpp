@@ -31,8 +31,8 @@
 
 #include "Utils.h"
 
-#include "tinyxml2.h"
-using namespace tinyxml2;
+#include "pugixml.hpp"
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -136,12 +136,12 @@ void TextManager::Load(const std::string& _file,int _flags)
 	
 	loadedString = LoadTextFile(fullPath,_flags);
 	
-	XMLDocument doc;
-	doc.Parse( loadedString.c_str());
-	XMLElement* root = doc.FirstChildElement();
-	for(XMLElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+  pugi::xml_document doc;
+  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+  pugi::xml_node root = doc.first_child();
+  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
 		{
-		mapStrings[elem->Attribute("id")] = elem->Attribute("value");
+    mapStrings[elem.attribute("id").value()] = elem.attribute("value").value();
 		}
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Text Dico <%s> loaded successfully \n",_file.c_str());

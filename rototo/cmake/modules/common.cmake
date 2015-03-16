@@ -1,3 +1,6 @@
+include(CMakeParseArguments)
+
+
 # Macro for defining source files with optional arguments as follows:
 #  GLOB_CPP_PATTERNS <list> - Use the provided globbing patterns for CPP_FILES instead of the default *.cpp
 #  GLOB_H_PATTERNS <list> - Use the provided globbing patterns for H_FILES instead of the default *.h
@@ -74,5 +77,14 @@ endmacro ()
 
 
 macro (setup_library)
+    add_library (${TARGET_NAME} ${ARGN} ${SOURCE_FILES})
+    setup_target ()
+endmacro()
 
+
+macro (setup_target)
+    # Include directories
+    include_directories (${INCLUDE_DIRS})
+    # Link libraries
+    target_link_libraries (${TARGET_NAME} ${ABSOLUTE_PATH_LIBS} ${LIBS})
 endmacro()

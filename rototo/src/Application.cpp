@@ -27,7 +27,7 @@
 
 #include "Application.h"
 #include "Utils.h"
-#include "tinyxml2.h"
+#include "pugixml.hpp"
 
 CApplication *g_app;
 
@@ -529,58 +529,58 @@ void CApplication::ReadSettings()
 
 	if (loadedString.empty())
 		return;
-	tinyxml2::XMLDocument doc;
-	doc.Parse( loadedString.c_str());
-	tinyxml2::XMLElement* root = doc.FirstChildElement();
-	for(tinyxml2::XMLElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+  pugi::xml_document doc;
+  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+  pugi::xml_node root = doc.first_child();
+  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
 		{
-		SDL_Log(elem->Value());
-		if (strcmp(elem->Value(),"position") == 0)
+    SDL_Log(elem.name());
+    if (strcmp(elem.name(), "position") == 0)
 			{
-			this->settings_winpos_x   = atoi(elem->Attribute("x"));
-			this->settings_winpos_y   = atoi(elem->Attribute("y"));
+      this->settings_winpos_x = atoi(elem.attribute("x").as_string());
+      this->settings_winpos_y = atoi(elem.attribute("y").as_string());
 			}
 		else
-		if (strcmp(elem->Value(),"size") == 0)
+      if (strcmp(elem.name(), "size") == 0)
 			{
-			this->settings_winsize_w   = atoi(elem->Attribute("w"));
-			this->settings_winsize_h   = atoi(elem->Attribute("h"));
+      this->settings_winsize_w = atoi(elem.attribute("w").as_string());
+      this->settings_winsize_h = atoi(elem.attribute("h").as_string());
 			}
 		else
-		if (strcmp(elem->Value(),"editor") == 0)
+      if (strcmp(elem.name(), "editor") == 0)
 			{
-			this->settings_editorURL  = elem->Attribute("url");
-			this->settings_editorArgs  = elem->Attribute("args");			
+      this->settings_editorURL = elem.attribute("url").as_string();
+      this->settings_editorArgs = elem.attribute("args").as_string();
 			}
 		else
-		if (strcmp(elem->Value(),"datafolder") == 0)
+      if (strcmp(elem.name(), "datafolder") == 0)
 			{
-			this->settings_gamedataURL  = elem->Attribute("directory");
+      this->settings_gamedataURL = elem.attribute("directory").as_string();
 			}
 		else
-		if (strcmp(elem->Value(),"autorestart") == 0)
+      if (strcmp(elem.name(), "autorestart") == 0)
 			{
-			this->settings_autorestart  = atoi(elem->Attribute("value"));
+      this->settings_autorestart = atoi(elem.attribute("value").as_string());
 			}
 		else
-		if (strcmp(elem->Value(),"allowdebug") == 0)
+      if (strcmp(elem.name(), "allowdebug") == 0)
 			{
-			this->settings_allowdebug  = atoi(elem->Attribute("value"));
+      this->settings_allowdebug = atoi(elem.attribute("value").as_string());
 			}
 		else
-		if (strcmp(elem->Value(),"verbose") == 0)
+      if (strcmp(elem.name(), "verbose") == 0)
 			{
-			this->settings_verbose  = atoi(elem->Attribute("value"));
+      this->settings_verbose = atoi(elem.attribute("value").as_string());
 			}
 		else
-		if (strcmp(elem->Value(),"logtofile") == 0)
+      if (strcmp(elem.name(), "logtofile") == 0)
 			{
-			this->settings_logtofile  = atoi(elem->Attribute("value"));
+      this->settings_logtofile = atoi(elem.attribute("value").as_string());
 			}
 		else
-		if (strcmp(elem->Value(),"server") == 0)
+      if (strcmp(elem.name(), "server") == 0)
 			{
-			this->settings_serverIP  = elem->Attribute("ip");
+      this->settings_serverIP = elem.attribute("ip").as_string();
 			}
 
 		} // for(tinyxml2::XMLElement* elem ...

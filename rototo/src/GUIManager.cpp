@@ -30,7 +30,7 @@
 #include "GUIManager.h"
 #include "Application.h"
 #include "Utils.h"
-#include "tinyxml2.h"
+#include "pugixml.hpp"
 #include "Font.h"
 #include "Sprite.h"
 #include "Atlas.h"
@@ -188,17 +188,17 @@ void GUIManager::RemoveWidget(Widget *_widget)
 
 Sprite * GUIManager::LoadSprite(void* _elem)
 {
-	tinyxml2::XMLElement *el = (tinyxml2::XMLElement *) _elem;
 
+  pugi::xml_node * el = (pugi::xml_node *) _elem;
 
 
 	Sprite * temp_sprite;
 	temp_sprite= new Sprite();
-	temp_sprite->Load(this->atlas,el->Attribute("name"));
-	if (strcmp(el->Attribute("nine"),"yes")== 0)
+	temp_sprite->Load(this->atlas,el->attribute("name").as_string());
+	if (strcmp(el->attribute("nine").as_string(),"yes")== 0)
 	{
 	temp_sprite->SetNinePatch(true);
-	temp_sprite->SetNinePatchRect(atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("w")),atoi(el->Attribute("h")));
+  temp_sprite->SetNinePatchRect(atoi(el->attribute("x").as_string()), atoi(el->attribute("y").as_string()), atoi(el->attribute("w").as_string()), atoi(el->attribute("h").as_string()));
 	}
 	else
 	{
@@ -238,112 +238,112 @@ void GUIManager::LoadTheme(const std::string& _file)
 	return;
 	}
 
-	tinyxml2::XMLDocument doc;
-	doc.Parse( loadedString.c_str());
-	tinyxml2::XMLElement* root = doc.FirstChildElement();
-	for(tinyxml2::XMLElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
+  pugi::xml_document doc;
+  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+  pugi::xml_node root = doc.first_child();
+  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
 	{
-	SDL_Log(elem->Value());
+	SDL_Log(elem.name());
 		
-	if (strcmp(elem->Value(),"font") == 0)
+  if (strcmp(elem.name(), "font") == 0)
 		{
 		std::string tempFontName;
-		tempFontName  = "themes//"+_file+"//fonts//" + elem->Attribute("name");
+		tempFontName  = "themes//"+_file+"//fonts//" + elem.attribute("name").as_string();
 
-		int tempSize   = atoi(elem->Attribute("size"));
+		int tempSize   = atoi(elem.attribute("size").as_string());
 		SDL_assert(this->font == NULL);
 		this->font = new Font();
 		this->font->Load(tempFontName,tempSize,FULLPATH|BOTH);
 		}
 	else
-		if (strcmp(elem->Value(),"button_up") == 0)
+    if (strcmp(elem.name(), "button_up") == 0)
 		{
 		MY_SAFE_RELEASE(this->button_up);
-		this->button_up = LoadSprite(elem);
+		this->button_up = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"button_down") == 0)
+    if (strcmp(elem.name(), "button_down") == 0)
 		{
 		MY_SAFE_RELEASE(this->button_down);
-		this->button_down = LoadSprite(elem);
+		this->button_down = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"button_disabled") == 0)
+    if (strcmp(elem.name(), "button_disabled") == 0)
 		{
 		MY_SAFE_RELEASE(this->button_disable);
-		this->button_disable = LoadSprite(elem);
+		this->button_disable = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"list_normal") == 0)
+    if (strcmp(elem.name(), "list_normal") == 0)
 		{
 		MY_SAFE_RELEASE(this->list_normal_item);
-		this->list_normal_item = LoadSprite(elem);
+		this->list_normal_item = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"list_selected") == 0)
+    if (strcmp(elem.name(), "list_selected") == 0)
 		{
 		MY_SAFE_RELEASE(this->list_selected_item);
-		this->list_selected_item = LoadSprite(elem);
+		this->list_selected_item = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"checkbox_up") == 0)
+    if (strcmp(elem.name(), "checkbox_up") == 0)
 		{
 		MY_SAFE_RELEASE(this->checkbox_up);
-		this->checkbox_up = LoadSprite(elem);
+		this->checkbox_up = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"checkbox_down") == 0)
+    if (strcmp(elem.name(), "checkbox_down") == 0)
 		{
 		MY_SAFE_RELEASE(this->checkbox_down);
-		this->checkbox_down = LoadSprite(elem);
+		this->checkbox_down = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"checkbox_disabled") == 0)
+    if (strcmp(elem.name(), "checkbox_disabled") == 0)
 		{
 		MY_SAFE_RELEASE(this->checkbox_disable);
-		this->checkbox_disable = LoadSprite(elem);
+		this->checkbox_disable = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"radiobox_up") == 0)
+    if (strcmp(elem.name(), "radiobox_up") == 0)
 		{
 		MY_SAFE_RELEASE(this->radiobox_up);
-		this->radiobox_up = LoadSprite(elem);
+		this->radiobox_up = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"radiobox_down") == 0)
+    if (strcmp(elem.name(), "radiobox_down") == 0)
 		{
 		MY_SAFE_RELEASE(this->radiobox_down);
-		this->radiobox_down = LoadSprite(elem);
+		this->radiobox_down = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"radiobox_disabled") == 0)
+    if (strcmp(elem.name(), "radiobox_disabled") == 0)
 		{
 			MY_SAFE_RELEASE(this->radiobox_disable);
-			this->radiobox_disable = LoadSprite(elem);
+			this->radiobox_disable = LoadSprite(&elem);
 		}
 	else
-		if (strcmp(elem->Value(),"primary_text_color") == 0)
+    if (strcmp(elem.name(), "primary_text_color") == 0)
 		{
-		primary_text_color.r = atoi(elem->Attribute("r"));
-		primary_text_color.g = atoi(elem->Attribute("g"));
-		primary_text_color.b = atoi(elem->Attribute("b"));
-		primary_text_color.a = atoi(elem->Attribute("a"));
+		primary_text_color.r = atoi(elem.attribute("r").as_string());
+    primary_text_color.g = atoi(elem.attribute("g").as_string());
+    primary_text_color.b = atoi(elem.attribute("b").as_string());
+    primary_text_color.a = atoi(elem.attribute("a").as_string());
 		}
 	else
-		if (strcmp(elem->Value(),"disable_text_color") == 0)
+    if (strcmp(elem.name(), "disable_text_color") == 0)
 		{
-		disable_text_color.r = atoi(elem->Attribute("r"));
-		disable_text_color.g = atoi(elem->Attribute("g"));
-		disable_text_color.b = atoi(elem->Attribute("b"));
-		disable_text_color.a = atoi(elem->Attribute("a"));
+    disable_text_color.r = atoi(elem.attribute("r").as_string());
+    disable_text_color.g = atoi(elem.attribute("g").as_string());
+    disable_text_color.b = atoi(elem.attribute("b").as_string());
+    disable_text_color.a = atoi(elem.attribute("a").as_string());
 		}
 	else
-		if (strcmp(elem->Value(),"background_color") == 0)
+    if (strcmp(elem.name(), "background_color") == 0)
 		{
-		background_color.r = atoi(elem->Attribute("r"));
-		background_color.g = atoi(elem->Attribute("g"));
-		background_color.b = atoi(elem->Attribute("b"));
-		background_color.a = atoi(elem->Attribute("a"));
+    background_color.r = atoi(elem.attribute("r").as_string());
+    background_color.g = atoi(elem.attribute("g").as_string());
+    background_color.b = atoi(elem.attribute("b").as_string());
+    background_color.a = atoi(elem.attribute("a").as_string());
 		}
 
 	}

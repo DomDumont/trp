@@ -1,3 +1,3 @@
-foreach (TARGET FreeType PugiXml STB)
+foreach (TARGET PugiXml)
     add_subdirectory (${TARGET})
 endforeach ()

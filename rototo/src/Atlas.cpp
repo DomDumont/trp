@@ -25,11 +25,11 @@
 #include "Global.h"
 
 #include "Atlas.h"
-#include "tinyxml2.h"
+#include "pugixml.hpp"
 #include "Application.h"
 #include "Utils.h"
 
-using namespace tinyxml2;
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -179,17 +179,17 @@ void Atlas::Load(const std::string& _file,int _flags)
 	
 	loadedString = LoadTextFile(fullPath,_flags);
 
-	XMLDocument doc;
-	doc.Parse( loadedString.c_str());
-	XMLElement* root = doc.FirstChildElement();
-	for(XMLElement* elem = root->FirstChildElement(); elem != NULL; elem = elem->NextSiblingElement())
-		{
+  pugi::xml_document doc;
+  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+  pugi::xml_node root = doc.first_child();
+  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
+    {
 		AtlasEntry *pTemp = new AtlasEntry();
-		pTemp->name = elem->Attribute("name");
-		pTemp->frame.x = atoi(elem->Attribute("x"));
-		pTemp->frame.y = atoi(elem->Attribute("y"));
-		pTemp->frame.w = atoi(elem->Attribute("width"));
-		pTemp->frame.h = atoi(elem->Attribute("height"));
+    pTemp->name = elem.attribute("name").as_string();
+		pTemp->frame.x = atoi(elem.attribute("x").as_string());
+    pTemp->frame.y = atoi(elem.attribute("y").as_string());
+    pTemp->frame.w = atoi(elem.attribute("width").as_string());
+    pTemp->frame.h = atoi(elem.attribute("height").as_string());
 		pTemp->atlas = this; 
 
 		atlasEntries.push_back(pTemp);
