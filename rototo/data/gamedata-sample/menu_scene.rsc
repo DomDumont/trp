@@ -96,7 +96,6 @@ void Init()
 #endif    
 	tempText += UTI_GetVersion();
 	monLabel.SetText(tempText);
-	monLabel.SetShaded(false);
 	monLabel.SetPosition(260,100);
 	monLabel.Rotation = -5;
 	

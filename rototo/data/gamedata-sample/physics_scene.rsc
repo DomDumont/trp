@@ -46,7 +46,6 @@ class PhysicsScene:Scene
 		
 		
 		labelTitle.SetText("Physics Sample");
-		labelTitle.SetShaded(false);
 		labelTitle.SetPosition(360,100);
 
 		

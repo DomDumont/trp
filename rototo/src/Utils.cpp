@@ -546,9 +546,11 @@ SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops  *_flow,boo
   int x, y, comp;
   unsigned char *data;
 
-  SDL_RWseek(_flow, 0, SEEK_END);
-  int size = (int) SDL_RWtell(_flow);
-  SDL_RWseek(_flow, 0, SEEK_SET);
+  if (_flow == NULL)
+    return NULL;
+  
+  int size = (int) SDL_RWsize(_flow);
+  
 
   unsigned char *raw = new unsigned char[size];
   SDL_RWread(_flow, raw, size, 1);

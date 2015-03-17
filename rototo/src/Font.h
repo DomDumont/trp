@@ -28,6 +28,10 @@
 #define __FONT_H__
 
 #include <string>
+
+
+#include "stb_truetype.h"
+
 class Font
 {
  public:
@@ -36,6 +40,7 @@ class Font
     Font(const Font &other);
     void Load(const std::string& _file, int _size, int _flags = 13 /*GAMEDATA|BOTH*/);
     void UnLoad();
+    SDL_Texture * Render(const std::string& _text, SDL_Color _color);
 
     void AddRef()
     {
@@ -57,11 +62,17 @@ class Font
         SDL_assert(0);
     }
 
+  private:
+  
+  void GetTextExtent(const std::string& _text, float & _x, float &_y);
 
- public:
-    TTF_Font                *font;
+
  private:
-    int                     refCount;
+    int               refCount;
+
+    SDL_Texture*      texture;      //!< font texture
+    stbtt_bakedchar*  cdata;    //!< font data: ASCII 32..126 is 95 glyphs
+    float             fontHeight;
 };
 
 

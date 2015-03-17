@@ -67,8 +67,6 @@ void RegisterLabel()
 	g_app->scriptManager->RegisterClassMethod("Label","void set_Rotation(float _angle)", asMETHOD(Label, SetRotation));
 	///func:float GetRotation()
 	g_app->scriptManager->RegisterClassMethod("Label","float get_Rotation()", asMETHOD(Label, GetRotation));
-	///func:void SetShaded(bool value)
-	g_app->scriptManager->RegisterClassMethod("Label","void SetShaded(bool _value)", asMETHOD(Label, SetShaded));
 
 }
 
@@ -76,7 +74,7 @@ void RegisterLabel()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Label::Label() : font(NULL),texture(NULL),shaded(false)
+Label::Label() : font(NULL),texture(NULL)
 {
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Label Constructor\n");
@@ -147,6 +145,17 @@ void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 	else
 		tempColor = this->disable_text_color;
 
+  this->texture = this->font->Render(_text, tempColor);
+
+  this->frame.x = 0;
+  this->frame.y = 0;
+  SDL_QueryTexture(this->texture, NULL, NULL, &(this->frame.w), &(this->frame.h));
+
+  SDL_SetTextureAlphaMod(this->texture, tempColor.a);
+  SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
+
+
+  /*
 	if (len > 0)
 		{
 		for (std::size_t off = 0; off != std::string::npos;)
@@ -161,12 +170,8 @@ void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 				}
 			SDL_Surface* line;
 		
-			
-		
-			if (this->shaded)
-				line = TTF_RenderUTF8_Shaded(this->font->font, &text[off], tempColor,this->color_background);
-			else
-				line = TTF_RenderUTF8_Blended(this->font->font, &text[off], tempColor);
+      
+      line = this->font->Render(&text[off], tempColor);
 
 			if (line)
 				{
@@ -206,10 +211,13 @@ void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 		while (it != end)
 			{
 			SDL_Surface* line = *it;
-			if (_justified)
-				dstrect.x = (width - line->w)/2;
-			SDL_BlitSurface(line, NULL, surface, &dstrect);
-			dstrect.y += line->h;
+      if (line != NULL)
+        {
+        if (_justified)
+          dstrect.x = (width - line->w) / 2;
+        SDL_BlitSurface(line, NULL, surface, &dstrect);
+        dstrect.y += line->h;
+        }
 			SDL_FreeSurface(line); // clean up as we go
 			++it;
 			}
@@ -226,6 +234,7 @@ void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 	this->frame.h = height;
 	
 	SDL_FreeSurface(surface);
+  */
 }
 
 /*----------------------------------------------------------------------------*/
@@ -237,7 +246,7 @@ void Label::SetText(const std::string& _text,bool _justified)
 	this->text = _text; //Backup for later use
 
 	// If the font is not set, try to set it to the theme font.
-	if ((this->font == NULL)||(this->font->font == NULL))
+	if ((this->font == NULL))
 		{
 		if (g_app->guiManager->font != NULL)
 			{
@@ -283,15 +292,7 @@ void Label::Render()
 	SDL_RenderCopyEx(g_app->sdlRenderer,this->texture , &this->frame, &this->position,this->angle,NULL,SDL_FLIP_NONE); 
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
-void Label::SetShaded(bool _value)
-{
-	this->shaded = _value;
-	SetText(this->text);
-}
 
 
 /*----------------------------------------------------------------------------*/

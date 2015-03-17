@@ -75,18 +75,10 @@ TextManager::~TextManager()
 /*----------------------------------------------------------------------------*/
 
 void TextManager::Init()
-{
+  {
 	
-	if ( TTF_Init() < 0 )
-		{
-		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Couldn't initialize TTF: %s\n",SDL_GetError());
-		}
-	else
-		{
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"TTF_Init Ok");
-		}
 
-}
+  }
 
 
 /*----------------------------------------------------------------------------*/
@@ -94,11 +86,9 @@ void TextManager::Init()
 /*----------------------------------------------------------------------------*/
 
 void TextManager::Shutdown()
-{
-	
-	TTF_Quit();
+  {
 
-}
+  }
 
 
 /*----------------------------------------------------------------------------*/

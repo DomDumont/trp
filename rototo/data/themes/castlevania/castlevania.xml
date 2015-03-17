@@ -1,5 +1,5 @@
 <settings>
-<font name = "lohengrin.ttf" size = "48"/>
+<font name = "lohengrin.ttf" size = "36"/>
 <primary_text_color r="11" g="51" b="60" a="255" />
 <disable_text_color r="91" g="103" b="112" a="255" />
 <background_color r="19" g="23" b="26" a="255" />

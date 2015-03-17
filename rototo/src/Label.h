@@ -41,7 +41,6 @@ public:
 	void SetFont(Font & _font);
 	void SetColor(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	void SetText(const std::string& _text,bool _justified = true);
-	void SetShaded(bool _value);
 	void SetEnabled(bool _value);
 
 private:
@@ -60,7 +59,7 @@ public:
 	std::string 		text;
 private:
 	
-	bool 			shaded;
+
 
 
 };
