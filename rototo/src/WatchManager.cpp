@@ -28,17 +28,18 @@
 #include "Application.h"
 #include "Utils.h"
 
-#if defined WIN32 || defined TRP_OSX
-#include <efsw/efsw.hpp>
+#ifdef TRP_USE_WATCH
+  #if defined WIN32 || defined TRP_OSX
+    #include <efsw/efsw.hpp>
+  #endif
 #endif
-
 
 #if defined TRP_OSX
 #include <mach-o/dyld.h>	/* _NSGetExecutablePath */
 #include <libgen.h>
 #endif
 
-#if defined WIN32 || defined TRP_OSX
+#ifdef TRP_USE_WATCH
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -85,7 +86,7 @@ public:
 
 WatchManager::WatchManager()
 {
-#if defined WIN32 || defined TRP_OSX
+#ifdef TRP_USE_WATCH
 	fileWatcher = NULL;
 #endif
 }
@@ -106,7 +107,7 @@ WatchManager::~WatchManager()
 void WatchManager::Init()
 {
 	
-#if defined WIN32
+#if defined WIN32 && defined TRP_USE_WATCH
 	char pathbuf[512];
 	fileWatcher = new efsw::FileWatcher();
 	// add a watch to the system
@@ -155,7 +156,7 @@ void WatchManager::Update(Uint64 _elapsed)
 
 void WatchManager::Shutdown()
 {
-#if defined WIN32 || defined TRP_OSX
+#ifdef TRP_USE_WATCH
 	delete fileWatcher;
 	delete watcherListener;
 	fileWatcher = NULL;
