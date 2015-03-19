@@ -41,6 +41,8 @@ ListBox *ListBox_Factory()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+#ifdef TRP_USE_BINDING
+
 void RegisterListBox()
 {
 	int r;
@@ -71,21 +73,23 @@ void RegisterListBox()
 	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData));
 	//g_app->scriptManager->RegisterClassMethod("ListBox","void Update(uint64 _elapsed)", asMETHOD(ListBox, Update));
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 ListBox::ListBox():
-	 onSelectionChangedHandler(NULL),bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1)
+	 bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1)
 {
 
 
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox Constructor\n");
 
-	//this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ListBox"));
+#ifdef TRP_USE_BINDING
 	this->sender.Set(NULL,NULL);
 	this->userData.Set(NULL,NULL);
+#endif
 
 	this->backgroundColor.r = 0;
 	this->backgroundColor.g = 0;
@@ -126,7 +130,9 @@ ListBox::~ListBox()
 		this->bgTexture = NULL;
 		}
 
+#ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->onSelectionChangedHandler);
+#endif
 
 }
 
@@ -436,12 +442,14 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 		this->BuildInternalTexture();
 
 		//Call Callback
+#ifdef TRP_USE_BINDING
 		if (this->onSelectionChangedHandler != NULL)
 			{			
 			this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ListBox"));
 			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
 			this->sender.Set(NULL,NULL);
 			}
+#endif
 
 		}
 	this->dragState = 0;

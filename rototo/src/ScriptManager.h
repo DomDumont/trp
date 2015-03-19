@@ -25,6 +25,7 @@
 #ifndef __SCRIPT_MANAGER_H__
 #define __SCRIPT_MANAGER_H__
 
+#ifdef TRP_USE_BINDING
 
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
@@ -56,9 +57,10 @@ public:
 	void CompileScript(const std::string& _file);
 	void CompileScriptViaBuilder(const std::string& _file);
 	FunctionEntry * RegisterScript(const std::string& _prototype, char * _fmt);
+
+
 	void RunScript(const std::string& _prototype, char * _fmt, ...);
 	void RunFunctionEntry(FunctionEntry * _fe, ...);
-
 	int RunCallback(asIScriptFunction * _callback,CScriptHandle *_sender,CScriptHandle *_userData);
 
 	template <class class_type>
@@ -109,5 +111,6 @@ private:
 
 	
 };
+#endif
 
 #endif

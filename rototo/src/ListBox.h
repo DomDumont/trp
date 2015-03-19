@@ -28,8 +28,12 @@
 #include "Widget.h"
 #include <vector>
 #include "Label.h"
+
+#ifdef TRP_USE_BINDING
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
+#endif
+
 #include "Sprite.h"
 
 class ListBox : public Widget
@@ -59,9 +63,13 @@ public:
 	std::string GetItemText(int _index);
 
 public:
-	asIScriptFunction *	onSelectionChangedHandler;
+
+#ifdef TRP_USE_BINDING
+	asIScriptFunction *	onSelectionChangedHandler = nullptr;
 	CScriptHandle		userData;
 	CScriptHandle		sender;
+#endif
+
 private:
 	void BuildInternalTexture();
 	SDL_Texture *bgTexture;

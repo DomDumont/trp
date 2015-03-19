@@ -39,6 +39,8 @@ Body *Body_Factory()
 	return new Body();
 }
 
+#ifdef TRP_USE_BINDING
+
 void RegisterBody()
 {
 
@@ -66,6 +68,7 @@ void RegisterBody()
 
 
 }
+#endif
 
 Body::Body() : refCount(1),body(NULL),shape(NULL)
 {
@@ -221,7 +224,9 @@ void CContactListener::BeginContact(b2Contact* contact)
 	g_app->physicsManager->contactB = (Body *) contact->GetFixtureB()->GetBody()->GetUserData();
 
 	//call the script
+#ifdef TRP_USE_BINDING
 	g_app->scriptManager->RunScript("void OnCollide()",(char*)"");
+#endif
 	}
 
 /************************************************************************/
@@ -236,8 +241,9 @@ void CContactListener::EndContact(b2Contact* contact)
 	g_app->physicsManager->contactB = (Body *) contact->GetFixtureB()->GetBody()->GetUserData();
 
 	//call the script
-
+#ifdef TRP_USE_BINDING
 	g_app->scriptManager->RunScript("void OnCollide()",(char*)"");
+#endif
 	}
 
 

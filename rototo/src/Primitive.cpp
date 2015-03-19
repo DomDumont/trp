@@ -41,6 +41,7 @@ Primitive *Primitive_Factory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterPrimitive()
 {
@@ -67,7 +68,7 @@ void RegisterPrimitive()
 	g_app->scriptManager->RegisterClassMethod("Primitive","void SetAngles(int _start,int _end)", asMETHOD(Primitive, SetAngles));
 	
 }
-
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

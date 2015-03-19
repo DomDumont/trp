@@ -1,10 +1,13 @@
 #ifndef __DEBUG_H__
 #define __DEBUG_H__
 
+#ifdef TRP_USE_BINDING
 #ifndef ANGELSCRIPT_H 
 // Avoid having to inform include path if header is already include before
 #include <angelscript.h>
+
 #endif
+
 
 #include <string>
 #include <vector>
@@ -76,4 +79,5 @@ bool            blocked;
 
 END_AS_NAMESPACE
 
+#endif
 #endif

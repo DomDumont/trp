@@ -38,6 +38,7 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+#ifdef TRP_USE_BINDING
 void RegisterTextManager()
 {
 	
@@ -47,9 +48,9 @@ void RegisterTextManager()
 	///glob:void TXT_Load(string &in file,int flags=13)
 	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asMETHOD(TextManager,Load), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
 	g_app->scriptManager->RegisterGlobalFunction("string TXT_UnLoad()", asMETHOD(TextManager,UnLoad), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
-
 	
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

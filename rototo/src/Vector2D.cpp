@@ -174,6 +174,7 @@ void ConstructVector2DWithFloats(Vector2D *thisPointer,float _x,float _y)
 {
 	new(thisPointer) Vector2D(_x,_y);
 }
+#ifdef TRP_USE_BINDING
 
 void RegisterVector2D()
 {
@@ -201,7 +202,6 @@ void RegisterVector2D()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void FromPolar(float _angle, float _magnitude)", asMETHOD(Vector2D, FromPolar), asCALL_THISCALL);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void TurnLeft()", asMETHOD(Vector2D, TurnLeft), asCALL_THISCALL);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void TurnRight()", asMETHOD(Vector2D, TurnRight), asCALL_THISCALL);
-	
-
-	
+		
 }
+#endif

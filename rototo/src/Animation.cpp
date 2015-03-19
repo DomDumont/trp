@@ -48,9 +48,11 @@ Animation *Animation_Factory()
 /*----------------------------------------------------------------------------*/
 
 Animation::Animation() 
-	:onCompleteHandler(NULL),atlas(NULL),timeElapsed(0),currentFrame(0),nbFrames(0),msPerFrame(1000/12),playing(0)
+	:atlas(NULL),timeElapsed(0),currentFrame(0),nbFrames(0),msPerFrame(1000/12),playing(0)
 {
-	
+#ifdef TRP_USE_BINDING
+onCompleteHandler= nullptr;
+#endif
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Animation Constructor %s\n",this->name.c_str());
 }
 
@@ -62,7 +64,9 @@ Animation::~Animation()
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Animation Destructor %s\n",this->name.c_str());
 	MY_SAFE_RELEASE(this->atlas);
+#ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->onCompleteHandler);
+#endif
 }
 
 /*----------------------------------------------------------------------------*/
@@ -77,7 +81,9 @@ Animation::Animation(const Animation &other)
 	this->msPerFrame = other.msPerFrame;
 	this->playing = other.playing;
 	this->atlas = other.atlas;
+#ifdef TRP_USE_BINDING
 	this->onCompleteHandler = other.onCompleteHandler; //Very Important
+#endif
 	}
 
 /*----------------------------------------------------------------------------*/
@@ -169,11 +175,13 @@ if (this->playing != 0)
 		// if mode is pingpong, we just reverse the sens
 		if (this->mode == C_MODE_NORMAL)
 		{
+#ifdef TRP_USE_BINDING
 		//Call Callback
 		if (this->onCompleteHandler != NULL)
 			{
 			g_app->scriptManager->RunCallback(this->onCompleteHandler,&(this->sender),&(this->userData));
 			}
+#endif
 		
 		if (this->playing != -1)
 			{
@@ -209,12 +217,13 @@ if (this->playing != 0)
 	this->currentFrame = (this->nbFrames-1) - (int)((float)this->timeElapsed/(float)this->msPerFrame);
 	if (this->currentFrame <= 0)
 		{
-	
+#ifdef TRP_USE_BINDING	
 		//Call Callback
 		if (this->onCompleteHandler != NULL)
 		{
 		g_app->scriptManager->RunCallback(this->onCompleteHandler,&(this->sender),&(this->userData));
 		}
+#endif
 		
 		if (this->mode == C_MODE_PINGPONG)
 		{
@@ -348,7 +357,7 @@ void Animation::SetRotation(float _angle)
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-
+#ifdef TRP_USE_BINDING
 void RegisterAnimation()
 {
 	int r;
@@ -394,3 +403,4 @@ void RegisterAnimation()
 	g_app->scriptManager->RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData));
 
 }
+#endif

@@ -40,6 +40,7 @@ Label *Label_Factory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterLabel()
 {
@@ -69,6 +70,7 @@ void RegisterLabel()
 	g_app->scriptManager->RegisterClassMethod("Label","float get_Rotation()", asMETHOD(Label, GetRotation));
 
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

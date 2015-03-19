@@ -50,14 +50,18 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 			event->mgesture.dDist);
 			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"MG: numDownTouch = %i",event->mgesture.numFingers);
 
-			const double PI = 3.141592653589793;
+			const double PI = 3.141592653589793; //TODO WTF !!!
+
+#ifdef TRP_USE_BINDING
 			scriptManager->RunScript("void OnMultiGesture(int _numFingers, double _x, double _y, double _theta, double _dist )",
+
 			(char*)"dffff",
 			event->mgesture.numFingers,
 			event->mgesture.x,
 			event->mgesture.y,
 			event->mgesture.dTheta * (180/PI),
 			event->mgesture.dDist);
+#endif
 			}
 		break;
 
@@ -196,7 +200,9 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 				ScanGameData(pathToScan);
 				}
 
+#ifdef TRP_USE_BINDING
 			scriptManager->RunScript("void OnKeyUp(uint32 _scancode)",(char*)"d",event->key.keysym.scancode);
+#endif
 			
 		break;
 
@@ -204,8 +210,10 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 
 			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Mouse button %d pressed at (%d,%d)\n",
 					event->button.button, event->button.x, event->button.y);
-	
+
+#ifdef TRP_USE_BINDING
 			scriptManager->RunScript("void OnTouch(uint32 _button,uint32 _x,uint32 _y)",(char*)"ddd",event->button.button, event->button.x, event->button.y);
+#endif
 
 			break;
 
@@ -260,7 +268,9 @@ CApplication::CApplication()
 
 	this->soundManager	= new SoundManager();
 	this->textManager	= new TextManager();
+#ifdef TRP_USE_BINDING
 	this->scriptManager	= new ScriptManager();
+#endif
 	this->tweenManager	= new TweenManager();
 	this->resourceManager = new ResourceManager(); 
 	this->watchManager	= new WatchManager();
@@ -287,7 +297,9 @@ CApplication::~CApplication()
 	delete guiManager;
 	delete soundManager;
 	delete textManager;
+#ifdef TRP_USE_BINDING
 	delete scriptManager;
+#endif
 	delete tweenManager;
 	delete resourceManager;
 	delete watchManager;
@@ -419,9 +431,12 @@ void CApplication::Init()
 	this->capFPS = -1;
 
 	doneCode = DONECODE_NOT_DONE;
+#ifdef TRP_USE_BINDING
 	scriptManager->Init();
+#endif
 	guiManager->Init();
 	tweenManager->Init();
+#ifdef TRP_USE_BINDING
 	//scriptManager->CompileScript("main.rsc");
 	scriptManager->CompileScriptViaBuilder("main.rsc");
 
@@ -431,9 +446,9 @@ void CApplication::Init()
 	on_update_func = scriptManager->RegisterScript("void OnUpdate(uint64 _delta)",(char*)"L");
 	on_render_func = scriptManager->RegisterScript("void OnRender(uint64 _delta)",(char*)"L");
 
-
-	//scriptManager->RunScript("void OnInit()","");
 	scriptManager->RunFunctionEntry(on_init_func,"");
+
+#endif
 }
 
 /*----------------------------------------------------------------------------*/
@@ -469,8 +484,10 @@ int CApplication::Run()
 		tweenManager->Update(elapsed);
 		physicsManager->Update(elapsed);
 
+#ifdef TRP_USE_BINDING
 		scriptManager->RunFunctionEntry(on_update_func,elapsed);
 		scriptManager->RunFunctionEntry(on_render_func,elapsed);
+#endif
 
 		physicsManager->Render();
 		SDL_RenderPresent(this->sdlRenderer);
@@ -504,12 +521,16 @@ int CApplication::Run()
 
 void CApplication::Shutdown()
 {
+#ifdef TRP_USE_BINDING
 	scriptManager->RunScript("void OnShutdown()",(char*)"");
+#endif
 
 	// Shutdown always done, even in restart only
 
 	tweenManager->Shutdown(); //Must be here to remove potential pending tweens and release them.
+#ifdef TRP_USE_BINDING
 	scriptManager->Shutdown();
+#endif
 	guiManager->Shutdown(); // Must be here to release the widgets.
 
 	if (doneCode != DONECODE_RESTART_ONLY)

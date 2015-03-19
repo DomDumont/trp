@@ -10,6 +10,8 @@
 
 using namespace std;
 
+#ifdef TRP_USE_BINDING
+
 BEGIN_AS_NAMESPACE
 
 CDebug::CDebug()
@@ -770,3 +772,4 @@ void CDebug::Output(const string &str)
 */
 
 END_AS_NAMESPACE
+#endif

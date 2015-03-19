@@ -78,7 +78,9 @@ public:
 	PhysicsManager		*physicsManager;
 	SoundManager		*soundManager;
 	TextManager		*textManager;
+#ifdef TRP_USE_BINDING
 	ScriptManager		*scriptManager;
+#endif
 	ResourceManager		*resourceManager;
 	WatchManager		*watchManager;
 #ifdef TRP_USE_NETWORK
@@ -114,10 +116,12 @@ private:
 	int			settings_winpos_y;
 	int			settings_winsize_w;
 	int			settings_winsize_h;
-	
+
+#ifdef TRP_USE_BINDING
 	FunctionEntry		*on_init_func;
 	FunctionEntry		*on_update_func;
 	FunctionEntry		*on_render_func;
+#endif
 };
 
 #endif

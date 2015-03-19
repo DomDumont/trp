@@ -86,12 +86,14 @@ void TweenManager::Update(Uint64 _elapsed)
 		else
 			{
 			//Call Callback
+#ifdef TRP_USE_BINDING
 			if (pTemp->onCompleteHandler != NULL)
 				{
-                pTemp->sender.Set(pTemp,g_app->scriptManager->engine->GetObjectTypeByName("Tween"));
+        pTemp->sender.Set(pTemp,g_app->scriptManager->engine->GetObjectTypeByName("Tween"));
 				g_app->scriptManager->RunCallback(pTemp->onCompleteHandler,&(pTemp->sender),&(pTemp->userData));
-                pTemp->sender.Set(NULL,NULL);
+        pTemp->sender.Set(NULL,NULL);
 				}
+#endif
 			RemoveTween(*tweensIT);
 			tweensIT = tweens.begin(); //TODO I don't like this but ...
 			if (tweens.size()==0)

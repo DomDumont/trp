@@ -41,6 +41,7 @@ Button *ButtonFactory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterButton()
 {
@@ -89,17 +90,20 @@ void RegisterButton()
 	///prop:ref @user_data
 	g_app->scriptManager->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data));
 }
-
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Button::Button() : on_click_handler(NULL),state(0),type(0)
+Button::Button() : state(0),type(0)
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Button Constructor\n");
+#ifdef TRP_USE_BINDING
 	this->user_data.Set(NULL,NULL);
 	this->sender.Set(NULL,NULL);
+  on_click_handler = NULL;
+#endif
 }
 
 
@@ -111,7 +115,9 @@ Button ::~Button()
 {
 
 	MY_SAFE_RELEASE(this->label.font);
+#ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->on_click_handler);
+#endif
 
 }
 
@@ -311,8 +317,9 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 		else
 			this->state = STATE_UP;
 		}
-	//Call Callback
 
+#ifdef TRP_USE_BINDING
+	//Call Callback
 	if (this->on_click_handler != NULL)
 		{
 		this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("Button"));
@@ -320,6 +327,7 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 		this->sender.Set(NULL,NULL);
 		return ret;
 		}
+#endif
 
 	return false;
 }

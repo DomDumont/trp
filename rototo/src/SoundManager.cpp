@@ -89,6 +89,7 @@ void SoundManager::Shutdown()
 //----------------------------------------------------------------------------
 //
 
+#ifdef TRP_USE_BINDING
 void RegisterSoundManager()
 {
 
@@ -99,6 +100,7 @@ void RegisterSoundManager()
 	g_app->scriptManager->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", asMETHOD(SoundManager,SetSFXVolume), asCALL_THISCALL_ASGLOBAL, g_app->soundManager);
 
 }
+#endif
 
 //-----------------------------------------------------------------------------
 // Music
@@ -126,6 +128,8 @@ void DestructMusic(Music *thisPointer)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+#ifdef TRP_USE_BINDING
+
 void RegisterMusic()
 {
 	int r;
@@ -138,13 +142,10 @@ void RegisterMusic()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music","void Play(int _nbLoops=-1, int _timeFadeIn=1000)", asMETHOD(Music, Play), asCALL_THISCALL);SDL_assert(r>=0);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music","void UnLoad()", asMETHOD(Music, UnLoad), asCALL_THISCALL);SDL_assert(r>=0);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music","void Stop()", asMETHOD(Music, Stop), asCALL_THISCALL);SDL_assert(r>=0);
-	/*
-	this->RegisterClassMethod("Music","void Load(string &in _file)", asMETHOD(Music, Load));
-	this->RegisterClassMethod("Music","void Play(int _nbLoops=-1, int _timeFadeIn=1000)", asMETHOD(Music, Play));
-	this->RegisterClassMethod("Music","void UnLoad()", asMETHOD(Music, UnLoad));
-	*/
 
 }
+#endif
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -296,6 +297,7 @@ void Sound::SetVolume(int _newVolume)
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterSound()
 {
@@ -312,3 +314,5 @@ void RegisterSound()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void SetVolume(int _newVolume)", asMETHOD(Sound, SetVolume), asCALL_THISCALL);SDL_assert(r>=0);
 
 }
+
+#endif

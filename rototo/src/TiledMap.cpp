@@ -94,6 +94,7 @@ void TiledMap::Render()
 
 }
 
+#ifdef TRP_USE_BINDING
 
 void RegisterTiledMap()
 {
@@ -109,3 +110,5 @@ void RegisterTiledMap()
 	g_app->scriptManager->RegisterClassMethod("TiledMap","void Render()", asMETHOD(TiledMap, Render));
     g_app->scriptManager->RegisterClassMethod("TiledMap","void UnLoad()", asMETHOD(TiledMap, UnLoad));	
 }
+
+#endif

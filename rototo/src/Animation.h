@@ -28,8 +28,11 @@
 
 #include "Widget.h"
 #include <vector>
+
+#ifdef TRP_USE_BINDING
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
+#endif
 
 #define C_MODE_NORMAL   0
 #define C_MODE_REVERSE  1
@@ -60,9 +63,12 @@ public:
 	void SetRotation(float _angle);
 
 public:
+#ifdef TRP_USE_BINDING
 	asIScriptFunction *onCompleteHandler;
 	CScriptHandle		userData;
 	CScriptHandle		sender;
+#endif
+
 private:
 	Atlas *			atlas;
 	std::vector<Sprite *>	sprites;

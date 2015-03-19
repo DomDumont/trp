@@ -223,6 +223,8 @@ void Font::UnLoad()
     delete[] this->cdata;
 }
 
+#ifdef TRP_USE_BINDING
+
 void RegisterFont()
 {
     int r;
@@ -249,3 +251,4 @@ void RegisterFont()
     g_app->scriptManager->RegisterClassMethod("Font",
         "void UnLoad()", asMETHOD(Font, UnLoad));
 }
+#endif

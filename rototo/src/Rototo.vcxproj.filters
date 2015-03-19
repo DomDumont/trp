@@ -5,11 +5,11 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\asaddons">
-      <UniqueIdentifier>{b2127675-f855-44ac-b215-263113d5a58a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\gui">
       <UniqueIdentifier>{e555e5ac-8d9f-4646-99a2-d66a59dc3e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\binding">
+      <UniqueIdentifier>{b2127675-f855-44ac-b215-263113d5a58a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,26 +103,26 @@
     <ClCompile Include="ComboBox.cpp">
       <Filter>Fichiers sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scriptstdstring\scriptstdstring.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scriptmath\scriptmath.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scripthandle\scripthandle.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scriptdictionary\scriptdictionary.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scriptbuilder\scriptbuilder.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scriptarray\scriptarray.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Primitives.c">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="binding\scriptstdstring.cpp">
+      <Filter>Fichiers sources\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="binding\scriptmath.cpp">
+      <Filter>Fichiers sources\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="binding\scripthandle.cpp">
+      <Filter>Fichiers sources\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="binding\scriptdictionary.cpp">
+      <Filter>Fichiers sources\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="binding\scriptbuilder.cpp">
+      <Filter>Fichiers sources\binding</Filter>
+    </ClCompile>
+    <ClCompile Include="binding\scriptarray.cpp">
+      <Filter>Fichiers sources\binding</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

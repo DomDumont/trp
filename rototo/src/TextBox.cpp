@@ -40,6 +40,7 @@ TextBox *TextBox_Factory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterTextBox()
 {
@@ -60,7 +61,7 @@ void RegisterTextBox()
 	g_app->scriptManager->RegisterClassMethod("TextBox","float get_Rotation()", asMETHOD(TextBox, GetRotation));
 	//g_app->scriptManager->RegisterClassMethod("TextBox","void Update(uint64 _elapsed)", asMETHOD(TextBox, Update));
 }
-
+#endif
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/

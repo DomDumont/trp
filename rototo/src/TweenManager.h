@@ -2,8 +2,11 @@
 #define __TWEEN_MANAGER_H__
 
 #include <vector>
+
+#ifdef TRP_USE_BINDING
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
+#endif
 
 #ifndef C_PI
 #define C_PI 3.1415926535897932384626433832795
@@ -213,7 +216,9 @@ public:
 	duration = 0;
 	transition = 0;
 	equation = 0;
+#ifdef TRP_USE_BINDING
 	this->onCompleteHandler = NULL; //Very Important
+#endif
 	//this->userData = NULL;
 	// Let the constructor initialize the reference counter to 1
 	refCount = 1;
@@ -224,10 +229,12 @@ public:
 	{
 	this->timeElapsed = other.timeElapsed;
 	this->duration = other.duration;
+#ifdef TRP_USE_BINDING
 	this->onCompleteHandler = other.onCompleteHandler;
 	// Let the constructor initialize the reference counter to 1
-    this->sender.Set(NULL,NULL);
-    this->userData.Set(NULL,NULL);
+  this->sender.Set(NULL,NULL);
+  this->userData.Set(NULL,NULL);
+#endif
 	refCount = 1;
 	}
 
@@ -243,14 +250,16 @@ public:
 	*/
 
 
+
 	~Tween()
 	{
-        
+#ifdef TRP_USE_BINDING      
 	if (this->onCompleteHandler != NULL)
 		{
 		this->onCompleteHandler->Release();
 		}
-        
+#endif
+
 	// Clean all properties.
 	for (this->propsIT = this->properties.begin();  this->propsIT != this->properties.end(); ++(this->propsIT) ) 
 				{
@@ -298,9 +307,11 @@ public:
 	std::vector<TweenedFloat *>  properties;
 	std::vector<TweenedFloat *>::iterator propsIT;
 
+#ifdef TRP_USE_BINDING
 	asIScriptFunction *onCompleteHandler;
 	CScriptHandle		userData;
 	CScriptHandle		sender;
+#endif
 
 private:
 	int refCount;

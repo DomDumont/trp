@@ -41,6 +41,7 @@ Widget *Widget_Factory()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+#ifdef TRP_USE_BINDING
 void RegisterWidget()
 {
 	int r;
@@ -50,6 +51,7 @@ void RegisterWidget()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", asMETHOD(Widget,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

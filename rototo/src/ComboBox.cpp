@@ -40,6 +40,7 @@ ComboBox *ComboBox_Factory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterComboBox()
 {
@@ -72,21 +73,23 @@ void RegisterComboBox()
 	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData));
 	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 ComboBox::ComboBox():
-onSelectionChangedHandler(NULL),bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
+bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
 {
 	
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox Constructor\n");
 	
-	//this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ComboBox"));
+#ifdef TRP_USE_BINDING
 	this->sender.Set(NULL,NULL);
 	this->userData.Set(NULL,NULL);
+#endif
 	
 	this->backgroundColor.r = 0;
 	this->backgroundColor.g = 0;
@@ -126,8 +129,10 @@ ComboBox::~ComboBox()
 		SDL_DestroyTexture(this->bgTexture); // et on la vire
 		this->bgTexture = NULL;
 	}
-	
+
+#ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->onSelectionChangedHandler);
+#endif
 	
 }
 
@@ -468,7 +473,8 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 		
 		//Rebuild the background texture
 		this->BuildInternalTexture();
-		
+
+#ifdef TRP_USE_BINDING
 		//Call Callback
 		if (this->onSelectionChangedHandler != NULL)
 			{
@@ -478,6 +484,8 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 			this->sender.Set(NULL,NULL);
 
 			}
+#endif
+
 		this->state = 0; //Close the comboBox
 		
 		}

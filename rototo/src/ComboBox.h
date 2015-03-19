@@ -28,8 +28,12 @@
 #include "Widget.h"
 #include <vector>
 #include "Label.h"
+
+#ifdef TRP_USE_BINDING
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
+#endif
+
 #include "Sprite.h"
 
 class ComboBox : public Widget
@@ -60,9 +64,13 @@ public:
 	std::string			GetItemText(int _index);
 	
 public:
+
+#ifdef TRP_USE_BINDING
 	asIScriptFunction *		onSelectionChangedHandler;
 	CScriptHandle			userData;
 	CScriptHandle			sender;
+#endif
+
 private:
 	void				BuildInternalTexture();
 	SDL_Texture *			bgTexture;

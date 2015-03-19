@@ -340,6 +340,8 @@ void Sprite::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigne
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+#ifdef TRP_USE_BINDING
+
 void RegisterSprite()
 {
 	int r;
@@ -378,4 +380,5 @@ void RegisterSprite()
 
 }
 
+#endif
 

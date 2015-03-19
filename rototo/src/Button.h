@@ -30,8 +30,10 @@
 #include "Label.h"
 #include "Sprite.h"
 
+#ifdef TRP_USE_BINDING
 #include <angelscript.h>
 #include "scripthandle/scripthandle.h"
+#endif
 
 #define STATE_UP	0
 #define STATE_DOWN	1
@@ -72,10 +74,11 @@ public:
 	void SetState		(int _state);
 
 public:
-
+#ifdef TRP_USE_BINDING
 	asIScriptFunction *	on_click_handler;
 	CScriptHandle		user_data;
 	CScriptHandle		sender;
+#endif
 
 
 private:

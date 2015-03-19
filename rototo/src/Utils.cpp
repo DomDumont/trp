@@ -612,6 +612,8 @@ SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops  *_flow,boo
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
+#ifdef TRP_USE_BINDING
+
 void RegisterUtils()
 {
 	int r;
@@ -665,4 +667,5 @@ g_app->scriptManager->RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int
 ///glob:void IO_Close(uint64 handle)
 g_app->scriptManager->RegisterGlobalFunction("void IO_Close(uint64 _handle)", asFUNCTION(IO_Close), asCALL_CDECL);
 }
+#endif
 

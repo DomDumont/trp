@@ -99,6 +99,7 @@ Emitter *Emitter_Factory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
+#ifdef TRP_USE_BINDING
 
 void RegisterEmitter()
 {
@@ -120,6 +121,7 @@ void RegisterEmitter()
     g_app->scriptManager->RegisterClassMethod("Emitter","void Render()", asMETHOD(Emitter, Render));
 
 }
+#endif
 
 
 /*----------------------------------------------------------------------------*/

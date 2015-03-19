@@ -47,6 +47,9 @@
 
 #include "Particles.h" //Registration
 
+
+#ifdef TRP_USE_BINDING
+
 #include "scriptstdstring/scriptstdstring.h"
 #include "scripthandle/scripthandle.h"
 #include "scriptbuilder/scriptbuilder.h"
@@ -795,3 +798,4 @@ void ScriptManager::RegisterGlobalFunction(const std::string& function_definitio
 	SDL_assert( r >= 0 );
 	
 }
+#endif
