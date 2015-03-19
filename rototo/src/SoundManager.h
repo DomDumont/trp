@@ -43,7 +43,6 @@ public:
 
 private:
 
-	Mix_Chunk*	sample;
 	int		channel;
 	int		volume;
 
@@ -68,7 +67,6 @@ public:
 	
 private:
 
-	Mix_Music *music;
 };
 
 void ConstructMusic(Music *thisPointer);

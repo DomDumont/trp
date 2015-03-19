@@ -103,7 +103,7 @@ SDL_Texture * Font::Render(const std::string& _text, SDL_Color _color)
   float extY;
   GetTextExtent(_text, extX, extY);
 
-  SDL_Texture * tempTexture = SDL_CreateTexture(g_app->sdlRenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET,extX,extY);
+  SDL_Texture * tempTexture = SDL_CreateTexture(g_app->sdlRenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, (int)extX, (int)extY);
   SDL_SetTextureColorMod(tempTexture, _color.r, _color.g, _color.b);
   SDL_SetTextureBlendMode(tempTexture, SDL_BLENDMODE_BLEND);
   SDL_SetRenderTarget(g_app->sdlRenderer, tempTexture);
