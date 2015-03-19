@@ -28,7 +28,7 @@
 #include "PhysicsManager.h"
 #include "Application.h"
 
-#include "SDL2_gfxPrimitives.h"
+#include "Primitives.h"
 
 #define     C_RATIO  (LOGICAL_SIZE_X/10) // le monde box2d fait 10m
 

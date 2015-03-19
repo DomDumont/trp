@@ -60,8 +60,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Debug;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Debug;..\extern\PugiXml\Debug;..\extern\AngelScript-2.30.0\sdk\angelscript\lib;..\extern\Box2D-2.3.1\Build\vs2013\bin\x32\Debug;..\extern\SDL2_gfx-1.0.0\Win32\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sdl2.lib;SDL2main.lib;SDL2_gfx.lib;PugiXml.lib;angelscriptd.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Debug;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Debug;..\extern\PugiXml\Debug;..\extern\AngelScript-2.30.0\sdk\angelscript\lib;..\extern\Box2D-2.3.1\Build\vs2013\bin\x32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2.lib;SDL2main.lib;PugiXml.lib;angelscriptd.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,8 +81,8 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sdl2.lib;SDL2main.lib;SDL2_gfx.lib;angelscript.lib;Box2D.lib;PugiXml.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Release;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Release;..\extern\AngelScript-2.30.0\sdk\angelscript\lib;..\extern\Box2D-2.3.1\Build\vs2013\bin\x32\Release;..\extern\SDL2_gfx-1.0.0\Win32\Release;..\extern\PugiXml\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2.lib;SDL2main.lib;angelscript.lib;Box2D.lib;PugiXml.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\extern\SDL2-2.0.3\VisualC\SDL\Win32\Release;..\extern\SDL2-2.0.3\VisualC\SDLmain\Win32\Release;..\extern\AngelScript-2.30.0\sdk\angelscript\lib;..\extern\Box2D-2.3.1\Build\vs2013\bin\x32\Release;..\extern\PugiXml\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -134,6 +134,10 @@
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="Primitives.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="ResourceManager.cpp" />

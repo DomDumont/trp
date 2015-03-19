@@ -25,7 +25,7 @@
 #include "Global.h"
 #include "Primitive.h"
 #include "Application.h"
-#include "SDL2_gfxPrimitives.h"
+#include "Primitives.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

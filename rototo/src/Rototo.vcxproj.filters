@@ -121,6 +121,9 @@
     <ClCompile Include="..\extern\AngelScript-2.30.0\sdk\add_on\scriptarray\scriptarray.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Primitives.c">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
