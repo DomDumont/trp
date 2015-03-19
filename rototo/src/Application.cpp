@@ -101,7 +101,9 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 			if ((event->key.keysym.mod & KMOD_CTRL) && (event->key.keysym.scancode == SDL_SCANCODE_R))
 				{
 				*done = DONECODE_RESTART_ONLY; //! \TODO change this
+#ifdef TRP_USE_NETWORK
 				networkManager->SendMessageToAllClients("R>\n"); //Restart
+#endif
 				}
 
 			// F7 Change Screen Orientation
@@ -120,7 +122,9 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 					SDL_RenderSetLogicalSize(sdlRenderer, LOGICAL_SIZE_Y, LOGICAL_SIZE_X);
 					}
 				*done = 2; //! \TODO change this
+#ifdef TRP_USE_NETWORK
 				networkManager->SendMessageToAllClients("R>\n"); //Restart
+#endif
 				}
 			else
 			// F12 Launch GameDataFolder ?
@@ -260,7 +264,9 @@ CApplication::CApplication()
 	this->tweenManager	= new TweenManager();
 	this->resourceManager = new ResourceManager(); 
 	this->watchManager	= new WatchManager();
+#ifdef TRP_USE_NETWORK
 	this->networkManager  = new NetworkManager();
+#endif
 	this->guiManager		= new GUIManager();
 	this->physicsManager  = new PhysicsManager();
 	
@@ -285,7 +291,9 @@ CApplication::~CApplication()
 	delete tweenManager;
 	delete resourceManager;
 	delete watchManager;
+#ifdef TRP_USE_NETWORK
 	delete networkManager;
+#endif
 }
 
 #ifdef TRP_ANDROID
@@ -362,7 +370,9 @@ void CApplication::Init()
 		textManager->Init();	
 		resourceManager->Init();
 		watchManager->Init();
+#ifdef TRP_USE_NETWORK
 		networkManager->Init();	
+#endif
 		physicsManager->Init();
 
 #if (defined TRP_IOS) || defined (TRP_ANDROID)
@@ -389,9 +399,11 @@ void CApplication::Init()
 		else
 			SDL_RenderSetLogicalSize(sdlRenderer, LOGICAL_SIZE_Y, LOGICAL_SIZE_X);
 
-
-		if ((g_app->platform == "Windows")||(g_app->platform == "Mac OS X")||(g_app->platform == "Linux"))
-			networkManager->CreateServer(); //To Test
+#ifdef TRP_USE_NETWORK
+    if ((g_app->platform == "Windows") || (g_app->platform == "Mac OS X") || (g_app->platform == "Linux"))
+      {
+      networkManager->CreateServer(); //To Test
+      }
 		else
 			{
 			if (this->settings_serverIP.empty() == false)
@@ -400,7 +412,7 @@ void CApplication::Init()
 				}
 			//	networkManager->ConnectToServer("192.168.0.17");
 			}
-	
+#endif	
 
 		} // if (doneCode != DONECODE_RESTART_ONLY)
 
@@ -451,7 +463,9 @@ int CApplication::Run()
 		lasttime = now;
 			
 		watchManager->Update(elapsed);
+#ifdef TRP_USE_NETWORK
 		networkManager->Update();
+#endif
 		tweenManager->Update(elapsed);
 		physicsManager->Update(elapsed);
 
@@ -503,7 +517,9 @@ void CApplication::Shutdown()
 		// Shutdown done only in real quit
 
 		physicsManager->Shutdown();//TODO check if it must be here
+#ifdef TRP_USE_NETWORK
 		networkManager->Shutdown();
+#endif
 		watchManager->Shutdown();
 		resourceManager->Shutdown();
 		textManager->Shutdown();

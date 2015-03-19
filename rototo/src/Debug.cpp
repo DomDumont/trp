@@ -282,7 +282,7 @@ void CDebug::TakeCommands(asIScriptContext *ctx)
 for(;;)
 	{
 	std::string contents = "";
-
+#ifdef TRP_USE_NETWORK
 	if (g_app->networkManager->command != NULL)
 	{
 	Sint64 length = SDL_RWseek(g_app->networkManager->command,0,SEEK_END);
@@ -297,7 +297,7 @@ for(;;)
 	SDL_RWclose(g_app->networkManager->command);
 	g_app->networkManager->command = NULL;
 	}
-	
+#endif	
 	std::vector<std::string> subCommands = split(contents, '\n');
 	unsigned int currentCommand = 0;
 	
@@ -306,14 +306,22 @@ for(;;)
 			blocked = ! InterpretCommand(subCommands[currentCommand], ctx);
 	if (blocked == false)
 		return;
-	else
-		g_app->networkManager->Update();
+  else
+    {
+#ifdef TRP_USE_NETWORK
+    g_app->networkManager->Update();
+#endif
+    }
 	currentCommand++;
 	}
 	if (blocked == false)
 	return;
-	else
-	g_app->networkManager->Update();
+  else
+    {
+#ifdef TRP_USE_NETWORK
+    g_app->networkManager->Update();
+#endif
+    }
 
 	}
 }
@@ -485,7 +493,9 @@ bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 	// restart the engine
 	g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
 	//Tells also all the clients to restart
+#ifdef TRP_USE_NETWORK
 	g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
+#endif
 	// Continue execution
 	return true;
 	break;

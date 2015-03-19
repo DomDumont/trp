@@ -35,6 +35,7 @@
 #include "CoreFoundation/CoreFoundation.h"
 #endif
 
+#include <sstream>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -95,7 +96,9 @@ bool StartsWith(const std::string& s1, const std::string& s2)
 void LogToOutputAndNetwork(const std::string &str)
 {
 	SDL_Log(str.c_str());
+#ifdef TRP_USE_NETWORK
 	g_app->networkManager->SendMessageToAllClients(str);
+#endif
 
 }
 
@@ -170,7 +173,9 @@ void ScanGameData(const std::string & _path)
 		{
 		if (( strcmp(FindFileData.cFileName,".") != 0 ) && (strcmp(FindFileData.cFileName,"..") != 0 ) )
 			{
+#ifdef TRP_USE_NETWORK
 			g_app->networkManager->MakeDirToAllClients(FindFileData.cFileName);
+#endif
 			std::string newPath  = _path;
 			newPath += FindFileData.cFileName;
 			newPath += "//";

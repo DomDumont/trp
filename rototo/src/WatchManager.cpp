@@ -64,12 +64,14 @@ public:
 
 		if (StartsWith(tempString,"save_")== false)
 			{
+#ifdef TRP_USE_NETWORK
 			g_app->networkManager->SendFileToAllClients(tempString);
 			if (g_app->settings_autorestart)
 				{
 				g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
 				g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
 				}
+#endif
 			}
 		//std::cout << "DIR (" << dir + ") FILE (" + filename + ") has event " << action << std::endl;
 	}

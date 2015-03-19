@@ -25,6 +25,8 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
+#ifdef TRP_USE_NETWORK
+
 #include "SDL_net.h"
 
 #include <iostream>
@@ -81,5 +83,5 @@ std::string toString(const T& t)
 	stream << t;
 	return stream.str();
 }
-
+#endif 
 #endif

@@ -25,6 +25,7 @@
 #ifndef __NETWORK_MANAGER_H__
 #define __NETWORK_MANAGER_H__
 
+#ifdef TRP_USE_NETWORK
 
 #include "SDL_net.h"
 #include <string>
@@ -65,5 +66,7 @@ private:
 public:
     SDL_RWops * command;
 };
+
+#endif 
 
 #endif

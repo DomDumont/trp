@@ -21,11 +21,14 @@
 
   ==============================================================================
 */
-
 #include "Global.h"
 #include "Client.h"
 #include "Application.h"
 #include "Utils.h"
+
+#ifdef TRP_USE_NETWORK
+
+
 
 #ifdef TRP_IOS
 #include <sys/stat.h>
@@ -318,3 +321,4 @@ SDL_RWops* tempFile = NULL;
 	return tempFile;
 
 }
+#endif 

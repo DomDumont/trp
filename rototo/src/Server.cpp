@@ -31,6 +31,8 @@
 #include "Application.h"
 #include "Utils.h"
 
+#ifdef TRP_USE_NETWORK
+
 const std::string Server::SERVER_NOT_FULL = "OK\n";
 const std::string Server::SERVER_FULL     = "FULL";
 
@@ -369,3 +371,5 @@ SDL_RWops * Server::CheckForActivity()
 
 
 }
+
+#endif

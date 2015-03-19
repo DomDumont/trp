@@ -81,7 +81,9 @@ public:
 	ScriptManager		*scriptManager;
 	ResourceManager		*resourceManager;
 	WatchManager		*watchManager;
+#ifdef TRP_USE_NETWORK
 	NetworkManager		*networkManager;
+#endif
 	GUIManager		*guiManager;
 
 	SDL_Window		*sdlWindow;

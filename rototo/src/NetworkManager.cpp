@@ -22,14 +22,12 @@
   ==============================================================================
 */
 
+
 #include "Global.h"
-
-
-
 #include "NetworkManager.h"
 #include "Application.h"
 
-
+#ifdef TRP_USE_NETWORK
 
 	NetworkManager::NetworkManager() : command(NULL)
 	{
@@ -158,3 +156,5 @@
 		}
 	SDLNet_Quit();
 	}
+
+#endif

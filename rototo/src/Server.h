@@ -25,9 +25,13 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
 
-#include "SDL_net.h"
+
+
 #include <string>
 
+#ifdef TRP_USE_NETWORK
+
+#include "SDL_net.h"
 class Server
 {
 public:
@@ -68,5 +72,5 @@ private:
 		unsigned int clientCount;   // Count of how many clients are currently connected to the server
 
 };
-
+#endif
 #endif
