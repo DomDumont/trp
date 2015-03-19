@@ -1,4 +1,6 @@
 rototo/extern/SDL*
+rototo/MAKE/*
+
 
 # Compiled Object files
 *.slo
