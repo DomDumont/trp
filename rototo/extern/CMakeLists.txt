@@ -1,3 +1,3 @@
-foreach (TARGET PugiXml)
+foreach (TARGET PugiXml SDL)
     add_subdirectory (${TARGET})
 endforeach ()

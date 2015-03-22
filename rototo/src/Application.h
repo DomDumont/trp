@@ -75,7 +75,9 @@ private:
 	void WriteSettings();
 	
 public:
+#ifdef TRP_USE_PHYSICS
 	PhysicsManager		*physicsManager;
+#endif
 	SoundManager		*soundManager;
 	TextManager		*textManager;
 #ifdef TRP_USE_BINDING

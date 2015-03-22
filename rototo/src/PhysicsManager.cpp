@@ -30,6 +30,8 @@
 
 #include "Primitives.h"
 
+#ifdef TRP_USE_PHYSICS
+
 #define     C_RATIO  (LOGICAL_SIZE_X/10) // le monde box2d fait 10m
 
 
@@ -481,3 +483,5 @@ void CPhysicsDebugDraw::DrawAABB(b2AABB* aabb, const b2Color& c)
 	//glVertex2f(aabb->lowerBound.x, aabb->upperBound.y);
 	//glEnd();
 }
+
+#endif

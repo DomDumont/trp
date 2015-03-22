@@ -25,7 +25,9 @@
 #ifndef __PHYSICS_MANAGER_H__
 #define __PHYSICS_MANAGER_H__
 
+#ifdef TRP_USE_PHYSICS
 #include "Box2D/Box2D.h"
+
 
 class Body
 {
@@ -131,5 +133,5 @@ public:
 	bool showDebugDraw;
 };
 
-
+#endif
 #endif

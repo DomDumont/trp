@@ -278,8 +278,10 @@ CApplication::CApplication()
 	this->networkManager  = new NetworkManager();
 #endif
 	this->guiManager		= new GUIManager();
+
+#ifdef TRP_USE_PHYSICS
 	this->physicsManager  = new PhysicsManager();
-	
+#endif	
 	doneCode = DONECODE_NOT_DONE;
 	
 	this->orientation = ORIENTATION_PAYSAGE;
@@ -293,7 +295,9 @@ CApplication::CApplication()
 
 CApplication::~CApplication()
 {
+#ifdef TRP_USE_PHYSICS
 	delete physicsManager;
+#endif
 	delete guiManager;
 	delete soundManager;
 	delete textManager;
@@ -385,7 +389,9 @@ void CApplication::Init()
 #ifdef TRP_USE_NETWORK
 		networkManager->Init();	
 #endif
+#ifdef TRP_USE_PHYSICS
 		physicsManager->Init();
+#endif
 
 #if (defined TRP_IOS) || defined (TRP_ANDROID)
 
@@ -482,14 +488,18 @@ int CApplication::Run()
 		networkManager->Update();
 #endif
 		tweenManager->Update(elapsed);
+#ifdef TRP_USE_PHYSICS
 		physicsManager->Update(elapsed);
+#endif
 
 #ifdef TRP_USE_BINDING
 		scriptManager->RunFunctionEntry(on_update_func,elapsed);
 		scriptManager->RunFunctionEntry(on_render_func,elapsed);
 #endif
 
+#ifdef TRP_USE_PHYSICS
 		physicsManager->Render();
+#endif
 		SDL_RenderPresent(this->sdlRenderer);
 	
 		endLoop = SDL_GetTicks();
@@ -536,8 +546,9 @@ void CApplication::Shutdown()
 	if (doneCode != DONECODE_RESTART_ONLY)
 		{
 		// Shutdown done only in real quit
-
+#ifdef TRP_USE_PHYSICS
 		physicsManager->Shutdown();//TODO check if it must be here
+#endif
 #ifdef TRP_USE_NETWORK
 		networkManager->Shutdown();
 #endif

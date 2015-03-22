@@ -29,6 +29,7 @@
 #include "Vector2D.h"
 #include "Application.h"
 #include <cmath>
+#include <cfloat>
 
 Vector2D::Vector2D()
 {
