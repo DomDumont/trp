@@ -43,7 +43,10 @@ macro (define_source_files)
     endif ()
     list (APPEND CPP_FILES ${ARG_EXTRA_CPP_FILES})
     list (APPEND H_FILES ${ARG_EXTRA_H_FILES})
+
     set (SOURCE_FILES ${CPP_FILES} ${H_FILES})
+
+    message ("SOURCE_FILES = " ${SOURCE_FILES})
 
     # Optionally enable PCH
     if (ARG_PCH)
@@ -85,6 +88,50 @@ endmacro()
 macro (setup_target)
     # Include directories
     include_directories (${INCLUDE_DIRS})
+    define_dependency_libs (${TARGET_NAME})
     # Link libraries
+    message( "LIBS = " ${LIBS})
+    message( "ABSOLUTE_PATH_LIBS = " ${ABSOLUTE_PATH_LIBS})
+
     target_link_libraries (${TARGET_NAME} ${ABSOLUTE_PATH_LIBS} ${LIBS})
 endmacro()
+
+
+macro (setup_main_executable)
+    # Parse extra arguments
+    cmake_parse_arguments (ARG "NOBUNDLE;MACOSX_BUNDLE;WIN32" "" "" ${ARGN})
+
+    if (WIN32)
+        message("EXE_TYPE set to win32")
+        set (EXE_TYPE WIN32)
+    endif ()
+    list (APPEND TARGET_PROPERTIES DEBUG_POSTFIX _d)
+    setup_executable (${EXE_TYPE} ${ARG_UNPARSED_ARGUMENTS})
+endmacro()    
+
+
+macro (setup_executable)
+
+    define_dependency_libs (Rototo)
+    add_executable (${TARGET_NAME} ${ARG_UNPARSED_ARGUMENTS} ${SOURCE_FILES})
+    setup_target ()
+endmacro()    
+
+
+macro (define_dependency_libs TARGET)
+
+        # This variable value can either be 'ROTOTO' target or an absolute path to an actual static/shared ROTOTO library or empty (if we are building the library itself)
+        # The former would cause CMake not only to link against the ROTOTO library but also to add a dependency to ROTOTO target
+        if (Rototo_LIBRARIES)
+            message("Rototo_LIBRARIES is defined")
+            if (WIN32 AND Rototo_LIBRARIES_DBG AND Rototo_LIBRARIES_REL AND TARGET ${TARGET_NAME})
+                # Special handling when both debug and release libraries are found
+                message("Special handling when both debug and release libraries are found")
+                target_link_libraries (${TARGET_NAME} debug ${ROTOTO_LIBRARIES_DBG} optimized ${ROTOTO_LIBRARIES_REL})
+            else ()
+                message("Rototo_LIBRARIES" ${Rototo_LIBRARIES})
+                list (APPEND ABSOLUTE_PATH_LIBS ${Rototo_LIBRARIES})
+            endif ()
+        endif ()
+
+endmacro()        

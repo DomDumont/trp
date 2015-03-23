@@ -1,4 +1,4 @@
-project (TRP)
+project (Rototo)
 
 cmake_minimum_required (VERSION 2.8.6)
 
@@ -6,5 +6,7 @@ set (CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/modules)
 include (common)
 
 
-add_subdirectory (src)
+
+add_subdirectory (Sources)
 add_subdirectory (extern)
+add_subdirectory (Samples)
