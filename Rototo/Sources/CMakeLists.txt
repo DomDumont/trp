@@ -11,3 +11,5 @@ include_directories("../extern/PugiXml/src")
 
 # Setup target
 setup_library ()
+
+install(TARGETS Rototo DESTINATION ${DEST_RUNTIME_DIR})
