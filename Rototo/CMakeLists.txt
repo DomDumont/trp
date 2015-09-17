@@ -6,4 +6,5 @@ include_directories("Extern/stb")
 include_directories("Extern/PugiXml/src")
 add_library (Rototo ${Rototo_SOURCES})
 
+add_subdirectory(Extern)
 

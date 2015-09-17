@@ -9,6 +9,7 @@ include_directories(${SDL2_INCLUDE_DIR})
 include_directories("../../Rototo/Sources")
 add_executable (HelloWorld ${HelloWorld_SOURCES})
 target_link_libraries(HelloWorld Rototo)
+target_link_libraries(HelloWorld PugiXml)
 target_link_libraries(HelloWorld ${SDL2_LIBRARY})
 
 
