@@ -1,6 +1,4 @@
-rototo/extern/SDL*
-rototo/MAKE/*
-
+Build/
 
 # Compiled Object files
 *.slo
@@ -65,3 +63,4 @@ DerivedData
 .idea/
 # Pods - for those of you who use CocoaPods
 Pods
+

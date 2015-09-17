@@ -7,4 +7,3 @@ include_directories("Extern/PugiXml/src")
 add_library (Rototo ${Rototo_SOURCES})
 
 
-
