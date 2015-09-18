@@ -1,4 +1,5 @@
 Build/
+Rototo/Extern/SDL2/
 
 # Compiled Object files
 *.slo
