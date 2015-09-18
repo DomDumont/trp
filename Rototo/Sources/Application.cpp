@@ -457,6 +457,8 @@ void Application::Init()
 	scriptManager->RunFunctionEntry(on_init_func,"");
 
 #endif
+
+	this->OnInit();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -498,6 +500,9 @@ int Application::Run()
 		scriptManager->RunFunctionEntry(on_update_func,elapsed);
 		scriptManager->RunFunctionEntry(on_render_func,elapsed);
 #endif
+
+		this->OnUpdate(elapsed);
+		this->OnRender(elapsed);
 
 #ifdef TRP_USE_PHYSICS
 		physicsManager->Render();

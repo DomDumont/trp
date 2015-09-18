@@ -58,6 +58,11 @@ public:
 	~Application();
 	
 	void	Init();
+
+	virtual void OnInit() = 0;
+	virtual void OnUpdate(Uint64 elapsed) = 0;
+	virtual void OnRender(Uint64 elapsed) = 0;
+
 	int		Run();
 	void	Shutdown();
 	void	HandleEvent( SDL_Event * event, Uint32 *done);
