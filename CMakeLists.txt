@@ -12,4 +12,5 @@ ENDIF(WIN32)
 
 add_subdirectory (Rototo)
 add_subdirectory (Samples)
+add_subdirectory (Docs)
 
