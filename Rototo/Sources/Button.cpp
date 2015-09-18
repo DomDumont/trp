@@ -297,7 +297,7 @@ void Button::SetRotation(float _angle)
 
 int Button::OnMouseButtonDown( SDL_Event * event)
 {
-	int ret;
+	
 
 	if (this->enabled == false)
 		return false;

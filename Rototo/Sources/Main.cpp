@@ -31,6 +31,7 @@
 
 #include "Sprite.h"
 
+#ifdef TRP_USE_MAIN
 
 int main(int argc, char *argv[])
 {
@@ -49,3 +50,5 @@ int main(int argc, char *argv[])
 	delete g_app;
 	return 0;
 }
+
+#endif
