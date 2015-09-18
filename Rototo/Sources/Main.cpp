@@ -36,7 +36,7 @@
 int main(int argc, char *argv[])
 {
 	
-	g_app = new CApplication();
+	g_app = new Application();
 
 	int doneCode = DONECODE_NOT_DONE;
 	do

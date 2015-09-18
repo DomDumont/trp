@@ -47,8 +47,8 @@
 
 
 
-class CApplication;
-extern CApplication *g_app;
+class Application;
+extern Application *g_app;
 
 #define MY_SAFE_RELEASE(p) { if ( (p) ) { (p)->Release(); (p) = 0; } }
 #define ROTOTO_VERSION "0.2.0"

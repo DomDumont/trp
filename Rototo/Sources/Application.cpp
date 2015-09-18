@@ -29,7 +29,7 @@
 #include "Utils.h"
 #include "pugixml.hpp"
 
-CApplication *g_app;
+Application *g_app;
 
 
 
@@ -37,7 +37,7 @@ CApplication *g_app;
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
+void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 {
 	switch (event->type)
 		{
@@ -229,7 +229,7 @@ void CApplication::HandleEvent( SDL_Event * event, Uint32 *done)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-CApplication::CApplication()
+Application::Application()
 {
 #if defined WIN32 || defined TRP_LINUX
 	this->settings_configURL = ".";
@@ -287,13 +287,15 @@ CApplication::CApplication()
 	this->orientation = ORIENTATION_PAYSAGE;
 	SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeRight" );
 	//this->orientation = C_ORIENTATION_PORTRAIT;
+
+	this->title = "Rototo";
 }
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-CApplication::~CApplication()
+Application::~Application()
 {
 #ifdef TRP_USE_PHYSICS
 	delete physicsManager;
@@ -318,7 +320,7 @@ CApplication::~CApplication()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::PrepareAndroidEnvironment()
+void Application::PrepareAndroidEnvironment()
 {
 	std::string loadedString;
 
@@ -344,7 +346,7 @@ void CApplication::PrepareAndroidEnvironment()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::PrepareIOSEnvironment()
+void Application::PrepareIOSEnvironment()
 	{
 
 	}
@@ -354,7 +356,7 @@ void CApplication::PrepareIOSEnvironment()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::Init()
+void Application::Init()
 {
 	
 #ifdef TRP_ANDROID
@@ -410,7 +412,7 @@ void CApplication::Init()
 
 #endif
 
-		SDL_SetWindowTitle(sdlWindow,"Rototo, le jeu ultime");
+		SDL_SetWindowTitle(sdlWindow, this->title.c_str());
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");  // make the scaled rendering look smoother.
 		if (this->orientation == ORIENTATION_PAYSAGE)
 			SDL_RenderSetLogicalSize(sdlRenderer, LOGICAL_SIZE_X,LOGICAL_SIZE_Y);
@@ -461,7 +463,7 @@ void CApplication::Init()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int CApplication::Run()
+int Application::Run()
 {
 	/* Main render loop */
 
@@ -529,7 +531,7 @@ int CApplication::Run()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::Shutdown()
+void Application::Shutdown()
 {
 #ifdef TRP_USE_BINDING
 	scriptManager->RunScript("void OnShutdown()",(char*)"");
@@ -569,7 +571,7 @@ void CApplication::Shutdown()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::ReadSettings()
+void Application::ReadSettings()
 {
 	std::string loadedString;
 
@@ -639,7 +641,7 @@ void CApplication::ReadSettings()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void CApplication::WriteSettings()
+void Application::WriteSettings()
 {
 	
 }

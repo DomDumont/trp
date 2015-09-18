@@ -51,24 +51,26 @@
 #define DONECODE_REAL_QUIT 1
 #define DONECODE_RESTART_ONLY 2
 
-class CApplication
+class Application
 {
 public:
-	CApplication();
-	~CApplication();
+	Application();
+	~Application();
 	
 	void	Init();
-	int	Run();
+	int		Run();
 	void	Shutdown();
 	void	HandleEvent( SDL_Event * event, Uint32 *done);
 
 #ifdef TRP_ANDROID
-	void PrepareAndroidEnvironment();
+	void	PrepareAndroidEnvironment();
 #endif
 #ifdef TRP_IOS
-	void PrepareIOSEnvironment();
+	void	PrepareIOSEnvironment();
 #endif
 
+	std::string GetTitle() const { return title; }
+	void		SetTitle(const std::string& newTitle) { title = newTitle; }
 private:
 
 	void ReadSettings();
@@ -79,7 +81,7 @@ public:
 	PhysicsManager		*physicsManager;
 #endif
 	SoundManager		*soundManager;
-	TextManager		*textManager;
+	TextManager			*textManager;
 #ifdef TRP_USE_BINDING
 	ScriptManager		*scriptManager;
 #endif
@@ -88,36 +90,37 @@ public:
 #ifdef TRP_USE_NETWORK
 	NetworkManager		*networkManager;
 #endif
-	GUIManager		*guiManager;
+	GUIManager			*guiManager;
 
-	SDL_Window		*sdlWindow;
+	SDL_Window			*sdlWindow;
 	SDL_Renderer		*sdlRenderer;
 	TweenManager		*tweenManager; //TODO rename to tweenManager
 
-	std::string		platform;
+	std::string			platform;
 	
-	Uint32			doneCode;
+	Uint32				doneCode;
 
-	int			orientation;
+	int					orientation;
 
-	int			capFPS;
+	int					capFPS;
 
 	std::string		settings_editorURL; //TODO put all settings in a settings class
 	std::string		settings_editorArgs;
 	std::string		settings_gamedataURL;
 	std::string		settings_configURL;
-	int			settings_autorestart;
-	int			settings_allowdebug;
-	int			settings_verbose;
-	int			settings_logtofile;
+	int				settings_autorestart;
+	int				settings_allowdebug;
+	int				settings_verbose;
+	int				settings_logtofile;
 	std::string		settings_serverIP;
 
 private:
 	SDL_Event			event;
-	int			settings_winpos_x;
-	int			settings_winpos_y;
-	int			settings_winsize_w;
-	int			settings_winsize_h;
+	std::string			title;
+	int				settings_winpos_x;
+	int				settings_winpos_y;
+	int				settings_winsize_w;
+	int				settings_winsize_h;
 
 #ifdef TRP_USE_BINDING
 	FunctionEntry		*on_init_func;
