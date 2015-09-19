@@ -22,6 +22,8 @@ if (UNIX)
 	add_definitions(-DTRP_LINUX)
 endif(UNIX)
 
+target_link_libraries(Rototo PugiXml)
+target_link_libraries(Rototo ${SDL2_LIBRARY})
 
 add_subdirectory(Extern)
 
