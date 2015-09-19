@@ -3,13 +3,15 @@
 
 #include "Application.h"
 #include "Label.h"
+#include "Font.h"
 
 class DemoApp : Application
 {
 private:
-	Label  				monLabel;
-	int                 windowX;
-	int                 windowY;
+	Font		maFonte;
+	Label  		monLabel;
+	int             windowX;
+	int             windowY;
 
 	void OnInit()
 	{
@@ -17,10 +19,12 @@ private:
 
 		WND_GetLogicalSize(windowX, windowY);
 
-		//g_app->guiManager->LoadTheme("aeon");
+		g_app->guiManager->LoadTheme("aeon");
 
 		//monLabel.SetText(UTI_GetLanguage());
-		monLabel.SetText("Français");
+		//maFonte.Load("fonts/casual.ttf",25);
+		//monLabel.SetFont(maFonte);
+		monLabel.SetText("French");
 		monLabel.SetPosition(windowX / 2, windowY / 2);
 	}
 
@@ -33,6 +37,7 @@ private:
 	{
 		WND_Clear();
 		monLabel.Render();
+		
 	}
 };
 

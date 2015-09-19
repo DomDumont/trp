@@ -7,6 +7,8 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
 
 include_directories("../../Rototo/Sources")
+include_directories("../../Rototo/Extern/stb")
+
 add_executable (HelloWorld ${HelloWorld_SOURCES})
 target_link_libraries(HelloWorld Rototo)
 
