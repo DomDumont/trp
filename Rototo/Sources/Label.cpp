@@ -248,7 +248,7 @@ void Label::SetText(const std::string& _text,bool _justified)
 	this->text = _text; //Backup for later use
 
 	// If the font is not set, try to set it to the theme font.
-	if ((this->font == NULL))
+	if (this->font == NULL)
 		{
 		if (g_app->guiManager->font != NULL)
 			{

@@ -46,7 +46,7 @@ class Font
     {
         // Increase the reference counter
         refCount++;
-        SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : 0x%x font nb active ref = %d\n", this, refCount);
+        SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : 0x%x font nb active ref = %d\n", (unsigned int)this, refCount);
     }
 
     void Release()
@@ -57,7 +57,7 @@ class Font
         delete this;
     else
     if (refCount > 0)
-        SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Release : 0x%x font nb active refs = %d\n", this, refCount);
+        SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Release : 0x%x font nb active refs = %d\n",(unsigned int) this, refCount);
     else
         SDL_assert(0);
     }

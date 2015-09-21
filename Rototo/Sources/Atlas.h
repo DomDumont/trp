@@ -62,7 +62,7 @@ class Atlas
 	{
 		// Increase the reference counter
 		refCount++;
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x AddRef : nb active ref = %d\n",this,refCount);
+		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
 	}
 
 	void Release()
@@ -73,7 +73,7 @@ class Atlas
 			delete this;
 		else
 		if ( refCount > 0 )
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x Release : nb active ref = %d\n",this,refCount);
+			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas 0x%x Release : nb active ref = %d\n",(unsigned int)this,refCount);
 		else
 			SDL_assert(0);
 			
