@@ -84,6 +84,6 @@ private:
 
 };
 
-
+void GUI_AddWidget(Widget *_widget);
 
 #endif

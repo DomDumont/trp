@@ -53,7 +53,7 @@ private:
 	void OnRender(Uint64 elapsed)
 	{
 	
-	
+	theSceneManager.OnRender(elapsed);
 	}
 };
 

@@ -9,6 +9,8 @@ class Scene
 public:
 	virtual void Init(){};
 	virtual void OnShutdown(){};
+	virtual void OnRender(Uint64 _delta){};
+	virtual void OnUpdate(Uint64 _delta){};
 };
 
 class SceneManager

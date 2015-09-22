@@ -17,11 +17,20 @@ class MenuScene : public Scene
 {
 public:
 
-	Button buttonStart;
+	int             windowX;
+	int             windowY;
+
+	Button 	buttonStart;
 	ListBox listBox;
 	ComboBox comboBox;
+	Label  monLabel;
+	Label  labelChosen;
+    Label  helpLabel;	
 
 	void Init();
+	void OnRender(Uint64 _delta);
+	void OnUpdate(Uint64 _delta);
+
 };
 
 
