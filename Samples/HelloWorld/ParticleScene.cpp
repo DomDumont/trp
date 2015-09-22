@@ -1,5 +1,5 @@
 #include "ParticleScene.h"
-#include "GuiManager.h"
+#include "GUIManager.h"
 
 
 void ParticleScene::Init()

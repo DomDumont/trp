@@ -1,5 +1,5 @@
 #include "MenuScene.h"
-#include "GuiManager.h"
+#include "GUIManager.h"
 
 
 bool OnSelectionChangedHandler(void * _sender,void * _userData)
@@ -18,13 +18,23 @@ bool OnSelectionChangedHandler(void * _sender,void * _userData)
 
 	tempScene->buttonStart.SetEnabled(true);
 
-	return true;
+	return false; //important
 }
 
 bool OnClickHandler(void * _sender,void * _userData)
 	{
 		UTI_Log("click on start");
-		return true;
+
+	Button *tempButton = (Button*)(_sender);
+	MenuScene *tempScene = (MenuScene*)(_userData);
+	tempButton->SetScale(1.5,1.5);
+	int sel = tempScene->listBox.GetSelectedIndex();
+	
+
+	//theSceneManager.ChangeScene();
+	UTI_Log("====> Fin du OnClickHandler");
+	return true; //Very important !!!		
+
 	}
 
 void MenuScene::Init()
