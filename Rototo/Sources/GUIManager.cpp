@@ -86,17 +86,18 @@ void GUIManager::HandleEvent( SDL_Event * event)
 	case SDL_MOUSEBUTTONDOWN:
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Nb Widgets = %d\n",widgets.size());
 		for (widgetsIT = widgets.begin();  widgetsIT != widgets.end(); ++widgetsIT )
-		{
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Pouet Pouet\n",widgets.size());
-		Widget *pTemp;
-		pTemp = *widgetsIT;
-		if (pTemp->Touched(event->button.x,event->button.y))
 			{
-			if (pTemp->OnMouseButtonDown(event) != 0)
-				break;
+			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Pouet Pouet %d\n",widgets.size());
+			Widget *pTemp;
+			pTemp = *widgetsIT;
+			if (pTemp->Touched(event->button.x,event->button.y))
+				{
+				if (pTemp->OnMouseButtonDown(event) != 0)
+					break;
+				}
+
 			}
 
-		}
 		break;
 	case SDL_MOUSEBUTTONUP:
 		for (widgetsIT = widgets.begin();  widgetsIT != widgets.end(); ++widgetsIT )

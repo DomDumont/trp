@@ -55,7 +55,7 @@ class Application
 {
 public:
 	Application();
-	~Application();
+	virtual ~Application();
 	
 	void	Init();
 

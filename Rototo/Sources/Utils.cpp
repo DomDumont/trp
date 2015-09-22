@@ -223,7 +223,7 @@ std::string LoadTextFile(const std::string& _file, unsigned int _flags)
 		}
 	else
 		{
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"script is %d bytes long\n",length);
+		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"script is %llu bytes long\n",length);
 		contents.resize((unsigned int)length);
 		if (SDL_RWread(rw,&contents[0], contents.size(),1) != 1)
 		{

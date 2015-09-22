@@ -31,7 +31,9 @@
 
 Application *g_app;
 
-
+#ifdef __EMSCRIPTEN__
+#include "emscripten/emscripten.h"
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -374,7 +376,7 @@ void Application::Init()
 	if (doneCode != DONECODE_RESTART_ONLY)
 		{
 
-		if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) != 0 )
+		if ( SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS ) != 0 )
 			{
 			SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,"Couldn't initialize SDL: %s\n",SDL_GetError());
 			}
@@ -468,13 +470,20 @@ void Application::Init()
 int Application::Run()
 {
 	/* Main render loop */
-
+#ifndef __EMSCRIPTEN__
 	Uint64 lasttime = SDL_GetTicks(); 
 	Uint64 beginLoop;
 	Uint64 endLoop;
 	while (doneCode == DONECODE_NOT_DONE)
+
 		{
 		beginLoop = SDL_GetTicks();
+#else
+	double lasttime = emscripten_get_now(); 
+	double beginLoop;
+	double endLoop;
+	beginLoop = emscripten_get_now();
+#endif		
 
 		/* Check for events */
 		while (SDL_PollEvent(&event))
@@ -483,9 +492,15 @@ int Application::Run()
 			this->HandleEvent(&event, &doneCode);
 			}
 
+#ifndef __EMSCRIPTEN__
 		Uint64 now = SDL_GetTicks(); 
 		Uint64 elapsed = now - lasttime;
 		lasttime = now;
+#else
+		double now =  emscripten_get_now();	
+		Uint64 elapsed = (Uint64) (now -lasttime);
+		lasttime = now;
+#endif		
 			
 		watchManager->Update(elapsed);
 #ifdef TRP_USE_NETWORK
@@ -509,6 +524,7 @@ int Application::Run()
 #endif
 		SDL_RenderPresent(this->sdlRenderer);
 	
+#ifndef __EMSCRIPTEN__	
 		endLoop = SDL_GetTicks();
 			
 		// Try to cap fps
@@ -526,7 +542,7 @@ int Application::Run()
 			}
 		
 		}
-
+#endif
 
 	return doneCode; //TODO 1 = quit 2= restart  change this
 

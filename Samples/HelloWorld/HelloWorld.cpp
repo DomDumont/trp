@@ -5,6 +5,10 @@
 #include "Label.h"
 #include "Font.h"
 
+#ifdef __EMSCRIPTEN__
+#include "emscripten/emscripten.h"
+#endif
+
 class DemoApp : Application
 {
 private:
@@ -41,18 +45,30 @@ private:
 	}
 };
 
+
+void mainLoopForEmscripten()
+{
+	g_app->Run();		  
+}
 int main(int argc, char *argv[])
   {
 	  g_app = (Application *) new DemoApp();
 	  g_app->SetTitle("HelloWorld");
 
 	  int doneCode = DONECODE_NOT_DONE;
+#ifndef __EMSCRIPTEN__	  
 	  do
 	  {
+#endif	  	
 		  g_app->Init();
-		  doneCode = g_app->Run();
+	
+#ifndef __EMSCRIPTEN__		  
+	  	doneCode = g_app->Run();		  
 		  g_app->Shutdown();
 	  } while (doneCode != DONECODE_REAL_QUIT);
+#else
+	emscripten_set_main_loop(mainLoopForEmscripten,0,true);	  
+#endif	  
 
 	  delete g_app;
 	  return 0;
