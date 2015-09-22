@@ -38,8 +38,8 @@ private:
 
 		WND_GetLogicalSize(windowX, windowY);
 		  
-		//g_app->guiManager->LoadTheme("aeon");
-		g_app->guiManager->LoadTheme("metal");
+		g_app->guiManager->LoadTheme("aeon");
+		//g_app->guiManager->LoadTheme("metal");
 		
 		theSceneManager.ChangeScene(&menuScene);
 
