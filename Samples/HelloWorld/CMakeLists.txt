@@ -15,8 +15,8 @@ add_executable (HelloWorld ${HelloWorld_SOURCES})
 target_link_libraries(HelloWorld Rototo)
 
 if (EMSCRIPTEN)
-	SET(CMAKE_EXECUTABLE_SUFFIX ".html")
-	set_target_properties(HelloWorld PROPERTIES LINK_FLAGS "-O2 -s USE_SDL=2")
+	# SET(CMAKE_EXECUTABLE_SUFFIX ".html")
+	set_target_properties(HelloWorld PROPERTIES LINK_FLAGS "-s USE_SDL=2")
 endif()
 
 

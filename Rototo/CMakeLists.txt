@@ -24,7 +24,8 @@ if (UNIX)
 endif(UNIX)
 
 if (EMSCRIPTEN)
-	add_definitions(-s USE_SDL=2 -Wno-warn-absolute-paths -Wno-format-security )
+	add_definitions(-DTRP_EMSCRIPTEN)
+	add_definitions( -s USE_SDL=2 -Wno-warn-absolute-paths -Wno-format-security )
 endif()
 
 target_link_libraries(Rototo PugiXml)
