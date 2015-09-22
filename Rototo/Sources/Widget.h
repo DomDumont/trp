@@ -64,7 +64,7 @@ public:
 	{
 		// Increase the reference counter
 		refCount++;
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
+		//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
 	}
 
 	void Release()
@@ -75,7 +75,9 @@ public:
 			delete this;
 		else
 	if ( refCount > 0 )
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
+		{
+		//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
+		}
 	else
 		SDL_assert(0);
 	}
