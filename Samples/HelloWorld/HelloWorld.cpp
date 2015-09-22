@@ -4,10 +4,18 @@
 #include "Application.h"
 #include "Label.h"
 #include "Font.h"
+#include "Button.h"
+#include "GUIManager.h"
 
 #ifdef __EMSCRIPTEN__
 #include "emscripten/emscripten.h"
 #endif
+
+bool OnClickHandler(void * _sender,void * _userData)
+    {
+    UTI_Log("click");
+    return true;
+    }
 
 class DemoApp : Application
 {
@@ -16,7 +24,7 @@ private:
 	Label  		monLabel;
 	int             windowX;
 	int             windowY;
-
+	Button buttonBack; 
 	void OnInit()
 	{
 		UTI_Log("OnInit");
@@ -30,6 +38,17 @@ private:
 		//monLabel.SetFont(maFonte);
 		monLabel.SetText("French");
 		monLabel.SetPosition(windowX / 2, windowY / 2);
+
+		   buttonBack.SetText("Back");        
+        buttonBack.SetSize(250,100);
+        buttonBack.SetPosition(800,650);        
+        buttonBack.SetRotation(5);
+        buttonBack.SetEnabled(true);
+        buttonBack.SetScale(1.0,1.0);
+        buttonBack.on_click_handler = OnClickHandler;
+        
+
+        g_app->guiManager->AddWidget(&buttonBack);
 	}
 
 	void OnUpdate(Uint64 elapsed)
@@ -41,7 +60,7 @@ private:
 	{
 		WND_Clear();
 		monLabel.Render();
-		
+		 buttonBack.Render();
 	}
 };
 

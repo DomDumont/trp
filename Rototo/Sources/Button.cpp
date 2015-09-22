@@ -103,6 +103,11 @@ Button::Button() : state(0),type(0)
 	this->user_data.Set(NULL,NULL);
 	this->sender.Set(NULL,NULL);
   on_click_handler = NULL;
+#else
+	this->user_data = NULL;
+	this->sender = NULL;
+  	this->on_click_handler = NULL;
+
 #endif
 }
 
@@ -327,6 +332,12 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 		this->sender.Set(NULL,NULL);
 		return ret;
 		}
+#else
+	if (this->on_click_handler != NULL)
+		{
+		bool ret = this->on_click_handler(this->sender,this->user_data);
+		return ret;
+		}		
 #endif
 
 	return false;

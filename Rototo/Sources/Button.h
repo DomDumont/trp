@@ -78,6 +78,10 @@ public:
 	asIScriptFunction *	on_click_handler;
 	CScriptHandle		user_data;
 	CScriptHandle		sender;
+#else
+	bool (*on_click_handler)(void * _sender, void * _user_data);
+	void * sender;
+	void * user_data;
 #endif
 
 

@@ -96,6 +96,7 @@ bool StartsWith(const std::string& s1, const std::string& s2)
 void LogToOutputAndNetwork(const std::string &str)
 {
 	SDL_Log(str.c_str());
+	printf(str.c_str()); //For emscripten
 #ifdef TRP_USE_NETWORK
 	g_app->networkManager->SendMessageToAllClients(str);
 #endif
