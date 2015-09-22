@@ -1,5 +1,32 @@
 #include "MenuScene.h"
 #include "GuiManager.h"
+
+
+bool OnSelectionChangedHandler(void * _sender,void * _userData)
+{
+	UTI_Log("list changed");
+
+	ListBox *tempLB = (ListBox*)(_sender);
+	MenuScene *tempScene = (MenuScene*)(_userData);
+
+
+	int sel = tempLB->GetSelectedIndex();
+	if (sel == -1)
+		tempScene->labelChosen.SetText("None selected");
+	else
+		tempScene->labelChosen.SetText(tempLB->GetItemText(sel));
+
+	tempScene->buttonStart.SetEnabled(true);
+
+	return true;
+}
+
+bool OnClickHandler(void * _sender,void * _userData)
+	{
+		UTI_Log("click on start");
+		return true;
+	}
+
 void MenuScene::Init()
 {
 	WND_GetLogicalSize(windowX, windowY);
@@ -27,8 +54,10 @@ void MenuScene::Init()
 	buttonStart.SetEnabled(false);
 	buttonStart.SetScale(1.0,1.0);
 	
-	//@buttonStart.on_click_handler = CallbackHandler(menuScene.OnClickHandler);
-	//@buttonStart.user_data = @this;
+	buttonStart.on_click_handler = OnClickHandler;
+	buttonStart.user_data = this;
+	buttonStart.sender = &buttonStart;
+
 
 	GUI_AddWidget(&buttonStart);
 
@@ -37,8 +66,9 @@ void MenuScene::Init()
 	listBox.SetSize(400,400);
 	listBox.SetPosition(200,380);
 	
-	//@listBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandler);
-	//@listBox.userData = @this;
+	listBox.on_selection_changed_handler = OnSelectionChangedHandler;
+	listBox.user_data = this;
+	listBox.sender = &listBox;
 	
     listBox.AddItem("Particles");
     listBox.AddItem("Hello World");

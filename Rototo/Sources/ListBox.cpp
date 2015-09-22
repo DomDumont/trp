@@ -449,6 +449,12 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
 			this->sender.Set(NULL,NULL);
 			}
+#else			
+		if (this->on_selection_changed_handler != NULL)
+			{
+			bool ret = this->on_selection_changed_handler(this->sender,this->user_data);
+			return ret;
+			}
 #endif
 
 		}

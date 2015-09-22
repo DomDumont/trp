@@ -13,8 +13,9 @@
 
 #include "SceneManager.h"
 #include "MenuScene.h"
+#include "ParticleScene.h"
 
-bool OnClickHandler(void * _sender,void * _userData)
+bool OnClickHandler2(void * _sender,void * _userData)
     {
     UTI_Log("click");
     return true;
@@ -31,6 +32,7 @@ private:
 
 	SceneManager theSceneManager;
 	MenuScene    menuScene;
+	ParticleScene    particleScene;
 
 	void OnInit()
 	{
@@ -38,8 +40,8 @@ private:
 
 		WND_GetLogicalSize(windowX, windowY);
 		  
-		g_app->guiManager->LoadTheme("aeon");
-		//g_app->guiManager->LoadTheme("metal");
+		//g_app->guiManager->LoadTheme("aeon");
+		g_app->guiManager->LoadTheme("metal");
 		
 		theSceneManager.ChangeScene(&menuScene);
 

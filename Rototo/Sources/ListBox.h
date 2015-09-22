@@ -68,6 +68,10 @@ public:
 	asIScriptFunction *	onSelectionChangedHandler = nullptr;
 	CScriptHandle		userData;
 	CScriptHandle		sender;
+#else
+	bool (*on_selection_changed_handler)(void * _sender, void * _user_data);
+	void * sender;
+	void * user_data;	
 #endif
 
 private:
