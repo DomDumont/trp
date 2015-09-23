@@ -11,6 +11,7 @@
 #include "ListBox.h"
 #include "ComboBox.h"
 #include "Button.h"
+#include "SoundManager.h"
 
 
 class MenuScene : public Scene
@@ -26,6 +27,7 @@ public:
 	Label  monLabel;
 	Label  labelChosen;
     Label  helpLabel;	
+    Music  myMusic;
 
 	void Init();
 	void OnRender(Uint64 _delta);

@@ -29,8 +29,10 @@
 #include "SoundManager.h"
 #include "Application.h"
 
-
-
+#ifdef TRP_USE_AUDIO
+  dfgsdg
+	//#include <SDL/SDL_Mixer.h>
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -38,10 +40,18 @@
 
 SoundManager::SoundManager()
 	{
+	//TODO should be elsewhere
+
+#ifdef TRP_USE_AUDIO
+
 	rate		= 44100;
 	format		= AUDIO_S16;
 	channels	= 2;
 	buffers		= 1024;
+	volume		= MIX_MAX_VOLUME;
+	volumeSFX	= MIX_MAX_VOLUME;
+#endif
+
 	initialized	= 0;
 
 	}
@@ -54,40 +64,76 @@ SoundManager::~SoundManager()
 	{
 	}
 
-//----------------------------------------------------------------------------
-//
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void SoundManager::Init()
   {
-  initialized = 1;	
+#ifdef TRP_USE_AUDIO  	
+	if (Mix_OpenAudio(rate, format, channels, buffers) < 0)
+		{
+		SDL_Log("Couldn't open audio: %s\n", SDL_GetError());
+		}
+	else
+		{
+		/*
+		Mix_QuerySpec(&rate, &format, &channels);
+		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Opened audio at %d Hz %d bit %s (%s), %d bytes audio buffer\n", rate,
+			(format&0xFF),
+			(channels > 2) ? "surround" : (channels > 1) ? "stereo" : "mono",
+			(format&0x1000) ? "BE" : "LE",
+			buffers );
+		*/
+		}
+	
+  
+	Mix_VolumeMusic(volume);
+
+	// allocate 16 mixing channels
+	Mix_AllocateChannels(16);
+#endif	
+	initialized = 1;
   }
 
-//----------------------------------------------------------------------------
-//
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void SoundManager::SetMusicVolume(int _newVolume)
 {
 	this->volume = _newVolume;
+#ifdef TRP_USE_AUDIO 	
+	Mix_VolumeMusic(this->volume);
+#endif	
 }
 
-//----------------------------------------------------------------------------
-//
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void SoundManager::SetSFXVolume(int _newVolume)
 {
 	this->volumeSFX = _newVolume;
+#ifdef TRP_USE_AUDIO 	
+	Mix_Volume(-1, this->volumeSFX);
+#endif	
 }
 
-//----------------------------------------------------------------------------
-//
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void SoundManager::Shutdown()
 {
-
+#ifdef TRP_USE_AUDIO 	
+	Mix_CloseAudio();
+#endif	
 }
 
-//----------------------------------------------------------------------------
-//
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 #ifdef TRP_USE_BINDING
 void RegisterSoundManager()
@@ -153,7 +199,7 @@ void RegisterMusic()
 
 Music::Music()
 {
-
+	music = NULL;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -162,6 +208,13 @@ Music::Music()
 
 Music::~Music()
   {
+if (music != NULL)
+	{
+#ifdef TRP_USE_AUDIO 		
+	Mix_FreeMusic(music);
+#endif	
+	music = NULL;
+	}
   }
 
 /*----------------------------------------------------------------------------*/
@@ -170,6 +223,13 @@ Music::~Music()
 
 void Music::UnLoad()
   {
+if (music != NULL)
+	{
+#ifdef TRP_USE_AUDIO 		
+	Mix_FreeMusic(music);
+#endif	
+	music = NULL;
+	}
   }
 
 /*----------------------------------------------------------------------------*/
@@ -178,6 +238,18 @@ void Music::UnLoad()
 
 void Music::Load(const std::string & _file)
   {
+#ifdef TRP_USE_AUDIO   	
+	music = Mix_LoadMUS_RW(g_app->resourceManager->Load(_file,GAMEDATA|BOTH)); //todo check this FreeSrc ?
+#endif	
+
+	if ( music == NULL ) 
+		{
+		SDL_Log("Cannot load music %s %s",_file.c_str(),SDL_GetError());
+		}
+	else
+		{
+		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Music %s loaded sucessfully",_file.c_str());
+		}
   }
 
 /*----------------------------------------------------------------------------*/
@@ -186,7 +258,9 @@ void Music::Load(const std::string & _file)
 
 void Music::Play(int _nbLoops, int _timeFadeIn)
 {
-
+#ifdef TRP_USE_AUDIO 	
+	Mix_PlayMusic(music,_nbLoops);
+#endif	
 }
 
 /*----------------------------------------------------------------------------*/
@@ -195,7 +269,9 @@ void Music::Play(int _nbLoops, int _timeFadeIn)
 
 void Music::Stop()
 {
-
+#ifdef TRP_USE_AUDIO 	
+	Mix_HaltMusic();
+#endif	
 }
 //-----------------------------------------------------------------------------
 // Sound
@@ -224,8 +300,13 @@ void DestructSound(Sound *thisPointer)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Sound::Sound(): channel(-1)
+Sound::Sound(): sample(NULL),channel(-1)
 {
+
+#ifdef TRP_USE_AUDIO 	
+	volume = MIX_MAX_VOLUME;
+#endif
+
 }
 
 /*----------------------------------------------------------------------------*/
@@ -234,35 +315,52 @@ Sound::Sound(): channel(-1)
 
 Sound::~Sound()
 {
+	if (sample != NULL)
+		{
+#ifdef TRP_USE_AUDIO 			
+		Mix_FreeChunk(sample);
+#endif		
+		sample = NULL;
+		}
 }
 
-//----------------------------------------------------------------------------
-// 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 void Sound::UnLoad()
   {
+	if (sample != NULL)
+		{
+#ifdef TRP_USE_AUDIO 			
+		Mix_FreeChunk(sample);
+#endif		
+		sample = NULL;
+		}
   }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
-
-//----------------------------------------------------------------------------
-// Load a sample
-
-void Sound::Load
-  (
-  const std::string & _file
-  )
-
+void Sound::Load(const std::string & _file)
   {
-  /* this->sample = Mix_LoadWAV_RW(g_app->resourceManager->Load(_file,GAMEDATA|BOTH),1); //todo check this FreeSrc ?
-  this->sample = nullptr;
-  if (sample == nullptr)
+#ifdef TRP_USE_AUDIO 
+	this->sample = Mix_LoadWAV_RW(g_app->resourceManager->Load(_file,GAMEDATA|BOTH),1); //todo check this FreeSrc ?
+#endif	
+	
+	if ( sample == NULL ) 
 		  {
 		  SDL_Log("Cannot load sample %s %s",_file.c_str(),SDL_GetError());
 		  return;
 		  }
-    */
 	  SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Sample %s loaded sucessfully",_file.c_str());
+	
+#ifdef TRP_USE_AUDIO 	
+	Mix_VolumeChunk(this->sample,this->volume);
+#endif
+
+
   }
 
 /*----------------------------------------------------------------------------*/
@@ -273,7 +371,14 @@ void Sound::Play(int _nbLoops)
 {
 	Uint64 now = SDL_GetTicks();
 
+	//SDL_Log("play at %lu\n", now- lasttime32);
 	lasttime32 = now ;
+
+#ifdef TRP_USE_AUDIO 	
+	this->channel = Mix_PlayChannel(-1,this->sample,_nbLoops);
+	//SDL_Log("Mix_PlayChannel returns : %d\n", this->channel);
+	Mix_Volume(this->channel, g_app->soundManager->volumeSFX);
+#endif	
 }
 
 /*----------------------------------------------------------------------------*/
@@ -282,6 +387,11 @@ void Sound::Play(int _nbLoops)
 
 void Sound::Stop()
 {
+
+#ifdef TRP_USE_AUDIO	
+	Mix_HaltChannel(this->channel);
+#endif
+
 }
 
 /*----------------------------------------------------------------------------*/
@@ -292,6 +402,10 @@ void Sound::SetVolume(int _newVolume)
 {
 	this->volume = _newVolume;
 
+#ifdef TRP_USE_AUDIO	
+	Mix_VolumeChunk(this->sample,this->volume);
+#endif
+	
 }
 
 /*----------------------------------------------------------------------------*/

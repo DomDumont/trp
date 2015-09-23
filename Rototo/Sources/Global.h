@@ -47,6 +47,7 @@
 
 
 
+
 class Application;
 extern Application *g_app;
 

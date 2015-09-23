@@ -73,7 +73,7 @@ void ResourceManager::Shutdown()
 
 SDL_RWops*  ResourceManager::Load(const std::string & _file, unsigned int _flags)
 {
-#if defined WIN32 || defined TRP_LINUX || defined TRP_OSX
+#if defined WIN32 || defined TRP_LINUX || defined TRP_OSX || TRP_EMSCRIPTEN
     // On desktop platforms, Internal and external are the same
     // So check only FROM_FULLPATH or FROM_GAMEDATA
     std::string tempFile = "";
@@ -196,7 +196,7 @@ SDL_RWops*  ResourceManager::Load(const std::string & _file, unsigned int _flags
 
 SDL_RWops*  ResourceManager::Save(const std::string & _file, unsigned int _flags)
 {
-#if defined WIN32 || defined TRP_LINUX || defined TRP_OSX
+#if defined WIN32 || defined TRP_LINUX || defined TRP_OSX || TRP_EMSCRIPTEN
     // On desktop platforms Internal and external are the same
     // So check only FROM_FULLPATH or FROM_GAMEDATA
     std::string tempFile;

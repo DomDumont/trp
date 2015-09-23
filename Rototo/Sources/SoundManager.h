@@ -28,7 +28,8 @@
 
 #include <string>
 
-
+class Mix_Chunk;
+class Mix_Music;
 
 class Sound
 {
@@ -43,6 +44,7 @@ public:
 
 private:
 
+	Mix_Chunk*	sample;
 	int		channel;
 	int		volume;
 
@@ -67,6 +69,7 @@ public:
 	
 private:
 
+	Mix_Music *music;
 };
 
 void ConstructMusic(Music *thisPointer);

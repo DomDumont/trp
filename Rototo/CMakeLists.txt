@@ -1,5 +1,6 @@
 file(GLOB_RECURSE Rototo_SOURCES "Sources/*.cpp")
 
+option(ROTOTO_USE_AUDIO "Rototo has audio features " OFF)
 
 
 if (NOT DEFINED EMSCRIPTEN)
@@ -14,6 +15,9 @@ include_directories("Extern/PugiXml/src")
 
 add_library (Rototo ${Rototo_SOURCES})
 
+if (ROTOTO_USE_AUDIO)
+	add_definitions(-DTRP_USE_AUDIO)
+endif()
 
 if (WIN32)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)

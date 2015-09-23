@@ -30,8 +30,8 @@ Module.expectedDataFileDownloads++;
                               Module['locateFile'](REMOTE_PACKAGE_BASE) :
                               ((Module['filePackagePrefixURL'] || '') + REMOTE_PACKAGE_BASE);
   
-      var REMOTE_PACKAGE_SIZE = 3086279;
-      var PACKAGE_UUID = '44db976c-da1d-48a2-98e7-9b6bb303c131';
+      var REMOTE_PACKAGE_SIZE = 3368051;
+      var PACKAGE_UUID = '442087df-d6ab-4be1-9903-fff204ad8fc6';
     
     function fetchRemotePackage(packageName, packageSize, callback, errback) {
       var xhr = new XMLHttpRequest();
@@ -214,9 +214,10 @@ Module['FS_createPath']('/gamedata-sample', 'strings', true, true);
     new DataRequest(2884810, 3024688, 0, 0).open('GET', '/gamedata-sample/sounds/invitation.mod');
     new DataRequest(3024688, 3047233, 0, 1).open('GET', '/gamedata-sample/sounds/pop.ogg');
     new DataRequest(3047233, 3065659, 0, 1).open('GET', '/gamedata-sample/sounds/ressort.ogg');
-    new DataRequest(3065659, 3085970, 0, 1).open('GET', '/gamedata-sample/sounds/sheep.ogg');
-    new DataRequest(3085970, 3086124, 0, 0).open('GET', '/gamedata-sample/strings/en.xml');
-    new DataRequest(3086124, 3086279, 0, 0).open('GET', '/gamedata-sample/strings/fr.xml');
+    new DataRequest(3065659, 3347431, 0, 1).open('GET', '/gamedata-sample/sounds/sample.ogg');
+    new DataRequest(3347431, 3367742, 0, 1).open('GET', '/gamedata-sample/sounds/sheep.ogg');
+    new DataRequest(3367742, 3367896, 0, 0).open('GET', '/gamedata-sample/strings/en.xml');
+    new DataRequest(3367896, 3368051, 0, 0).open('GET', '/gamedata-sample/strings/fr.xml');
 
     function processPackageData(arrayBuffer) {
       Module.finishedDataFileDownloads++;
@@ -292,6 +293,7 @@ Module['FS_createPath']('/gamedata-sample', 'strings', true, true);
           DataRequest.prototype.requests["/gamedata-sample/sounds/invitation.mod"].onload();
           DataRequest.prototype.requests["/gamedata-sample/sounds/pop.ogg"].onload();
           DataRequest.prototype.requests["/gamedata-sample/sounds/ressort.ogg"].onload();
+          DataRequest.prototype.requests["/gamedata-sample/sounds/sample.ogg"].onload();
           DataRequest.prototype.requests["/gamedata-sample/sounds/sheep.ogg"].onload();
           DataRequest.prototype.requests["/gamedata-sample/strings/en.xml"].onload();
           DataRequest.prototype.requests["/gamedata-sample/strings/fr.xml"].onload();

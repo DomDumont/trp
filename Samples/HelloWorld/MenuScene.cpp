@@ -119,7 +119,8 @@ void MenuScene::Init()
 	comboBox.SetEnabled(true);
 	GUI_AddWidget(&comboBox);
 
-	
+	myMusic.Load("sounds/sample.ogg");  
+    myMusic.Play(-1);   
 }
 
 void MenuScene::OnRender(Uint64 _delta)

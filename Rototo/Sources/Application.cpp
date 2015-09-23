@@ -626,7 +626,8 @@ void Application::ReadSettings()
 		else
       if (strcmp(elem.name(), "datafolder") == 0)
 			{
-      this->settings_gamedataURL = elem.attribute("directory").as_string();
+      		this->settings_gamedataURL = elem.attribute("directory").as_string();
+      		UTI_Log(this->settings_gamedataURL.c_str());
 			}
 		else
       if (strcmp(elem.name(), "autorestart") == 0)
