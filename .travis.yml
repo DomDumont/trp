@@ -9,7 +9,7 @@ os:
   - linux
   - osx
 
-matrix:
+env:
   - WINDOWS=2  
   - WINDOWS=1  
 
