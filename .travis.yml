@@ -10,8 +10,8 @@ os:
   - osx
 
 matrix:
-	-WINDOWS=2  
-	-WINDOWS=1  
+  - WINDOWS=2  
+  - WINDOWS=1  
 
 install:
 
