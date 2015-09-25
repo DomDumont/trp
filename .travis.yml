@@ -9,9 +9,13 @@ os:
   - linux
   - osx
 
-env:
-  - WINDOWS=2  
-  - WINDOWS=1  
+
+matrix:
+  include:
+    - os: linux
+      env: TRP_WINDOWS=true
+
+
 
 install:
 
