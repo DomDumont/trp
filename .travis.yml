@@ -9,6 +9,10 @@ os:
   - linux
   - osx
 
+matrix:
+	-WINDOWS=2  
+	-WINDOWS=1  
+
 install:
 
   - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa -y; fi
