@@ -16,7 +16,7 @@ BuildDoc
 def BuildDoc () :
 
     savedPath = os.getcwd()
-    os.chdir('../../doc/'+lang_id)
+    os.chdir('../../Docs/'+lang_id)
 
     SRC_LIST = [
     'Home.md',

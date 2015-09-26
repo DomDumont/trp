@@ -1,41 +1,45 @@
 language: cpp
-
 compiler:
-
-  - gcc
-  - clang
-
+- gcc
+- clang
 os:
-  - linux
-  - osx
-
-
+- linux
+- osx
 matrix:
   include:
-    - os: linux
-      env: TRP_WINDOWS=true
-
-
-
+  - os: linux
+    env: TRP_WINDOWS=true
 install:
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa
+  -y; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install pandoc; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install pandoc; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install caskroom/cask/brew-cask; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew cask install basictex; fi
 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa -y; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install pandoc; fi
+before_script:
+- mkdir Build
+- cd Build
+- cmake ..
+- cd Tools/doc
+- ./build_doc.sh
 
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install pandoc; fi
+script: make
+deploy:
+  provider: releases
+  api_key:
+    secure: CTQ9kAUprr9cGiUcRdHvk1h3O6CWGf+f0CI/y6dWQqpRWi0jzdPbZQTvXByz/QpJKJsJF80qlNbxC+hmvU9sEGqgOlnCu1LYxZM8R4/TTuYfu44eIh0qQCrJelXZBOm74PBsYEZ5SAujnvPIRlTQA157PVdseumCYX6BXwnr1xw=
+    skip_cleanup: true
+
+  file: Docs/en/out/trp-manual.docx
+  file: Docs/en/out/trp-manual.html
+  file: Docs/en/out/trp-manual.pdf
 
 
-
-
-before_script:  
-    - mkdir Build
-    - cd Build
-    - cmake ..
-
-script: make  
-
-
+  on:
+    repo: DomDumont/trp
+    tags: true
