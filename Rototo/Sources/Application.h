@@ -60,8 +60,8 @@ public:
 	void	Init();
 
 	virtual void OnInit() = 0;
-	virtual void OnUpdate(Uint64 elapsed) = 0;
-	virtual void OnRender(Uint64 elapsed) = 0;
+	virtual void OnUpdate(unsigned int elapsed) = 0;
+	virtual void OnRender(unsigned int elapsed) = 0;
 
 	int		Run();
 	void	Shutdown();

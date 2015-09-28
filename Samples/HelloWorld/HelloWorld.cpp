@@ -47,12 +47,12 @@ private:
 
 	}
 
-	void OnUpdate(Uint64 elapsed)
+	void OnUpdate(unsigned int elapsed)
 	{
 
 	}
 
-	void OnRender(Uint64 elapsed)
+	void OnRender(unsigned int elapsed)
 	{
 	
 	theSceneManager.OnRender(elapsed);

@@ -471,9 +471,9 @@ int Application::Run()
 {
 	/* Main render loop */
 #ifndef __EMSCRIPTEN__
-	Uint64 lasttime = SDL_GetTicks(); 
-	Uint64 beginLoop;
-	Uint64 endLoop;
+	unsigned int lasttime = SDL_GetTicks(); 
+	unsigned int beginLoop;
+	unsigned int endLoop;
 	while (doneCode == DONECODE_NOT_DONE)
 
 		{
@@ -493,12 +493,12 @@ int Application::Run()
 			}
 
 #ifndef __EMSCRIPTEN__
-		Uint64 now = SDL_GetTicks(); 
-		Uint64 elapsed = now - lasttime;
+		unsigned int now = SDL_GetTicks(); 
+		unsigned int elapsed = now - lasttime;
 		lasttime = now;
 #else
 		double now =  emscripten_get_now();	
-		Uint64 elapsed = (Uint64) (now -lasttime);
+		unsigned int elapsed = (unsigned int) (now -lasttime);
 		lasttime = now;
 #endif		
 			
