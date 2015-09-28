@@ -54,7 +54,7 @@ def BuildDoc () :
     print "PDF conversion done"
     os.system('pandoc temp.md -o ./out/{0}.docx'.format(OUTPUT))
     print "Docx conversion done"
-    os.system('pandoc -s -S --toc --toc-depth=2 --self-contained -N -c pandoc.css -A footer.html temp.md -o ./out/{0}.html'.format(OUTPUT))
+    os.system('pandoc -s -S --toc --self-contained -N -c pandoc.css -A footer.html temp.md -o ./out/{0}.html'.format(OUTPUT))
     print "HTML conversion done"
 
     os.remove('temp.md')

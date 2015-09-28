@@ -26,6 +26,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install pandoc; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install caskroom/cask/brew-cask; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew cask install basictex; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH="/usr/texbin:$PATH"; fi
 
 before_script:
   - mkdir Build
