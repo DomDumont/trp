@@ -47,8 +47,9 @@ deploy:
 
   skip_cleanup: true
 
-  file: /Docs/en/out/trp-manual.docx
-  file: /Docs/en/out/trp-manual.html
+  file: 
+    - "Docs/en/out/trp-manual.docx"
+    - "Docs/en/out/trp-manual.html"
 
 
   on:
