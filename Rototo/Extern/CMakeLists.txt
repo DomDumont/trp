@@ -1,3 +1,3 @@
-foreach (TARGET PugiXml)
-    add_subdirectory (${TARGET})
-endforeach ()
+add_subdirectory (PugiXml)
+add_subdirectory (AngelScript/sdk/angelscript/projects/cmake)
+
