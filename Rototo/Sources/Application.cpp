@@ -144,7 +144,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 				std::string tempPath;
 				tempPath = "explorer ";
 				tempPath += currentDir;
-				tempPath = tempPath + "\\"+g_app->settings_gamedataURL+"\\";
+				tempPath = tempPath + "\\"+g_app->settings.gamedataURL+"\\";
 				system(tempPath.c_str());
 				}
 #endif
@@ -198,7 +198,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 			else
 			if (event->key.keysym.scancode == SDL_SCANCODE_S)
 				{
-				std::string pathToScan = ".//"+g_app->settings_gamedataURL+"//";
+				std::string pathToScan = ".//"+g_app->settings.gamedataURL+"//";
 				ScanGameData(pathToScan);
 				}
 
@@ -234,7 +234,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 Application::Application()
 {
 #if defined WIN32 || defined TRP_LINUX
-	this->settings_configURL = ".";
+	this->settings.configURL = ".";
 #else
 	
 #if defined TRP_OSX
@@ -252,15 +252,15 @@ Application::Application()
 #endif
 
 	
-	this->settings_gamedataURL = "gamedata";
-	this->settings_autorestart = 1;
-	this->settings_verbose = 1;
-	this->settings_logtofile = 0;
-	this->settings_winpos_x = 50;
-	this->settings_winpos_y = 50;
-	this->settings_winsize_h = 576;
-	this->settings_winsize_w = 768;
-	this->settings_serverIP="";
+	this->settings.gamedataURL = "gamedata";
+	this->settings.autorestart = 1;
+	this->settings.verbose = 1;
+	this->settings.logtofile = 0;
+	this->settings.winpos_x = 50;
+	this->settings.winpos_y = 50;
+	this->settings.winsize_h = 576;
+	this->settings.winsize_w = 768;
+	this->settings.serverIP="";
 	
 	platform = SDL_GetPlatform();
 	if (platform == "iOS")
@@ -370,7 +370,7 @@ void Application::Init()
 #endif
 
 
-	this->ReadSettings();
+	settings.Read();
 
 
 	if (doneCode != DONECODE_RESTART_ONLY)
@@ -380,10 +380,10 @@ void Application::Init()
 			{
 			SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,"Couldn't initialize SDL: %s\n",SDL_GetError());
 			}
-		if (this->settings_verbose != 0)
+		if (this->settings.verbose != 0)
 			SDL_LogSetAllPriority(SDL_LOG_PRIORITY_VERBOSE);
 
-		if (this->settings_logtofile != 0)
+		if (this->settings.logtofile != 0)
 			UTI_CreateLogFile();
 
 		soundManager->Init();
@@ -406,11 +406,11 @@ void Application::Init()
 #else
 
 		if (this->orientation == ORIENTATION_PAYSAGE)
-			SDL_CreateWindowAndRenderer(this->settings_winsize_w,this->settings_winsize_h,0, &sdlWindow, &sdlRenderer);
+			SDL_CreateWindowAndRenderer(this->settings.winsize_w,this->settings.winsize_h,0, &sdlWindow, &sdlRenderer);
 		else
-			SDL_CreateWindowAndRenderer(this->settings_winsize_h,this->settings_winsize_w,0, &sdlWindow, &sdlRenderer);
+			SDL_CreateWindowAndRenderer(this->settings.winsize_h,this->settings.winsize_w,0, &sdlWindow, &sdlRenderer);
 
-		SDL_SetWindowPosition(sdlWindow,this->settings_winpos_x,this->settings_winpos_y);
+		SDL_SetWindowPosition(sdlWindow,this->settings.winpos_x,this->settings.winpos_y);
 
 #endif
 
@@ -580,91 +580,11 @@ void Application::Shutdown()
 		textManager->Shutdown();
 		soundManager->Shutdown();
 		SDL_Quit();
-		this->WriteSettings(); //TODO check if it must be here
+		settings.Write(); //TODO check if it must be here
 
-		if (this->settings_logtofile != 0)
+		if (this->settings.logtofile != 0)
 		UTI_CloseLogFile();
 
 		}
-}
-
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-void Application::ReadSettings()
-{
-	std::string loadedString;
-
-	loadedString = LoadTextFile("settings.xml",FULLPATH|BOTH);
-
-	if (loadedString.empty())
-		return;
-  pugi::xml_document doc;
-  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
-  pugi::xml_node root = doc.first_child();
-  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
-		{
-    SDL_Log(elem.name());
-    if (strcmp(elem.name(), "position") == 0)
-			{
-      this->settings_winpos_x = atoi(elem.attribute("x").as_string());
-      this->settings_winpos_y = atoi(elem.attribute("y").as_string());
-			}
-		else
-      if (strcmp(elem.name(), "size") == 0)
-			{
-      this->settings_winsize_w = atoi(elem.attribute("w").as_string());
-      this->settings_winsize_h = atoi(elem.attribute("h").as_string());
-			}
-		else
-      if (strcmp(elem.name(), "editor") == 0)
-			{
-      this->settings_editorURL = elem.attribute("url").as_string();
-      this->settings_editorArgs = elem.attribute("args").as_string();
-			}
-		else
-      if (strcmp(elem.name(), "datafolder") == 0)
-			{
-      		this->settings_gamedataURL = elem.attribute("directory").as_string();
-      		UTI_Log(this->settings_gamedataURL.c_str());
-			}
-		else
-      if (strcmp(elem.name(), "autorestart") == 0)
-			{
-      this->settings_autorestart = atoi(elem.attribute("value").as_string());
-			}
-		else
-      if (strcmp(elem.name(), "allowdebug") == 0)
-			{
-      this->settings_allowdebug = atoi(elem.attribute("value").as_string());
-			}
-		else
-      if (strcmp(elem.name(), "verbose") == 0)
-			{
-      this->settings_verbose = atoi(elem.attribute("value").as_string());
-			}
-		else
-      if (strcmp(elem.name(), "logtofile") == 0)
-			{
-      this->settings_logtofile = atoi(elem.attribute("value").as_string());
-			}
-		else
-      if (strcmp(elem.name(), "server") == 0)
-			{
-      this->settings_serverIP = elem.attribute("ip").as_string();
-			}
-
-		} // for(tinyxml2::XMLElement* elem ...
-
-}
-
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-void Application::WriteSettings()
-{
-	
 }
 

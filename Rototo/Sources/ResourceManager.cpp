@@ -81,12 +81,12 @@ SDL_RWops*  ResourceManager::Load(const std::string & _file, unsigned int _flags
     if  (_flags & FULLPATH)
         {
         SDL_assert((_flags & GAMEDATA) == 0);
-        tempFile = g_app->settings_configURL + "//" + _file;
+        tempFile = g_app->settings.configURL + "//" + _file;
         }
     else
         {        
         SDL_assert((_flags & FULLPATH) == 0);
-        tempFile = g_app->settings_configURL + "//" + g_app->settings_gamedataURL + "//";
+        tempFile = g_app->settings.configURL + "//" + g_app->settings.gamedataURL + "//";
         tempFile += _file;
         }
     
@@ -204,12 +204,12 @@ SDL_RWops*  ResourceManager::Save(const std::string & _file, unsigned int _flags
     if  (_flags & FULLPATH)
         {
         SDL_assert((_flags & GAMEDATA) == 0);
-        tempFile = g_app->settings_configURL + "//" + _file;
+        tempFile = g_app->settings.configURL + "//" + _file;
         }
     else
         {        
         SDL_assert((_flags & FULLPATH) == 0);
-        tempFile = g_app->settings_configURL + "//" + g_app->settings_gamedataURL + "//";
+        tempFile = g_app->settings.configURL + "//" + g_app->settings.gamedataURL + "//";
         tempFile += _file;
         }
 

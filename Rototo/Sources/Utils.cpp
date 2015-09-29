@@ -298,7 +298,7 @@ void UTI_Log(const std::string& _toto)
 	//SDL_Log(_toto.c_str());
 	LogToOutputAndNetwork(tmp.c_str());
 
-	if (g_app->settings_logtofile != 0)
+	if (g_app->settings.logtofile != 0)
 	{
 	unsigned int tmpSize = (unsigned int) tmp.length();
 	

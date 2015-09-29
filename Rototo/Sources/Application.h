@@ -37,6 +37,7 @@
 #include "NetworkManager.h"
 #include "GUIManager.h"
 #include "PhysicsManager.h"
+#include "Settings.h"
 
 #define ORIENTATION_PORTRAIT 1
 #define ORIENTATION_PAYSAGE  2
@@ -76,10 +77,9 @@ public:
 
 	std::string GetTitle() const { return title; }
 	void		SetTitle(const std::string& newTitle) { title = newTitle; }
-private:
 
-	void ReadSettings();
-	void WriteSettings();
+
+
 	
 public:
 #ifdef TRP_USE_PHYSICS
@@ -109,23 +109,11 @@ public:
 
 	int					capFPS;
 
-	std::string		settings_editorURL; //TODO put all settings in a settings class
-	std::string		settings_editorArgs;
-	std::string		settings_gamedataURL;
-	std::string		settings_configURL;
-	int				settings_autorestart;
-	int				settings_allowdebug;
-	int				settings_verbose;
-	int				settings_logtofile;
-	std::string		settings_serverIP;
+	Settings			settings;
 
 private:
 	SDL_Event			event;
 	std::string			title;
-	int				settings_winpos_x;
-	int				settings_winpos_y;
-	int				settings_winsize_w;
-	int				settings_winsize_h;
 
 #ifdef TRP_USE_BINDING
 	FunctionEntry		*on_init_func;
