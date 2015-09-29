@@ -24,7 +24,7 @@
 
 #include "Global.h"
 #include "Primitive.h"
-#include "Application.h"
+#include "Application_p.h"
 #include "Primitives.h"
 
 /*----------------------------------------------------------------------------*/

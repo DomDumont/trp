@@ -25,7 +25,7 @@
 
 #include "Global.h"
 #include "NetworkManager.h"
-#include "Application.h"
+#include "Application_p.h"
 
 #ifdef TRP_USE_NETWORK
 

@@ -27,7 +27,7 @@
 
 
 #include "SoundManager.h"
-#include "Application.h"
+#include "Application_p.h"
 
 #ifdef TRP_USE_AUDIO
   dfgsdg

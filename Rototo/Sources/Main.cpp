@@ -26,7 +26,7 @@
 
 
 
-#include "Application.h"
+#include "Application_p.h"
 #include "Atlas.h"
 
 #include "Sprite.h"

@@ -24,7 +24,7 @@
 
 #include "Global.h"
 #include "Button.h"
-#include "Application.h"
+#include "Application_p.h"
 #include "Font.h"
 #include "Vector2D.h"
 

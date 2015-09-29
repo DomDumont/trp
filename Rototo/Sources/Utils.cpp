@@ -24,7 +24,7 @@
 
 #include "Global.h"
 #include "Utils.h"
-#include "Application.h"
+#include "Application_p.h"
 
 #ifdef WIN32
 #include <direct.h>

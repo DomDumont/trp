@@ -1,7 +1,7 @@
 #include "Global.h"
 #include "Utils.h"
 
-#include "Application.h"
+#include "Application_p.h"
 #include "Label.h"
 #include "Font.h"
 #include "Button.h"

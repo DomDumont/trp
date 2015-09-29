@@ -29,7 +29,7 @@
 #include "Sprite.h"
 
 #include "Atlas.h"
-#include "Application.h"
+#include "Application_p.h"
 
 
 

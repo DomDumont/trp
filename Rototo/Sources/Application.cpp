@@ -25,7 +25,7 @@
 
 #include "Global.h"
 
-#include "Application.h"
+#include "Application_p.h"
 #include "Utils.h"
 #include "pugixml.hpp"
 

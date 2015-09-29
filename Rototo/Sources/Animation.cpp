@@ -30,7 +30,7 @@
 #include "Animation.h"
 
 #include "Atlas.h"
-#include "Application.h"
+#include "Application_p.h"
 #include "Sprite.h"
 
 /*----------------------------------------------------------------------------*/

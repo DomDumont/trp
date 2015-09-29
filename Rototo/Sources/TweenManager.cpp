@@ -3,7 +3,7 @@
 
 
 #include "TweenManager.h"
-#include "Application.h"
+#include "Application_p.h"
 
 
 TweenedFloat *TweenedFloat_Factory()

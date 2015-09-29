@@ -23,7 +23,7 @@
 */
 #include "Global.h"
 #include "Client.h"
-#include "Application.h"
+#include "Application_p.h"
 #include "Utils.h"
 
 #ifdef TRP_USE_NETWORK

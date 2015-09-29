@@ -23,7 +23,7 @@
 */
 
 #include "Global.h"
-#include "Application.h"
+#include "Application_p.h"
 #include "Widget.h"
 #include "Vector2D.h"
 
