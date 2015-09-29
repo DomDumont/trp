@@ -2,16 +2,9 @@
 #define __MENUSCENE_H__
 
 
-#include "SceneManager.h"
+#include "SceneManager.h" //TODO à virer et à mettre dans Rototo
 
-
-#include "Global.h"
-#include "Utils.h"
-
-#include "ListBox.h"
-#include "ComboBox.h"
-#include "Button.h"
-#include "SoundManager.h"
+#include "Rototo.h"
 
 
 class MenuScene : public Scene
@@ -30,8 +23,8 @@ public:
     Music  myMusic;
 
 	void Init();
-	void OnRender(Uint64 _delta);
-	void OnUpdate(Uint64 _delta);
+	void OnRender(unsigned int _delta);
+	void OnUpdate(unsigned int _delta);
 
 };
 

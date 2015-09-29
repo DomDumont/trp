@@ -35,7 +35,7 @@
 #include "TiledMap.h" //Registration
 #include "Animation.h" //Registration
 
-#include "Button.h" //Registration
+#include "Button_p.h" //Registration
 #include "Font.h" //Registration
 #include "Label.h" //Registration
 #include "ListBox.h" //Registration

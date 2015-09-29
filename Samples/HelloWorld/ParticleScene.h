@@ -4,13 +4,7 @@
 
 #include "SceneManager.h"
 
-
-#include "Global.h"
-#include "Utils.h"
-
-#include "ListBox.h"
-#include "ComboBox.h"
-#include "Button.h"
+#include "Rototo.h"
 
 
 class ParticleScene : public Scene
@@ -28,8 +22,8 @@ public:
     Label  helpLabel;	
 
 	void Init();
-	void OnRender(Uint64 _delta);
-	void OnUpdate(Uint64 _delta);
+	void OnRender(unsigned int _delta);
+	void OnUpdate(unsigned int _delta);
 
 };
 

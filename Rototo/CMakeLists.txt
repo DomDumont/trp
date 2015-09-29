@@ -1,4 +1,6 @@
 file(GLOB_RECURSE Rototo_SOURCES "Sources/*.cpp")
+file(GLOB_RECURSE Rototo_HEADERS "Sources/*.h" "Includes/*.h")
+
 
 option(ROTOTO_USE_AUDIO "Rototo has audio features " OFF)
 
@@ -9,11 +11,13 @@ if (NOT DEFINED EMSCRIPTEN)
 endif()
 include_directories("Extern/stb")
 include_directories("Extern/PugiXml/src")
+include_directories("Includes")
 
 
 
 
-add_library (Rototo ${Rototo_SOURCES})
+add_library (Rototo ${Rototo_SOURCES} ${Rototo_HEADERS})
+
 
 if (ROTOTO_USE_AUDIO)
 	add_definitions(-DTRP_USE_AUDIO)

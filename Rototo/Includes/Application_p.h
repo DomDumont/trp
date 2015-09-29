@@ -23,8 +23,8 @@
 */
 
 
-#ifndef __APPLICATION_H__
-#define __APPLICATION_H__
+#ifndef __APPLICATION_P_H__
+#define __APPLICATION_P_H__
 
 //TODO replace this with forward declarations ?
 

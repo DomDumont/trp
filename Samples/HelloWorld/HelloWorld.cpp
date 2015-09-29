@@ -1,15 +1,6 @@
-#include "Global.h"
-#include "Utils.h"
+#include "Rototo.h"
 
-#include "Application_p.h"
-#include "Label.h"
-#include "Font.h"
-#include "Button.h"
-#include "GUIManager.h"
 
-#ifdef __EMSCRIPTEN__
-#include "emscripten/emscripten.h"
-#endif
 
 #include "SceneManager.h"
 #include "MenuScene.h"
@@ -21,14 +12,14 @@ bool OnClickHandler2(void * _sender,void * _userData)
     return true;
     }
 
-class DemoApp : Application
+class DemoApp : public Application
 {
 private:
 	Font		maFonte;
 	Label  		monLabel;
-	int             windowX;
-	int             windowY;
-	Button buttonBack; 
+	int         windowX;
+	int         windowY;
+	Button		buttonBack;
 
 	SceneManager theSceneManager;
 	MenuScene    menuScene;
@@ -41,7 +32,7 @@ private:
 		WND_GetLogicalSize(windowX, windowY);
 		  
 		//g_app->guiManager->LoadTheme("aeon");
-		g_app->guiManager->LoadTheme("metal");
+		GUI_LoadTheme("metal");
 		
 		theSceneManager.ChangeScene(&menuScene);
 
@@ -60,31 +51,10 @@ private:
 };
 
 
-void mainLoopForEmscripten()
-{
-	g_app->Run();		  
-}
 int main(int argc, char *argv[])
   {
-	  g_app = (Application *) new DemoApp();
-	  g_app->SetTitle("HelloWorld");
+	  RegisterApplication(new DemoApp());
 
-	  int doneCode = DONECODE_NOT_DONE;
-#ifndef __EMSCRIPTEN__	  
-	  do
-	  {
-#endif	  	
-		  g_app->Init();
-	
-#ifndef __EMSCRIPTEN__		  
-	  	doneCode = g_app->Run();		  
-		  g_app->Shutdown();
-	  } while (doneCode != DONECODE_REAL_QUIT);
-#else
-	emscripten_set_main_loop(mainLoopForEmscripten,0,true);	  
-#endif	  
-
-	  delete g_app;
+	  GetApp()->SetTitle("HelloWorld"); //TODO APP_SetTitle is better no ?
 	  return 0;
-  return 0;
   }

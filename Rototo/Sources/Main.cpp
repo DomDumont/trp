@@ -31,6 +31,10 @@
 
 #include "Sprite.h"
 
+#ifdef __EMSCRIPTEN__
+#include "emscripten/emscripten.h"
+#endif
+
 #ifdef TRP_USE_MAIN
 
 int main(int argc, char *argv[])
@@ -52,3 +56,38 @@ int main(int argc, char *argv[])
 }
 
 #endif
+
+void mainLoopForEmscripten()
+{
+	g_app->Run();
+}
+
+Application * GetApp()
+{
+	return g_app;
+}
+
+int RegisterApplication(Application * app)
+{
+	g_app = app;
+
+
+	int doneCode = DONECODE_NOT_DONE;
+#ifndef __EMSCRIPTEN__	  
+	do
+	{
+#endif	  	
+		g_app->Init();
+
+#ifndef __EMSCRIPTEN__		  
+		doneCode = g_app->Run();
+		g_app->Shutdown();
+	} while (doneCode != DONECODE_REAL_QUIT);
+#else
+		emscripten_set_main_loop(mainLoopForEmscripten, 0, true);
+#endif	  
+
+		delete g_app;
+		return 0;
+
+}

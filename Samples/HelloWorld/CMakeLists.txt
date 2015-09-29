@@ -10,8 +10,9 @@ if (NOT DEFINED EMSCRIPTEN)
 	include_directories(${SDL2_INCLUDE_DIR})
 endif()
 
-include_directories("../../Rototo/Sources")
 include_directories("../../Rototo/Extern/stb")
+include_directories("../../Rototo/Includes")
+
 
 add_executable (HelloWorld ${HelloWorld_SOURCES})
 target_link_libraries(HelloWorld Rototo)

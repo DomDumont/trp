@@ -1,6 +1,13 @@
-#ifndef __ROTOTO_H__
-#define __ROTOTO_H__
+#include "Global.h"
+#include "Utils.h"
+#include "Application_p.h"
+#include "Font.h"
+#include "Label.h"
+#include "Button_p.h"
+#include "ListBox.h"
+#include "ComboBox.h"
+#include "Music.h"
 
-#include "Application.h"
 
-#endif
+int RegisterApplication(Application * app);
+Application * GetApp();

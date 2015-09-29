@@ -23,7 +23,7 @@
 */
 
 #include "Global.h"
-#include "Button.h"
+#include "Button_p.h"
 #include "Application_p.h"
 #include "Font.h"
 #include "Vector2D.h"
@@ -116,7 +116,7 @@ Button::Button() : state(0),type(0)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Button ::~Button()
+Button::~Button()
 {
 
 	MY_SAFE_RELEASE(this->label.font);
@@ -125,6 +125,37 @@ Button ::~Button()
 #endif
 
 }
+
+
+#ifndef TRP_USE_BINDING
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void Button::SetUserData(void * userdata)
+{
+	this->user_data = userdata;
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void Button::SetSender(void * sender)
+{
+	this->sender = sender;
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void Button::SetClickHandler(on_click_handler_type handler)
+{
+	this->on_click_handler = handler;
+}
+
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

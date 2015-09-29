@@ -1,5 +1,4 @@
 #include "MenuScene.h"
-#include "GUIManager.h"
 
 
 bool OnSelectionChangedHandler(void * _sender,void * _userData)
@@ -64,9 +63,9 @@ void MenuScene::Init()
 	buttonStart.SetEnabled(false);
 	buttonStart.SetScale(1.0,1.0);
 	
-	buttonStart.on_click_handler = OnClickHandler;
-	buttonStart.user_data = this;
-	buttonStart.sender = &buttonStart;
+	buttonStart.SetClickHandler(OnClickHandler);
+	buttonStart.SetUserData(this);
+	buttonStart.SetSender(&buttonStart);
 
 
 	GUI_AddWidget(&buttonStart);
@@ -76,9 +75,9 @@ void MenuScene::Init()
 	listBox.SetSize(400,400);
 	listBox.SetPosition(200,380);
 	
-	listBox.on_selection_changed_handler = OnSelectionChangedHandler;
-	listBox.user_data = this;
-	listBox.sender = &listBox;
+	listBox.SetSelectionClickHandler(OnSelectionChangedHandler);
+	listBox.SetUserData(this);
+	listBox.SetSender(&listBox);
 	
     listBox.AddItem("Particles");
     listBox.AddItem("Hello World");
@@ -123,7 +122,7 @@ void MenuScene::Init()
     myMusic.Play(-1);   
 }
 
-void MenuScene::OnRender(Uint64 _delta)
+void MenuScene::OnRender(unsigned int _delta)
 {
 	WND_Clear();
 	monLabel.Render();
@@ -135,7 +134,7 @@ void MenuScene::OnRender(Uint64 _delta)
 	
 }
 
-void MenuScene::OnUpdate(Uint64 _delta)
+void MenuScene::OnUpdate(unsigned int _delta)
 {
 
 }

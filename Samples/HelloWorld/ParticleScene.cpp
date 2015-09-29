@@ -1,5 +1,4 @@
 #include "ParticleScene.h"
-#include "GUIManager.h"
 
 
 void ParticleScene::Init()
@@ -10,14 +9,14 @@ void ParticleScene::Init()
 	
 }
 
-void ParticleScene::OnRender(Uint64 _delta)
+void ParticleScene::OnRender(unsigned int _delta)
 {
 	WND_Clear();
 
 	
 }
 
-void ParticleScene::OnUpdate(Uint64 _delta)
+void ParticleScene::OnUpdate(unsigned int _delta)
 {
 
 }

@@ -1,16 +1,14 @@
 #ifndef __SCENE_MANAGER_H__
 #define __SCENE_MANAGER_H__
 
-#include "Global.h"
-#include "Utils.h"
 
 class Scene
 {
 public:
 	virtual void Init(){};
 	virtual void OnShutdown(){};
-	virtual void OnRender(Uint64 _delta){};
-	virtual void OnUpdate(Uint64 _delta){};
+	virtual void OnRender(unsigned int _delta){};
+	virtual void OnUpdate(unsigned int _delta){};
 };
 
 class SceneManager
@@ -18,8 +16,8 @@ class SceneManager
 public:
 
 	void ChangeScene(Scene * _newScene);
-	void OnRender(Uint64 _delta);
-	void OnUpdate(Uint64 _delta);
+	void OnRender(unsigned int _delta);
+	void OnUpdate(unsigned int _delta);
 
 private:
 	Scene *currentScene;

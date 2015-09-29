@@ -4,7 +4,7 @@
 
 void SceneManager::ChangeScene(Scene * _newScene)
 {
-	if (currentScene != NULL) 
+	if (currentScene != nullptr)
 		{
 		currentScene->OnShutdown();
 		}
@@ -12,9 +12,9 @@ void SceneManager::ChangeScene(Scene * _newScene)
     currentScene = _newScene;
 }
 
-void SceneManager::OnRender(Uint64 _delta)
+void SceneManager::OnRender(unsigned int _delta)
 	{	
-		if (currentScene != NULL) 
+		if (currentScene != nullptr)
 			{
 			currentScene->OnRender(_delta);
 			}

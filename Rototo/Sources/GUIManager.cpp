@@ -36,6 +36,13 @@
 #include "Atlas.h"
 
 
+
+void GUI_LoadTheme(const std::string& _file)
+{
+	g_app->guiManager->LoadTheme(_file);
+}
+
+
 void GUI_AddWidget(Widget *_widget)
 {
 	g_app->guiManager->AddWidget(_widget);
