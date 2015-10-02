@@ -51,5 +51,6 @@ void RegisterStdString(asIScriptEngine *engine);
 void RegisterStdStringUtils(asIScriptEngine *engine);
 
 END_AS_NAMESPACE
+
 #endif
 #endif

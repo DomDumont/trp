@@ -149,6 +149,8 @@ void Primitive::BuildInternalTexture()
 	SDL_SetRenderDrawColor(g_app->sdlRenderer, 0, 0, 0, 0);
 	SDL_RenderClear(g_app->sdlRenderer);
 
+	/* TODO Change this, and recreate basic shapes , without SDL_GFX if possible
+
 	switch(this->shape)
 	{
 	case 0:
@@ -164,6 +166,7 @@ void Primitive::BuildInternalTexture()
 		filledPieRGBA(g_app->sdlRenderer, this->frame.w/2, this->frame.h/2, this->frame.w/2,startAngle,endAngle, this->color.r,this->color.g,this->color.b,this->color.a);
 		break;
 	}
+	*/
 	//roundedBoxRGBA(g_app->sdlRenderer, 0, 0, this->position.w, this->position.h, 10 /*rad*/, this->color.r,this->color.g,this->color.b,this->color.a);
 
 

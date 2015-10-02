@@ -86,9 +86,9 @@ void RegisterButton()
 	///func:void SetState(int state)
 	g_app->scriptManager->RegisterClassMethod("Button","void SetState(int _state)", asMETHOD(Button, SetState));
 	///prop:CallbackHandler @on_click_handler
-	g_app->scriptManager->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler));
+	g_app->scriptManager->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler_script));
 	///prop:ref @user_data
-	g_app->scriptManager->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data));
+	g_app->scriptManager->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data_script));
 }
 #endif
 
@@ -100,15 +100,16 @@ Button::Button() : state(0),type(0)
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Button Constructor\n");
 #ifdef TRP_USE_BINDING
-	this->user_data.Set(NULL,NULL);
-	this->sender.Set(NULL,NULL);
-  on_click_handler = NULL;
-#else
+	this->user_data_script.Set(NULL,NULL);
+	this->sender_script.Set(NULL,NULL);
+	on_click_handler_script = NULL;
+#endif
+
 	this->user_data = NULL;
 	this->sender = NULL;
   	this->on_click_handler = NULL;
 
-#endif
+
 }
 
 
@@ -121,13 +122,13 @@ Button::~Button()
 
 	MY_SAFE_RELEASE(this->label.font);
 #ifdef TRP_USE_BINDING
-	MY_SAFE_RELEASE(this->on_click_handler);
+	MY_SAFE_RELEASE(this->on_click_handler_script);
 #endif
 
 }
 
 
-#ifndef TRP_USE_BINDING
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -155,7 +156,7 @@ void Button::SetClickHandler(on_click_handler_type handler)
 	this->on_click_handler = handler;
 }
 
-#endif
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -356,20 +357,20 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 
 #ifdef TRP_USE_BINDING
 	//Call Callback
-	if (this->on_click_handler != NULL)
+	if (this->on_click_handler_script != NULL)
 		{
-		this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("Button"));
-		ret = g_app->scriptManager->RunCallback(this->on_click_handler,&(this->sender),&(this->user_data));
-		this->sender.Set(NULL,NULL);
+		this->sender_script.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("Button"));
+		int ret = g_app->scriptManager->RunCallback(this->on_click_handler_script,&(this->sender_script),&(this->user_data_script));
+		this->sender_script.Set(NULL,NULL);
 		return ret;
 		}
-#else
+#endif
 	if (this->on_click_handler != NULL)
 		{
 		bool ret = this->on_click_handler(this->sender,this->user_data);
 		return ret;
 		}		
-#endif
+
 
 	return false;
 }

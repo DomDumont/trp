@@ -68,9 +68,9 @@ void RegisterListBox()
 	///func:float GetRotation()
 	g_app->scriptManager->RegisterClassMethod("ListBox","float get_Rotation()", asMETHOD(ListBox, GetRotation));
 	///prop:CallbackHandler @onSelectionChangedHandler
-	g_app->scriptManager->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler));
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData));
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
 	//g_app->scriptManager->RegisterClassMethod("ListBox","void Update(uint64 _elapsed)", asMETHOD(ListBox, Update));
 }
 #endif
@@ -87,8 +87,8 @@ ListBox::ListBox():
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox Constructor\n");
 
 #ifdef TRP_USE_BINDING
-	this->sender.Set(NULL,NULL);
-	this->userData.Set(NULL,NULL);
+	this->sender_script.Set(NULL,NULL);
+	this->userData_script.Set(NULL,NULL);
 #endif
 
 	this->backgroundColor.r = 0;
@@ -131,7 +131,7 @@ ListBox::~ListBox()
 		}
 
 #ifdef TRP_USE_BINDING
-	MY_SAFE_RELEASE(this->onSelectionChangedHandler);
+	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
 #endif
 
 }
@@ -235,7 +235,7 @@ void ListBox::SetSize(int _w,int _h)
 	Widget::SetSize(_w,_h);
 }
 
-#ifndef TRP_USE_BINDING
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -262,7 +262,7 @@ void ListBox::SetSelectionClickHandler(on_selection_changed_handler_type handler
 {
 	this->on_selection_changed_handler = handler;
 }
-#endif
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -471,19 +471,19 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 
 		//Call Callback
 #ifdef TRP_USE_BINDING
-		if (this->onSelectionChangedHandler != NULL)
+		if (this->onSelectionChangedHandler_script != NULL)
 			{			
-			this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ListBox"));
-			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
-			this->sender.Set(NULL,NULL);
+			this->sender_script.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ListBox"));
+			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler_script,&(this->sender_script),&(this->userData_script));
+			this->sender_script.Set(NULL,NULL);
 			}
-#else			
+#endif
 		if (this->on_selection_changed_handler != NULL)
 			{
 			bool ret = this->on_selection_changed_handler(this->sender,this->user_data);
 			return ret;
 			}
-#endif
+
 
 		}
 	this->dragState = 0;

@@ -31,7 +31,7 @@
 
 #ifdef TRP_USE_BINDING
 #include <angelscript.h>
-#include "scripthandle/scripthandle.h"
+#include "binding/scripthandle.h"
 #endif
 
 #include "Sprite.h"
@@ -65,12 +65,12 @@ public:
 public:
 
 #ifdef TRP_USE_BINDING
-	asIScriptFunction *	onSelectionChangedHandler = nullptr;
-	CScriptHandle		userData;
-	CScriptHandle		sender;
+	asIScriptFunction *	onSelectionChangedHandler_script = nullptr;
+	CScriptHandle		userData_script;
+	CScriptHandle		sender_script;
 #endif
 
-#ifndef TRP_USE_BINDING
+
 private:
 	typedef bool(*on_selection_changed_handler_type)(void * _sender, void * _user_data);
 	on_selection_changed_handler_type on_selection_changed_handler;	
@@ -80,7 +80,7 @@ public:
 	void SetUserData(void * userdata); //TODO Move Up to widget ?
 	void SetSender(void *sender);
 	void SetSelectionClickHandler(on_selection_changed_handler_type handler);
-#endif
+
 
 private:
 	void BuildInternalTexture();

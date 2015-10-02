@@ -32,7 +32,7 @@
 
 #ifdef TRP_USE_BINDING
 #include <angelscript.h>
-#include "scripthandle/scripthandle.h"
+#include "binding/scripthandle.h"
 #endif
 
 #define STATE_UP	0
@@ -75,14 +75,14 @@ public:
 
 public:
 #ifdef TRP_USE_BINDING
-	asIScriptFunction *	on_click_handler;
-	CScriptHandle		user_data;
-	CScriptHandle		sender;
+	asIScriptFunction *	on_click_handler_script;
+	CScriptHandle		user_data_script;
+	CScriptHandle		sender_script;
 #endif
 
 
 
-#ifndef TRP_USE_BINDING
+
 private:
 	typedef bool(*on_click_handler_type)(void * _sender, void * _user_data);
 	on_click_handler_type on_click_handler;
@@ -92,7 +92,7 @@ public:
 	void SetUserData(void *userdata);
 	void SetSender(void *sender);
 	void SetClickHandler(on_click_handler_type handler);
-#endif
+
 
 
 private:

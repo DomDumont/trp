@@ -4,8 +4,6 @@
 #include <string.h>
 #include "scriptmath.h"
 
-#ifdef TRP_USE_BINDING
-
 #ifdef __BORLANDC__
 #include <cmath>
 
@@ -48,6 +46,8 @@ inline float modff (float x, float *y)
 	return f;
 }
 #endif
+
+#ifdef TRP_USE_BINDING
 
 BEGIN_AS_NAMESPACE
 
@@ -345,6 +345,5 @@ void RegisterScriptMath(asIScriptEngine *engine)
 }
 
 END_AS_NAMESPACE
-
 #endif
 

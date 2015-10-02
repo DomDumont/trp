@@ -31,7 +31,7 @@
 
 #ifdef TRP_USE_BINDING
 #include <angelscript.h>
-#include "scripthandle/scripthandle.h"
+#include "binding/scripthandle.h"
 #endif
 
 #define C_MODE_NORMAL   0

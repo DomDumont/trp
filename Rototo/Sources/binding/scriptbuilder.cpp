@@ -67,7 +67,11 @@ string CScriptBuilder::GetSectionName(unsigned int idx) const
 {
 	if( idx >= includedScripts.size() ) return "";
 
+#ifdef _WIN32
+	set<string, ci_less>::const_iterator it = includedScripts.begin();
+#else
 	set<string>::const_iterator it = includedScripts.begin();
+#endif
 	while( idx-- > 0 ) it++;
 	return *it;
 }
@@ -1021,6 +1025,5 @@ string GetCurrentDir()
 }
 
 END_AS_NAMESPACE
-
-
 #endif
+

@@ -1,6 +1,8 @@
 #include "Global.h"
 
+
 #include "Music.h"
+#include "Application_p.h"
 
 
 //-----------------------------------------------------------------------------

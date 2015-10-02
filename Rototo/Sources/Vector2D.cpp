@@ -186,8 +186,8 @@ void RegisterVector2D()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_CONSTRUCT, "void f(float _x,float _y)", asFUNCTION(ConstructVector2DWithFloats),asCALL_CDECL_OBJFIRST);
 
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_DESTRUCT,   "void f()",asFUNCTION(DestructVector2D),  asCALL_CDECL_OBJLAST);
-	r = g_app->scriptManager->engine->RegisterObjectProperty("Vector2D", "float x", asOFFSET(Vector2D,x)); assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectProperty("Vector2D", "float y", asOFFSET(Vector2D,y)); assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("Vector2D", "float x", asOFFSET(Vector2D,x)); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("Vector2D", "float y", asOFFSET(Vector2D,y)); SDL_assert( r >= 0 );
 	
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "bool opEquals(const Vector2D &in)", asMETHOD(Vector2D, operator==), asCALL_THISCALL);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void opMulAssign(float a)", asMETHOD(Vector2D, operator*=), asCALL_THISCALL);

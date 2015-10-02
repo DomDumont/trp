@@ -47,16 +47,18 @@
 
 #include "Particles.h" //Registration
 
+#include "Music.h" //Registration
+
 
 #ifdef TRP_USE_BINDING
 
-#include "scriptstdstring/scriptstdstring.h"
-#include "scripthandle/scripthandle.h"
-#include "scriptbuilder/scriptbuilder.h"
-#include "scriptmath/scriptmath.h"
-#include "scriptarray/scriptarray.h"
+#include "binding/scriptstdstring.h"
+#include "binding/scripthandle.h"
+#include "binding/scriptbuilder.h"
+#include "binding/scriptmath.h"
+#include "binding/scriptarray.h"
 #include "Debug.h" // New one based on the angelscript add_on called debugger
-#include "scriptdictionary/scriptdictionary.h"
+#include "binding/scriptdictionary.h"
 
 
 #include <iostream>  // cout
@@ -267,6 +269,7 @@ void ScriptManager::Prepare()
 
 	//Physics Related
 
+#ifdef TRP_USE_PHYSICS
 	RegisterBody();
 
 	///sect:Physic
@@ -279,6 +282,7 @@ void ScriptManager::Prepare()
 	///glob:Body @ PHY_GetContactB()
 	this->RegisterGlobalFunction("Body @ PHY_GetContactB()", asMETHOD(PhysicsManager,GetContactB), asCALL_THISCALL_ASGLOBAL, g_app->physicsManager);
 
+#endif
 	RegisterEmitter();
 
 	if (this->mydbg != NULL)
@@ -336,7 +340,7 @@ int ScriptManager::RunCallback(asIScriptFunction * _callback,CScriptHandle *_sen
 
 	asIScriptContext* tempCtx = this->NewContext();
 
-	if( g_app->settings_allowdebug != 0 )
+	if( g_app->settings.allowdebug != 0 )
 		{
 
 		SDL_assert(mydbg);
@@ -420,7 +424,7 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 
 
 	//Debug try
-	if( g_app->settings_allowdebug != 0 )
+	if( g_app->settings.allowdebug != 0 )
 		{
 
 
@@ -532,7 +536,7 @@ void ScriptManager::RunScript(const std::string& _prototype, char * _fmt, ...)
 
 
 	//Debug try
-	if( g_app->settings_allowdebug != 0 )
+	if( g_app->settings.allowdebug != 0 )
 		{
 
 		SDL_assert(mydbg != NULL);

@@ -28,7 +28,7 @@
 #ifdef TRP_USE_BINDING
 
 #include <angelscript.h>
-#include "scripthandle/scripthandle.h"
+#include "binding/scripthandle.h"
 #include <string>
 #include <vector>
 

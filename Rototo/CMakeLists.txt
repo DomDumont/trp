@@ -3,6 +3,7 @@ file(GLOB_RECURSE Rototo_HEADERS "Sources/*.h" "Includes/*.h")
 
 
 option(ROTOTO_USE_AUDIO "Rototo has audio features " OFF)
+option(ROTOTO_USE_BINDING "Rototo has audio features " OFF)
 
 
 if (NOT DEFINED EMSCRIPTEN)
@@ -13,6 +14,10 @@ include_directories("Extern/stb")
 include_directories("Extern/PugiXml/src")
 include_directories("Includes")
 
+if (ROTOTO_USE_BINDING)
+	include_directories("Extern/AngelScript/sdk/angelscript/include")
+endif()
+
 
 
 
@@ -20,8 +25,15 @@ add_library (Rototo ${Rototo_SOURCES} ${Rototo_HEADERS})
 
 
 if (ROTOTO_USE_AUDIO)
-	add_definitions(-DTRP_USE_AUDIO)
+	add_definitions(-DTRP_USE_AUDIO)	
 endif()
+
+if (ROTOTO_USE_BINDING)
+	add_definitions(-DTRP_USE_BINDING)	
+endif()
+
+
+
 
 if (WIN32)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
@@ -38,6 +50,9 @@ endif()
 
 target_link_libraries(Rototo PugiXml)
 target_link_libraries(Rototo ${SDL2_LIBRARY})
+if (ROTOTO_USE_BINDING)
+	target_link_libraries(Rototo angelscript)
+endif()
 
 add_subdirectory(Extern)
 
