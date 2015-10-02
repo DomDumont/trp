@@ -27,6 +27,8 @@ private:
 
 	void OnInit()
 	{
+		
+/*		
 		UTI_Log("OnInit");
 
 		WND_GetLogicalSize(windowX, windowY);
@@ -35,18 +37,19 @@ private:
 		GUI_LoadTheme("metal");
 		
 		theSceneManager.ChangeScene(&menuScene);
-
+*/
 	}
 
 	void OnUpdate(unsigned int elapsed)
 	{
-
+		
 	}
 
 	void OnRender(unsigned int elapsed)
 	{
+		
 	
-	theSceneManager.OnRender(elapsed);
+//	theSceneManager.OnRender(elapsed);
 	}
 };
 

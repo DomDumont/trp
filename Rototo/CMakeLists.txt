@@ -3,7 +3,7 @@ file(GLOB_RECURSE Rototo_HEADERS "Sources/*.h" "Includes/*.h")
 
 
 option(ROTOTO_USE_AUDIO "Rototo has audio features " OFF)
-option(ROTOTO_USE_BINDING "Rototo has audio features " OFF)
+option(ROTOTO_USE_BINDING "Rototo has audio features " ON)
 
 
 if (NOT DEFINED EMSCRIPTEN)
