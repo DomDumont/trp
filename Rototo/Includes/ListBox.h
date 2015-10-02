@@ -65,7 +65,7 @@ public:
 public:
 
 #ifdef TRP_USE_BINDING
-	asIScriptFunction *	onSelectionChangedHandler_script = nullptr;
+	asIScriptFunction *	onSelectionChangedHandler_script;
 	CScriptHandle		userData_script;
 	CScriptHandle		sender_script;
 #endif

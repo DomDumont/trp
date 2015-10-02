@@ -87,6 +87,7 @@ ListBox::ListBox():
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox Constructor\n");
 
 #ifdef TRP_USE_BINDING
+	this->onSelectionChangedHandler_script = NULL;
 	this->sender_script.Set(NULL,NULL);
 	this->userData_script.Set(NULL,NULL);
 #endif
