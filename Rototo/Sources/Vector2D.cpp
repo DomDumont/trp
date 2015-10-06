@@ -31,6 +31,10 @@
 #include <cmath>
 #include <cfloat>
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
+
 Vector2D::Vector2D()
 {
 	this->x = 0.0f;
@@ -180,6 +184,9 @@ void ConstructVector2DWithFloats(Vector2D *thisPointer,float _x,float _y)
 void RegisterVector2D()
 {
 	int r;
+
+#ifndef __EMSCRIPTEN__	
+
 	r = g_app->scriptManager->engine->RegisterObjectType("Vector2D", sizeof(Vector2D), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r>=0);
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_CONSTRUCT,  "void f()",asFUNCTION(ConstructVector2D), asCALL_CDECL_OBJLAST);
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_CONSTRUCT, "void f(const Vector2D &in)", asFUNCTION(CopyConstructorVector2D),asCALL_CDECL_OBJFIRST);
@@ -203,6 +210,32 @@ void RegisterVector2D()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void FromPolar(float _angle, float _magnitude)", asMETHOD(Vector2D, FromPolar), asCALL_THISCALL);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void TurnLeft()", asMETHOD(Vector2D, TurnLeft), asCALL_THISCALL);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void TurnRight()", asMETHOD(Vector2D, TurnRight), asCALL_THISCALL);
-		
+#else
+
+	r = g_app->scriptManager->engine->RegisterObjectType("Vector2D", sizeof(Vector2D), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r>=0);
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_CONSTRUCT,  "void f()",WRAP_CON(Vector2D,()), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_CONSTRUCT, "void f(const Vector2D &in)", WRAP_CON(Vector2D,(const Vector2D &)),asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_CONSTRUCT, "void f(float _x,float _y)", WRAP_CON(Vector2D,(float ,float)),asCALL_GENERIC);
+
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Vector2D", asBEHAVE_DESTRUCT,   "void f()",WRAP_DES(Vector2D),  asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectProperty("Vector2D", "float x", asOFFSET(Vector2D,x)); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("Vector2D", "float y", asOFFSET(Vector2D,y)); SDL_assert( r >= 0 );
+	
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "bool opEquals(const Vector2D &in)", WRAP_MFN(Vector2D, operator==), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void opMulAssign(float a)", WRAP_MFN(Vector2D, operator*=), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "Vector2D opMul(float a)", WRAP_MFN(Vector2D, operator*), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void opAssign(const Vector2D &in)", WRAP_MFN(Vector2D, operator=), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void opAddAssign(const Vector2D &in)", WRAP_MFN(Vector2D, operator+=), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "Vector2D opAdd(const Vector2D &in)", WRAP_MFN(Vector2D, operator+), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void opSubAssign(const Vector2D &in)", WRAP_MFN(Vector2D, operator-=), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "Vector2D opSub(const Vector2D &in)", WRAP_MFN(Vector2D, operator-), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "float Length()", WRAP_MFN(Vector2D, Length), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "float Normalize()", WRAP_MFN(Vector2D, Normalize), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "float ToAngle()", WRAP_MFN(Vector2D, ToAngle), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void FromPolar(float _angle, float _magnitude)", WRAP_MFN(Vector2D, FromPolar), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void TurnLeft()", WRAP_MFN(Vector2D, TurnLeft), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Vector2D", "void TurnRight()", WRAP_MFN(Vector2D, TurnRight), asCALL_GENERIC);
+
+#endif		
 }
 #endif

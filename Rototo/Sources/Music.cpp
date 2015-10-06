@@ -54,9 +54,9 @@ void RegisterMusic()
 #else
 
 	r = g_app->scriptManager->engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(ConstructMusic), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(DestructMusic), asCALL_CDECL_OBJLAST);SDL_assert(r >= 0);
-	
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", WRAP_CON(Music,()), asCALL_GENERIC); SDL_assert(r >= 0);
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", WRAP_DES(Music), asCALL_GENERIC);SDL_assert(r >= 0);
+
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Load(string &in _file)", WRAP_MFN(Music, Load), asCALL_GENERIC);SDL_assert(r >= 0);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", WRAP_MFN(Music, Play), asCALL_GENERIC);SDL_assert(r >= 0);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void UnLoad()", WRAP_MFN(Music, UnLoad), asCALL_GENERIC);SDL_assert(r >= 0);
