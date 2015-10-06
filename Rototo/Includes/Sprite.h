@@ -29,6 +29,8 @@
 #include <string>
 class Atlas;
 class AtlasEntry;
+#include "Vector2D.h"
+
 class Sprite : public Widget
 {
 public:
@@ -45,6 +47,9 @@ public:
 	void UnLoad();
 	void SetNinePatch(bool _value);
 	void SetNinePatchRect(int _x,int _y,int _w,int _h);
+	void	SetPosition(int _x,int _y);
+	void	SetPosition(Vector2D _pos);	
+	void	SetSize(int _w,int _h);
 
 public:
 

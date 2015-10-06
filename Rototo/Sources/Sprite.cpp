@@ -32,7 +32,33 @@
 #include "Application_p.h"
 
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
 
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void	Sprite::SetSize(int _x,int _y)
+{
+	Widget::SetSize(_x,_y);
+}
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void	Sprite::SetPosition(int _x,int _y)
+{
+	Widget::SetPosition(_x,_y);
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void	Sprite::SetPosition(Vector2D _pos)
+{
+	Widget::SetPosition(_pos);
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -346,37 +372,62 @@ void RegisterSprite()
 {
 	int r;
 
+#ifndef __EMSCRIPTEN__
+
 	///class:Sprite
 	r = g_app->scriptManager->engine->RegisterObjectType("Sprite", 0, asOBJ_REF); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_FACTORY, "Sprite@ f()", asFUNCTION(Sprite_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_ADDREF, "void f()", asMETHOD(Sprite,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_RELEASE, "void f()", asMETHOD(Sprite,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+
 	///func:void Load(Atlas @ atlas, string &in name)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void Load(Atlas @ _atlas, string &in _name)", asMETHOD(Sprite, Load));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void Load(Atlas @ _atlas, string &in _name)", asMETHOD(Sprite, Load),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetPosition(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetPosition(int _x,int _y)", asMETHODPR(Sprite, SetPosition,(int,int),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetPosition(int _x,int _y)", asMETHODPR(Sprite, SetPosition,(int,int),void),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void set_Position(Vector2D pos)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void set_Position(Vector2D _pos)", asMETHODPR(Sprite, SetPosition,(Vector2D),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void set_Position(Vector2D _pos)", asMETHODPR(Sprite, SetPosition,(Vector2D),void),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:bool Touched(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Sprite","bool Touched(int _x,int _y)", asMETHOD(Sprite, Touched));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","bool Touched(int _x,int _y)", asMETHOD(Sprite, Touched),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetScale(double xFactor,double yFactor)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Sprite, SetScale));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Sprite, SetScale),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetRotation(float angle)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void set_Rotation(float _angle)", asMETHOD(Sprite, SetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void set_Rotation(float _angle)", asMETHOD(Sprite, SetRotation),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:float get_Rotation()
-	g_app->scriptManager->RegisterClassMethod("Sprite","float get_Rotation()", asMETHOD(Sprite, GetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","float get_Rotation()", asMETHOD(Sprite, GetRotation),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Render()
-	g_app->scriptManager->RegisterClassMethod("Sprite","void Render()", asMETHOD(Sprite, Render));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void Render()", asMETHOD(Sprite, Render),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void UnLoad()
-	g_app->scriptManager->RegisterClassMethod("Sprite","void UnLoad()", asMETHOD(Sprite, UnLoad));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void UnLoad()", asMETHOD(Sprite, UnLoad),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Sprite, SetColor));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Sprite, SetColor),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetSize(int w,int h)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetSize(int _w,int _h)", asMETHODPR(Sprite, SetSize,(int,int),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetSize(int _w,int _h)", asMETHODPR(Sprite, SetSize,(int,int),void),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetNinePatch(bool value)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetNinePatch(bool _value)", asMETHOD(Sprite, SetNinePatch));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetNinePatch(bool _value)", asMETHOD(Sprite, SetNinePatch),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetNinePatchRect(int x,int y,int w,int h)
-	g_app->scriptManager->RegisterClassMethod("Sprite","void SetNinePatchRect(int _x,int _y,int _w,int _h)", asMETHOD(Sprite, SetNinePatchRect));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetNinePatchRect(int _x,int _y,int _w,int _h)", asMETHOD(Sprite, SetNinePatchRect),asCALL_THISCALL);SDL_assert( r >= 0 );
+#else
+	r = g_app->scriptManager->engine->RegisterObjectType("Sprite", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_FACTORY, "Sprite@ f()", asFUNCTION(Sprite_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_ADDREF, "void f()", asMETHOD(Sprite,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_RELEASE, "void f()", asMETHOD(Sprite,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+
+	
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void Load(Atlas @ _atlas, string &in _name)", WRAP_MFN(Sprite, Load),asCALL_GENERIC);SDL_assert( r >= 0 );	
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Sprite, SetPosition,(int,int),void),asCALL_GENERIC);SDL_assert( r >= 0 );	
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void set_Position(Vector2D _pos)", WRAP_MFN_PR(Sprite, SetPosition,(Vector2D),void),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","bool Touched(int _x,int _y)", WRAP_MFN(Sprite, Touched),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Sprite, SetScale),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void set_Rotation(float _angle)", WRAP_MFN(Sprite, SetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","float get_Rotation()", WRAP_MFN(Sprite, GetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void Render()", WRAP_MFN(Sprite, Render),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void UnLoad()", WRAP_MFN(Sprite, UnLoad),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Sprite, SetColor),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetSize(int _w,int _h)", WRAP_MFN_PR(Sprite, SetSize,(int,int),void),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetNinePatch(bool _value)", WRAP_MFN(Sprite, SetNinePatch),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetNinePatchRect(int _x,int _y,int _w,int _h)", WRAP_MFN(Sprite, SetNinePatchRect),asCALL_GENERIC);SDL_assert( r >= 0 );
+
+#endif
 
 }
 

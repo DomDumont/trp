@@ -27,6 +27,10 @@
 #include "Widget.h"
 #include "Vector2D.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -45,10 +49,19 @@ Widget *Widget_Factory()
 void RegisterWidget()
 {
 	int r;
+
+#ifndef __EMSCRIPTEN__	
 	r = g_app->scriptManager->engine->RegisterObjectType("Widget", 0, asOBJ_REF); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_FACTORY, "Widget@ f()", asFUNCTION(Widget_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_ADDREF, "void f()", asMETHOD(Widget,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", asMETHOD(Widget,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+#else
+	r = g_app->scriptManager->engine->RegisterObjectType("Widget", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_FACTORY, "Widget@ f()", WRAP_FN(Widget_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Widget,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Widget,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+
+#endif	
 
 }
 #endif
