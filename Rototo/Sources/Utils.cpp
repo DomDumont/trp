@@ -40,6 +40,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
+  
 FILE *rwLogFile = NULL;
 
 /*----------------------------------------------------------------------------*/
@@ -619,6 +624,9 @@ void RegisterUtils()
 {
 	int r;
 
+
+#ifndef __EMSCRIPTEN__
+
 ///sect:Utils
 r = g_app->scriptManager->engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert( r >= 0 );
 
@@ -667,6 +675,36 @@ g_app->scriptManager->RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,in
 g_app->scriptManager->RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", asFUNCTION(IO_ReadInt), asCALL_CDECL);
 ///glob:void IO_Close(uint64 handle)
 g_app->scriptManager->RegisterGlobalFunction("void IO_Close(uint64 _handle)", asFUNCTION(IO_Close), asCALL_CDECL);
+
+#else
+
+r = g_app->scriptManager->engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert( r >= 0 );
+
+g_app->scriptManager->RegisterGlobalFunction("void UTI_Log(string &in _toto)", WRAP_FN(UTI_Log), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void UTI_Exit()", WRAP_FN(UTI_Exit), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void UTI_SRand(uint _seed)", WRAP_FN(UTI_SRand), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", WRAP_FN(UTI_Rand), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("string UTI_GetLanguage()", WRAP_FN(UTI_GetLanguage), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("string UTI_GetVersion()", WRAP_FN(UTI_GetVersion), asCALL_GENERIC);
+
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", WRAP_FN(WND_SetWindowTitle), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", WRAP_FN(WND_SetLogicalSize), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", WRAP_FN(WND_GetLogicalSize), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", WRAP_FN(WND_SetOrientation), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", WRAP_FN(WND_SetCapFPS), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_FN(WND_ClearWithColor), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_Clear()", WRAP_FN(WND_Clear), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", WRAP_FN(WND_ClearRect), asCALL_GENERIC);
+
+
+g_app->scriptManager->RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", WRAP_FN(IO_Open), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", WRAP_FN(IO_WriteString), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", WRAP_FN(IO_ReadString), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", WRAP_FN(IO_WriteInt), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", WRAP_FN(IO_ReadInt), asCALL_GENERIC);
+g_app->scriptManager->RegisterGlobalFunction("void IO_Close(uint64 _handle)", WRAP_FN(IO_Close), asCALL_GENERIC);
+
+#endif
 }
 #endif
 

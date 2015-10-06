@@ -4,6 +4,9 @@
 #include "Music.h"
 #include "Application_p.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
 
 //-----------------------------------------------------------------------------
 // Music
@@ -36,6 +39,9 @@ void DestructMusic(Music *thisPointer)
 void RegisterMusic()
 {
 	int r;
+
+#ifndef __EMSCRIPTEN__
+
 	///class:Music
 	r = g_app->scriptManager->engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
 	//this->RegisterClass<Music>("Music");
@@ -45,6 +51,18 @@ void RegisterMusic()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", asMETHOD(Music, Play), asCALL_THISCALL);SDL_assert(r >= 0);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void UnLoad()", asMETHOD(Music, UnLoad), asCALL_THISCALL);SDL_assert(r >= 0);
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Stop()", asMETHOD(Music, Stop), asCALL_THISCALL);SDL_assert(r >= 0);
+#else
+
+	r = g_app->scriptManager->engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(ConstructMusic), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(DestructMusic), asCALL_CDECL_OBJLAST);SDL_assert(r >= 0);
+	
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Load(string &in _file)", WRAP_MFN(Music, Load), asCALL_GENERIC);SDL_assert(r >= 0);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", WRAP_MFN(Music, Play), asCALL_GENERIC);SDL_assert(r >= 0);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void UnLoad()", WRAP_MFN(Music, UnLoad), asCALL_GENERIC);SDL_assert(r >= 0);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Music", "void Stop()", WRAP_MFN(Music, Stop), asCALL_GENERIC);SDL_assert(r >= 0);
+
+#endif	
 
 }
 #endif
