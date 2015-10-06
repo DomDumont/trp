@@ -408,9 +408,9 @@ void RegisterSprite()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void SetNinePatchRect(int _x,int _y,int _w,int _h)", asMETHOD(Sprite, SetNinePatchRect),asCALL_THISCALL);SDL_assert( r >= 0 );
 #else
 	r = g_app->scriptManager->engine->RegisterObjectType("Sprite", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_FACTORY, "Sprite@ f()", asFUNCTION(Sprite_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_ADDREF, "void f()", asMETHOD(Sprite,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_RELEASE, "void f()", asMETHOD(Sprite,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_FACTORY, "Sprite@ f()", WRAP_FN(Sprite_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Sprite,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sprite", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Sprite,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 
 	
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Sprite","void Load(Atlas @ _atlas, string &in _name)", WRAP_MFN(Sprite, Load),asCALL_GENERIC);SDL_assert( r >= 0 );	
