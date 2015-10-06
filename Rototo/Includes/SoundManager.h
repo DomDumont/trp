@@ -87,5 +87,7 @@ private:
 };
 
 void RegisterSoundManager();
+void SND_SetMusicVolume(int _newVolume);
+void SND_SetSFXVolume(int _newVolume);
 
 #endif

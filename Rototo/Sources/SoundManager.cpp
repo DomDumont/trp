@@ -34,6 +34,28 @@
 	//#include <SDL/SDL_Mixer.h>
 #endif
 
+
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void SND_SetMusicVolume(int _newVolume)
+{
+	g_app->soundManager->SetMusicVolume(_newVolume);
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void SND_SetSFXVolume(int _newVolume)
+{
+	g_app->soundManager->SetSFXVolume(_newVolume);
+}
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -139,11 +161,16 @@ void SoundManager::Shutdown()
 void RegisterSoundManager()
 {
 
+#ifndef __EMSCRIPTEN__
 	///sect:Sound
-	///glob:void SND_SetMusicVolume(int newVolume)
-	g_app->scriptManager->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", asMETHOD(SoundManager,SetMusicVolume), asCALL_THISCALL_ASGLOBAL, g_app->soundManager);
+	///glob:void SND_SetMusicVolume(int newVolume)	
+	g_app->scriptManager->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", asFUNCTION(SND_SetMusicVolume), asCALL_CDECL);
 	///glob:void SND_SetSFXVolume(int newVolume)
-	g_app->scriptManager->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", asMETHOD(SoundManager,SetSFXVolume), asCALL_THISCALL_ASGLOBAL, g_app->soundManager);
+	g_app->scriptManager->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", asFUNCTION(SND_SetSFXVolume), asCALL_CDECL);
+#else
+	g_app->scriptManager->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", WRAP_FN(SND_SetMusicVolume), asCALL_GENERIC);
+	g_app->scriptManager->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", WRAP_FN(SND_SetSFXVolume), asCALL_GENERIC);
+#endif	
 
 }
 #endif
