@@ -33,6 +33,9 @@
 
 #include "pugixml.hpp"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -42,15 +45,48 @@
 void RegisterTextManager()
 {
 	
+#ifndef __EMSCRIPTEN__	
 	///sect:Text
 	///glob:string TXT_GetString(string &id)
-	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(string &in id)", asMETHOD(TextManager,GetString), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
+	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(string &in id)", asFUNCTION(TXT_GetString), asCALL_CDECL);
 	///glob:void TXT_Load(string &in file,int flags=13)
-	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asMETHOD(TextManager,Load), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
-	g_app->scriptManager->RegisterGlobalFunction("string TXT_UnLoad()", asMETHOD(TextManager,UnLoad), asCALL_THISCALL_ASGLOBAL, g_app->textManager);
+	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asFUNCTION(TXT_Load), asCALL_CDECL);
+	///glob:void TXT_UnLoad()
+	g_app->scriptManager->RegisterGlobalFunction("void TXT_UnLoad()", asFUNCTION(TXT_UnLoad), asCALL_CDECL);
+#else
+	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(string &in id)", WRAP_FN(TXT_GetString), asCALL_GENERIC);
+	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", WRAP_FN(TXT_Load), asCALL_GENERIC);
+	g_app->scriptManager->RegisterGlobalFunction("void TXT_UnLoad()", WRAP_FN(TXT_UnLoad), asCALL_GENERIC);
+
+#endif	
 	
 }
 #endif
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+std::string TXT_GetString(const std::string& _id)
+{
+	return g_app->textManager->GetString(_id);
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void TXT_Load(const std::string& _file,int _flags=13)
+{
+g_app->textManager->Load(_file,_flags);
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void TXT_UnLoad()
+{
+	g_app->textManager->UnLoad();
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

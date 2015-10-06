@@ -52,5 +52,8 @@ private:
 
 
 void RegisterTextManager();
+std::string TXT_GetString(const std::string& _id);
+void TXT_Load(const std::string& _file,int _flags);
+void  TXT_UnLoad();
 
 #endif
