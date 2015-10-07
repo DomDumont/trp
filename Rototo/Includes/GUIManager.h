@@ -85,6 +85,10 @@ private:
 };
 
 void GUI_AddWidget(Widget *_widget);
+void GUI_RemoveWidget(Widget *_widget);
 void GUI_LoadTheme(const std::string& _file);
+void GUI_UnLoadTheme();
+
+void RegisterGUI();
 
 #endif

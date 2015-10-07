@@ -35,18 +35,44 @@
 #include "Sprite.h"
 #include "Atlas.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
 
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 void GUI_LoadTheme(const std::string& _file)
 {
 	g_app->guiManager->LoadTheme(_file);
 }
 
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void GUI_UnLoadTheme()
+{
+	g_app->guiManager->UnLoadTheme();
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 void GUI_AddWidget(Widget *_widget)
 {
 	g_app->guiManager->AddWidget(_widget);
 }
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+void GUI_RemoveWidget(Widget *_widget)
+{
+	g_app->guiManager->RemoveWidget(_widget);
+}
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -388,3 +414,31 @@ void GUIManager::UnLoadTheme()
 }
 
 
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+void RegisterGUI()
+{
+
+#ifndef __EMSCRIPTEN__ //TODO Pout this elsewhese.
+
+	///sect:GUI
+	///glob:void GUI_AddWidget(Widget @)
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asMETHOD(GUIManager,AddWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+	///glob:void GUI_RemoveWidget(Widget @)
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asMETHOD(GUIManager,RemoveWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+	///glob:void GUI_LoadTheme(string &in file)
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asMETHOD(GUIManager,LoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+	///glob:void GUI_UnLoadTheme()
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager,UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
+#else
+
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_AddWidget(Widget @)", WRAP_FN(GUI_AddWidget), asCALL_GENERIC);
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", WRAP_FN(GUI_RemoveWidget), asCALL_GENERIC);
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", WRAP_FN(GUI_LoadTheme), asCALL_GENERIC);
+	g_app->scriptManager->RegisterGlobalFunction("void GUI_UnLoadTheme()", WRAP_FN(GUI_UnLoadTheme), asCALL_GENERIC);
+
+#endif	
+}

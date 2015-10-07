@@ -99,7 +99,7 @@ void RegisterButton()
 
 	///class:Button
 	r = g_app->scriptManager->engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", asFUNCTION(ButtonFactory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", WRAP_FN(ButtonFactory), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Button,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Button,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 
@@ -108,13 +108,13 @@ void RegisterButton()
 	///func:void Render()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void Render()", WRAP_MFN(Button, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void SetSize(int w,int h)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetSize(int _w,int _h)", WRAP_MFN_PR(Button, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void set_Position(Vector2D vec)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Size(Vector2D _vec)", WRAP_MFN_PR(Button, SetSize,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void SetPosition(int x,int y)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Button, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void set_Position(Vector2D vec)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Position(Vector2D _vec)", WRAP_MFN_PR(Button, SetPosition,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void SetFont(Font @ font)
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetFont(Font @ _font)", WRAP_MFN(Button, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
