@@ -33,6 +33,11 @@
 #include "Application_p.h"
 #include "Sprite.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
+
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -362,6 +367,8 @@ void RegisterAnimation()
 {
 	int r;
 
+#ifndef __EMSCRIPTEN__
+
 	///class:Animation
 	r = g_app->scriptManager->engine->RegisterObjectType("Animation", 0, asOBJ_REF); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Animation", asBEHAVE_FACTORY, "Animation@ f()", asFUNCTION(Animation_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
@@ -372,35 +379,57 @@ void RegisterAnimation()
 	///arg: _atlas : Reference to the atlas containing the animation
 	///arg: _name : name of the animation
 	///sample:int toto\ntoto = Load(titi);\ntata
-	g_app->scriptManager->RegisterClassMethod("Animation","void Load(Atlas @ _atlas, string &in _name,string &in _format,int _nbFrames)", asMETHOD(Animation, Load));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Load(Atlas @ _atlas, string &in _name,string &in _format,int _nbFrames)", asMETHOD(Animation, Load));SDL_assert( r >= 0 );
 	///func:void SetFPS(int fps)
 	///role: Set the speed of the animation in frames per second
 	///arg: _fps : frames per second
-	g_app->scriptManager->RegisterClassMethod("Animation","void SetFPS(int _fps)", asMETHOD(Animation, SetFPS));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void SetFPS(int _fps)", asMETHOD(Animation, SetFPS),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Update(uint64 elapsed)
-	g_app->scriptManager->RegisterClassMethod("Animation","void Update(uint64 _elapsed)", asMETHOD(Animation, Update));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Update(uint64 _elapsed)", asMETHOD(Animation, Update),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Render()
-	g_app->scriptManager->RegisterClassMethod("Animation","void Render()", asMETHOD(Animation, Render));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Render()", asMETHOD(Animation, Render),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Play(int mode = 0, int nbLoops = 1)
-	g_app->scriptManager->RegisterClassMethod("Animation","void Play(int _mode = 0, int _nbLoops = 1)", asMETHOD(Animation, Play));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Play(int _mode = 0, int _nbLoops = 1)", asMETHOD(Animation, Play),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Stop(bool waitEnd = true)
-	g_app->scriptManager->RegisterClassMethod("Animation","void Stop(bool _waitEnd = true)", asMETHOD(Animation, Stop));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Stop(bool _waitEnd = true)", asMETHOD(Animation, Stop),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetPosition(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Animation","void SetPosition(int _x,int _y)", asMETHOD(Animation, SetPosition));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void SetPosition(int _x,int _y)", asMETHOD(Animation, SetPosition),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:bool Touched(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Animation","bool Touched(int _x,int _y)", asMETHOD(Animation, Touched));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","bool Touched(int _x,int _y)", asMETHOD(Animation, Touched),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetScale(double xFactor,double yFactor)
-	g_app->scriptManager->RegisterClassMethod("Animation","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Animation, SetScale));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Animation, SetScale),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetRotation(float angle)
-	g_app->scriptManager->RegisterClassMethod("Animation","void set_Rotation(float _angle)", asMETHOD(Animation, SetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void set_Rotation(float _angle)", asMETHOD(Animation, SetRotation),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:float get_Rotation()
-	g_app->scriptManager->RegisterClassMethod("Animation","float get_Rotation()", asMETHOD(Animation, GetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","float get_Rotation()", asMETHOD(Animation, GetRotation),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void UnLoad()
-	g_app->scriptManager->RegisterClassMethod("Animation","void UnLoad()", asMETHOD(Animation, UnLoad));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void UnLoad()", asMETHOD(Animation, UnLoad)),asCALL_THISCALL;SDL_assert( r >= 0 );
 	///prop:CallbackHandler @onComplete
-	g_app->scriptManager->RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler));
+	g_app->scriptManager->RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler));SDL_assert( r >= 0 );
 	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData));
+	g_app->scriptManager->RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData));SDL_assert( r >= 0 );
+#else
+	
+	r = g_app->scriptManager->engine->RegisterObjectType("Animation", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Animation", asBEHAVE_FACTORY, "Animation@ f()", WRAP_FN(Animation_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Animation", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Animation,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Animation", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Animation,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Load(Atlas @ _atlas, string &in _name,string &in _format,int _nbFrames)", WRAP_MFN(Animation, Load),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void SetFPS(int _fps)", WRAP_MFN(Animation, SetFPS),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Update(uint64 _elapsed)", WRAP_MFN(Animation, Update),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Render()", WRAP_MFN(Animation, Render),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Play(int _mode = 0, int _nbLoops = 1)", WRAP_MFN(Animation, Play),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Stop(bool _waitEnd = true)", WRAP_MFN(Animation, Stop),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void SetPosition(int _x,int _y)", WRAP_MFN(Animation, SetPosition),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","bool Touched(int _x,int _y)", WRAP_MFN(Animation, Touched),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Animation, SetScale),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void set_Rotation(float _angle)", WRAP_MFN(Animation, SetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","float get_Rotation()", WRAP_MFN(Animation, GetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void UnLoad()", WRAP_MFN(Animation, UnLoad),asCALL_GENERIC);SDL_assert( r >= 0 );
+
+	g_app->scriptManager->RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler));SDL_assert( r >= 0 );
+	g_app->scriptManager->RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData));	SDL_assert( r >= 0 );
+#endif
 }
 #endif
