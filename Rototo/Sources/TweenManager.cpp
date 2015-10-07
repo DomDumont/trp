@@ -490,7 +490,7 @@ void RegisterTween()
 
 
 	r = g_app->scriptManager->engine->RegisterObjectType("Tween", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", asFUNCTION(Tween_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", WRAP_FN(Tween_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Tween,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Tween,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectProperty("Tween", "CallbackHandler @onComplete", asOFFSET(Tween, onCompleteHandler)); SDL_assert( r >= 0 );

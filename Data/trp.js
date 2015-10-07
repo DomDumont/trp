@@ -30,9 +30,9 @@ Module.expectedDataFileDownloads++;
                               Module['locateFile'](REMOTE_PACKAGE_BASE) :
                               ((Module['filePackagePrefixURL'] || '') + REMOTE_PACKAGE_BASE);
   
-      var REMOTE_PACKAGE_SIZE = 3370615;
-      var PACKAGE_UUID = '6333226c-1389-43c3-83e5-6138bd971ce2';
-    
+    var REMOTE_PACKAGE_SIZE = metadata.remote_package_size;
+    var PACKAGE_UUID = metadata.package_uuid;
+  
     function fetchRemotePackage(packageName, packageSize, callback, errback) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', packageName, true);
@@ -152,157 +152,30 @@ Module['FS_createPath']('/gamedata-sample', 'strings', true, true);
       },
     };
 
-      new DataRequest(0, 518, 0, 0).open('GET', '/settings.xml');
-    new DataRequest(518, 2180, 0, 0).open('GET', '/helpers/scene_manager.rsc');
-    new DataRequest(2180, 3082, 0, 0).open('GET', '/helpers/trp_api.rsc');
-    new DataRequest(3082, 4045, 0, 0).open('GET', '/themes/aeon/aeon.xml');
-    new DataRequest(4045, 45065, 0, 0).open('GET', '/themes/aeon/fonts/aeon_main.ttf');
-    new DataRequest(45065, 125329, 0, 0).open('GET', '/themes/aeon/fonts/pf_ronda_seven.ttf');
-    new DataRequest(125329, 198193, 0, 0).open('GET', '/themes/aeon/fonts/pf_ronda_seven_bold.ttf');
-    new DataRequest(198193, 215440, 0, 0).open('GET', '/themes/aeon/images/aeon.png');
-    new DataRequest(215440, 224448, 0, 0).open('GET', '/themes/aeon/images/aeon.xml');
-    new DataRequest(224448, 225351, 0, 0).open('GET', '/themes/castlevania/castlevania.xml');
-    new DataRequest(225351, 290027, 0, 0).open('GET', '/themes/castlevania/fonts/lohengrin.ttf');
-    new DataRequest(290027, 340115, 0, 0).open('GET', '/themes/castlevania/images/castlevania.png');
-    new DataRequest(340115, 345905, 0, 0).open('GET', '/themes/castlevania/images/castlevania.xml');
-    new DataRequest(345905, 346885, 0, 0).open('GET', '/themes/metal/metal.xml');
-    new DataRequest(346885, 496393, 0, 0).open('GET', '/themes/metal/fonts/SourceSansPro-Regular.ttf');
-    new DataRequest(496393, 645745, 0, 0).open('GET', '/themes/metal/fonts/SourceSansPro-Semibold.ttf');
-    new DataRequest(645745, 680554, 0, 0).open('GET', '/themes/metal/images/metal.png');
-    new DataRequest(680554, 685508, 0, 0).open('GET', '/themes/metal/images/metal.xml');
-    new DataRequest(685508, 686405, 0, 0).open('GET', '/themes/metroid/metroid.xml');
-    new DataRequest(686405, 695261, 0, 0).open('GET', '/themes/metroid/fonts/metroid.ttf');
-    new DataRequest(695261, 722775, 0, 0).open('GET', '/themes/metroid/images/metroid.png');
-    new DataRequest(722775, 728558, 0, 0).open('GET', '/themes/metroid/images/metroid.xml');
-    new DataRequest(728558, 729462, 0, 0).open('GET', '/themes/minimal/minimal.xml');
-    new DataRequest(729462, 809726, 0, 0).open('GET', '/themes/minimal/fonts/pf_ronda_seven.ttf');
-    new DataRequest(809726, 882590, 0, 0).open('GET', '/themes/minimal/fonts/pf_ronda_seven_bold.ttf');
-    new DataRequest(882590, 909408, 0, 0).open('GET', '/themes/minimal/images/minimal.png');
-    new DataRequest(909408, 914441, 0, 0).open('GET', '/themes/minimal/images/minimal.xml');
-    new DataRequest(914441, 915923, 0, 0).open('GET', '/gamedata-sample/animation_scene.rsc');
-    new DataRequest(915923, 917502, 0, 0).open('GET', '/gamedata-sample/dialog_scene.rsc');
-    new DataRequest(917502, 921401, 0, 0).open('GET', '/gamedata-sample/game_scene.rsc');
-    new DataRequest(921401, 923664, 0, 0).open('GET', '/gamedata-sample/gui_scene.rsc');
-    new DataRequest(923664, 925213, 0, 0).open('GET', '/gamedata-sample/helloworld_scene.rsc');
-    new DataRequest(925213, 927444, 0, 0).open('GET', '/gamedata-sample/io_scene.rsc');
-    new DataRequest(927444, 931180, 0, 0).open('GET', '/gamedata-sample/main.rsc');
-    new DataRequest(931180, 936552, 0, 0).open('GET', '/gamedata-sample/menu_scene.rsc');
-    new DataRequest(936552, 937866, 0, 0).open('GET', '/gamedata-sample/music_scene.rsc');
-    new DataRequest(937866, 939575, 0, 0).open('GET', '/gamedata-sample/particle_scene.rsc');
-    new DataRequest(939575, 943914, 0, 0).open('GET', '/gamedata-sample/physics_scene.rsc');
-    new DataRequest(943914, 953542, 0, 0).open('GET', '/gamedata-sample/platform.tmx');
-    new DataRequest(953542, 955113, 0, 0).open('GET', '/gamedata-sample/platform_scene.rsc');
-    new DataRequest(955113, 956924, 0, 0).open('GET', '/gamedata-sample/primitive_scene.rsc');
-    new DataRequest(956924, 957551, 0, 0).open('GET', '/gamedata-sample/project.rap');
-    new DataRequest(957551, 958775, 0, 0).open('GET', '/gamedata-sample/sound_scene.rsc');
-    new DataRequest(958775, 960505, 0, 0).open('GET', '/gamedata-sample/sprite_scene.rsc');
-    new DataRequest(960505, 962256, 0, 0).open('GET', '/gamedata-sample/textbox_scene.rsc');
-    new DataRequest(962256, 964024, 0, 0).open('GET', '/gamedata-sample/tween_scene.rsc');
-    new DataRequest(964024, 988928, 0, 0).open('GET', '/gamedata-sample/fonts/casual.ttf');
-    new DataRequest(988928, 1347184, 0, 0).open('GET', '/gamedata-sample/fonts/consola.ttf');
-    new DataRequest(1347184, 1440648, 0, 0).open('GET', '/gamedata-sample/fonts/kinkie.ttf');
-    new DataRequest(1440648, 1462392, 0, 0).open('GET', '/gamedata-sample/fonts/vitamin.ttf');
-    new DataRequest(1462392, 2043190, 0, 0).open('GET', '/gamedata-sample/graphics/apple-bg.jpg');
-    new DataRequest(2043190, 2094924, 0, 0).open('GET', '/gamedata-sample/graphics/back1.jpg');
-    new DataRequest(2094924, 2626144, 0, 0).open('GET', '/gamedata-sample/graphics/broute.png');
-    new DataRequest(2626144, 2633039, 0, 0).open('GET', '/gamedata-sample/graphics/broute.xml');
-    new DataRequest(2633039, 2642018, 0, 0).open('GET', '/gamedata-sample/graphics/level1.tmx');
-    new DataRequest(2642018, 2704388, 0, 0).open('GET', '/gamedata-sample/graphics/platform1.bmp');
-    new DataRequest(2704388, 2720240, 0, 0).open('GET', '/gamedata-sample/graphics/Sheep.png');
-    new DataRequest(2720240, 2744463, 0, 0).open('GET', '/gamedata-sample/graphics/sheet.png');
-    new DataRequest(2744463, 2744873, 0, 0).open('GET', '/gamedata-sample/graphics/sheet.xml');
-    new DataRequest(2744873, 2873708, 0, 0).open('GET', '/gamedata-sample/graphics/tiles_spritesheet.png');
-    new DataRequest(2873708, 2887273, 0, 0).open('GET', '/gamedata-sample/graphics/tiles_spritesheet.xml');
-    new DataRequest(2887273, 2887374, 0, 0).open('GET', '/gamedata-sample/particles/snow.xml');
-    new DataRequest(2887374, 3027252, 0, 0).open('GET', '/gamedata-sample/sounds/invitation.mod');
-    new DataRequest(3027252, 3049797, 0, 1).open('GET', '/gamedata-sample/sounds/pop.ogg');
-    new DataRequest(3049797, 3068223, 0, 1).open('GET', '/gamedata-sample/sounds/ressort.ogg');
-    new DataRequest(3068223, 3349995, 0, 1).open('GET', '/gamedata-sample/sounds/sample.ogg');
-    new DataRequest(3349995, 3370306, 0, 1).open('GET', '/gamedata-sample/sounds/sheep.ogg');
-    new DataRequest(3370306, 3370460, 0, 0).open('GET', '/gamedata-sample/strings/en.xml');
-    new DataRequest(3370460, 3370615, 0, 0).open('GET', '/gamedata-sample/strings/fr.xml');
+        var files = metadata.files;
+        for (i = 0; i < files.length; ++i) {
+          new DataRequest(files[i].start, files[i].end, files[i].crunched, files[i].audio).open('GET', files[i].filename);
+        }
 
+  
     function processPackageData(arrayBuffer) {
       Module.finishedDataFileDownloads++;
       assert(arrayBuffer, 'Loading data file failed.');
+      assert(arrayBuffer instanceof ArrayBuffer, 'bad input to processPackageData');
       var byteArray = new Uint8Array(arrayBuffer);
       var curr;
       
-      // copy the entire loaded file into a spot in the heap. Files will refer to slices in that. They cannot be freed though
-      // (we may be allocating before malloc is ready, during startup).
-      var ptr = Module['getMemory'](byteArray.length);
-      Module['HEAPU8'].set(byteArray, ptr);
-      DataRequest.prototype.byteArray = Module['HEAPU8'].subarray(ptr, ptr+byteArray.length);
-          DataRequest.prototype.requests["/settings.xml"].onload();
-          DataRequest.prototype.requests["/helpers/scene_manager.rsc"].onload();
-          DataRequest.prototype.requests["/helpers/trp_api.rsc"].onload();
-          DataRequest.prototype.requests["/themes/aeon/aeon.xml"].onload();
-          DataRequest.prototype.requests["/themes/aeon/fonts/aeon_main.ttf"].onload();
-          DataRequest.prototype.requests["/themes/aeon/fonts/pf_ronda_seven.ttf"].onload();
-          DataRequest.prototype.requests["/themes/aeon/fonts/pf_ronda_seven_bold.ttf"].onload();
-          DataRequest.prototype.requests["/themes/aeon/images/aeon.png"].onload();
-          DataRequest.prototype.requests["/themes/aeon/images/aeon.xml"].onload();
-          DataRequest.prototype.requests["/themes/castlevania/castlevania.xml"].onload();
-          DataRequest.prototype.requests["/themes/castlevania/fonts/lohengrin.ttf"].onload();
-          DataRequest.prototype.requests["/themes/castlevania/images/castlevania.png"].onload();
-          DataRequest.prototype.requests["/themes/castlevania/images/castlevania.xml"].onload();
-          DataRequest.prototype.requests["/themes/metal/metal.xml"].onload();
-          DataRequest.prototype.requests["/themes/metal/fonts/SourceSansPro-Regular.ttf"].onload();
-          DataRequest.prototype.requests["/themes/metal/fonts/SourceSansPro-Semibold.ttf"].onload();
-          DataRequest.prototype.requests["/themes/metal/images/metal.png"].onload();
-          DataRequest.prototype.requests["/themes/metal/images/metal.xml"].onload();
-          DataRequest.prototype.requests["/themes/metroid/metroid.xml"].onload();
-          DataRequest.prototype.requests["/themes/metroid/fonts/metroid.ttf"].onload();
-          DataRequest.prototype.requests["/themes/metroid/images/metroid.png"].onload();
-          DataRequest.prototype.requests["/themes/metroid/images/metroid.xml"].onload();
-          DataRequest.prototype.requests["/themes/minimal/minimal.xml"].onload();
-          DataRequest.prototype.requests["/themes/minimal/fonts/pf_ronda_seven.ttf"].onload();
-          DataRequest.prototype.requests["/themes/minimal/fonts/pf_ronda_seven_bold.ttf"].onload();
-          DataRequest.prototype.requests["/themes/minimal/images/minimal.png"].onload();
-          DataRequest.prototype.requests["/themes/minimal/images/minimal.xml"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/animation_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/dialog_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/game_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/gui_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/helloworld_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/io_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/main.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/menu_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/music_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/particle_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/physics_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/platform.tmx"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/platform_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/primitive_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/project.rap"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sound_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sprite_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/textbox_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/tween_scene.rsc"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/fonts/casual.ttf"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/fonts/consola.ttf"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/fonts/kinkie.ttf"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/fonts/vitamin.ttf"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/apple-bg.jpg"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/back1.jpg"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/broute.png"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/broute.xml"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/level1.tmx"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/platform1.bmp"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/Sheep.png"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/sheet.png"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/sheet.xml"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/tiles_spritesheet.png"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/graphics/tiles_spritesheet.xml"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/particles/snow.xml"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sounds/invitation.mod"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sounds/pop.ogg"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sounds/ressort.ogg"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sounds/sample.ogg"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/sounds/sheep.ogg"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/strings/en.xml"].onload();
-          DataRequest.prototype.requests["/gamedata-sample/strings/fr.xml"].onload();
-          Module['removeRunDependency']('datafile_trp.data');
+        // copy the entire loaded file into a spot in the heap. Files will refer to slices in that. They cannot be freed though
+        // (we may be allocating before malloc is ready, during startup).
+        var ptr = Module['getMemory'](byteArray.length);
+        Module['HEAPU8'].set(byteArray, ptr);
+        DataRequest.prototype.byteArray = Module['HEAPU8'].subarray(ptr, ptr+byteArray.length);
+  
+          var files = metadata.files;
+          for (i = 0; i < files.length; ++i) {
+            DataRequest.prototype.requests[files[i].filename].onload();
+          }
+              Module['removeRunDependency']('datafile_trp.data');
 
     };
     Module['addRunDependency']('datafile_trp.data');
@@ -326,6 +199,6 @@ Module['FS_createPath']('/gamedata-sample', 'strings', true, true);
   }
 
  }
- loadPackage();
+ loadPackage({"files": [{"audio": "0", "start": 0, "crunched": "0", "end": 518, "filename": "/settings.xml"}, {"audio": "0", "start": 518, "crunched": "0", "end": 2180, "filename": "/helpers/scene_manager.rsc"}, {"audio": "0", "start": 2180, "crunched": "0", "end": 3082, "filename": "/helpers/trp_api.rsc"}, {"audio": "0", "start": 3082, "crunched": "0", "end": 4045, "filename": "/themes/aeon/aeon.xml"}, {"audio": "0", "start": 4045, "crunched": "0", "end": 45065, "filename": "/themes/aeon/fonts/aeon_main.ttf"}, {"audio": "0", "start": 45065, "crunched": "0", "end": 125329, "filename": "/themes/aeon/fonts/pf_ronda_seven.ttf"}, {"audio": "0", "start": 125329, "crunched": "0", "end": 198193, "filename": "/themes/aeon/fonts/pf_ronda_seven_bold.ttf"}, {"audio": "0", "start": 198193, "crunched": "0", "end": 215440, "filename": "/themes/aeon/images/aeon.png"}, {"audio": "0", "start": 215440, "crunched": "0", "end": 224448, "filename": "/themes/aeon/images/aeon.xml"}, {"audio": "0", "start": 224448, "crunched": "0", "end": 225351, "filename": "/themes/castlevania/castlevania.xml"}, {"audio": "0", "start": 225351, "crunched": "0", "end": 290027, "filename": "/themes/castlevania/fonts/lohengrin.ttf"}, {"audio": "0", "start": 290027, "crunched": "0", "end": 340115, "filename": "/themes/castlevania/images/castlevania.png"}, {"audio": "0", "start": 340115, "crunched": "0", "end": 345905, "filename": "/themes/castlevania/images/castlevania.xml"}, {"audio": "0", "start": 345905, "crunched": "0", "end": 346885, "filename": "/themes/metal/metal.xml"}, {"audio": "0", "start": 346885, "crunched": "0", "end": 496393, "filename": "/themes/metal/fonts/SourceSansPro-Regular.ttf"}, {"audio": "0", "start": 496393, "crunched": "0", "end": 645745, "filename": "/themes/metal/fonts/SourceSansPro-Semibold.ttf"}, {"audio": "0", "start": 645745, "crunched": "0", "end": 680554, "filename": "/themes/metal/images/metal.png"}, {"audio": "0", "start": 680554, "crunched": "0", "end": 685508, "filename": "/themes/metal/images/metal.xml"}, {"audio": "0", "start": 685508, "crunched": "0", "end": 686405, "filename": "/themes/metroid/metroid.xml"}, {"audio": "0", "start": 686405, "crunched": "0", "end": 695261, "filename": "/themes/metroid/fonts/metroid.ttf"}, {"audio": "0", "start": 695261, "crunched": "0", "end": 722775, "filename": "/themes/metroid/images/metroid.png"}, {"audio": "0", "start": 722775, "crunched": "0", "end": 728558, "filename": "/themes/metroid/images/metroid.xml"}, {"audio": "0", "start": 728558, "crunched": "0", "end": 729462, "filename": "/themes/minimal/minimal.xml"}, {"audio": "0", "start": 729462, "crunched": "0", "end": 809726, "filename": "/themes/minimal/fonts/pf_ronda_seven.ttf"}, {"audio": "0", "start": 809726, "crunched": "0", "end": 882590, "filename": "/themes/minimal/fonts/pf_ronda_seven_bold.ttf"}, {"audio": "0", "start": 882590, "crunched": "0", "end": 909408, "filename": "/themes/minimal/images/minimal.png"}, {"audio": "0", "start": 909408, "crunched": "0", "end": 914441, "filename": "/themes/minimal/images/minimal.xml"}, {"audio": "0", "start": 914441, "crunched": "0", "end": 915923, "filename": "/gamedata-sample/animation_scene.rsc"}, {"audio": "0", "start": 915923, "crunched": "0", "end": 917502, "filename": "/gamedata-sample/dialog_scene.rsc"}, {"audio": "0", "start": 917502, "crunched": "0", "end": 921401, "filename": "/gamedata-sample/game_scene.rsc"}, {"audio": "0", "start": 921401, "crunched": "0", "end": 923664, "filename": "/gamedata-sample/gui_scene.rsc"}, {"audio": "0", "start": 923664, "crunched": "0", "end": 925213, "filename": "/gamedata-sample/helloworld_scene.rsc"}, {"audio": "0", "start": 925213, "crunched": "0", "end": 927444, "filename": "/gamedata-sample/io_scene.rsc"}, {"audio": "0", "start": 927444, "crunched": "0", "end": 931180, "filename": "/gamedata-sample/main.rsc"}, {"audio": "0", "start": 931180, "crunched": "0", "end": 936552, "filename": "/gamedata-sample/menu_scene.rsc"}, {"audio": "0", "start": 936552, "crunched": "0", "end": 937866, "filename": "/gamedata-sample/music_scene.rsc"}, {"audio": "0", "start": 937866, "crunched": "0", "end": 939575, "filename": "/gamedata-sample/particle_scene.rsc"}, {"audio": "0", "start": 939575, "crunched": "0", "end": 943952, "filename": "/gamedata-sample/physics_scene.rsc"}, {"audio": "0", "start": 943952, "crunched": "0", "end": 953580, "filename": "/gamedata-sample/platform.tmx"}, {"audio": "0", "start": 953580, "crunched": "0", "end": 955151, "filename": "/gamedata-sample/platform_scene.rsc"}, {"audio": "0", "start": 955151, "crunched": "0", "end": 956962, "filename": "/gamedata-sample/primitive_scene.rsc"}, {"audio": "0", "start": 956962, "crunched": "0", "end": 957589, "filename": "/gamedata-sample/project.rap"}, {"audio": "0", "start": 957589, "crunched": "0", "end": 958813, "filename": "/gamedata-sample/sound_scene.rsc"}, {"audio": "0", "start": 958813, "crunched": "0", "end": 960543, "filename": "/gamedata-sample/sprite_scene.rsc"}, {"audio": "0", "start": 960543, "crunched": "0", "end": 962294, "filename": "/gamedata-sample/textbox_scene.rsc"}, {"audio": "0", "start": 962294, "crunched": "0", "end": 964062, "filename": "/gamedata-sample/tween_scene.rsc"}, {"audio": "0", "start": 964062, "crunched": "0", "end": 988966, "filename": "/gamedata-sample/fonts/casual.ttf"}, {"audio": "0", "start": 988966, "crunched": "0", "end": 1347222, "filename": "/gamedata-sample/fonts/consola.ttf"}, {"audio": "0", "start": 1347222, "crunched": "0", "end": 1440686, "filename": "/gamedata-sample/fonts/kinkie.ttf"}, {"audio": "0", "start": 1440686, "crunched": "0", "end": 1462430, "filename": "/gamedata-sample/fonts/vitamin.ttf"}, {"audio": "0", "start": 1462430, "crunched": "0", "end": 2043228, "filename": "/gamedata-sample/graphics/apple-bg.jpg"}, {"audio": "0", "start": 2043228, "crunched": "0", "end": 2094962, "filename": "/gamedata-sample/graphics/back1.jpg"}, {"audio": "0", "start": 2094962, "crunched": "0", "end": 2626182, "filename": "/gamedata-sample/graphics/broute.png"}, {"audio": "0", "start": 2626182, "crunched": "0", "end": 2633077, "filename": "/gamedata-sample/graphics/broute.xml"}, {"audio": "0", "start": 2633077, "crunched": "0", "end": 2642056, "filename": "/gamedata-sample/graphics/level1.tmx"}, {"audio": "0", "start": 2642056, "crunched": "0", "end": 2704426, "filename": "/gamedata-sample/graphics/platform1.bmp"}, {"audio": "0", "start": 2704426, "crunched": "0", "end": 2720278, "filename": "/gamedata-sample/graphics/Sheep.png"}, {"audio": "0", "start": 2720278, "crunched": "0", "end": 2744501, "filename": "/gamedata-sample/graphics/sheet.png"}, {"audio": "0", "start": 2744501, "crunched": "0", "end": 2744911, "filename": "/gamedata-sample/graphics/sheet.xml"}, {"audio": "0", "start": 2744911, "crunched": "0", "end": 2873746, "filename": "/gamedata-sample/graphics/tiles_spritesheet.png"}, {"audio": "0", "start": 2873746, "crunched": "0", "end": 2887311, "filename": "/gamedata-sample/graphics/tiles_spritesheet.xml"}, {"audio": "0", "start": 2887311, "crunched": "0", "end": 2887412, "filename": "/gamedata-sample/particles/snow.xml"}, {"audio": "0", "start": 2887412, "crunched": "0", "end": 3027290, "filename": "/gamedata-sample/sounds/invitation.mod"}, {"audio": "1", "start": 3027290, "crunched": "0", "end": 3049835, "filename": "/gamedata-sample/sounds/pop.ogg"}, {"audio": "1", "start": 3049835, "crunched": "0", "end": 3068261, "filename": "/gamedata-sample/sounds/ressort.ogg"}, {"audio": "1", "start": 3068261, "crunched": "0", "end": 3350033, "filename": "/gamedata-sample/sounds/sample.ogg"}, {"audio": "1", "start": 3350033, "crunched": "0", "end": 3370344, "filename": "/gamedata-sample/sounds/sheep.ogg"}, {"audio": "0", "start": 3370344, "crunched": "0", "end": 3370498, "filename": "/gamedata-sample/strings/en.xml"}, {"audio": "0", "start": 3370498, "crunched": "0", "end": 3370653, "filename": "/gamedata-sample/strings/fr.xml"}], "remote_package_size": 3370653, "package_uuid": "20c45d59-363c-4264-bc68-266f01aad94e"});
 
 })();

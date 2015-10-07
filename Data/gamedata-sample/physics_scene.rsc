@@ -1,6 +1,6 @@
 class PhysicsScene:Scene
 	{
-
+/*
 	bool OnClickHandler(ref @ _sender,ref @ _userData)
 		{
 		theSceneManager.ChangeScene(menuScene);
@@ -20,10 +20,11 @@ class PhysicsScene:Scene
 		Init();
 		return true;
 		}
-
+*/
 	void Init()
 		{
 
+/*
 		UTI_Log("====> physicsScene Init");
 		//showDebugDraw = true;
 
@@ -107,21 +108,22 @@ class PhysicsScene:Scene
 		ground.SetCenterPosition(400,450);
 		ground.SetAngle(5.0f);
 		ground.Create();
-
+*/
 		}
 		
 	void OnUpdate(uint64 _delta)
 		{	
-		
+/*		
 		int x,y;
 		box.GetPosition(x,y);
 		monSprite.SetPosition(x,y);
 		monSprite.set_Rotation(box.GetAngle());
-		
+*/		
 		}
 
 	void OnRender(uint64 _delta)
 		{
+/*			
 		WND_Clear();
 		monBG.Render();
 		buttonBack.Render();
@@ -129,8 +131,10 @@ class PhysicsScene:Scene
 		buttonDebugDraw.Render();
 		labelTitle.Render();	
 		monSprite.Render();	
+*/		
 		}
 		
+/*		
 	void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 		{
         if (monSprite.Touched(_x,_y))
@@ -191,5 +195,6 @@ class PhysicsScene:Scene
 	Body   ground;
 
 	bool showDebugDraw = false;
+*/	
 	}
 
