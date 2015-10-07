@@ -540,7 +540,7 @@ void RegisterComboBox()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_RELEASE, "void f()", asMETHOD(ComboBox,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void Render()", asMETHOD(ComboBox, Render), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", asMETHOD(ComboBox, SetSize), asCALL_THISCALL);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", asMETHODPR(ComboBox, SetSize,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetPosition(int _x,int _y)", asMETHODPR(ComboBox, SetPosition,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetFont(Font @ _font)", asMETHOD(ComboBox, SetFont), asCALL_THISCALL);SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","int AddItem(const string &in _newText)", asMETHOD(ComboBox, AddItem), asCALL_THISCALL);SDL_assert( r >= 0 );
@@ -570,7 +570,7 @@ void RegisterComboBox()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(ComboBox,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 	
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void Render()", WRAP_MFN(ComboBox, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", WRAP_MFN(ComboBox, SetSize), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", WRAP_MFN_PR(ComboBox, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetPosition(int _x,int _y)", WRAP_MFN_PR(ComboBox, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetFont(Font @ _font)", WRAP_MFN(ComboBox, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","int AddItem(const string &in _newText)", WRAP_MFN(ComboBox, AddItem), asCALL_GENERIC);SDL_assert( r >= 0 );

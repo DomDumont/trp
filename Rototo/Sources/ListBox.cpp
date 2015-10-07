@@ -531,7 +531,7 @@ void RegisterListBox()
 
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void Render()", asMETHOD(ListBox, Render), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSize(int _w,int _h)", asMETHOD(ListBox, SetSize), asCALL_THISCALL);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSize(int _w,int _h)", asMETHODPR(ListBox, SetSize,(int,int),void), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetPosition(int _x,int _y)", asMETHODPR(ListBox, SetPosition,(int,int),void), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
@@ -574,7 +574,7 @@ void RegisterListBox()
 
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void Render()", WRAP_MFN(ListBox, Render), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSize(int _w,int _h)", WRAP_MFN(ListBox, SetSize), asCALL_GENERIC); //TODO Check this , should be virtual ? _PR ?
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSize(int _w,int _h)", WRAP_MFN_PR(ListBox, SetSize,(int,int),void), asCALL_GENERIC); //TODO Check this , should be virtual ? _PR ?
 	SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetPosition(int _x,int _y)", WRAP_MFN_PR(ListBox, SetPosition,(int,int),void), asCALL_GENERIC);
 	SDL_assert( r >= 0 );

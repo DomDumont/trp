@@ -267,7 +267,7 @@ void RegisterTextBox()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TextBox", asBEHAVE_ADDREF, "void f()", asMETHOD(TextBox,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TextBox", asBEHAVE_RELEASE, "void f()", asMETHOD(TextBox,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void Render()", asMETHOD(TextBox, Render), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetSize(int _w,int _h)", asMETHOD(TextBox, SetSize), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetSize(int _w,int _h)", asMETHODPR(TextBox, SetSize,(int,int),void), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetPosition(int _x,int _y,int _from=0)", asMETHOD(TextBox, SetPosition), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetFont(Font @ _font)", asMETHOD(TextBox, SetFont), asCALL_THISCALL); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetText(string &in _newText)", asMETHOD(TextBox, SetText), asCALL_THISCALL); SDL_assert( r >= 0 );
@@ -283,7 +283,7 @@ void RegisterTextBox()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TextBox", asBEHAVE_ADDREF, "void f()", WRAP_MFN(TextBox,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TextBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(TextBox,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void Render()", WRAP_MFN(TextBox, Render), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetSize(int _w,int _h)", WRAP_MFN(TextBox, SetSize), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetSize(int _w,int _h)", WRAP_MFN_PR(TextBox, SetSize,(int,int),void), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetPosition(int _x,int _y,int _from=0)", WRAP_MFN(TextBox, SetPosition), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetFont(Font @ _font)", WRAP_MFN(TextBox, SetFont), asCALL_GENERIC); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("TextBox","void SetText(string &in _newText)", WRAP_MFN(TextBox, SetText), asCALL_GENERIC); SDL_assert( r >= 0 );

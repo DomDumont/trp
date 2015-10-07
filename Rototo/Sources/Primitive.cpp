@@ -246,7 +246,7 @@ void RegisterPrimitive()
 	///func:float GetRotation()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","float get_Rotation()", asMETHOD(Primitive, GetRotation), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", asMETHOD(Primitive, SetSize), asCALL_THISCALL);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", asMETHODPR(Primitive, SetSize,(int,int),void), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Primitive, SetScale), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
@@ -274,7 +274,7 @@ void RegisterPrimitive()
 	SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","float get_Rotation()", WRAP_MFN(Primitive, GetRotation), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", WRAP_MFN(Primitive, SetSize), asCALL_GENERIC);
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", WRAP_MFN_PR(Primitive, SetSize,(int,int),void), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Primitive, SetScale), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
