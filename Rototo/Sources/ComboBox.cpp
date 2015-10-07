@@ -44,10 +44,13 @@ bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox Constructor\n");
 	
 #ifdef TRP_USE_BINDING
-	this->sender.Set(NULL,NULL);
-	this->userData.Set(NULL,NULL);
+	this->onSelectionChangedHandler_script = NULL;
+	this->sender_script.Set(NULL, NULL);
+	this->userData_script.Set(NULL, NULL);
 #endif
 	
+	this->on_selection_changed_handler = NULL;
+
 	this->backgroundColor.r = 0;
 	this->backgroundColor.g = 0;
 	this->backgroundColor.b = 0;
@@ -88,7 +91,7 @@ ComboBox::~ComboBox()
 	}
 
 #ifdef TRP_USE_BINDING
-	MY_SAFE_RELEASE(this->onSelectionChangedHandler);
+	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
 #endif
 	
 }
@@ -443,12 +446,12 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 
 #ifdef TRP_USE_BINDING
 		//Call Callback
-		if (this->onSelectionChangedHandler != NULL)
+		if (this->onSelectionChangedHandler_script != NULL)
 			{
 
-			this->sender.Set(this,g_app->scriptManager->engine->GetObjectTypeByName("ComboBox"));
-			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler,&(this->sender),&(this->userData));
-			this->sender.Set(NULL,NULL);
+			this->sender_script.Set(this, g_app->scriptManager->engine->GetObjectTypeByName("ComboBox"));
+			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler_script, &(this->sender_script), &(this->userData_script));
+			this->sender_script.Set(NULL, NULL);
 
 			}
 #endif
@@ -553,9 +556,9 @@ void RegisterComboBox()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","float get_Rotation()", asMETHOD(ComboBox, GetRotation), asCALL_THISCALL);SDL_assert( r >= 0 );
 
 	///prop:CallbackHandler @onSelectionChangedHandler
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler));
+	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData));
+	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
 	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
 #else
 	///class:ComboBox

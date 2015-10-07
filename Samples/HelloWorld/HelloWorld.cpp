@@ -58,6 +58,6 @@ int main(int argc, char *argv[])
   {
 	  RegisterApplication(new DemoApp());
 
-	  GetApp()->SetTitle("HelloWorld"); //TODO APP_SetTitle is better no ?
+	  //GetApp()->SetTitle("HelloWorld"); //TODO APP_SetTitle is better no ?
 	  return 0;
   }

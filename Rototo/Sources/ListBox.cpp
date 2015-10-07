@@ -49,6 +49,8 @@ ListBox::ListBox():
 	this->userData_script.Set(NULL,NULL);
 #endif
 
+	this->on_selection_changed_handler = NULL;
+
 	this->backgroundColor.r = 0;
 	this->backgroundColor.g = 0;
 	this->backgroundColor.b = 0;

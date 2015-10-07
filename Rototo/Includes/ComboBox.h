@@ -67,10 +67,16 @@ public:
 public:
 
 #ifdef TRP_USE_BINDING
-	asIScriptFunction *		onSelectionChangedHandler;
-	CScriptHandle			userData;
-	CScriptHandle			sender;
+	asIScriptFunction *		onSelectionChangedHandler_script;
+	CScriptHandle			userData_script;
+	CScriptHandle			sender_script;
 #endif
+
+private:
+	typedef bool(*on_selection_changed_handler_type)(void * _sender, void * _user_data);
+	on_selection_changed_handler_type on_selection_changed_handler;
+	void * sender;
+	void * user_data;
 
 private:
 	void				BuildInternalTexture();
