@@ -379,7 +379,7 @@ void RegisterAnimation()
 	///arg: _atlas : Reference to the atlas containing the animation
 	///arg: _name : name of the animation
 	///sample:int toto\ntoto = Load(titi);\ntata
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Load(Atlas @ _atlas, string &in _name,string &in _format,int _nbFrames)", asMETHOD(Animation, Load));SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void Load(Atlas @ _atlas, string &in _name,string &in _format,int _nbFrames)", asMETHOD(Animation, Load),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetFPS(int fps)
 	///role: Set the speed of the animation in frames per second
 	///arg: _fps : frames per second
@@ -403,7 +403,7 @@ void RegisterAnimation()
 	///func:float get_Rotation()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","float get_Rotation()", asMETHOD(Animation, GetRotation),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void UnLoad()
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void UnLoad()", asMETHOD(Animation, UnLoad)),asCALL_THISCALL;SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Animation","void UnLoad()", asMETHOD(Animation, UnLoad),asCALL_THISCALL);SDL_assert( r >= 0 );
 	///prop:CallbackHandler @onComplete
 	g_app->scriptManager->RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler));SDL_assert( r >= 0 );
 	///prop:ref @userData

@@ -380,5 +380,8 @@ private:
 };
 
 
-void		RegisterTween();
+void	RegisterTween();
+void 	TWN_AddTween(Tween * _tween);
+void 	TWN_CancelTweens();
+
 #endif

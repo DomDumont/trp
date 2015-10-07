@@ -229,20 +229,20 @@ void ScriptManager::Prepare()
 #else
 
 
-	r = engine->RegisterObjectMethod("Widget", "Button@ opCast()", asFUNCTION((refCast<Widget, Button>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = engine->RegisterObjectMethod("Button", "Widget@ opImplCast()", asFUNCTION((refCast<Button, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Widget", "Button@ opCast()", WRAP_OBJ_LAST((refCast<Widget, Button>)), asCALL_GENERIC); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Button", "Widget@ opImplCast()", WRAP_OBJ_LAST((refCast<Button, Widget>)), asCALL_GENERIC); SDL_assert(r >= 0);
 
-	r = engine->RegisterObjectMethod("Widget", "Label@ opCast()", asFUNCTION((refCast<Widget, Label>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = engine->RegisterObjectMethod("Label", "Widget@ opImplCast()", asFUNCTION((refCast<Label, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Widget", "Label@ opCast()", WRAP_OBJ_LAST((refCast<Widget, Label>)), asCALL_GENERIC); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Label", "Widget@ opImplCast()", WRAP_OBJ_LAST((refCast<Label, Widget>)), asCALL_GENERIC); SDL_assert(r >= 0);
 
-	r = engine->RegisterObjectMethod("Widget",  "ListBox@ opCast()", asFUNCTION((refCast<Widget, ListBox>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = engine->RegisterObjectMethod("ListBox",  "Widget@ opImplCast()", asFUNCTION((refCast<ListBox, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Widget",  "ListBox@ opCast()", WRAP_OBJ_LAST((refCast<Widget, ListBox>)), asCALL_GENERIC); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("ListBox",  "Widget@ opImplCast()", WRAP_OBJ_LAST((refCast<ListBox, Widget>)), asCALL_GENERIC); SDL_assert(r >= 0);
 
-	r = engine->RegisterObjectMethod("Widget",  "ComboBox@ opCast()", asFUNCTION((refCast<Widget, ComboBox>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = engine->RegisterObjectMethod("ComboBox" , "Widget@ opImplCast()", asFUNCTION((refCast<ComboBox, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Widget",  "ComboBox@ opCast()", WRAP_OBJ_LAST((refCast<Widget, ComboBox>)), asCALL_GENERIC); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("ComboBox" , "Widget@ opImplCast()", WRAP_OBJ_LAST((refCast<ComboBox, Widget>)), asCALL_GENERIC); SDL_assert(r >= 0);
 
-	r = engine->RegisterObjectMethod("Widget",  "TextBox@ opCast()", asFUNCTION((refCast<Widget, TextBox>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = engine->RegisterObjectMethod("TextBox",  "Widget@ opImplCast()", asFUNCTION((refCast<TextBox, Widget>)), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("Widget",  "TextBox@ opCast()", WRAP_OBJ_LAST((refCast<Widget, TextBox>)), asCALL_GENERIC); SDL_assert(r >= 0);
+	r = engine->RegisterObjectMethod("TextBox",  "Widget@ opImplCast()", WRAP_OBJ_LAST((refCast<TextBox, Widget>)), asCALL_GENERIC); SDL_assert(r >= 0);
 
 
 #endif
