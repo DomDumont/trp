@@ -45,7 +45,8 @@ public:
 	
 	void		Render();
 	void		SetSize(int _w,int _h);
-	int		AddItem(const std::string& _text);
+	void 		SetPosition(int _x,int _y);
+	int			AddItem(const std::string& _text);
 	void		RemoveItem(int _index);
 	void		ResetContent();
 	void		SetFont(Font & _font);
@@ -55,11 +56,11 @@ public:
 	void		SetTextColor(int _r,int _g,int _b,int _a);
 	
 	
-	int				OnMouseButtonDown( SDL_Event * event);
-	int				OnMouseButtonUp( SDL_Event * event);
-	void				OnMouseMotion( SDL_Event * event);
+	int			OnMouseButtonDown( SDL_Event * event);
+	int			OnMouseButtonUp( SDL_Event * event);
+	void		OnMouseMotion( SDL_Event * event);
 	
-	int				GetSelectedIndex();
+	int			GetSelectedIndex();
 	void				SetSelectedIndex(int _newIndex);
 	std::string			GetItemText(int _index);
 	
