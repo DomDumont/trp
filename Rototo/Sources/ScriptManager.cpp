@@ -184,34 +184,9 @@ void ScriptManager::Prepare()
 	RegisterAnimation();
 
 
+	RegisterTween();
 
 
-
-
-	r = engine->RegisterObjectType("TweenedFloat", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_FACTORY, "TweenedFloat@ f()", asFUNCTION(TweenedFloat_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_ADDREF, "void f()", asMETHOD(TweenedFloat,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_RELEASE, "void f()", asMETHOD(TweenedFloat,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
-	this->RegisterObjectProperty("TweenedFloat", "float value", asOFFSET(TweenedFloat,value));
-	r = engine->RegisterObjectProperty("TweenedFloat", "float targetValue", asOFFSET(TweenedFloat,targetValue)); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectProperty("TweenedFloat", "float initialValue", asOFFSET(TweenedFloat,initialValue)); SDL_assert( r >= 0 );
-
-
-	r = engine->RegisterObjectType("Tween", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", asFUNCTION(Tween_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_ADDREF, "void f()", asMETHOD(Tween,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectBehaviour("Tween", asBEHAVE_RELEASE, "void f()", asMETHOD(Tween,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectProperty("Tween", "CallbackHandler @onComplete", asOFFSET(Tween, onCompleteHandler)); SDL_assert( r >= 0 );
-	r = engine->RegisterObjectProperty("Tween", "ref @userData", asOFFSET(Tween, userData)); SDL_assert( r >= 0 );
-
-	this->RegisterClassMethod("Tween","void AddProp(TweenedFloat @)", asMETHOD(Tween, AddProp));
-	this->RegisterClassMethod("Tween","void Init(float _duration,int _effect,int _easeMode)", asMETHOD(Tween, Init));
-
-	///sect:Tweens
-	///glob:void TWN_AddTween(Tween @)
-	this->RegisterGlobalFunction("void TWN_AddTween(Tween @)", asMETHOD(TweenManager,AddTween), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
-	///glob:void TWN_CancelTweens()
-	this->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
 
 
 	
@@ -769,18 +744,6 @@ bool ScriptManager::RegisterClass(const std::string& class_name)
 	return true;
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-// This is how you register a C++ class method in AngelScript
-void ScriptManager::RegisterClassMethod(const std::string& class_name, const std::string& function_definition, const asSFuncPtr &funcPointer)
-{
-
-	int r = engine->RegisterObjectMethod(class_name.c_str(), function_definition.c_str(), funcPointer, asCALL_THISCALL);
-	SDL_assert(r>0);
-
-}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */

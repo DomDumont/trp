@@ -27,6 +27,10 @@
 #include "Application_p.h"
 #include "Font.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -35,6 +39,17 @@ Label *Label_Factory()
 {
 	// The class constructor is initializing the reference counter to 1
 	return new Label();
+}
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+
+void Label::SetPosition(int _x,int _y)
+{
+	Widget::SetPosition(_x,_y);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -46,6 +61,7 @@ void RegisterLabel()
 {
 	int r;
 	
+#ifndef __EMSCRIPTEN__	
 	///class:Label
 	r = g_app->scriptManager->engine->RegisterObjectType("Label", 0, asOBJ_REF); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Label", asBEHAVE_FACTORY, "Label@ f()", asFUNCTION(Label_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
@@ -53,21 +69,38 @@ void RegisterLabel()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Label", asBEHAVE_RELEASE, "void f()", asMETHOD(Label,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 
 	///func:void SetText(string &in _newText,bool _justified = true)
-	g_app->scriptManager->RegisterClassMethod("Label","void SetText(string &in _newText,bool _justified = true)", asMETHOD(Label, SetText));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetText(string &in _newText,bool _justified = true)", asMETHOD(Label, SetText), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Render()
-	g_app->scriptManager->RegisterClassMethod("Label","void Render()", asMETHOD(Label, Render));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void Render()", asMETHOD(Label, Render), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetFont(Font @ font)
-	g_app->scriptManager->RegisterClassMethod("Label","void SetFont(Font @ _font)", asMETHOD(Label, SetFont));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetFont(Font @ _font)", asMETHOD(Label, SetFont), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)
-	g_app->scriptManager->RegisterClassMethod("Label","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Label, SetColor));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Label, SetColor), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetPosition(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Label","void SetPosition(int _x,int _y)", asMETHODPR(Label, SetPosition,(int,int),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetPosition(int _x,int _y)", asMETHODPR(Label, SetPosition,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:bool Touched(int _x,int _y)
-	g_app->scriptManager->RegisterClassMethod("Label","bool Touched(int _x,int _y)", asMETHOD(Label, Touched));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","bool Touched(int _x,int _y)", asMETHOD(Label, Touched), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetRotation(float angle)
-	g_app->scriptManager->RegisterClassMethod("Label","void set_Rotation(float _angle)", asMETHOD(Label, SetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void set_Rotation(float _angle)", asMETHOD(Label, SetRotation), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:float GetRotation()
-	g_app->scriptManager->RegisterClassMethod("Label","float get_Rotation()", asMETHOD(Label, GetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","float get_Rotation()", asMETHOD(Label, GetRotation), asCALL_THISCALL);SDL_assert( r >= 0 );
+#else
+
+	r = g_app->scriptManager->engine->RegisterObjectType("Label", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Label", asBEHAVE_FACTORY, "Label@ f()", WRAP_FN(Label_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Label", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Label,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Label", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Label,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetText(string &in _newText,bool _justified = true)", WRAP_MFN(Label, SetText), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void Render()", WRAP_MFN(Label, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetFont(Font @ _font)", WRAP_MFN(Label, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Label, SetColor), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Label, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","bool Touched(int _x,int _y)", WRAP_MFN(Label, Touched), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","void set_Rotation(float _angle)", WRAP_MFN(Label, SetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Label","float get_Rotation()", WRAP_MFN(Label, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
+
+#endif	
 
 }
 #endif

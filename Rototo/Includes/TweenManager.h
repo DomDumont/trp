@@ -378,4 +378,7 @@ private:
 
 
 };
+
+
+void		RegisterTween();
 #endif

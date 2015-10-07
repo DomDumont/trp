@@ -42,6 +42,7 @@ public:
 	void SetColor(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	void SetText(const std::string& _text,bool _justified = true);
 	void SetEnabled(bool _value);
+	void SetPosition(int _x,int _y);
 
 private:
 

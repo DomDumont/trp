@@ -45,14 +45,15 @@ public:
 
 	void Render();
 	void SetSize(int _w,int _h);
+	void SetPosition(int _x,int _y);
 	int  AddItem(const std::string& _text);
-    	void RemoveItem(int _index);
-    	void ResetContent();
+	void RemoveItem(int _index);
+	void ResetContent();
 	void SetFont(Font & _font);
-    	void SetBackgroundColor(int _r,int _g,int _b,int _a);
-    	void SetItemColor(int _r,int _g,int _b,int _a);
-    	void SetSelectedItemColor(int _r,int _g,int _b,int _a);
-    	void SetTextColor(int _r,int _g,int _b,int _a);
+	void SetBackgroundColor(int _r,int _g,int _b,int _a);
+	void SetItemColor(int _r,int _g,int _b,int _a);
+	void SetSelectedItemColor(int _r,int _g,int _b,int _a);
+	void SetTextColor(int _r,int _g,int _b,int _a);
 	
 
 	int OnMouseButtonDown( SDL_Event * event);

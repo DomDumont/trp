@@ -27,53 +27,10 @@
 #include "Application_p.h"
 #include "Font.h"
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-ListBox *ListBox_Factory()
-{
-	// The class constructor is initializing the reference counter to 1
-	return new ListBox();
-}
-
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-#ifdef TRP_USE_BINDING
-
-void RegisterListBox()
-{
-	int r;
-	///class:ListBox
-	r = g_app->scriptManager->engine->RegisterObjectType("ListBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_FACTORY, "ListBox@ f()", asFUNCTION(ListBox_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_ADDREF, "void f()", asMETHOD(ListBox,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_RELEASE, "void f()", asMETHOD(ListBox,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
-	g_app->scriptManager->RegisterClassMethod("ListBox","void Render()", asMETHOD(ListBox, Render));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetSize(int _w,int _h)", asMETHOD(ListBox, SetSize));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetPosition(int _x,int _y)", asMETHODPR(ListBox, SetPosition,(int,int),void));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetFont(Font @ _font)", asMETHOD(ListBox, SetFont));
-	g_app->scriptManager->RegisterClassMethod("ListBox","int AddItem(const string &in _newText)", asMETHOD(ListBox, AddItem));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void RemoveItem(int _index)", asMETHOD(ListBox, RemoveItem));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void ResetContent()", asMETHOD(ListBox, ResetContent));
-	g_app->scriptManager->RegisterClassMethod("ListBox","int GetSelectedIndex()", asMETHOD(ListBox, GetSelectedIndex));
-	g_app->scriptManager->RegisterClassMethod("ListBox","string GetItemText(int _index)", asMETHOD(ListBox, GetItemText));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetEnabled(bool _value)", asMETHOD(ListBox, SetEnabled));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetBackgroundColor));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetItemColor));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetSelectedItemColor));
-	g_app->scriptManager->RegisterClassMethod("ListBox","void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetTextColor));
-	///func:float GetRotation()
-	g_app->scriptManager->RegisterClassMethod("ListBox","float get_Rotation()", asMETHOD(ListBox, GetRotation));
-	///prop:CallbackHandler @onSelectionChangedHandler
-	g_app->scriptManager->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
-	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
-	//g_app->scriptManager->RegisterClassMethod("ListBox","void Update(uint64 _elapsed)", asMETHOD(ListBox, Update));
-}
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
 #endif
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -234,6 +191,17 @@ void ListBox::Render()
 void ListBox::SetSize(int _w,int _h)
 {
 	Widget::SetSize(_w,_h);
+}
+
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+
+void ListBox::SetPosition(int _x,int _y)
+{
+	Widget::SetPosition(_x,_y);
 }
 
 
@@ -530,3 +498,115 @@ std::string ListBox::GetItemText(int _index)
 	else
 		return "";
 }
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+ListBox *ListBox_Factory()
+{
+	// The class constructor is initializing the reference counter to 1
+	return new ListBox();
+}
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+#ifdef TRP_USE_BINDING
+
+void RegisterListBox()
+{
+	int r;
+
+#ifndef __EMSCRIPTEN__
+
+	///class:ListBox
+	r = g_app->scriptManager->engine->RegisterObjectType("ListBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_FACTORY, "ListBox@ f()", asFUNCTION(ListBox_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_ADDREF, "void f()", asMETHOD(ListBox,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_RELEASE, "void f()", asMETHOD(ListBox,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void Render()", asMETHOD(ListBox, Render), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSize(int _w,int _h)", asMETHOD(ListBox, SetSize), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetPosition(int _x,int _y)", asMETHODPR(ListBox, SetPosition,(int,int),void), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetFont(Font @ _font)", asMETHOD(ListBox, SetFont), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","int AddItem(const string &in _newText)", asMETHOD(ListBox, AddItem), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void RemoveItem(int _index)", asMETHOD(ListBox, RemoveItem), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void ResetContent()", asMETHOD(ListBox, ResetContent), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","int GetSelectedIndex()", asMETHOD(ListBox, GetSelectedIndex), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","string GetItemText(int _index)", asMETHOD(ListBox, GetItemText), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetEnabled(bool _value)", asMETHOD(ListBox, SetEnabled), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetBackgroundColor), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetItemColor), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetSelectedItemColor), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ListBox, SetTextColor), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+	///func:float GetRotation()
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","float get_Rotation()", asMETHOD(ListBox, GetRotation), asCALL_THISCALL);
+	SDL_assert( r >= 0 );
+
+	///prop:CallbackHandler @onSelectionChangedHandler
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
+	///prop:ref @userData
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
+	
+#else
+	r = g_app->scriptManager->engine->RegisterObjectType("ListBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_FACTORY, "ListBox@ f()", WRAP_FN(ListBox_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_ADDREF, "void f()", WRAP_MFN(ListBox,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ListBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(ListBox,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void Render()", WRAP_MFN(ListBox, Render), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSize(int _w,int _h)", WRAP_MFN(ListBox, SetSize), asCALL_GENERIC); //TODO Check this , should be virtual ? _PR ?
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetPosition(int _x,int _y)", WRAP_MFN_PR(ListBox, SetPosition,(int,int),void), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetFont(Font @ _font)", WRAP_MFN(ListBox, SetFont), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","int AddItem(const string &in _newText)", WRAP_MFN(ListBox, AddItem), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void RemoveItem(int _index)", WRAP_MFN(ListBox, RemoveItem), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void ResetContent()", WRAP_MFN(ListBox, ResetContent), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","int GetSelectedIndex()", WRAP_MFN(ListBox, GetSelectedIndex), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","string GetItemText(int _index)", WRAP_MFN(ListBox, GetItemText), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetEnabled(bool _value)", WRAP_MFN(ListBox, SetEnabled), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ListBox, SetBackgroundColor), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetItemColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ListBox, SetItemColor), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ListBox, SetSelectedItemColor), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","void SetTextColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ListBox, SetTextColor), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectMethod("ListBox","float get_Rotation()", WRAP_MFN(ListBox, GetRotation), asCALL_GENERIC);
+	SDL_assert( r >= 0 );
+
+	
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
+	
+	g_app->scriptManager->RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
+	
+#endif
+
+}
+#endif

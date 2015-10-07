@@ -28,6 +28,9 @@
 #include "Font.h"
 #include "Application_p.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
 
 #define STB_TRUETYPE_IMPLEMENTATION  // force following include to generate implementation
 #include "stb_truetype.h"
@@ -229,6 +232,7 @@ void RegisterFont()
 {
     int r;
 
+#ifndef __EMSCRIPTEN__
     ///class:Font
     r = g_app->scriptManager->engine->RegisterObjectType("Font", 0, asOBJ_REF);
         SDL_assert(r >= 0);
@@ -245,10 +249,38 @@ void RegisterFont()
         asBEHAVE_RELEASE, "void f()", asMETHOD(Font, Release), asCALL_THISCALL);
         SDL_assert(r >= 0);
 
-    g_app->scriptManager->RegisterClassMethod("Font",
-        "void Load(string &in _name,int _size,int _flags=13)", asMETHOD(Font, Load));
+    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+        "void Load(string &in _name,int _size,int _flags=13)", asMETHOD(Font, Load), asCALL_THISCALL);
+        SDL_assert(r >= 0);
 
-    g_app->scriptManager->RegisterClassMethod("Font",
-        "void UnLoad()", asMETHOD(Font, UnLoad));
+    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+        "void UnLoad()", asMETHOD(Font, UnLoad), asCALL_THISCALL);
+        SDL_assert(r >= 0);
+
+#else
+    r = g_app->scriptManager->engine->RegisterObjectType("Font", 0, asOBJ_REF);
+        SDL_assert(r >= 0);
+
+    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font",
+        asBEHAVE_FACTORY, "Font@ f()", WRAP_FN(Font_Factory), asCALL_GENERIC);
+        SDL_assert(r >= 0);
+
+    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font", asBEHAVE_ADDREF,
+        "void f()", WRAP_MFN(Font, AddRef), asCALL_GENERIC);
+        SDL_assert(r >= 0);
+
+    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font",
+        asBEHAVE_RELEASE, "void f()", WRAP_MFN(Font, Release), asCALL_GENERIC);
+        SDL_assert(r >= 0);
+
+    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+        "void Load(string &in _name,int _size,int _flags=13)", WRAP_MFN(Font, Load), asCALL_GENERIC);
+        SDL_assert(r >= 0);
+
+    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+        "void UnLoad()", WRAP_MFN(Font, UnLoad), asCALL_GENERIC);
+        SDL_assert(r >= 0);        
+#endif
+
 }
 #endif

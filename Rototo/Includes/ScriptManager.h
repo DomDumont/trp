@@ -65,7 +65,6 @@ public:
 
 	template <class class_type>
 	bool RegisterClass(const std::string& class_name);
-	void RegisterClassMethod(const std::string& class_name, const std::string& function_definition, const asSFuncPtr &funcPointer);
 	void RegisterObjectProperty(const std::string& class_name, const std::string& function_definition, int byteOffset);
 	void RegisterGlobalFunction(const std::string& function_definition, const asSFuncPtr &funcPointer,asDWORD callConv, void * objFOrThisCall = 0);
 

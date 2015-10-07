@@ -28,6 +28,9 @@
 #include "Font.h"
 #include "Vector2D.h"
 
+#ifdef __EMSCRIPTEN__
+#include "binding\aswrappedcall.h"
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -47,6 +50,8 @@ void RegisterButton()
 {
 	int r;
 
+#ifndef __EMSCRIPTEN__
+
 	///class:Button
 	r = g_app->scriptManager->engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert( r >= 0 );
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", asFUNCTION(ButtonFactory), asCALL_CDECL); SDL_assert( r >= 0 );
@@ -54,41 +59,89 @@ void RegisterButton()
 	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", asMETHOD(Button,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
 
 	///func:void SetText(string &in newText)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetText(string &in _newText)", asMETHOD(Button, SetText));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetText(string &in _newText)", asMETHOD(Button, SetText), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void Render()
-	g_app->scriptManager->RegisterClassMethod("Button","void Render()", asMETHOD(Button, Render));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void Render()", asMETHOD(Button, Render), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetSize(int w,int h)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize,(int,int),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void set_Position(Vector2D vec)
-	g_app->scriptManager->RegisterClassMethod("Button","void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize,(Vector2D),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize,(Vector2D),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetPosition(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition,(int,int),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void set_Position(Vector2D vec)
-	g_app->scriptManager->RegisterClassMethod("Button","void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition,(Vector2D),void));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition,(Vector2D),void), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetFont(Font @ font)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetFont(Font @ _font)", asMETHOD(Button, SetFont));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetFont(Font @ _font)", asMETHOD(Button, SetFont), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", asMETHOD(Button, SetSprite));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", asMETHOD(Button, SetSprite), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Button, SetTextColor));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Button, SetTextColor), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetRotation(float angle)
-	g_app->scriptManager->RegisterClassMethod("Button","void set_Rotation(float _angle)", asMETHOD(Button, SetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Rotation(float _angle)", asMETHOD(Button, SetRotation), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:float get_Rotation()
-	g_app->scriptManager->RegisterClassMethod("Button","float get_Rotation()", asMETHOD(Button, GetRotation));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","float get_Rotation()", asMETHOD(Button, GetRotation), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:bool Touched(int x,int y)
-	g_app->scriptManager->RegisterClassMethod("Button","bool Touched(int _x,int _y)", asMETHOD(Button, Touched));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","bool Touched(int _x,int _y)", asMETHOD(Button, Touched), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetScale(double xFactor,double yFactor)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Button, SetScale));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Button, SetScale), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetEnabled(bool value)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetEnabled(bool _value)", asMETHOD(Button, SetEnabled));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetEnabled(bool _value)", asMETHOD(Button, SetEnabled), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetType(int type)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetType(int _type)", asMETHOD(Button, SetType));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetType(int _type)", asMETHOD(Button, SetType), asCALL_THISCALL);SDL_assert( r >= 0 );
 	///func:void SetState(int state)
-	g_app->scriptManager->RegisterClassMethod("Button","void SetState(int _state)", asMETHOD(Button, SetState));
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetState(int _state)", asMETHOD(Button, SetState), asCALL_THISCALL);SDL_assert( r >= 0 );
+
 	///prop:CallbackHandler @on_click_handler
-	g_app->scriptManager->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler_script));
+	g_app->scriptManager->engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler_script));
 	///prop:ref @user_data
-	g_app->scriptManager->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data_script));
+	g_app->scriptManager->engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data_script));
+#else
+
+	///class:Button
+	r = g_app->scriptManager->engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", asFUNCTION(ButtonFactory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Button,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Button,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+
+	///func:void SetText(string &in newText)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetText(string &in _newText)", WRAP_MFN(Button, SetText), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void Render()
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void Render()", WRAP_MFN(Button, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetSize(int w,int h)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void set_Position(Vector2D vec)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetPosition(int x,int y)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void set_Position(Vector2D vec)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetFont(Font @ font)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetFont(Font @ _font)", WRAP_MFN(Button, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", WRAP_MFN(Button, SetSprite), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Button, SetTextColor), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetRotation(float angle)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void set_Rotation(float _angle)", WRAP_MFN(Button, SetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:float get_Rotation()
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","float get_Rotation()", WRAP_MFN(Button, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:bool Touched(int x,int y)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","bool Touched(int _x,int _y)", WRAP_MFN(Button, Touched), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetScale(double xFactor,double yFactor)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Button, SetScale), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetEnabled(bool value)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetEnabled(bool _value)", WRAP_MFN(Button, SetEnabled), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetType(int type)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetType(int _type)", WRAP_MFN(Button, SetType), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetState(int state)
+	r = g_app->scriptManager->engine->RegisterObjectMethod("Button","void SetState(int _state)", WRAP_MFN(Button, SetState), asCALL_GENERIC);SDL_assert( r >= 0 );
+
+	///prop:CallbackHandler @on_click_handler
+	g_app->scriptManager->engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler_script));
+	///prop:ref @user_data
+	g_app->scriptManager->engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data_script));
+
+#endif	
 }
 #endif
 

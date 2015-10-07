@@ -411,3 +411,43 @@ float TweenManager::RunEquation(int transition,int equation, float t,float b , f
 			}
 	}
 
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+	
+void RegisterTween()
+{
+		int r;
+
+#ifndef __EMSCRIPTEN__
+
+	r = g_app->scriptManager->engine->RegisterObjectType("TweenedFloat", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_FACTORY, "TweenedFloat@ f()", asFUNCTION(TweenedFloat_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_ADDREF, "void f()", asMETHOD(TweenedFloat,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("TweenedFloat", asBEHAVE_RELEASE, "void f()", asMETHOD(TweenedFloat,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("TweenedFloat", "float value", asOFFSET(TweenedFloat,value));
+	r = g_app->scriptManager->engine->RegisterObjectProperty("TweenedFloat", "float targetValue", asOFFSET(TweenedFloat,targetValue)); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("TweenedFloat", "float initialValue", asOFFSET(TweenedFloat,initialValue)); SDL_assert( r >= 0 );
+
+
+	r = g_app->scriptManager->engine->RegisterObjectType("Tween", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", asFUNCTION(Tween_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_ADDREF, "void f()", asMETHOD(Tween,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Tween", asBEHAVE_RELEASE, "void f()", asMETHOD(Tween,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("Tween", "CallbackHandler @onComplete", asOFFSET(Tween, onCompleteHandler)); SDL_assert( r >= 0 );
+	r = g_app->scriptManager->engine->RegisterObjectProperty("Tween", "ref @userData", asOFFSET(Tween, userData)); SDL_assert( r >= 0 );
+
+	r = g_app->scriptManager->engine->RegisterClassMethod("Tween","void AddProp(TweenedFloat @)", asMETHOD(Tween, AddProp));
+	r = g_app->scriptManager->engine->RegisterClassMethod("Tween","void Init(float _duration,int _effect,int _easeMode)", asMETHOD(Tween, Init));
+
+	///sect:Tweens
+	///glob:void TWN_AddTween(Tween @)
+	r = g_app->scriptManager->engine->RegisterGlobalFunction("void TWN_AddTween(Tween @)", asMETHOD(TweenManager,AddTween), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
+	///glob:void TWN_CancelTweens()
+	r = g_app->scriptManager->engine->RegisterGlobalFunction("void TWN_CancelTweens()", asMETHOD(TweenManager,Shutdown), asCALL_THISCALL_ASGLOBAL, g_app->tweenManager);
+#else
+
+#endif
+
+}
