@@ -50,6 +50,8 @@ bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
 #endif
 	
 	this->on_selection_changed_handler = NULL;
+	this->user_data = NULL;
+	this->sender = NULL;
 
 	this->backgroundColor.r = 0;
 	this->backgroundColor.g = 0;
@@ -586,9 +588,9 @@ void RegisterComboBox()
 	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","float get_Rotation()", WRAP_MFN(ComboBox, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
 
 	///prop:CallbackHandler @onSelectionChangedHandler
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler));
+	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData));
+	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
 	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
 	
 #endif
