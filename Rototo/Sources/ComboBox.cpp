@@ -96,6 +96,7 @@ ComboBox::~ComboBox()
 	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
 #endif
 	
+	this->on_selection_changed_handler = NULL;
 }
 
 /*----------------------------------------------------------------------------*/

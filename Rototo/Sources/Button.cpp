@@ -177,7 +177,7 @@ Button::~Button()
 #ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->on_click_handler_script);
 #endif
-
+	this->on_click_handler = NULL;
 }
 
 
