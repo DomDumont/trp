@@ -1,7 +1,7 @@
 #include "Global.h"
 #ifdef TRP_USE_BINDING
 
-#include "binding\scripthandle.h"
+#include "binding/scripthandle.h"
 #include <new>
 #include <assert.h>
 #include <string.h>

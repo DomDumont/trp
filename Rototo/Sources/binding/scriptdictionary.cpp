@@ -3,8 +3,8 @@
 
 #include <assert.h>
 #include <string.h>
-#include "binding\scriptdictionary.h"
-#include "binding\scriptarray.h"
+#include "binding/scriptdictionary.h"
+#include "binding/scriptarray.h"
 
 
 

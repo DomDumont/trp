@@ -1,7 +1,7 @@
 #include "Global.h"
 #ifdef TRP_USE_BINDING
 
-#include "binding\scriptbuilder.h"
+#include "binding/scriptbuilder.h"
 #include <vector>
 #include <assert.h>
 using namespace std;

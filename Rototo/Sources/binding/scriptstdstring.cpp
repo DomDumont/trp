@@ -1,7 +1,7 @@
 #include "Global.h"
 #ifdef TRP_USE_BINDING
 
-#include "binding\scriptstdstring.h"
+#include "binding/scriptstdstring.h"
 #include <assert.h> // assert()
 #include <sstream>  // std::stringstream
 #include <string.h> // strstr()

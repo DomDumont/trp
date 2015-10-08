@@ -5,7 +5,7 @@
 #include <math.h>
 #include <float.h>
 #include <string.h>
-#include "binding\scriptmath.h"
+#include "binding/scriptmath.h"
 
 #ifdef __BORLANDC__
 #include <cmath>
