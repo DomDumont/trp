@@ -162,7 +162,11 @@ Button::Button() : state(0),type(0)
 	this->sender = NULL;
   	this->on_click_handler = NULL;
 
-
+	this->SetScale(1,1);
+	this->sprite_up.SetScale(1,1);
+	this->sprite_down.SetScale(1,1);
+	this->sprite_disable.SetScale(1,1);
+	this->label.SetScale(1,1);
 }
 
 
@@ -550,6 +554,10 @@ void Button::SetScale(double _xFactor,double _yFactor)
 {
 	Widget::SetScale(_xFactor,_yFactor);
 
+	this->sprite_up.SetScale(_xFactor,_yFactor);
+	this->sprite_down.SetScale(_xFactor,_yFactor);
+	this->sprite_disable.SetScale(_xFactor,_yFactor);
+
 	this->sprite_up.position = this->position;
 	this->sprite_down.position = this->position;
 	this->sprite_disable.position = this->position;
@@ -592,7 +600,7 @@ void Button::SetScale(double _xFactor,double _yFactor)
 
 void Button::SetSize(Vector2D _pos)
 {
-	this->SetSize((int)_pos.x,(int) _pos.y);
+	this->SetSize((int)_pos.x,(int) _pos.y);	
 }
 
 /*----------------------------------------------------------------------------*/
@@ -609,9 +617,9 @@ void Button::SetSize(int _w,int _h)
 	Widget::SetSize(_w,_h);
 	//Now reposition the sprite
 
-	this->sprite_up.SetSize(_w/10,_h/2);
-	this->sprite_down.SetSize(_w/10,_h/2);
-	this->sprite_disable.SetSize(_w/10,_h/2);
+	this->sprite_up.SetSize(_w,_h);
+	this->sprite_down.SetSize(_w,_h);
+	this->sprite_disable.SetSize(_w,_h);
 
 	//Now reposition the text because size changed
 	if (this->type == TYPE_BUTTON)

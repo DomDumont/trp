@@ -17,7 +17,10 @@ void Settings::Read()
 	loadedString = LoadTextFile("settings.xml", FULLPATH | BOTH);
 
 	if (loadedString.empty())
+		{
+		UTI_Log("Error : Empty settings file");
 		return;
+		}
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
 	pugi::xml_node root = doc.first_child();

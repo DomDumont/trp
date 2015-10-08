@@ -303,20 +303,22 @@ void UTI_Log(const std::string& _toto)
 	//SDL_Log(_toto.c_str());
 	LogToOutputAndNetwork(tmp.c_str());
 
+#ifndef __EMSCRIPTEN__
 	if (g_app->settings.logtofile != 0)
-	{
-	unsigned int tmpSize = (unsigned int) tmp.length();
-	
-	rwLogFile = fopen("trp.log", "a+");
-	if (rwLogFile != NULL)
-	{
-	if (fwrite( tmp.c_str(), 1, tmpSize,rwLogFile) != tmpSize)
 		{
-		SDL_Log("Couldn't fully write string");
+		unsigned int tmpSize = (unsigned int) tmp.length();
+		
+		rwLogFile = fopen("trp.log", "a+");
+		if (rwLogFile != NULL)
+		{
+		if (fwrite( tmp.c_str(), 1, tmpSize,rwLogFile) != tmpSize)
+			{
+			SDL_Log("Couldn't fully write string");
+			}
 		}
-	}
-	UTI_CloseLogFile();
-	}
+		UTI_CloseLogFile();
+		}
+#endif		
 }
 
 /*----------------------------------------------------------------------------*/

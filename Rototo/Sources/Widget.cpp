@@ -88,6 +88,8 @@ Widget::Widget():refCount(1)
 	this->xScale		= 1;
 	this->yScale		= 1;
 
+	this->SetScale(1,1);
+
 	this->enabled		= true;
 	this->shown		= true;
 

@@ -69,7 +69,9 @@ void RegisterTextManager()
 /*----------------------------------------------------------------------------*/
 std::string TXT_GetString(const std::string& _id)
 {
-	return g_app->textManager->GetString(_id);
+	std::string toto = g_app->textManager->GetString(_id);
+	UTI_Log(toto.c_str());
+	return toto;
 }
 
 /*----------------------------------------------------------------------------*/
