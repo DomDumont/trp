@@ -11,7 +11,7 @@
 
 #include <string>
 
-#include "binding\scriptarray.h"
+#include "binding/scriptarray.h"
 
 using namespace std;
 
