@@ -1,14 +1,17 @@
+#include "Global.h"
+#ifdef TRP_USE_BINDING
+
 #include <new>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <stdio.h> // sprintf
 
-#ifdef TRP_USE_BINDING
+
 
 #include <string>
 
-#include "scriptarray.h"
+#include "binding\scriptarray.h"
 
 using namespace std;
 

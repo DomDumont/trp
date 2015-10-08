@@ -12,6 +12,7 @@ endif()
 
 include_directories("../../Rototo/Extern/stb")
 include_directories("../../Rototo/Includes")
+include_directories("../../Rototo/Extern/AngelScript/sdk/angelscript/include")
 
 
 add_executable (HelloWorld ${HelloWorld_SOURCES})

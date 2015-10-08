@@ -1,4 +1,7 @@
-#include "scriptbuilder.h"
+#include "Global.h"
+#ifdef TRP_USE_BINDING
+
+#include "binding\scriptbuilder.h"
 #include <vector>
 #include <assert.h>
 using namespace std;
@@ -15,7 +18,7 @@ using namespace std;
 #include <unistd.h> // For getcwd()
 #endif
 
-#ifdef TRP_USE_BINDING
+
 
 BEGIN_AS_NAMESPACE
 

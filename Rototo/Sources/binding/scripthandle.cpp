@@ -1,9 +1,11 @@
-#include "scripthandle.h"
+#include "Global.h"
+#ifdef TRP_USE_BINDING
+
+#include "binding\scripthandle.h"
 #include <new>
 #include <assert.h>
 #include <string.h>
 
-#ifdef TRP_USE_BINDING
 
 BEGIN_AS_NAMESPACE
 

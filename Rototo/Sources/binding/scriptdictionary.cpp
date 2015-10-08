@@ -1,9 +1,12 @@
+#include "Global.h"
+#ifdef TRP_USE_BINDING
+
 #include <assert.h>
 #include <string.h>
-#include "scriptdictionary.h"
-#include "scriptarray.h"
+#include "binding\scriptdictionary.h"
+#include "binding\scriptarray.h"
 
-#ifdef TRP_USE_BINDING
+
 
 BEGIN_AS_NAMESPACE
 

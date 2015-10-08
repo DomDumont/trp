@@ -1,4 +1,7 @@
-#include "scriptstdstring.h"
+#include "Global.h"
+#ifdef TRP_USE_BINDING
+
+#include "binding\scriptstdstring.h"
 #include <assert.h> // assert()
 #include <sstream>  // std::stringstream
 #include <string.h> // strstr()
@@ -10,7 +13,7 @@
 
 using namespace std;
 
-#ifdef TRP_USE_BINDING
+
 
 BEGIN_AS_NAMESPACE
 

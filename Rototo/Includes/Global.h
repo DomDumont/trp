@@ -45,7 +45,7 @@
 #include "SDL.h"
 
 
-
+#define TRP_USE_BINDING
 
 
 class Application;

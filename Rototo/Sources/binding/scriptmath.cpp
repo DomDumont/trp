@@ -1,8 +1,11 @@
+#include "Global.h"
+#ifdef TRP_USE_BINDING
+
 #include <assert.h>
 #include <math.h>
 #include <float.h>
 #include <string.h>
-#include "scriptmath.h"
+#include "binding\scriptmath.h"
 
 #ifdef __BORLANDC__
 #include <cmath>
@@ -346,4 +349,4 @@ void RegisterScriptMath(asIScriptEngine *engine)
 
 END_AS_NAMESPACE
 #endif
-
+#endif

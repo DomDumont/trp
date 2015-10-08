@@ -72,6 +72,14 @@ SoundManager::SoundManager()
 	buffers		= 1024;
 	volume		= MIX_MAX_VOLUME;
 	volumeSFX	= MIX_MAX_VOLUME;
+#else
+		rate = 0;
+		format = 0;
+		channels = 0;
+		buffers = 0;
+		volume = 0;
+		volumeSFX = 0;
+
 #endif
 
 	initialized	= 0;
