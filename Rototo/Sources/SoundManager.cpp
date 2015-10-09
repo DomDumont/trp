@@ -215,6 +215,8 @@ Sound::Sound(): sample(NULL),channel(-1)
 
 #ifdef TRP_USE_AUDIO 	
 	volume = MIX_MAX_VOLUME;
+#else
+	volume = 0;
 #endif
 
 }

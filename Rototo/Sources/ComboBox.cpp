@@ -73,6 +73,9 @@ bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
 	this->textColor.b = 255;
 	this->textColor.a = 255;
 	
+	this->sizeXBG = 0;
+	this->sizeYBG = 0;
+	this->sizeItemBG = 0;
 }
 
 /*----------------------------------------------------------------------------*/

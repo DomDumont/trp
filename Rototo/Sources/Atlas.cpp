@@ -84,6 +84,11 @@ Atlas *Atlas_Factory()
 
 Atlas::Atlas():texture(NULL),refCount(1)
 {
+	this->size.x = 0;
+	this->size.y = 0;
+	this->size.w = 0;
+	this->size.h = 0;
+
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Atlas Constructor\n");
 }
 

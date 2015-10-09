@@ -53,12 +53,17 @@ Animation *Animation_Factory()
 /*----------------------------------------------------------------------------*/
 
 Animation::Animation() 
-	:atlas(NULL),timeElapsed(0),currentFrame(0),nbFrames(0),msPerFrame(1000/12),playing(0)
+	:atlas(NULL),timeElapsed(0),currentFrame(0),nbFrames(0),playing(0)
 {
 #ifdef TRP_USE_BINDING
-onCompleteHandler= nullptr;
+	onCompleteHandler= nullptr;
 #endif
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Animation Constructor %s\n",this->name.c_str());
+	mode = 0;
+	sens = 0;
+	stopASAP = false;
+	this->msPerFrame = (float)(1000.0 / 12.0);
+
 }
 
 /*----------------------------------------------------------------------------*/
@@ -89,6 +94,11 @@ Animation::Animation(const Animation &other)
 #ifdef TRP_USE_BINDING
 	this->onCompleteHandler = other.onCompleteHandler; //Very Important
 #endif
+
+	this->mode = other.mode;
+	this->sens = other.sens;
+	this->stopASAP = other.stopASAP;
+
 	}
 
 /*----------------------------------------------------------------------------*/

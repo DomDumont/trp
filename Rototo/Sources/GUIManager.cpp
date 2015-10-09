@@ -84,6 +84,21 @@ GUIManager::GUIManager(): font(NULL), atlas(NULL), button_up(NULL),button_down(N
 
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"CGUIManager Constructor\n");
+	this->primary_text_color.r = 0;
+	this->primary_text_color.g = 0;
+	this->primary_text_color.b = 0;
+	this->primary_text_color.a = 255;
+
+	this->disable_text_color.r = 0;
+	this->disable_text_color.g = 0;
+	this->disable_text_color.b = 0;
+	this->disable_text_color.a = 255;
+
+	this->background_color.r = 0;
+	this->background_color.g = 0;
+	this->background_color.b = 0;
+	this->background_color.a = 255;
+
 }
 
 /*----------------------------------------------------------------------------*/

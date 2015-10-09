@@ -51,6 +51,17 @@ Particle::Particle( AtlasEntry	* _entry)
     this->velocityX = 0;
     this->velocityY = 0;
     this->angularVelocity = 0;
+	this->TTL = 0;
+
+	this->frame.x = 0;
+	this->frame.y = 0;
+	this->frame.w = 0;
+	this->frame.h = 0;
+
+	this->position.x = 0;
+	this->position.y = 0;
+	this->position.w = 0;
+	this->position.h = 0;
 }
 
 /*----------------------------------------------------------------------------*/

@@ -42,6 +42,10 @@ class AtlasEntry
 	{
 		name = "";
 		atlas = NULL;
+		frame.x = 0;
+		frame.y = 0;
+		frame.w = 0;
+		frame.h = 0;
 	}
 
 };

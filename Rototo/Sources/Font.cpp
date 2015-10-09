@@ -44,12 +44,17 @@ Font *Font_Factory()
 
 Font::Font() : refCount(1) 
 	{
-
+		this->texture = NULL;
+		this->cdata = NULL;
+		this->fontHeight = 32.0f;
 	}
 
 Font::Font(const Font &other)
 	{
-
+		this->refCount = 1;
+		this->texture = other.texture;
+		this->cdata = other.cdata;
+		this->fontHeight = other.fontHeight;
 	}
 
 Font::~Font()

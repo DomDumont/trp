@@ -40,6 +40,16 @@ TextBox::TextBox()
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"TextBox Constructor\n");
 	state = 0; cursor = 0; pan = 0;
+	
+	this->backup_text_color.r = 0;
+	this->backup_text_color.g = 0;
+	this->backup_text_color.b = 0;
+	this->backup_text_color.a = 255;
+
+	this->color.r = 0;
+	this->color.g = 0;
+	this->color.b = 0;
+	this->color.a = 255;
 
 }
 

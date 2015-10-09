@@ -111,6 +111,10 @@ int MyIncludeCallback(const char *include, const char *from, CScriptBuilder *bui
 
 ScriptManager::ScriptManager():mydbg(NULL)
 {
+	this->engine = NULL;
+	this->module = NULL;
+	this->hasCompileErrors = false;
+
 }
 
 /*----------------------------------------------------------------------------*/
@@ -373,7 +377,9 @@ FunctionEntry * ScriptManager::RegisterScript(const std::string& _prototype, cha
 		FunctionEntry *pTempEntry = new FunctionEntry();
 
 		pTempEntry->func = module->GetFunctionByDecl(_prototype.c_str());
-		strcpy(pTempEntry->argsFormat,_fmt);
+
+		SDL_assert(strlen(_fmt) < 16);
+		strncpy(pTempEntry->argsFormat,_fmt,16);
 
 		this->functions.push_back(pTempEntry);
 

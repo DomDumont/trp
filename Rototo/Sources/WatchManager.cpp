@@ -86,9 +86,8 @@ public:
 
 WatchManager::WatchManager()
 {
-#ifdef TRP_USE_WATCH
 	fileWatcher = NULL;
-#endif
+	watcherListener = NULL;
 }
 
 /*----------------------------------------------------------------------------*/

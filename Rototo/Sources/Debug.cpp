@@ -19,6 +19,7 @@ CDebug::CDebug()
 	m_action = CONTINUE;
 	m_lastFunction = 0;
 	blocked = false;
+	m_lastCommandAtStackLevel = 0;
 }
 
 CDebug::~CDebug()

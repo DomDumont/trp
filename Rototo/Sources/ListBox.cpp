@@ -71,6 +71,11 @@ ListBox::ListBox():
 	this->textColor.b = 255;
 	this->textColor.a = 255;
 
+	this->sizeXBG = 0;
+	this->sizeYBG = 0;
+	this->sizeItemBG = 0;
+	this->sender = NULL;
+	this->user_data = NULL;
 }
 
 /*----------------------------------------------------------------------------*/

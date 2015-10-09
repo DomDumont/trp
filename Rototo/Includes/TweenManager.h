@@ -172,6 +172,9 @@ public :
 		{
 		// Let the constructor initialize the reference counter to 1
 		refCount = 1;
+		initialValue = 0;
+		value = 0;
+		targetValue = 0;
 		}
 
 	void AddRef()
