@@ -291,6 +291,13 @@ Application::Application()
 	//this->orientation = C_ORIENTATION_PORTRAIT;
 
 	this->title = "Rototo";
+	this->sdlWindow = NULL;
+	this->sdlRenderer = NULL;
+	this->capFPS = -1; //Desactivated //TODO remove this hardcoded value
+	this->on_init_func = NULL;
+	this->on_update_func = NULL;
+	this->on_render_func = NULL;
+
 }
 
 /*----------------------------------------------------------------------------*/

@@ -161,6 +161,18 @@ void RegisterEmitter()
 Emitter::Emitter():refCount(1),atlas(NULL),entry(NULL)
 {
 
+	this->emissionRate = 0;
+	this->frame.x = 0;
+	this->frame.y = 0;
+	this->frame.w = 0;
+	this->frame.h = 0;
+
+	this->position.x = 0;
+	this->position.y = 0;
+	this->position.w = 0;
+	this->position.h = 0;
+
+	this->TTL = 0;
 
     SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter Constructor \n");
 }
@@ -181,6 +193,24 @@ Emitter::~Emitter()
 
 Emitter::Emitter(const Emitter &other) 
 {
+	this->refCount = 1;
+	this->atlas = other.atlas;
+	this->atlas->AddRef();
+	this->entry = other.entry;
+	this->emissionRate = other.emissionRate;
+
+	this->frame.x = other.frame.x;
+	this->frame.y = other.frame.y;
+	this->frame.w = other.frame.w;
+	this->frame.h = other.frame.h;
+
+	this->position.x = other.position.x;
+	this->position.y = other.position.y;
+	this->position.w = other.position.w;
+	this->position.h = other.position.h;
+
+	this->TTL = other.TTL;
+
 }
 
 

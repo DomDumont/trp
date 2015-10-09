@@ -96,7 +96,10 @@ void TXT_UnLoad()
 
 TextManager::TextManager()
 {
-
+	this->color.r = 0;
+	this->color.g = 0;
+	this->color.b = 0;
+	this->color.a = 255;
 }
 
 /*----------------------------------------------------------------------------*/

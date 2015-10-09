@@ -39,17 +39,10 @@
 #include "binding\aswrappedcall.h"
 #endif
 
-/*
-void ConstructSprite(Sprite *thisPointer)
-{
-	new(thisPointer) Sprite();
-}
 
-void DestructSprite(Sprite *thisPointer)
-{
-	thisPointer->~Sprite();
-}
-*/
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 
 TiledMap *TiledMap_Factory()
 {
@@ -57,15 +50,25 @@ TiledMap *TiledMap_Factory()
 	return new TiledMap();
 }
 
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 TiledMap::TiledMap()
 {
 
-this->atlas = NULL;
+	this->atlas = NULL;
+	this->tileOffsetX = 0;
+	this->tileOffsetY = 0;
+	this->tileWidth = 0;
+	this->tileHeight = 0;
+	this->width = 0;
+	this->height = 0;
 }
 
-/************************************************************************/
-/*                                                                      */
-/************************************************************************/
+
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
 TiledMap::~TiledMap()
 {
     MY_SAFE_RELEASE(this->atlas);

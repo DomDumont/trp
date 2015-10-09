@@ -1,4 +1,7 @@
 Build/
+BuildVisual/
+BuildEmscripten/
+
 Rototo/Extern/SDL2/
 
 # Compiled Object files
