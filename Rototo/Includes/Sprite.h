@@ -50,6 +50,7 @@ public:
 	void	SetPosition(int _x,int _y);
 	void	SetPosition(Vector2D _pos);	
 	void	SetSize(int _w,int _h);
+	void	SetScale(double _xFactor,double _yFactor);
 
 public:
 

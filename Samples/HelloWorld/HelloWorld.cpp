@@ -14,17 +14,22 @@ bool OnClickHandler2(void * _sender,void * _userData)
 
 class DemoApp : public Application
 {
+
 private:
+/*	
 	Font		maFonte;
+
 	Label  		monLabel;
 	int         windowX;
 	int         windowY;
 	Button		buttonBack;
+*/	
 
-	SceneManager theSceneManager;
+	//SceneManager theSceneManager;
 	MenuScene    menuScene;
 	ParticleScene    particleScene;
 
+public:	
 	void OnInit()
 	{
 		

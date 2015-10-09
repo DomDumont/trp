@@ -38,7 +38,8 @@ bool OnClickHandler(void * _sender,void * _userData)
 
 void MenuScene::Init()
 {
-	WND_GetLogicalSize(windowX, windowY);
+
+	//WND_GetLogicalSize(windowX, windowY);
   	helpLabel.SetText("Ctrl-R to restart scripts\nCtrl-F to explore scripts\nCtrl-H for Help",true);
     helpLabel.SetPosition(windowX * 3/4,600);  
 
@@ -119,11 +120,13 @@ void MenuScene::Init()
 	GUI_AddWidget(&comboBox);
 
 	myMusic.Load("sounds/sample.ogg");  
-    myMusic.Play(-1);   
+    //myMusic.Play(-1);   
+    
 }
 
 void MenuScene::OnRender(unsigned int _delta)
 {
+	/*
 	WND_Clear();
 	monLabel.Render();
     helpLabel.Render();
@@ -131,7 +134,7 @@ void MenuScene::OnRender(unsigned int _delta)
 	buttonStart.Render();
 	listBox.Render();
 	comboBox.Render();
-	
+	*/
 }
 
 void MenuScene::OnUpdate(unsigned int _delta)

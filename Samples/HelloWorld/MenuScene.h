@@ -14,6 +14,7 @@ public:
 	int             windowX;
 	int             windowY;
 
+
 	Button 	buttonStart;
 	ListBox listBox;
 	ComboBox comboBox;
@@ -21,6 +22,7 @@ public:
 	Label  labelChosen;
     Label  helpLabel;	
     Music  myMusic;
+
 
 	void Init();
 	void OnRender(unsigned int _delta);

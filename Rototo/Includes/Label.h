@@ -43,6 +43,7 @@ public:
 	void SetText(const std::string& _text,bool _justified = true);
 	void SetEnabled(bool _value);
 	void SetPosition(int _x,int _y);
+	void SetScale(double _xFactor,double _yFactor);
 
 private:
 
