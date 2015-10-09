@@ -18,3 +18,20 @@ First public binaries for the crazy ones ;-)
 * Win32 Zip  : [here](http://www.mediafire.com/download/42nx7mju6ub2g0o/trp-win32.zip)
 * Win32 Inst : [here](http://www.mediafire.com/download/uv5ppbai9xgkxav/trp_setup.exe)
 * Android    : [here](http://www.mediafire.com/download/nuz5hpox87p31uo/rototo.apk)
+
+<a href="https://scan.coverity.com/projects/domdumont-trp">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/coverity/scan/6611.svg"/>
+</a>
+
+<a href="https://scan.coverity.com/projects/domdumont-trp">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/travis/DomDumont/trp.svg"/>
+</a>
+
+<a href="https://scan.coverity.com/projects/domdumont-trp">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/github/downloads/atom/atom/latest/total.svg"/>
+</a>
+
+
