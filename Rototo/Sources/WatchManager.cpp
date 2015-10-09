@@ -86,8 +86,11 @@ public:
 
 WatchManager::WatchManager()
 {
+#if defined WIN32 || defined TRP_OSX
 	fileWatcher = NULL;
 	watcherListener = NULL;
+#endif
+
 }
 
 /*----------------------------------------------------------------------------*/
