@@ -99,7 +99,10 @@ CScriptDictionary::CScriptDictionary(asBYTE *buffer)
 	// This constructor will always be called from a script
 	// so we can get the engine from the active context
 	asIScriptContext *ctx = asGetActiveContext();
-	Init(ctx->GetEngine());
+	if (ctx != NULL)
+		{
+		Init(ctx->GetEngine());
+		}
 
 	// Initialize the dictionary from the buffer
 	asUINT length = *(asUINT*)buffer;

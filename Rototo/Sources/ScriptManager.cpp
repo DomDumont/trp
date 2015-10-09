@@ -379,7 +379,7 @@ FunctionEntry * ScriptManager::RegisterScript(const std::string& _prototype, cha
 		pTempEntry->func = module->GetFunctionByDecl(_prototype.c_str());
 
 		SDL_assert(strlen(_fmt) < 16);
-		strncpy(pTempEntry->argsFormat,_fmt,16);
+		strncpy(pTempEntry->argsFormat,_fmt,15);
 
 		this->functions.push_back(pTempEntry);
 

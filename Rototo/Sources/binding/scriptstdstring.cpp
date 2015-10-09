@@ -325,7 +325,10 @@ static char *StringCharAt(unsigned int i, string &str)
 	{
 		// Set a script exception
 		asIScriptContext *ctx = asGetActiveContext();
-		ctx->SetException("Out of range");
+		if (ctx != NULL)
+			{
+			ctx->SetException("Out of range");
+			}
 
 		// Return a null pointer
 		return 0;
@@ -895,7 +898,10 @@ static void StringCharAtGeneric(asIScriptGeneric * gen)
 	{
 		// Set a script exception
 		asIScriptContext *ctx = asGetActiveContext();
-		ctx->SetException("Out of range");
+		if (ctx != NULL)
+			{
+			ctx->SetException("Out of range");
+			}
 
 		gen->SetReturnAddress(0);
 	}
