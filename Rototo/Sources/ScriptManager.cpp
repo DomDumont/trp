@@ -132,7 +132,11 @@ void ScriptManager::Init()
 {
 
 	engine = asCreateScriptEngine(ANGELSCRIPT_VERSION);
+#ifndef TRP_EMSCRIPTEN
 	engine->SetMessageCallback(asMETHOD(ScriptManager, MessageCallback), this, asCALL_THISCALL);
+#else
+	engine->SetMessageCallback(WRAP_FN(ScriptManager, MessageCallback), this, asCALL_GENERIC);
+#endif
 	
 	RegisterStdString(engine);
 	RegisterScriptHandle(engine);
