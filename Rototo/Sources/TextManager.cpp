@@ -157,6 +157,10 @@ std::string TextManager::GetString(const std::string& _id)
 
 void TextManager::Load(const std::string& _file,int _flags)
 {
+	// First clear everything before loading them again
+
+	mapStrings.clear();
+
 	// First load and create the Texture
 	
 	std::string fullPath;
@@ -168,12 +172,12 @@ void TextManager::Load(const std::string& _file,int _flags)
 	
 	loadedString = LoadTextFile(fullPath,_flags);
 	
-  pugi::xml_document doc;
-  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
-  pugi::xml_node root = doc.first_child();
-  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+	pugi::xml_node root = doc.first_child();
+	for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
 		{
-    mapStrings[elem.attribute("id").value()] = elem.attribute("value").value();
+		mapStrings[elem.attribute("id").value()] = elem.attribute("value").value();
 		}
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Text Dico <%s> loaded successfully \n",_file.c_str());

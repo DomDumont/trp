@@ -25,8 +25,8 @@ if (EMSCRIPTEN)
 	else()
 		message("Build js only")
 	endif()
-	add_definitions(-s USE_SDL=2 -Wno-warn-absolute-paths -Wno-format-security )	
-	set_target_properties(HelloWorld PROPERTIES LINK_FLAGS "-O2 -s USE_SDL=2")
+	add_definitions(-s USE_SDL=2 -s ASSERTIONS=2 -Wno-warn-absolute-paths -Wno-format-security )	
+	set_target_properties(HelloWorld PROPERTIES LINK_FLAGS "-s USE_SDL=2  -s DEMANGLE_SUPPORT=1 ")
 endif()
 
 
