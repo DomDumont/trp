@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -28,19 +28,21 @@
 #define __FONT_H__
 
 #include <string>
+#include <memory>
 
 
-#include "stb_truetype.h"
 
+class Font_p;
 class Font
 {
+	friend class Renderer;
  public:
     Font();
     ~Font();
     Font(const Font &other);
     void Load(const std::string& _file, int _size, int _flags = 13 /*GAMEDATA|BOTH*/);
     void UnLoad();
-    SDL_Texture * Render(const std::string& _text, SDL_Color _color);
+
 
     void AddRef()
     {
@@ -64,17 +66,19 @@ class Font
         SDL_assert(0);
     }
 
-  private:
-  
-  void GetTextExtent(const std::string& _text, float & _x, float &_y);
 
+	void GetTextExtent(const std::string& _text, float & _x, float &_y);
+	float GetFontHeight();
+
+private:
+	std::unique_ptr<Font_p> font_p; // opaque type here
+  
+  
 
  private:
     int               refCount;
 
-    SDL_Texture*      texture;      //!< font texture
-    stbtt_bakedchar*  cdata;    //!< font data: ASCII 32..126 is 95 glyphs
-    float             fontHeight;
+ 
 };
 
 

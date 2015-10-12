@@ -30,7 +30,7 @@
 #include "Animation.h"
 
 #include "Atlas.h"
-#include "Application_p.h"
+#include "Application.h"
 #include "Sprite.h"
 
 #ifdef __EMSCRIPTEN__

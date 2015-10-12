@@ -28,7 +28,7 @@
 
 
 #include "GUIManager.h"
-#include "Application_p.h"
+#include "Application.h"
 #include "Utils.h"
 #include "pugixml.hpp"
 #include "Font.h"

@@ -29,7 +29,7 @@
 #include "Sprite.h"
 
 #include "Atlas.h"
-#include "Application_p.h"
+#include "Application.h"
 
 
 #ifdef __EMSCRIPTEN__

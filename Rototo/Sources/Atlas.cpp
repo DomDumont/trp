@@ -26,7 +26,7 @@
 
 #include "Atlas.h"
 #include "pugixml.hpp"
-#include "Application_p.h"
+#include "Application.h"
 #include "Utils.h"
 
 #ifdef __EMSCRIPTEN__

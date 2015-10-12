@@ -1,6 +1,6 @@
 #include "Global.h"
 #include "Utils.h"
-#include "Application_p.h"
+#include "Application.h"
 #include "Font.h"
 #include "Label.h"
 #include "Button_p.h"

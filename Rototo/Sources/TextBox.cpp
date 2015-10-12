@@ -24,7 +24,7 @@
 
 #include "Global.h"
 #include "TextBox.h"
-#include "Application_p.h"
+#include "Application.h"
 #include "Font.h"
 
 #ifdef __EMSCRIPTEN__

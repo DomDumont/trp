@@ -25,15 +25,23 @@
 
 #include "Global.h"
 
-#include "Application_p.h"
+#include "Application.h"
 #include "Utils.h"
 #include "pugixml.hpp"
+
 
 Application *g_app;
 
 #ifdef __EMSCRIPTEN__
 #include "emscripten/emscripten.h"
 #endif
+
+
+class Application::impl
+{
+
+};
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -231,7 +239,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Application::Application()
+Application::Application() : pimpl(new impl)
 {
 #if defined WIN32 || defined TRP_LINUX
 	this->settings.configURL = ".";

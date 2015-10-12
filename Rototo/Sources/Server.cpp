@@ -28,7 +28,7 @@
 
 #include "Server.h"
 
-#include "Application_p.h"
+#include "Application.h"
 #include "Utils.h"
 
 #ifdef TRP_USE_NETWORK

@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -38,6 +38,10 @@
 #include "GUIManager.h"
 #include "PhysicsManager.h"
 #include "Settings.h"
+
+
+#include <memory>
+
 
 #define ORIENTATION_PORTRAIT 1
 #define ORIENTATION_PAYSAGE  2
@@ -111,15 +115,21 @@ public:
 
 	Settings			settings;
 
+
+
 private:
 	SDL_Event			event;
 	std::string			title;
+
 
 #ifdef TRP_USE_BINDING
 	FunctionEntry		*on_init_func;
 	FunctionEntry		*on_update_func;
 	FunctionEntry		*on_render_func;
 #endif
+
+private:
+	class impl; std::unique_ptr<impl> pimpl; // opaque type here
 };
 
 #endif

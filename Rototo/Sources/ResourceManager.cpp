@@ -28,7 +28,7 @@
 
 
 #include "ResourceManager.h"
-#include "Application_p.h"
+#include "Application.h"
 
 
 /*----------------------------------------------------------------------------*/

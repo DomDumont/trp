@@ -2,7 +2,7 @@
 
 
 #include "Music.h"
-#include "Application_p.h"
+#include "Application.h"
 
 #ifdef __EMSCRIPTEN__
 #include "binding\aswrappedcall.h"

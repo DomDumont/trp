@@ -25,7 +25,7 @@
 #include "Global.h"
 #include "Particles.h"
 
-#include "Application_p.h"
+#include "Application.h"
 #include "Utils.h"
 
 #include "pugixml.hpp"

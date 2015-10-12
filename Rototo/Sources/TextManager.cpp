@@ -27,7 +27,7 @@
 
 
 #include "TextManager.h"
-#include "Application_p.h"
+#include "Application.h"
 
 #include "Utils.h"
 

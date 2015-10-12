@@ -27,7 +27,7 @@
 
 
 #include "ScriptManager.h"
-#include "Application_p.h"
+#include "Application.h"
 #include "Utils.h"
 
 #include "Atlas.h" //Registration

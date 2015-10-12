@@ -24,8 +24,9 @@
 
 #include "Global.h"
 #include "Label.h"
-#include "Application_p.h"
+#include "Application.h"
 #include "Font.h"
+#include "Renderer.h"
 
 #ifdef __EMSCRIPTEN__
 #include "binding\aswrappedcall.h"
@@ -189,7 +190,7 @@ void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 	else
 		tempColor = this->disable_text_color;
 
-  this->texture = this->font->Render(_text, tempColor);
+  this->texture = 	Renderer::Get().RenderText(this->font,_text, tempColor);
 
   this->frame.x = 0;
   this->frame.y = 0;
