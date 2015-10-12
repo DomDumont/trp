@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "Font.h"
 #include "Label.h"
-#include "Button_p.h"
+#include "Button.h"
 #include "ListBox.h"
 #include "ComboBox.h"
 #include "Music.h"

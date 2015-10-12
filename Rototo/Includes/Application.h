@@ -23,15 +23,13 @@
 */
 
 
-#ifndef __APPLICATION_P_H__
-#define __APPLICATION_P_H__
+#ifndef __APPLICATION_H__
+#define __APPLICATION_H__
 
 //TODO replace this with forward declarations ?
 
 #include "SoundManager.h"
 #include "TextManager.h"
-#include "ScriptManager.h"
-#include "TweenManager.h"
 #include "ResourceManager.h"
 #include "WatchManager.h"
 #include "NetworkManager.h"
@@ -56,6 +54,7 @@
 #define DONECODE_REAL_QUIT 1
 #define DONECODE_RESTART_ONLY 2
 
+class Application_p;
 class Application
 {
 public:
@@ -91,9 +90,7 @@ public:
 #endif
 	SoundManager		*soundManager;
 	TextManager			*textManager;
-#ifdef TRP_USE_BINDING
-	ScriptManager		*scriptManager;
-#endif
+
 	ResourceManager		*resourceManager;
 	WatchManager		*watchManager;
 #ifdef TRP_USE_NETWORK
@@ -103,7 +100,6 @@ public:
 
 	SDL_Window			*sdlWindow;
 	SDL_Renderer		*sdlRenderer;
-	TweenManager		*tweenManager; //TODO rename to tweenManager
 
 	std::string			platform;
 	
@@ -122,14 +118,9 @@ private:
 	std::string			title;
 
 
-#ifdef TRP_USE_BINDING
-	FunctionEntry		*on_init_func;
-	FunctionEntry		*on_update_func;
-	FunctionEntry		*on_render_func;
-#endif
 
 private:
-	class impl; std::unique_ptr<impl> pimpl; // opaque type here
+	std::unique_ptr<Application_p> application_p; // opaque type here
 };
 
 #endif

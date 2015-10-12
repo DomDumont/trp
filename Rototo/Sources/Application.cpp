@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -37,11 +37,42 @@ Application *g_app;
 #endif
 
 
-class Application::impl
+#include "Application_p.h"
+
+Application_p::Application_p()
 {
+	this->on_init_func = NULL;
+	this->on_update_func = NULL;
+	this->on_render_func = NULL;
+}
 
-};
+void Application_p::Init()
+{
+#ifdef TRP_USE_BINDING
+	//scriptManager->CompileScript("main.rsc");
+	ScriptManager::Get().CompileScriptViaBuilder("main.rsc");
 
+
+	// New register scripts functions before using them
+	this->on_init_func = ScriptManager::Get().RegisterScript("void OnInit()", (char*)"");
+	this->on_update_func = ScriptManager::Get().RegisterScript("void OnUpdate(uint64 _delta)", (char*)"L");
+	this->on_render_func = ScriptManager::Get().RegisterScript("void OnRender(uint64 _delta)", (char*)"L");
+
+	ScriptManager::Get().RunFunctionEntry(this->on_init_func, "");
+
+#endif
+
+}
+
+
+void Application_p::Update(unsigned int elapsed)
+{
+#ifdef TRP_USE_BINDING
+	ScriptManager::Get().RunFunctionEntry(on_update_func, elapsed);
+	ScriptManager::Get().RunFunctionEntry(on_render_func, elapsed);
+#endif
+
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -63,7 +94,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 			const double PI = 3.141592653589793; //TODO WTF !!!
 
 #ifdef TRP_USE_BINDING
-			scriptManager->RunScript("void OnMultiGesture(int _numFingers, double _x, double _y, double _theta, double _dist )",
+			ScriptManager::Get().RunScript("void OnMultiGesture(int _numFingers, double _x, double _y, double _theta, double _dist )",
 
 			(char*)"dffff",
 			event->mgesture.numFingers,
@@ -211,7 +242,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 				}
 
 #ifdef TRP_USE_BINDING
-			scriptManager->RunScript("void OnKeyUp(uint32 _scancode)",(char*)"d",event->key.keysym.scancode);
+			ScriptManager::Get().RunScript("void OnKeyUp(uint32 _scancode)", (char*)"d", event->key.keysym.scancode);
 #endif
 			
 		break;
@@ -222,7 +253,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 					event->button.button, event->button.x, event->button.y);
 
 #ifdef TRP_USE_BINDING
-			scriptManager->RunScript("void OnTouch(uint32 _button,uint32 _x,uint32 _y)",(char*)"ddd",event->button.button, event->button.x, event->button.y);
+			ScriptManager::Get().RunScript("void OnTouch(uint32 _button,uint32 _x,uint32 _y)", (char*)"ddd", event->button.button, event->button.x, event->button.y);
 #endif
 
 			break;
@@ -239,7 +270,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Application::Application() : pimpl(new impl)
+Application::Application() : application_p(new Application_p)
 {
 #if defined WIN32 || defined TRP_LINUX
 	this->settings.configURL = ".";
@@ -278,10 +309,8 @@ Application::Application() : pimpl(new impl)
 
 	this->soundManager	= new SoundManager();
 	this->textManager	= new TextManager();
-#ifdef TRP_USE_BINDING
-	this->scriptManager	= new ScriptManager();
-#endif
-	this->tweenManager	= new TweenManager();
+
+
 	this->resourceManager = new ResourceManager(); 
 	this->watchManager	= new WatchManager();
 #ifdef TRP_USE_NETWORK
@@ -302,9 +331,6 @@ Application::Application() : pimpl(new impl)
 	this->sdlWindow = NULL;
 	this->sdlRenderer = NULL;
 	this->capFPS = -1; //Desactivated //TODO remove this hardcoded value
-	this->on_init_func = NULL;
-	this->on_update_func = NULL;
-	this->on_render_func = NULL;
 
 }
 
@@ -320,10 +346,6 @@ Application::~Application()
 	delete guiManager;
 	delete soundManager;
 	delete textManager;
-#ifdef TRP_USE_BINDING
-	delete scriptManager;
-#endif
-	delete tweenManager;
 	delete resourceManager;
 	delete watchManager;
 #ifdef TRP_USE_NETWORK
@@ -457,24 +479,11 @@ void Application::Init()
 
 	doneCode = DONECODE_NOT_DONE;
 #ifdef TRP_USE_BINDING
-	scriptManager->Init();
+	ScriptManager::Get().Init();
 #endif
 	guiManager->Init();
-	tweenManager->Init();
-#ifdef TRP_USE_BINDING
-	//scriptManager->CompileScript("main.rsc");
-	scriptManager->CompileScriptViaBuilder("main.rsc");
-
-
-	// New register scripts functions before using them
-	on_init_func = scriptManager->RegisterScript("void OnInit()",(char*)"");
-	on_update_func = scriptManager->RegisterScript("void OnUpdate(uint64 _delta)",(char*)"L");
-	on_render_func = scriptManager->RegisterScript("void OnRender(uint64 _delta)",(char*)"L");
-
-	scriptManager->RunFunctionEntry(on_init_func,"");
-
-#endif
-
+	TweenManager::Get().Init();
+	application_p->Init();
 	this->OnInit();
 }
 
@@ -521,15 +530,12 @@ int Application::Run()
 #ifdef TRP_USE_NETWORK
 		networkManager->Update();
 #endif
-		tweenManager->Update(elapsed);
+		TweenManager::Get().Update(elapsed);
 #ifdef TRP_USE_PHYSICS
 		physicsManager->Update(elapsed);
 #endif
 
-#ifdef TRP_USE_BINDING
-		scriptManager->RunFunctionEntry(on_update_func,elapsed);
-		scriptManager->RunFunctionEntry(on_render_func,elapsed);
-#endif
+		application_p->Update(elapsed);
 
 		this->OnUpdate(elapsed);
 		this->OnRender(elapsed);
@@ -570,14 +576,14 @@ int Application::Run()
 void Application::Shutdown()
 {
 #ifdef TRP_USE_BINDING
-	scriptManager->RunScript("void OnShutdown()",(char*)"");
+	ScriptManager::Get().RunScript("void OnShutdown()",(char*)"");
 #endif
 
 	// Shutdown always done, even in restart only
 
-	tweenManager->Shutdown(); //Must be here to remove potential pending tweens and release them.
+	TweenManager::Get().Shutdown(); //Must be here to remove potential pending tweens and release them.
 #ifdef TRP_USE_BINDING
-	scriptManager->Shutdown();
+	ScriptManager::Get().Shutdown();
 #endif
 	guiManager->Shutdown(); // Must be here to release the widgets.
 

@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -22,18 +22,16 @@
   ==============================================================================
 */
 
-#ifndef __BUTTON_P_H__
-#define __BUTTON_P_H__
+#ifndef __BUTTON_H__
+#define __BUTTON_H__
 
 #include "Widget.h"
 
 #include "Label.h"
 #include "Sprite.h"
 
-#ifdef TRP_USE_BINDING
-#include <angelscript.h>
-#include "binding/scripthandle.h"
-#endif
+
+#include <memory>
 
 #define STATE_UP	0
 #define STATE_DOWN	1
@@ -48,6 +46,7 @@
 #define CHECKBOX_SIZE	20
 #define RADIOBOX_SIZE	20
 
+class Button_p;
 
 class Button : public Widget
 {
@@ -74,11 +73,6 @@ public:
 	void SetState		(int _state);
 
 public:
-#ifdef TRP_USE_BINDING
-	asIScriptFunction *	on_click_handler_script;
-	CScriptHandle		user_data_script;
-	CScriptHandle		sender_script;
-#endif
 
 
 
@@ -95,7 +89,10 @@ public:
 
 
 
+
+
 private:
+	std::unique_ptr<Button_p> button_p; // opaque type here
 
 	Label			label;
 	Sprite			sprite_up;

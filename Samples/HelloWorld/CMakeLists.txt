@@ -11,7 +11,7 @@ if (NOT DEFINED EMSCRIPTEN)
 endif()
 
 include_directories("../../Rototo/Includes")
-include_directories("../../Rototo/Extern/AngelScript/sdk/angelscript/include")
+# include_directories("../../Rototo/Extern/AngelScript/sdk/angelscript/include")
 
 
 add_executable (HelloWorld ${HelloWorld_SOURCES})

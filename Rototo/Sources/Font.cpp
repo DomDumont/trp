@@ -32,7 +32,7 @@
 #include "binding\aswrappedcall.h"
 #endif
 
-
+#include "ScriptManager.h"
 
 #define STB_TRUETYPE_IMPLEMENTATION  // force following include to generate implementation
 
@@ -209,50 +209,50 @@ void RegisterFont()
 
 #ifndef __EMSCRIPTEN__
     ///class:Font
-    r = g_app->scriptManager->engine->RegisterObjectType("Font", 0, asOBJ_REF);
+	r = ScriptManager::Get().engine->RegisterObjectType("Font", 0, asOBJ_REF);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font",
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Font",
         asBEHAVE_FACTORY, "Font@ f()", asFUNCTION(Font_Factory), asCALL_CDECL);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font", asBEHAVE_ADDREF,
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Font", asBEHAVE_ADDREF,
         "void f()", asMETHOD(Font, AddRef), asCALL_THISCALL);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font",
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Font",
         asBEHAVE_RELEASE, "void f()", asMETHOD(Font, Release), asCALL_THISCALL);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Font",
         "void Load(string &in _name,int _size,int _flags=13)", asMETHOD(Font, Load), asCALL_THISCALL);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Font",
         "void UnLoad()", asMETHOD(Font, UnLoad), asCALL_THISCALL);
         SDL_assert(r >= 0);
 
 #else
-    r = g_app->scriptManager->engine->RegisterObjectType("Font", 0, asOBJ_REF);
+	r = ScriptManager::Get().engine->RegisterObjectType("Font", 0, asOBJ_REF);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font",
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Font",
         asBEHAVE_FACTORY, "Font@ f()", WRAP_FN(Font_Factory), asCALL_GENERIC);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font", asBEHAVE_ADDREF,
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Font", asBEHAVE_ADDREF,
         "void f()", WRAP_MFN(Font, AddRef), asCALL_GENERIC);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Font",
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Font",
         asBEHAVE_RELEASE, "void f()", WRAP_MFN(Font, Release), asCALL_GENERIC);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Font",
         "void Load(string &in _name,int _size,int _flags=13)", WRAP_MFN(Font, Load), asCALL_GENERIC);
         SDL_assert(r >= 0);
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Font",
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Font",
         "void UnLoad()", WRAP_MFN(Font, UnLoad), asCALL_GENERIC);
         SDL_assert(r >= 0);        
 #endif

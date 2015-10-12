@@ -38,6 +38,8 @@
 #include "binding\aswrappedcall.h"
 #endif
 
+#include "ScriptManager.h"
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -123,40 +125,40 @@ void RegisterEmitter()
 
     ///class:Emitter
     ///func:Emitter()
-    r = g_app->scriptManager->engine->RegisterObjectType("Emitter", 0, asOBJ_REF); SDL_assert( r >= 0 );
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Emitter", asBEHAVE_FACTORY, "Emitter@ f()", asFUNCTION(Emitter_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Emitter", asBEHAVE_ADDREF, "void f()", asMETHOD(Emitter,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Emitter", asBEHAVE_RELEASE, "void f()", asMETHOD(Emitter,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("Emitter", 0, asOBJ_REF); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Emitter", asBEHAVE_FACTORY, "Emitter@ f()", asFUNCTION(Emitter_Factory), asCALL_CDECL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Emitter", asBEHAVE_ADDREF, "void f()", asMETHOD(Emitter, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Emitter", asBEHAVE_RELEASE, "void f()", asMETHOD(Emitter, Release), asCALL_THISCALL); SDL_assert(r >= 0);
 
     ///func:void Load(Atlas @ atlas,string &in file,int flags=13)
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void Load(Atlas @ _atlas,string &in _file,int _flags=13)", asMETHOD(Emitter, Load), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void Load(Atlas @ _atlas,string &in _file,int _flags=13)", asMETHOD(Emitter, Load), asCALL_THISCALL);
     SDL_assert( r >= 0 );
     ///func:void SetPosition(int x,int y,int from=0)
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void SetPosition(int _x,int _y,int _from=0)", asMETHOD(Emitter, SetPosition), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void SetPosition(int _x,int _y,int _from=0)", asMETHOD(Emitter, SetPosition), asCALL_THISCALL);
     SDL_assert( r >= 0 );
     ///func:void Update(uint64 elapsed)
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void Update(uint64 _elapsed)", asMETHOD(Emitter, Update), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void Update(uint64 _elapsed)", asMETHOD(Emitter, Update), asCALL_THISCALL);
     SDL_assert( r >= 0 );
     ///func:void Render()
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void Render()", asMETHOD(Emitter, Render), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void Render()", asMETHOD(Emitter, Render), asCALL_THISCALL);
     SDL_assert( r >= 0 );
 #else
-    r = g_app->scriptManager->engine->RegisterObjectType("Emitter", 0, asOBJ_REF); SDL_assert( r >= 0 );
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Emitter", asBEHAVE_FACTORY, "Emitter@ f()", WRAP_FN(Emitter_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Emitter", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Emitter,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-    r = g_app->scriptManager->engine->RegisterObjectBehaviour("Emitter", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Emitter,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("Emitter", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Emitter", asBEHAVE_FACTORY, "Emitter@ f()", WRAP_FN(Emitter_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Emitter", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Emitter,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Emitter", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Emitter,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void Load(Atlas @ _atlas,string &in _file,int _flags=13)", WRAP_MFN(Emitter, Load), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void Load(Atlas @ _atlas,string &in _file,int _flags=13)", WRAP_MFN(Emitter, Load), asCALL_GENERIC);
     SDL_assert( r >= 0 );
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void SetPosition(int _x,int _y,int _from=0)", WRAP_MFN(Emitter, SetPosition), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void SetPosition(int _x,int _y,int _from=0)", WRAP_MFN(Emitter, SetPosition), asCALL_GENERIC);
     SDL_assert( r >= 0 );
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void Update(uint64 _elapsed)", WRAP_MFN(Emitter, Update), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void Update(uint64 _elapsed)", WRAP_MFN(Emitter, Update), asCALL_GENERIC);
     SDL_assert( r >= 0 );
 
-    r = g_app->scriptManager->engine->RegisterObjectMethod("Emitter","void Render()", WRAP_MFN(Emitter, Render), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void Render()", WRAP_MFN(Emitter, Render), asCALL_GENERIC);
     SDL_assert( r >= 0 );
 
 #endif

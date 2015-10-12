@@ -39,6 +39,8 @@
 #include "binding\aswrappedcall.h"
 #endif
 
+#include "ScriptManager.h"
+
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -172,12 +174,12 @@ void RegisterSoundManager()
 #ifndef __EMSCRIPTEN__
 	///sect:Sound
 	///glob:void SND_SetMusicVolume(int newVolume)	
-	g_app->scriptManager->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", asFUNCTION(SND_SetMusicVolume), asCALL_CDECL);
+	ScriptManager::Get().RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", asFUNCTION(SND_SetMusicVolume), asCALL_CDECL);
 	///glob:void SND_SetSFXVolume(int newVolume)
-	g_app->scriptManager->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", asFUNCTION(SND_SetSFXVolume), asCALL_CDECL);
+	ScriptManager::Get().RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", asFUNCTION(SND_SetSFXVolume), asCALL_CDECL);
 #else
-	g_app->scriptManager->RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", WRAP_FN(SND_SetMusicVolume), asCALL_GENERIC);
-	g_app->scriptManager->RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", WRAP_FN(SND_SetSFXVolume), asCALL_GENERIC);
+	ScriptManager::Get().RegisterGlobalFunction("void SND_SetMusicVolume(int _newVolume)", WRAP_FN(SND_SetMusicVolume), asCALL_GENERIC);
+	ScriptManager::Get().RegisterGlobalFunction("void SND_SetSFXVolume(int _newVolume)", WRAP_FN(SND_SetSFXVolume), asCALL_GENERIC);
 #endif	
 
 }
@@ -331,23 +333,23 @@ void RegisterSound()
 
 #ifndef __EMSCRIPTEN__
 	///class:Sound
-	r = g_app->scriptManager->engine->RegisterObjectType("Sound", sizeof(Sound) , asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sound", asBEHAVE_CONSTRUCT,  "void f()",asFUNCTION(ConstructSound), asCALL_CDECL_OBJLAST);
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sound", asBEHAVE_DESTRUCT,   "void f()",asFUNCTION(DestructSound),  asCALL_CDECL_OBJLAST);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void Load(string &in _file)", asMETHOD(Sound, Load), asCALL_THISCALL);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void Play(int _nbLoops=0)", asMETHOD(Sound, Play), asCALL_THISCALL);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void UnLoad()", asMETHOD(Sound, UnLoad), asCALL_THISCALL);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void Stop()", asMETHOD(Sound, Stop), asCALL_THISCALL);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void SetVolume(int _newVolume)", asMETHOD(Sound, SetVolume), asCALL_THISCALL);SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectType("Sound", sizeof(Sound), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Sound", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(ConstructSound), asCALL_CDECL_OBJLAST);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Sound", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(DestructSound), asCALL_CDECL_OBJLAST);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound", "void Load(string &in _file)", asMETHOD(Sound, Load), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound", "void Play(int _nbLoops=0)", asMETHOD(Sound, Play), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound", "void UnLoad()", asMETHOD(Sound, UnLoad), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound", "void Stop()", asMETHOD(Sound, Stop), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound", "void SetVolume(int _newVolume)", asMETHOD(Sound, SetVolume), asCALL_THISCALL); SDL_assert(r >= 0);
 #else
-	r = g_app->scriptManager->engine->RegisterObjectType("Sound", sizeof(Sound) , asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sound", asBEHAVE_CONSTRUCT,  "void f()",WRAP_CON(Sound,()), asCALL_GENERIC);
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Sound", asBEHAVE_DESTRUCT,   "void f()",WRAP_DES(Sound),  asCALL_GENERIC);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void Load(string &in _file)", WRAP_MFN(Sound, Load), asCALL_GENERIC);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void Play(int _nbLoops=0)", WRAP_MFN(Sound, Play), asCALL_GENERIC);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void UnLoad()", WRAP_MFN(Sound, UnLoad), asCALL_GENERIC);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void Stop()", WRAP_MFN(Sound, Stop), asCALL_GENERIC);SDL_assert(r>=0);
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Sound","void SetVolume(int _newVolume)", WRAP_MFN(Sound, SetVolume), asCALL_GENERIC);SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectType("Sound", sizeof(Sound) , asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Sound", asBEHAVE_CONSTRUCT,  "void f()",WRAP_CON(Sound,()), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Sound", asBEHAVE_DESTRUCT,   "void f()",WRAP_DES(Sound),  asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound","void Load(string &in _file)", WRAP_MFN(Sound, Load), asCALL_GENERIC);SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound","void Play(int _nbLoops=0)", WRAP_MFN(Sound, Play), asCALL_GENERIC);SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound","void UnLoad()", WRAP_MFN(Sound, UnLoad), asCALL_GENERIC);SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound","void Stop()", WRAP_MFN(Sound, Stop), asCALL_GENERIC);SDL_assert(r>=0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sound","void SetVolume(int _newVolume)", WRAP_MFN(Sound, SetVolume), asCALL_GENERIC);SDL_assert(r>=0);
 
 #endif	
 

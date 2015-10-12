@@ -45,8 +45,8 @@ class CDebug;
 class ScriptManager
 {
 public:
+	static ScriptManager& Get();
 
-	ScriptManager();
 	~ScriptManager();
 
 	void Init();
@@ -98,7 +98,8 @@ public:
 	asIScriptEngine		*engine;
 private:
 	
-	
+	ScriptManager();
+
 	asIScriptModule		*module;
 	
 	std::vector<asIScriptContext*> contexts;

@@ -3,6 +3,7 @@
 
 #include <vector>
 
+
 #ifdef TRP_USE_BINDING
 #include <angelscript.h>
 #include "binding/scripthandle.h"
@@ -334,20 +335,8 @@ class TweenManager
 {
 
 public:
-	TweenManager()
-	{
-		this->funcs[E_LINEAR_EFFECT] = new CLinearEffect();
-		this->funcs[E_SINE_EFFECT]  = new CSineEffect();
-		this->funcs[E_QUINT_EFFECT] = new CQuintEffect();
-		this->funcs[E_QUART_EFFECT] = new CQuartEffect();
-		this->funcs[E_QUAD_EFFECT] = new CQuadEffect();
-		this->funcs[E_EXPO_EFFECT] = new CExpoEffect();
-		this->funcs[E_ELASTIC_EFFECT] = new CElasticEffect();
-		this->funcs[E_CUBIC_EFFECT] = new CCubicEffect();
-		this->funcs[E_CIRC_EFFECT] =  new CCircEffect();
-		this->funcs[E_BOUNCE_EFFECT] =  new CBounceEffect();
-		this->funcs[E_BACK_EFFECT] =  new CBackEffect();
-	}
+	static TweenManager& Get();
+
 	~TweenManager()
 	{
 		delete this->funcs[E_LINEAR_EFFECT];
@@ -373,6 +362,23 @@ public:
 	float RunEquation(int transition,int equation, float t,float b , float c, float d);
 
 private:
+
+	TweenManager()
+	{
+		this->funcs[E_LINEAR_EFFECT] = new CLinearEffect();
+		this->funcs[E_SINE_EFFECT] = new CSineEffect();
+		this->funcs[E_QUINT_EFFECT] = new CQuintEffect();
+		this->funcs[E_QUART_EFFECT] = new CQuartEffect();
+		this->funcs[E_QUAD_EFFECT] = new CQuadEffect();
+		this->funcs[E_EXPO_EFFECT] = new CExpoEffect();
+		this->funcs[E_ELASTIC_EFFECT] = new CElasticEffect();
+		this->funcs[E_CUBIC_EFFECT] = new CCubicEffect();
+		this->funcs[E_CIRC_EFFECT] = new CCircEffect();
+		this->funcs[E_BOUNCE_EFFECT] = new CBounceEffect();
+		this->funcs[E_BACK_EFFECT] = new CBackEffect();
+	}
+
+
 	std::vector<Tween *> tweens;
 	std::vector<Tween *>::iterator tweensIT;
 	CEasing *funcs[11];

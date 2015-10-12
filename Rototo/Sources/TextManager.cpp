@@ -37,6 +37,8 @@
 #include "binding\aswrappedcall.h"
 #endif
 
+#include "ScriptManager.h"
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -48,15 +50,15 @@ void RegisterTextManager()
 #ifndef __EMSCRIPTEN__	
 	///sect:Text
 	///glob:string TXT_GetString(string &id)
-	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(string &in id)", asFUNCTION(TXT_GetString), asCALL_CDECL);
+	ScriptManager::Get().RegisterGlobalFunction("string TXT_GetString(string &in id)", asFUNCTION(TXT_GetString), asCALL_CDECL);
 	///glob:void TXT_Load(string &in file,int flags=13)
-	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asFUNCTION(TXT_Load), asCALL_CDECL);
+	ScriptManager::Get().RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asFUNCTION(TXT_Load), asCALL_CDECL);
 	///glob:void TXT_UnLoad()
-	g_app->scriptManager->RegisterGlobalFunction("void TXT_UnLoad()", asFUNCTION(TXT_UnLoad), asCALL_CDECL);
+	ScriptManager::Get().RegisterGlobalFunction("void TXT_UnLoad()", asFUNCTION(TXT_UnLoad), asCALL_CDECL);
 #else
-	g_app->scriptManager->RegisterGlobalFunction("string TXT_GetString(string &in id)", WRAP_FN(TXT_GetString), asCALL_GENERIC);
-	g_app->scriptManager->RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", WRAP_FN(TXT_Load), asCALL_GENERIC);
-	g_app->scriptManager->RegisterGlobalFunction("void TXT_UnLoad()", WRAP_FN(TXT_UnLoad), asCALL_GENERIC);
+	ScriptManager::Get().RegisterGlobalFunction("string TXT_GetString(string &in id)", WRAP_FN(TXT_GetString), asCALL_GENERIC);
+	ScriptManager::Get().RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", WRAP_FN(TXT_Load), asCALL_GENERIC);
+	ScriptManager::Get().RegisterGlobalFunction("void TXT_UnLoad()", WRAP_FN(TXT_UnLoad), asCALL_GENERIC);
 
 #endif	
 	

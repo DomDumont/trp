@@ -31,6 +31,7 @@
 #include "binding\aswrappedcall.h"
 #endif
 
+#include "ScriptManager.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -225,62 +226,62 @@ void RegisterPrimitive()
 #ifndef __EMSCRIPTEN__
 
 	///class:Primitive
-	r = g_app->scriptManager->engine->RegisterObjectType("Primitive", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Primitive", asBEHAVE_FACTORY, "Primitive@ f()", asFUNCTION(Primitive_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Primitive", asBEHAVE_ADDREF, "void f()", asMETHOD(Primitive,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Primitive", asBEHAVE_RELEASE, "void f()", asMETHOD(Primitive,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("Primitive", 0, asOBJ_REF); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Primitive", asBEHAVE_FACTORY, "Primitive@ f()", asFUNCTION(Primitive_Factory), asCALL_CDECL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Primitive", asBEHAVE_ADDREF, "void f()", asMETHOD(Primitive, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Primitive", asBEHAVE_RELEASE, "void f()", asMETHOD(Primitive, Release), asCALL_THISCALL); SDL_assert(r >= 0);
 
 	///func:void Render()
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void Render()", asMETHOD(Primitive, Render), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void Render()", asMETHOD(Primitive, Render), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 	///func:void SetColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Primitive, SetColor), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Primitive, SetColor), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 	///func:void SetPosition(int x,int y)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetPosition(int _x,int _y)", asMETHODPR(Primitive, SetPosition,(int,int),void), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetPosition(int _x,int _y)", asMETHODPR(Primitive, SetPosition, (int, int), void), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","bool Touched(int _x,int _y)", asMETHOD(Primitive, Touched), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "bool Touched(int _x,int _y)", asMETHOD(Primitive, Touched), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void set_Rotation(float _angle)", asMETHOD(Primitive, SetRotation), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void set_Rotation(float _angle)", asMETHOD(Primitive, SetRotation), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 	///func:float GetRotation()
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","float get_Rotation()", asMETHOD(Primitive, GetRotation), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "float get_Rotation()", asMETHOD(Primitive, GetRotation), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", asMETHODPR(Primitive, SetSize,(int,int),void), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetSize(int _w,int _h)", asMETHODPR(Primitive, SetSize, (int, int), void), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", asMETHOD(Primitive, SetScale), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetScale(double _xFactor,double _yFactor)", asMETHOD(Primitive, SetScale), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetShape(int _shape)", asMETHOD(Primitive, SetShape), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetShape(int _shape)", asMETHOD(Primitive, SetShape), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetAngles(int _start,int _end)", asMETHOD(Primitive, SetAngles), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetAngles(int _start,int _end)", asMETHOD(Primitive, SetAngles), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 
 #else
 
-	r = g_app->scriptManager->engine->RegisterObjectType("Primitive", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Primitive", asBEHAVE_FACTORY, "Primitive@ f()", WRAP_FN(Primitive_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Primitive", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Primitive,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Primitive", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Primitive,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("Primitive", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Primitive", asBEHAVE_FACTORY, "Primitive@ f()", WRAP_FN(Primitive_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Primitive", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Primitive,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Primitive", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Primitive,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void Render()", WRAP_MFN(Primitive, Render), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void Render()", WRAP_MFN(Primitive, Render), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Primitive, SetColor), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Primitive, SetColor), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Primitive, SetPosition,(int,int),void), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Primitive, SetPosition,(int,int),void), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","bool Touched(int _x,int _y)", WRAP_MFN(Primitive, Touched), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","bool Touched(int _x,int _y)", WRAP_MFN(Primitive, Touched), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void set_Rotation(float _angle)", WRAP_MFN(Primitive, SetRotation), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void set_Rotation(float _angle)", WRAP_MFN(Primitive, SetRotation), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","float get_Rotation()", WRAP_MFN(Primitive, GetRotation), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","float get_Rotation()", WRAP_MFN(Primitive, GetRotation), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", WRAP_MFN_PR(Primitive, SetSize,(int,int),void), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", WRAP_MFN_PR(Primitive, SetSize,(int,int),void), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Primitive, SetScale), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Primitive, SetScale), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetShape(int _shape)", WRAP_MFN(Primitive, SetShape), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetShape(int _shape)", WRAP_MFN(Primitive, SetShape), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Primitive","void SetAngles(int _start,int _end)", WRAP_MFN(Primitive, SetAngles), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetAngles(int _start,int _end)", WRAP_MFN(Primitive, SetAngles), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
 
 #endif	

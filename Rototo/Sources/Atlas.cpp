@@ -33,6 +33,7 @@
 #include "binding\aswrappedcall.h"
 #endif
 
+#include "ScriptManager.h"
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -45,25 +46,25 @@ void RegisterAtlas()
 
 	///class:Atlas
 	///func:Atlas()
-	r = g_app->scriptManager->engine->RegisterObjectType("Atlas", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Atlas", asBEHAVE_FACTORY, "Atlas@ f()", asFUNCTION(Atlas_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Atlas", asBEHAVE_ADDREF, "void f()", asMETHOD(Atlas,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Atlas", asBEHAVE_RELEASE, "void f()", asMETHOD(Atlas,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("Atlas", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Atlas", asBEHAVE_FACTORY, "Atlas@ f()", asFUNCTION(Atlas_Factory), asCALL_CDECL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Atlas", asBEHAVE_ADDREF, "void f()", asMETHOD(Atlas, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Atlas", asBEHAVE_RELEASE, "void f()", asMETHOD(Atlas, Release), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void Load(string &in _file,int _flags=13)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Atlas","void Load(string &in _file,int _flags=13)", asMETHOD(Atlas, Load),asCALL_THISCALL);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Atlas", "void Load(string &in _file,int _flags=13)", asMETHOD(Atlas, Load), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void LoadFromImage(string &in _file,int _flags=13)
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Atlas","void LoadFromImage(string &in _file,int _flags=13)", asMETHOD(Atlas, LoadFromImage),asCALL_THISCALL);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Atlas", "void LoadFromImage(string &in _file,int _flags=13)", asMETHOD(Atlas, LoadFromImage), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void UnLoad()
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Atlas","void UnLoad()", asMETHOD(Atlas, UnLoad),asCALL_THISCALL);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Atlas", "void UnLoad()", asMETHOD(Atlas, UnLoad), asCALL_THISCALL); SDL_assert(r >= 0);
 #else
-	r = g_app->scriptManager->engine->RegisterObjectType("Atlas", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Atlas", asBEHAVE_FACTORY, "Atlas@ f()", WRAP_FN(Atlas_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Atlas", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Atlas,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("Atlas", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Atlas,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("Atlas", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Atlas", asBEHAVE_FACTORY, "Atlas@ f()", WRAP_FN(Atlas_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Atlas", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Atlas,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Atlas", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Atlas,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 	
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Atlas","void Load(string &in _file,int _flags=13)", WRAP_MFN(Atlas, Load),asCALL_GENERIC);SDL_assert( r >= 0 );	
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Atlas","void LoadFromImage(string &in _file,int _flags=13)", WRAP_MFN(Atlas, LoadFromImage),asCALL_GENERIC);SDL_assert( r >= 0 );	
-	r = g_app->scriptManager->engine->RegisterObjectMethod("Atlas","void UnLoad()", WRAP_MFN(Atlas, UnLoad),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Atlas","void Load(string &in _file,int _flags=13)", WRAP_MFN(Atlas, Load),asCALL_GENERIC);SDL_assert( r >= 0 );	
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Atlas","void LoadFromImage(string &in _file,int _flags=13)", WRAP_MFN(Atlas, LoadFromImage),asCALL_GENERIC);SDL_assert( r >= 0 );	
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Atlas","void UnLoad()", WRAP_MFN(Atlas, UnLoad),asCALL_GENERIC);SDL_assert( r >= 0 );
 
 #endif
 }

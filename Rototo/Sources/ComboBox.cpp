@@ -31,6 +31,7 @@
 #include "binding\aswrappedcall.h"
 #endif
 
+#include "ScriptManager.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -455,8 +456,8 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 		if (this->onSelectionChangedHandler_script != NULL)
 			{
 
-			this->sender_script.Set(this, g_app->scriptManager->engine->GetObjectTypeByName("ComboBox"));
-			ret = g_app->scriptManager->RunCallback(this->onSelectionChangedHandler_script, &(this->sender_script), &(this->userData_script));
+				this->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("ComboBox"));
+				ret = ScriptManager::Get().RunCallback(this->onSelectionChangedHandler_script, &(this->sender_script), &(this->userData_script));
 			this->sender_script.Set(NULL, NULL);
 
 			}
@@ -538,63 +539,63 @@ void RegisterComboBox()
 #ifndef __EMSCRIPTEN__
 
 	///class:ComboBox
-	r = g_app->scriptManager->engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_FACTORY, "ComboBox@ f()", asFUNCTION(ComboBox_Factory), asCALL_CDECL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_ADDREF, "void f()", asMETHOD(ComboBox,AddRef), asCALL_THISCALL); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_RELEASE, "void f()", asMETHOD(ComboBox,Release), asCALL_THISCALL); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_FACTORY, "ComboBox@ f()", asFUNCTION(ComboBox_Factory), asCALL_CDECL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_ADDREF, "void f()", asMETHOD(ComboBox, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_RELEASE, "void f()", asMETHOD(ComboBox, Release), asCALL_THISCALL); SDL_assert(r >= 0);
 
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void Render()", asMETHOD(ComboBox, Render), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", asMETHODPR(ComboBox, SetSize,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetPosition(int _x,int _y)", asMETHODPR(ComboBox, SetPosition,(int,int),void), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetFont(Font @ _font)", asMETHOD(ComboBox, SetFont), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","int AddItem(const string &in _newText)", asMETHOD(ComboBox, AddItem), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void RemoveItem(int _index)", asMETHOD(ComboBox, RemoveItem), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void ResetContent()", asMETHOD(ComboBox, ResetContent), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","int GetSelectedIndex()", asMETHOD(ComboBox, GetSelectedIndex), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSelectedIndex(int _index)", asMETHOD(ComboBox, SetSelectedIndex), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","string GetItemText(int _index)", asMETHOD(ComboBox, GetItemText), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetEnabled(bool _value)", asMETHOD(ComboBox, SetEnabled), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetBackgroundColor), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetItemColor), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetSelectedItemColor), asCALL_THISCALL);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetTextColor), asCALL_THISCALL);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void Render()", asMETHOD(ComboBox, Render), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetSize(int _w,int _h)", asMETHODPR(ComboBox, SetSize, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetPosition(int _x,int _y)", asMETHODPR(ComboBox, SetPosition, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetFont(Font @ _font)", asMETHOD(ComboBox, SetFont), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "int AddItem(const string &in _newText)", asMETHOD(ComboBox, AddItem), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void RemoveItem(int _index)", asMETHOD(ComboBox, RemoveItem), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void ResetContent()", asMETHOD(ComboBox, ResetContent), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "int GetSelectedIndex()", asMETHOD(ComboBox, GetSelectedIndex), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetSelectedIndex(int _index)", asMETHOD(ComboBox, SetSelectedIndex), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "string GetItemText(int _index)", asMETHOD(ComboBox, GetItemText), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetEnabled(bool _value)", asMETHOD(ComboBox, SetEnabled), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetBackgroundColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetBackgroundColor), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetItemColor), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetSelectedItemColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetSelectedItemColor), asCALL_THISCALL); SDL_assert(r >= 0);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetTextColor(int _r,int _g,int _b,int _a)", asMETHOD(ComboBox, SetTextColor), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:float GetRotation()
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","float get_Rotation()", asMETHOD(ComboBox, GetRotation), asCALL_THISCALL);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "float get_Rotation()", asMETHOD(ComboBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 
 	///prop:CallbackHandler @onSelectionChangedHandler
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
+	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
-	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
+	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
+	//ScriptManager::Get().RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
 #else
 	///class:ComboBox
-	r = g_app->scriptManager->engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_FACTORY, "ComboBox@ f()", WRAP_FN(ComboBox_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_ADDREF, "void f()", WRAP_MFN(ComboBox,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(ComboBox,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_FACTORY, "ComboBox@ f()", WRAP_FN(ComboBox_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_ADDREF, "void f()", WRAP_MFN(ComboBox,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectBehaviour("ComboBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(ComboBox,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
 	
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void Render()", WRAP_MFN(ComboBox, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", WRAP_MFN_PR(ComboBox, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetPosition(int _x,int _y)", WRAP_MFN_PR(ComboBox, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetFont(Font @ _font)", WRAP_MFN(ComboBox, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","int AddItem(const string &in _newText)", WRAP_MFN(ComboBox, AddItem), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void RemoveItem(int _index)", WRAP_MFN(ComboBox, RemoveItem), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void ResetContent()", WRAP_MFN(ComboBox, ResetContent), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","int GetSelectedIndex()", WRAP_MFN(ComboBox, GetSelectedIndex), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSelectedIndex(int _index)", WRAP_MFN(ComboBox, SetSelectedIndex), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","string GetItemText(int _index)", WRAP_MFN(ComboBox, GetItemText), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetEnabled(bool _value)", WRAP_MFN(ComboBox, SetEnabled), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetBackgroundColor), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetItemColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetItemColor), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetSelectedItemColor), asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","void SetTextColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetTextColor), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void Render()", WRAP_MFN(ComboBox, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetSize(int _w,int _h)", WRAP_MFN_PR(ComboBox, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetPosition(int _x,int _y)", WRAP_MFN_PR(ComboBox, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetFont(Font @ _font)", WRAP_MFN(ComboBox, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","int AddItem(const string &in _newText)", WRAP_MFN(ComboBox, AddItem), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void RemoveItem(int _index)", WRAP_MFN(ComboBox, RemoveItem), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void ResetContent()", WRAP_MFN(ComboBox, ResetContent), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","int GetSelectedIndex()", WRAP_MFN(ComboBox, GetSelectedIndex), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetSelectedIndex(int _index)", WRAP_MFN(ComboBox, SetSelectedIndex), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","string GetItemText(int _index)", WRAP_MFN(ComboBox, GetItemText), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetEnabled(bool _value)", WRAP_MFN(ComboBox, SetEnabled), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetBackgroundColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetBackgroundColor), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetItemColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetItemColor), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetSelectedItemColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetSelectedItemColor), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","void SetTextColor(int _r,int _g,int _b,int _a)", WRAP_MFN(ComboBox, SetTextColor), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:float GetRotation()
-	r = g_app->scriptManager->engine->RegisterObjectMethod("ComboBox","float get_Rotation()", WRAP_MFN(ComboBox, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","float get_Rotation()", WRAP_MFN(ComboBox, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
 
 	///prop:CallbackHandler @onSelectionChangedHandler
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
+	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	g_app->scriptManager->RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
+	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
 	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
 	
 #endif
