@@ -37,7 +37,7 @@ class Font_p
 	float             fontHeight;
 
 public:
-	Font_p::Font_p();
+	Font_p();
 	void GetTextExtent(const std::string& _text, float & _x, float &_y);
 	float GetFontHeight();
 	void Load(const std::string& _file, int _size, int _flags);
