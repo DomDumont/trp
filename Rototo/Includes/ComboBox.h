@@ -29,12 +29,12 @@
 #include <vector>
 #include "Label.h"
 
-#ifdef TRP_USE_BINDING
-#include <angelscript.h>
-#include "binding/scripthandle.h"
-#endif
 
 #include "Sprite.h"
+
+#include <memory>
+
+class ComboBox_p;
 
 class ComboBox : public Widget
 {
@@ -66,11 +66,6 @@ public:
 	
 public:
 
-#ifdef TRP_USE_BINDING
-	asIScriptFunction *		onSelectionChangedHandler_script;
-	CScriptHandle			userData_script;
-	CScriptHandle			sender_script;
-#endif
 
 private:
 	typedef bool(*on_selection_changed_handler_type)(void * _sender, void * _user_data);
@@ -79,6 +74,8 @@ private:
 	void * user_data;
 
 private:
+	std::unique_ptr<ComboBox_p> combox_p; // opaque type here
+
 	void				BuildInternalTexture();
 	SDL_Texture *			bgTexture;
 	int				offsetBG;

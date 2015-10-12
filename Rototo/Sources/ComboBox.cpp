@@ -33,6 +33,19 @@
 
 #include "ScriptManager.h"
 
+#include "ComboBox_p.h"
+
+
+ComboBox_p::ComboBox_p()
+{
+#ifdef TRP_USE_BINDING
+	this->onSelectionChangedHandler_script = NULL;
+	this->sender_script.Set(NULL, NULL);
+	this->userData_script.Set(NULL, NULL);
+#endif
+
+}
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -44,11 +57,6 @@ bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
 	
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox Constructor\n");
 	
-#ifdef TRP_USE_BINDING
-	this->onSelectionChangedHandler_script = NULL;
-	this->sender_script.Set(NULL, NULL);
-	this->userData_script.Set(NULL, NULL);
-#endif
 	
 	this->on_selection_changed_handler = NULL;
 	this->user_data = NULL;
@@ -95,11 +103,12 @@ ComboBox::~ComboBox()
 		SDL_DestroyTexture(this->bgTexture); // et on la vire
 		this->bgTexture = NULL;
 	}
-
+	/* TODO
 #ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
 #endif
-	
+	*/
+
 	this->on_selection_changed_handler = NULL;
 }
 
@@ -451,6 +460,7 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 		//Rebuild the background texture
 		this->BuildInternalTexture();
 
+		/* TODO
 #ifdef TRP_USE_BINDING
 		//Call Callback
 		if (this->onSelectionChangedHandler_script != NULL)
@@ -462,6 +472,7 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 
 			}
 #endif
+			*/
 
 		this->state = 0; //Close the comboBox
 		
@@ -562,11 +573,13 @@ void RegisterComboBox()
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "float get_Rotation()", asMETHOD(ComboBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 
+	/* TODO
 	///prop:CallbackHandler @onSelectionChangedHandler
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
 	//ScriptManager::Get().RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
+	*/
 #else
 	///class:ComboBox
 	r = ScriptManager::Get().engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
@@ -592,11 +605,11 @@ void RegisterComboBox()
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","float get_Rotation()", WRAP_MFN(ComboBox, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
 
-	///prop:CallbackHandler @onSelectionChangedHandler
+	/* TODO
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
-	///prop:ref @userData
+	
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
-	//g_app->scriptManager->RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
+	*/
 	
 #endif
 

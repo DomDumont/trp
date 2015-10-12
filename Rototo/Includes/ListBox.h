@@ -29,13 +29,12 @@
 #include <vector>
 #include "Label.h"
 
-#ifdef TRP_USE_BINDING
-#include <angelscript.h>
-#include "binding/scripthandle.h"
-#endif
 
 #include "Sprite.h"
 
+#include <memory>
+
+class ListBox_p;
 class ListBox : public Widget
 {
 public:
@@ -65,11 +64,6 @@ public:
 
 public:
 
-#ifdef TRP_USE_BINDING
-	asIScriptFunction *	onSelectionChangedHandler_script;
-	CScriptHandle		userData_script;
-	CScriptHandle		sender_script;
-#endif
 
 
 private:
@@ -84,27 +78,30 @@ public:
 
 
 private:
+	std::unique_ptr<ListBox_p> listbox_p; // opaque type here
+
 	void BuildInternalTexture();
 	SDL_Texture *bgTexture;
 	int offsetBG;
 	int sizeXBG;
 	int sizeYBG;
 	int sizeItemBG;
+
 private:
 	//int refCount;
-	SDL_Color			backgroundColor;
+		SDL_Color			backgroundColor;
     	SDL_Color			itemColor;
     	SDL_Color			selectedItemColor;
     	SDL_Color			textColor;
 
-    	Sprite                  	sprite_selected;
-    	Sprite                  	sprite_item;
+    	Sprite                  		sprite_selected;
+    	Sprite                  		sprite_item;
 
-	int				dragState;
-	Font	*			font;
-	std::vector<Label*> 		labels; 
-	std::vector<Label *>::iterator 	labelsIT;
-	int 				selectedIndex;
+		int								dragState;
+		Font	*						font;
+		std::vector<Label*> 			labels; 
+		std::vector<Label *>::iterator 	labelsIT;
+		int 							selectedIndex;
 	
 
 };

@@ -33,6 +33,18 @@
 
 #include "ScriptManager.h"
 
+#include "ListBox_p.h"
+
+
+ListBox_p::ListBox_p()
+{
+#ifdef TRP_USE_BINDING
+	this->onSelectionChangedHandler_script = NULL;
+	this->sender_script.Set(NULL,NULL);
+	this->userData_script.Set(NULL,NULL);
+#endif
+
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -45,11 +57,6 @@ ListBox::ListBox():
 
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox Constructor\n");
 
-#ifdef TRP_USE_BINDING
-	this->onSelectionChangedHandler_script = NULL;
-	this->sender_script.Set(NULL,NULL);
-	this->userData_script.Set(NULL,NULL);
-#endif
 
 	this->on_selection_changed_handler = NULL;
 
@@ -97,9 +104,11 @@ ListBox::~ListBox()
 		this->bgTexture = NULL;
 		}
 
+	/* TODO
 #ifdef TRP_USE_BINDING
 	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
 #endif
+	*/
 	this->on_selection_changed_handler = NULL;
 
 }
@@ -449,6 +458,7 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 		this->BuildInternalTexture();
 
 		//Call Callback
+		/* TODO
 #ifdef TRP_USE_BINDING
 		if (this->onSelectionChangedHandler_script != NULL)
 			{			
@@ -457,6 +467,7 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 			this->sender_script.Set(NULL,NULL);
 			}
 #endif
+			*/
 		if (this->on_selection_changed_handler != NULL)
 			{
 			bool ret = this->on_selection_changed_handler(this->sender,this->user_data);
@@ -569,10 +580,12 @@ void RegisterListBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox", "float get_Rotation()", asMETHOD(ListBox, GetRotation), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 
+	/* TODO
 	///prop:CallbackHandler @onSelectionChangedHandler
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
 	///prop:ref @userData
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
+	*/
 	
 #else
 	r = ScriptManager::Get().engine->RegisterObjectType("ListBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
@@ -611,10 +624,11 @@ void RegisterListBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox","float get_Rotation()", WRAP_MFN(ListBox, GetRotation), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
 
-	
+	/* TODO
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
 	
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
+	*/
 	
 #endif
 

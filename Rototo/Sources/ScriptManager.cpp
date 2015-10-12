@@ -74,6 +74,12 @@
 using namespace std;
 
 
+ScriptManager& ScriptManager::Get() 
+{
+	static ScriptManager foo;
+	return foo;
+}
+
 std::string Vector2DToString(void *obj, bool expandMembers, CDebug *dbg)
 {
 	Vector2D *v = reinterpret_cast<Vector2D*>(obj);
