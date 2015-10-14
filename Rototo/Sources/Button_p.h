@@ -8,6 +8,7 @@
 
 class Button_p
 {
+public:
 #ifdef TRP_USE_BINDING
 	asIScriptFunction *	on_click_handler_script;
 	CScriptHandle		user_data_script;
@@ -16,6 +17,8 @@ class Button_p
 
 public:
 	Button_p();
+
+
 };
 
 

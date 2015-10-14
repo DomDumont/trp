@@ -74,7 +74,7 @@ private:
 	void * user_data;
 
 private:
-	std::unique_ptr<ComboBox_p> combox_p; // opaque type here
+	std::unique_ptr<ComboBox_p> combobox_p; // opaque type here
 
 	void				BuildInternalTexture();
 	SDL_Texture *			bgTexture;

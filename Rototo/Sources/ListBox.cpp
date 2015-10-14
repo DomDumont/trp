@@ -51,7 +51,7 @@ ListBox_p::ListBox_p()
 /*----------------------------------------------------------------------------*/
 
 ListBox::ListBox():
-	 bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1)
+bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1), listbox_p(new ListBox_p)
 {
 
 
@@ -580,12 +580,12 @@ void RegisterListBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox", "float get_Rotation()", asMETHOD(ListBox, GetRotation), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 
-	/* TODO
+	
 	///prop:CallbackHandler @onSelectionChangedHandler
-	ScriptManager::Get().RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
+	ScriptManager::Get().RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox_p, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	ScriptManager::Get().RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
-	*/
+	ScriptManager::Get().RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox_p, userData_script));
+	
 	
 #else
 	r = ScriptManager::Get().engine->RegisterObjectType("ListBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
@@ -624,11 +624,11 @@ void RegisterListBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox","float get_Rotation()", WRAP_MFN(ListBox, GetRotation), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
 
-	/* TODO
+	
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox, onSelectionChangedHandler_script));
 	
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox, userData_script));
-	*/
+	
 	
 #endif
 

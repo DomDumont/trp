@@ -50,8 +50,8 @@ ComboBox_p::ComboBox_p()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-ComboBox::ComboBox():
-bgTexture(NULL),offsetBG(0),dragState(0),font(NULL),selectedIndex(-1),state(0)
+ComboBox::ComboBox() :
+bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1), state(0), combobox_p(new ComboBox_p)
 {
 	
 	
@@ -573,13 +573,13 @@ void RegisterComboBox()
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "float get_Rotation()", asMETHOD(ComboBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 
-	/* TODO
+	
 	///prop:CallbackHandler @onSelectionChangedHandler
-	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
+	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox_p, onSelectionChangedHandler_script));
 	///prop:ref @userData
-	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
+	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox_p, userData_script));
 	//ScriptManager::Get().RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
-	*/
+	
 #else
 	///class:ComboBox
 	r = ScriptManager::Get().engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
@@ -605,11 +605,11 @@ void RegisterComboBox()
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","float get_Rotation()", WRAP_MFN(ComboBox, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
 
-	/* TODO
+	
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
 	
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
-	*/
+	
 	
 #endif
 

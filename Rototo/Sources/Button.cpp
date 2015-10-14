@@ -95,12 +95,13 @@ void RegisterButton()
 	///func:void SetState(int state)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetState(int _state)", asMETHOD(Button, SetState), asCALL_THISCALL); SDL_assert(r >= 0);
 
-	/* TODO remettre ça c'est important et interessant comme pb
 	///prop:CallbackHandler @on_click_handler
-	ScriptManager::Get().engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler_script));
+	ScriptManager::Get().engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button_p, on_click_handler_script));
 	///prop:ref @user_data
-	ScriptManager::Get().engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data_script));
-	*/
+	ScriptManager::Get().engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button_p, user_data_script));
+
+
+	
 #else
 
 	///class:Button
@@ -169,6 +170,9 @@ Button::Button() : state(0), type(0), button_p(new Button_p)
 	this->sprite_disable.SetScale(1,1);
 	this->label.SetScale(1,1);
 }
+
+
+
 
 /*----------------------------------------------------------------------------*/
 Button_p::Button_p()
