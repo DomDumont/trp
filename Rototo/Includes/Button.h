@@ -48,6 +48,7 @@
 
 class Button_p;
 class CScriptHandle;
+class asIScriptFunction;
 class Button : public Widget
 {
 public:
@@ -75,7 +76,7 @@ public:
 public:
 
 	void SetUserDataScript(CScriptHandle userdata);	
-	void SetSelectionClickHandlerScript(void * handler);
+	void SetSelectionClickHandlerScript(asIScriptFunction * handler);
 
 
 

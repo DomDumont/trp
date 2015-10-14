@@ -117,13 +117,24 @@ ComboBox::~ComboBox()
 void ComboBox::SetUserDataScript(CScriptHandle userdata)
 {
 	this->combobox_p->userData_script = userdata;
+	
 }
 
 
 /*----------------------------------------------------------------------------*/
-void ComboBox::SetSelectionChangedHandlerScript(void * handler)
+void ComboBox::SetSelectionChangedHandlerScript(asIScriptFunction * handler)
 {
-	this->combobox_p->onSelectionChangedHandler_script = (asIScriptFunction *)handler;
+
+	if (this->combobox_p->onSelectionChangedHandler_script != handler)
+	{
+		this->combobox_p->onSelectionChangedHandler_script->Release();
+	}
+
+	if (handler != NULL)
+	{
+		this->combobox_p->onSelectionChangedHandler_script = (asIScriptFunction *)handler;
+		handler->AddRef(); //Hyper important. Nous gardons un pointeur sur la callback donc on augmente son compteur de référence
+	}
 }
 
 
@@ -590,13 +601,6 @@ void RegisterComboBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetUserData( ref @)", asMETHOD(ComboBox, SetUserDataScript), asCALL_THISCALL);
 	SDL_assert(r >= 0);
 
-	/*
-	///prop:CallbackHandler @onSelectionChangedHandler
-	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox_p, onSelectionChangedHandler_script));
-	///prop:ref @userData
-	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox_p, userData_script));
-	//ScriptManager::Get().RegisterClassMethod("ComboBox","void Update(uint32 _elapsed)", asMETHOD(ComboBox, Update));
-	*/
 #else
 	///class:ComboBox
 	r = ScriptManager::Get().engine->RegisterObjectType("ComboBox", 0, asOBJ_REF); SDL_assert( r >= 0 );

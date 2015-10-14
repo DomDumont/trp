@@ -101,13 +101,6 @@ void RegisterButton()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", asMETHOD(Button, SetSelectionClickHandlerScript), asCALL_THISCALL);
 	SDL_assert(r >= 0);
 
-	/*
-	///prop:CallbackHandler @on_click_handler
-	ScriptManager::Get().engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button_p, on_click_handler_script));
-	///prop:ref @user_data
-	ScriptManager::Get().engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button_p, user_data_script));
-	*/
-
 
 	
 #else
@@ -203,11 +196,11 @@ Button::~Button()
 {
 
 	MY_SAFE_RELEASE(this->label.font);
-	/* TODO remettre ça
+	
 #ifdef TRP_USE_BINDING
-	MY_SAFE_RELEASE(this->on_click_handler_script);
+	MY_SAFE_RELEASE(this->button_p->on_click_handler_script);
 #endif
-	*/
+	
 	this->on_click_handler = NULL;
 }
 
@@ -219,9 +212,17 @@ void Button::SetUserDataScript(CScriptHandle userdata)
 }
 
 /*----------------------------------------------------------------------------*/
-void Button::SetSelectionClickHandlerScript(void * handler)
+void Button::SetSelectionClickHandlerScript(asIScriptFunction * handler)
 {
+	if (this->button_p->on_click_handler_script != handler)
+	{
+		this->button_p->on_click_handler_script->Release();
+	}
+	if (handler != NULL)
+	{
 	this->button_p->on_click_handler_script = (asIScriptFunction *)handler;
+	handler->AddRef();
+	}
 }
 
 

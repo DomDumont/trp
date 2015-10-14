@@ -36,6 +36,7 @@
 
 class ListBox_p;
 class CScriptHandle;
+class asIScriptFunction;
 class ListBox : public Widget
 {
 public:
@@ -78,7 +79,7 @@ public:
 	void SetSelectionClickHandler(on_selection_changed_handler_type handler);
 
 	void SetUserDataScript(CScriptHandle);
-	void SetSelectionChangedHandlerScript(void * handler);
+	void SetSelectionChangedHandlerScript(asIScriptFunction * handler);
 
 private:
 	std::unique_ptr<ListBox_p> listbox_p; // opaque type here

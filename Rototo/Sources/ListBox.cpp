@@ -100,11 +100,11 @@ ListBox::~ListBox()
 		this->bgTexture = NULL;
 		}
 
-	/* TODO
+	
 #ifdef TRP_USE_BINDING
-	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
+	MY_SAFE_RELEASE(this->listbox_p->onSelectionChangedHandler_script);
 #endif
-	*/
+	
 	this->on_selection_changed_handler = NULL;
 
 }
@@ -249,9 +249,17 @@ void ListBox::SetUserDataScript(CScriptHandle userdata)
 
 
 /*----------------------------------------------------------------------------*/
-void ListBox::SetSelectionChangedHandlerScript(void * handler)
+void ListBox::SetSelectionChangedHandlerScript(asIScriptFunction * handler)
 {
-	this->listbox_p->onSelectionChangedHandler_script = (asIScriptFunction *)handler;
+	if (this->listbox_p->onSelectionChangedHandler_script != handler)
+	{
+		this->listbox_p->onSelectionChangedHandler_script->Release();
+	}
+	if (handler != NULL)
+	{
+		this->listbox_p->onSelectionChangedHandler_script = (asIScriptFunction *)handler;
+		handler->AddRef(); //Hyper important. Nous gardons un pointeur sur la callback donc on augmente son compteur de référence
+	}
 }
 
 /*----------------------------------------------------------------------------*/

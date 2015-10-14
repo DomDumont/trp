@@ -142,7 +142,7 @@ void ScriptManager::Init()
 #ifndef TRP_EMSCRIPTEN
 	engine->SetMessageCallback(asMETHOD(ScriptManager, MessageCallback), this, asCALL_THISCALL);
 #else
-	engine->SetMessageCallback(asMETHOD(ScriptManager, MessageCallback), this, asCALL_THISCALL);
+	engine->SetMessageCallback(WRAP_MFN(ScriptManager, MessageCallback), this, asCALL_GENERIC);
 #endif
 	
 	RegisterStdString(engine);
@@ -327,7 +327,7 @@ void ScriptManager::Shutdown()
 /*----------------------------------------------------------------------------*/
 
 
-int ScriptManager::RunCallback(asIScriptFunction * _callback,CScriptHandle *_sender,CScriptHandle *_userData)
+int ScriptManager::RunCallback(asIScriptFunction * _callback, CScriptHandle *_sender, CScriptHandle *_userData)
 {
 
 
@@ -345,12 +345,18 @@ int ScriptManager::RunCallback(asIScriptFunction * _callback,CScriptHandle *_sen
 		mydbg->TakeCommands(tempCtx);
 
 		// Set the line callback for the debugging
+#ifndef __EMSCRIPTEN__ //TODO Pout this elsewhese.
 		tempCtx->SetLineCallback(asMETHOD(CDebug, LineCallback), mydbg, asCALL_THISCALL);
+#else
+		tempCtx->SetLineCallback(WRAP_MFN(CDebug, LineCallback), mydbg, asCALL_GENERIC);
+#endif
 
 		}
 
-
-
+	
+	printf("before prepare in runCallback\n");
+	asIScriptEngine *engine = _callback->GetEngine();
+	printf("before prepare in runCallback2\n");
 	r = tempCtx->Prepare(_callback);
 	if (r<0)
 		SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,"Couldn't Prepare callback: %s\n",SDL_GetError());

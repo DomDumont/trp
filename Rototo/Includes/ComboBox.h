@@ -36,6 +36,7 @@
 
 class ComboBox_p;
 class CScriptHandle;
+class asIScriptFunction;
 class ComboBox : public Widget
 {
 public:
@@ -67,7 +68,7 @@ public:
 public:
 
 	void SetUserDataScript(CScriptHandle userdata);
-	void SetSelectionChangedHandlerScript(void * handler);
+	void SetSelectionChangedHandlerScript(asIScriptFunction * handler);
 
 private:
 	typedef bool(*on_selection_changed_handler_type)(void * _sender, void * _user_data);
