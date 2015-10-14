@@ -116,9 +116,9 @@ void Init()
 	buttonStart.set_Rotation(5);
 	buttonStart.SetEnabled(false);
 	buttonStart.SetScale(1.0,1.0);
-	@buttonStart.on_click_handler = CallbackHandler(menuScene.OnClickHandler);
+	buttonStart.SetClickHandler(CallbackHandler(menuScene.OnClickHandler));
 
-	@buttonStart.user_data = @this;
+	buttonStart.SetUserData(@this);
 	GUI_AddWidget(buttonStart);
 
 	// Setup Listbox
@@ -127,7 +127,7 @@ void Init()
 	listBox.SetPosition(200,380);
 	//listBox.SetFont(fonteMed);
 	@listBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandler);
-	@listBox.userData = @this;
+	listBox.SetUserData(@this);
 	
     listBox.AddItem("Particles");
     listBox.AddItem("Hello World");
@@ -163,7 +163,7 @@ void Init()
 	comboBox.SetSelectedIndex(thisIsBad);
 
  	@comboBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandlerCB);
-	@comboBox.userData = @this;       
+	comboBox.SetUserData(@this);       
 
 	comboBox.SetEnabled(true);
 	GUI_AddWidget(comboBox);
@@ -212,16 +212,16 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 	
 	listBox.ResetContent();
 	@listBox.onSelectionChangedHandler = null;
-	@listBox.userData = null;
+	listBox.SetUserData(null);
 	GUI_RemoveWidget(listBox);
 
 	comboBox.ResetContent();
 	@comboBox.onSelectionChangedHandler = null;
-	@comboBox.userData = null;
+	comboBox.SetUserData(null);
 	GUI_RemoveWidget(comboBox);
 
-	@buttonStart.on_click_handler = null;
-	@buttonStart.user_data = null;
+	buttonStart.SetClickHandler(null);
+	buttonStart.SetUserData(null);
 	GUI_RemoveWidget(buttonStart);
 
 

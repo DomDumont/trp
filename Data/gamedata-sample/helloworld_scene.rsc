@@ -30,8 +30,8 @@ class HelloWorldScene:Scene
         buttonBack.SetPosition(800,650);        
         buttonBack.set_Rotation(5);
         buttonBack.SetEnabled(true);
-        @buttonBack.on_click_handler = CallbackHandler(helloworldScene.OnClickHandler);
-        @buttonBack.user_data = @this;
+        buttonBack.SetClickHandler(CallbackHandler(helloworldScene.OnClickHandler));
+        buttonBack.SetUserData(@this);
         buttonBack.SetScale(1.0,1.0);
         GUI_AddWidget(buttonBack);
 
@@ -53,8 +53,8 @@ class HelloWorldScene:Scene
         {
         UTI_Log("====> helloWorldScene Shutdown");    
         maFonte.UnLoad();
-        @buttonBack.on_click_handler = null;
-        @buttonBack.user_data = null;    
+        buttonBack.SetClickHandler(null);
+        buttonBack.SetUserData(null);    
         GUI_RemoveWidget(buttonBack);   
         myAtlas.UnLoad();
         }

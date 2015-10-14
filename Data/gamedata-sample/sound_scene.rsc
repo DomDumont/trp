@@ -18,8 +18,8 @@ class SoundScene:Scene
         buttonBack.SetPosition(800,650);    
         buttonBack.set_Rotation(5);
         buttonBack.SetEnabled(true);
-        @buttonBack.on_click_handler = CallbackHandler(soundScene.OnClickHandler);
-        @buttonBack.user_data = @this;
+        buttonBack.SetClickHandler(CallbackHandler(soundScene.OnClickHandler));
+        buttonBack.SetUserData(@this);
         buttonBack.SetScale(1.0,1.0);
         GUI_AddWidget(buttonBack);
         }
@@ -37,8 +37,8 @@ class SoundScene:Scene
 
     void OnShutdown()
         {
-        @buttonBack.on_click_handler = null;
-        @buttonBack.user_data = null;    
+        buttonBack.SetClickHandler(null);
+        buttonBack.SetUserData(null);    
         GUI_RemoveWidget(buttonBack);   
         myAtlas.UnLoad();            
         }

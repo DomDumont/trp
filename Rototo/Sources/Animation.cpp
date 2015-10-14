@@ -103,6 +103,20 @@ Animation::Animation(const Animation &other)
 
 	}
 
+
+void Animation::SetUserDataScript(void * userdata)
+{
+
+}
+void Animation::SetSenderScript(void *sender)
+{
+
+}
+void Animation::SetOnCompleteHandlerScript(void * handler)
+{
+
+}
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -416,10 +430,19 @@ void RegisterAnimation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "float get_Rotation()", asMETHOD(Animation, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void UnLoad()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void UnLoad()", asMETHOD(Animation, UnLoad), asCALL_THISCALL); SDL_assert(r >= 0);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void SetUserData( ref @userdata)", asMETHOD(Animation, SetUserDataScript), asCALL_THISCALL);
+	SDL_assert(r >= 0);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void SetOnCompleteHandler( CallbackHandler @ch)", asMETHOD(Animation, SetOnCompleteHandlerScript), asCALL_THISCALL);
+	SDL_assert(r >= 0);
+
+	/*
 	///prop:CallbackHandler @onComplete
 	ScriptManager::Get().RegisterObjectProperty("Animation", "CallbackHandler @onComplete", asOFFSET(Animation, onCompleteHandler)); SDL_assert(r >= 0);
 	///prop:ref @userData
 	ScriptManager::Get().RegisterObjectProperty("Animation", "ref @userData", asOFFSET(Animation, userData)); SDL_assert(r >= 0);
+	*/
 #else
 	
 	r = ScriptManager::Get().engine->RegisterObjectType("Animation", 0, asOBJ_REF); SDL_assert( r >= 0 );

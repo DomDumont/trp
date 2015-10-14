@@ -28,8 +28,8 @@ void Init()
     buttonBack.SetPosition(800,650);    
     buttonBack.set_Rotation(5);
     buttonBack.SetEnabled(true);
-    @buttonBack.on_click_handler = CallbackHandler(helloworldScene.OnClickHandler);
-    @buttonBack.user_data = @this;
+    @buttonBack.SetClickHandler(CallbackHandler(helloworldScene.OnClickHandler));
+    buttonBack.SetUserData(@this);
     buttonBack.SetScale(1.0,1.0);
     GUI_AddWidget(buttonBack);
 
@@ -44,8 +44,8 @@ void Init()
 	
 	Tween myTween;
 	myTween.Init(2000,BOUNCE_EFFECT,EASE_OUT);
-	@myTween.onComplete = @MyCompleteHandler;
-	@myTween.userData = @this;
+	myTween.SetOnCompleteHandler(@MyCompleteHandler);
+	myTween.SetUserData(@this);
 	monFloat.initialValue = 100;
 	monFloat.targetValue = 650;
 	myTween.AddProp(monFloat);
@@ -75,8 +75,8 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 
 	void OnShutdown()
 	{
-    @buttonBack.on_click_handler = null;
-    @buttonBack.user_data = null;    
+    buttonBack.SetClickHandler(null);
+    buttonBack.SetUserData(null);
     GUI_RemoveWidget(buttonBack);  
 
 	mySprite.UnLoad();	

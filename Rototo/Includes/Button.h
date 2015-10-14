@@ -74,6 +74,9 @@ public:
 
 public:
 
+	void SetUserDataScript(void * userdata);
+	void SetSenderScript(void *sender);
+	void SetSelectionClickHandlerScript(void * handler);
 
 
 

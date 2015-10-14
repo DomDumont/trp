@@ -251,6 +251,21 @@ void ListBox::SetSelectionClickHandler(on_selection_changed_handler_type handler
 	this->on_selection_changed_handler = handler;
 }
 
+
+void ListBox::SetUserDataScript(void * userdata)
+{
+
+}
+void ListBox::SetSenderScript(void *sender)
+{
+
+}
+
+void ListBox::SetSelectionClickHandlerScript(void * handler)
+{
+
+}
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -580,12 +595,15 @@ void RegisterListBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox", "float get_Rotation()", asMETHOD(ListBox, GetRotation), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 
-	
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox", "void SetUserData( ref @userdata)", asMETHOD(ListBox, SetUserDataScript), asCALL_THISCALL);
+	SDL_assert(r >= 0);
+
+	/*
 	///prop:CallbackHandler @onSelectionChangedHandler
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ListBox_p, onSelectionChangedHandler_script));
 	///prop:ref @userData
 	ScriptManager::Get().RegisterObjectProperty("ListBox", "ref @userData", asOFFSET(ListBox_p, userData_script));
-	
+	*/
 	
 #else
 	r = ScriptManager::Get().engine->RegisterObjectType("ListBox", 0, asOBJ_REF); SDL_assert( r >= 0 );

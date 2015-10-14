@@ -63,6 +63,10 @@ public:
 	void SetRotation(float _angle);
 
 public:
+	void SetUserDataScript(void * userdata);
+	void SetSenderScript(void *sender);
+	void SetOnCompleteHandlerScript(void * handler);
+
 #ifdef TRP_USE_BINDING
 	asIScriptFunction *onCompleteHandler;
 	CScriptHandle		userData;
@@ -70,18 +74,18 @@ public:
 #endif
 
 private:
-	Atlas *			atlas;
-	std::vector<Sprite *>	sprites;
+	Atlas *							atlas;
+	std::vector<Sprite *>			sprites;
 	std::vector<Sprite *>::iterator spritesIT;
-	float			timeElapsed;
-	int			currentFrame;
-	int			nbFrames;
-	float			msPerFrame;
-	int			playing;
-	int			mode;
-	int			sens;
-	bool			stopASAP;
-	std::string				name;
+	float							timeElapsed;
+	int								currentFrame;
+	int								nbFrames;
+	float							msPerFrame;
+	int								playing;
+	int								mode;
+	int								sens;
+	bool							stopASAP;
+	std::string						name;
 		
 	
 

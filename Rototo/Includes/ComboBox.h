@@ -66,6 +66,9 @@ public:
 	
 public:
 
+	void SetUserDataScript(void * userdata);
+	void SetSenderScript(void *sender);
+	void SetSelectionClickHandlerScript(void * handler);
 
 private:
 	typedef bool(*on_selection_changed_handler_type)(void * _sender, void * _user_data);

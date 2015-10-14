@@ -34,7 +34,7 @@ class CTextboxScene:CScene
 		buttonBack.set_Rotation(5);
 		buttonBack.SetEnabled(true);
 		@buttonBack.onClickHandler = CallbackHandler(textboxScene.OnClickHandler);
-		@buttonBack.userData = @this;
+		buttonBack.SetUserData(@this);
 		buttonBack.SetScale(1.0,1.0);
 
 		GUI_AddWidget(buttonBack);
@@ -67,7 +67,7 @@ class CTextboxScene:CScene
 	void OnShutdown()
 		{
 		@buttonBack.onClickHandler = null;
-		@buttonBack.userData = null;	
+		buttonBack.SetUserData(null);	
 		GUI_RemoveWidget(buttonBack);		
 		}
 

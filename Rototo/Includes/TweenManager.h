@@ -311,6 +311,9 @@ public:
 	std::vector<TweenedFloat *>  properties;
 	std::vector<TweenedFloat *>::iterator propsIT;
 
+	void SetOnCompleteHandlerScript(void * cb);
+	void SetUserDataScript (void * ud);
+
 #ifdef TRP_USE_BINDING
 	asIScriptFunction *onCompleteHandler;
 	CScriptHandle		userData;

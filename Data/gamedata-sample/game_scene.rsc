@@ -24,8 +24,8 @@ void Init()
     buttonBack.SetPosition(800,650);    
     buttonBack.set_Rotation(5);
     buttonBack.SetEnabled(true);
-    @buttonBack.on_click_handler = CallbackHandler(gameScene.OnClickHandler);
-    @buttonBack.user_data = @this;
+    @buttonBack.SetClickHandler(CallbackHandler(gameScene.OnClickHandler));
+    buttonBack.SetUserData(@this);
     buttonBack.SetScale(1.0,1.0);
     GUI_AddWidget(buttonBack);	
 
@@ -39,15 +39,15 @@ void Init()
 	animBroute.Load(myAtlas,"broute","%s_%05d.tga",30);
 	animBroute.SetFPS(12);
 	animBroute.SetPosition(windowX/2,windowY/2); // Center of the screen
-	@animBroute.onComplete = @OnAnimationFinishedHandler;
-	@animBroute.userData = @animBroute;	
+	animBroute.SetOnCompleteHandler(@OnAnimationFinishedHandler);
+	animBroute.SetUserData(@animBroute);	
 
 	
 	animTortue.Load(myAtlas,"tortue","%s_%05d.tga",15);
 	animTortue.SetFPS(12);	
 	animTortue.SetPosition(windowX/2,windowY/2); // Center of the screen
-	@animTortue.onComplete = @OnAnimationFinishedHandler;
-	@animTortue.userData = @animTortue;	
+	animTortue.SetOnCompleteHandler(@OnAnimationFinishedHandler);
+	animTortue.SetUserData(@animTortue);	
 
 	animBlink.Load(myAtlas,"blink","%s_%05d.tga",10);
 	animBlink.SetFPS(12);	
@@ -137,8 +137,8 @@ void OnShutdown()
 	{
 	UTI_Log("SHUTDOWN GAME SCENE\n");
 
-	@animBroute.userData = null;
-	@animTortue.userData = null;
+	animBroute.SetUserData(null);
+	animTortue.SetUserData(null);
 
 	animBroute.UnLoad();
 	animReverse.UnLoad();
@@ -151,8 +151,8 @@ void OnShutdown()
 		
 	myAtlas.UnLoad();
 
-    @buttonBack.on_click_handler = null;
-    @buttonBack.user_data = null;    
+    buttonBack.SetClickHandler(null);
+    buttonBack.SetUserData(null);    
     GUI_RemoveWidget(buttonBack);   
 
 	myAtlasUI.UnLoad();

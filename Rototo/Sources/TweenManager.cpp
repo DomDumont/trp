@@ -65,6 +65,19 @@ void Tween::Init(float _duration,int _effect,int _easeMode)
     this->transition = _effect ;
 }
 
+
+/*----------------------------------------------------------------------------*/
+void Tween::SetOnCompleteHandlerScript(void * cb)
+{
+
+}
+
+/*----------------------------------------------------------------------------*/
+void Tween::SetUserDataScript(void * ud)
+{
+
+}
+
 /*
 void ConstructTween(Tween *thisPointer)
 {
@@ -474,8 +487,15 @@ void RegisterTween()
 		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Tween", asBEHAVE_FACTORY, "Tween@ f()", asFUNCTION(Tween_Factory), asCALL_CDECL); SDL_assert(r >= 0);
 		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Tween", asBEHAVE_ADDREF, "void f()", asMETHOD(Tween, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
 		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Tween", asBEHAVE_RELEASE, "void f()", asMETHOD(Tween, Release), asCALL_THISCALL); SDL_assert(r >= 0);
+
+
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Tween", "void SetOnCompleteHandler(CallbackHandler @)", asMETHOD(Tween, SetOnCompleteHandlerScript), asCALL_THISCALL);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Tween", "void SetUserData(ref @)", asMETHOD(Tween, SetUserDataScript), asCALL_THISCALL);
+
+		/*
 		r = ScriptManager::Get().engine->RegisterObjectProperty("Tween", "CallbackHandler @onComplete", asOFFSET(Tween, onCompleteHandler)); SDL_assert(r >= 0);
 		r = ScriptManager::Get().engine->RegisterObjectProperty("Tween", "ref @userData", asOFFSET(Tween, userData)); SDL_assert(r >= 0);
+		*/
 
 		r = ScriptManager::Get().engine->RegisterObjectMethod("Tween", "void AddProp(TweenedFloat @)", asMETHOD(Tween, AddProp), asCALL_THISCALL);
 		r = ScriptManager::Get().engine->RegisterObjectMethod("Tween", "void Init(float _duration,int _effect,int _easeMode)", asMETHOD(Tween, Init), asCALL_THISCALL);
