@@ -47,7 +47,7 @@
 #define RADIOBOX_SIZE	20
 
 class Button_p;
-
+class CScriptHandle;
 class Button : public Widget
 {
 public:
@@ -74,8 +74,7 @@ public:
 
 public:
 
-	void SetUserDataScript(void * userdata);
-	void SetSenderScript(void *sender);
+	void SetUserDataScript(CScriptHandle userdata);	
 	void SetSelectionClickHandlerScript(void * handler);
 
 

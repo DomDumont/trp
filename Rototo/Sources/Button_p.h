@@ -10,9 +10,9 @@ class Button_p
 {
 public:
 #ifdef TRP_USE_BINDING
-	asIScriptFunction *	on_click_handler_script;
-	CScriptHandle		user_data_script;
-	CScriptHandle		sender_script;
+	asIScriptFunction	*	on_click_handler_script;
+	CScriptHandle			user_data_script;
+	CScriptHandle			sender_script;
 #endif
 
 public:

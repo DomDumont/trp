@@ -103,34 +103,27 @@ ComboBox::~ComboBox()
 		SDL_DestroyTexture(this->bgTexture); // et on la vire
 		this->bgTexture = NULL;
 	}
-	/* TODO
+	
 #ifdef TRP_USE_BINDING
-	MY_SAFE_RELEASE(this->onSelectionChangedHandler_script);
+	MY_SAFE_RELEASE(this->combobox_p->onSelectionChangedHandler_script);
 #endif
-	*/
+	
 
 	this->on_selection_changed_handler = NULL;
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
-void ComboBox::SetUserDataScript(void * userdata)
+void ComboBox::SetUserDataScript(CScriptHandle userdata)
 {
-
+	this->combobox_p->userData_script = userdata;
 }
 
-/*----------------------------------------------------------------------------*/
-void ComboBox::SetSenderScript(void *sender)
-{
-
-}
 
 /*----------------------------------------------------------------------------*/
 void ComboBox::SetSelectionChangedHandlerScript(void * handler)
 {
-
+	this->combobox_p->onSelectionChangedHandler_script = (asIScriptFunction *)handler;
 }
 
 
@@ -477,19 +470,19 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 		//Rebuild the background texture
 		this->BuildInternalTexture();
 
-		/* TODO
+		
 #ifdef TRP_USE_BINDING
 		//Call Callback
-		if (this->onSelectionChangedHandler_script != NULL)
+		if (this->combobox_p->onSelectionChangedHandler_script != NULL)
 			{
 
-				this->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("ComboBox"));
-				ret = ScriptManager::Get().RunCallback(this->onSelectionChangedHandler_script, &(this->sender_script), &(this->userData_script));
-			this->sender_script.Set(NULL, NULL);
+				this->combobox_p->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("ComboBox"));
+				ret = ScriptManager::Get().RunCallback(this->combobox_p->onSelectionChangedHandler_script, &(this->combobox_p->sender_script), &(this->combobox_p->userData_script));
+				this->combobox_p->sender_script.Set(NULL, NULL);
 
 			}
 #endif
-			*/
+		
 
 		this->state = 0; //Close the comboBox
 		

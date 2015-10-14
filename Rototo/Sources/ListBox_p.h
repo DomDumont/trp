@@ -12,8 +12,8 @@ class ListBox_p
 public:
 #ifdef TRP_USE_BINDING
 	asIScriptFunction *	onSelectionChangedHandler_script;
-	CScriptHandle		userData_script;
-	CScriptHandle		sender_script;
+	CScriptHandle		 userData_script;
+	CScriptHandle		 sender_script;
 #endif
 
 public:

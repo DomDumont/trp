@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -36,6 +36,7 @@
 #include "ListBox_p.h"
 
 
+/*----------------------------------------------------------------------------*/
 ListBox_p::ListBox_p()
 {
 #ifdef TRP_USE_BINDING
@@ -46,8 +47,6 @@ ListBox_p::ListBox_p()
 
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 ListBox::ListBox():
@@ -88,9 +87,6 @@ bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1), listb
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
 
 ListBox::~ListBox()
 {
@@ -114,9 +110,6 @@ ListBox::~ListBox()
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
 
 void ListBox::SetFont(Font & _font)
 {
@@ -127,8 +120,6 @@ void ListBox::SetFont(Font & _font)
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 void ListBox::SetBackgroundColor(int _r,int _g,int _b,int _a)
 {
@@ -138,8 +129,6 @@ void ListBox::SetBackgroundColor(int _r,int _g,int _b,int _a)
 	this->backgroundColor.a = _a;
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void ListBox::SetItemColor(int _r,int _g,int _b,int _a)
@@ -253,21 +242,16 @@ void ListBox::SetSelectionClickHandler(on_selection_changed_handler_type handler
 
 
 /*----------------------------------------------------------------------------*/
-void ListBox::SetUserDataScript(void * userdata)
+void ListBox::SetUserDataScript(CScriptHandle userdata)
 {
-
+	this->listbox_p->userData_script =  userdata;
 }
 
-/*----------------------------------------------------------------------------*/
-void ListBox::SetSenderScript(void *sender)
-{
-
-}
 
 /*----------------------------------------------------------------------------*/
 void ListBox::SetSelectionChangedHandlerScript(void * handler)
 {
-
+	this->listbox_p->onSelectionChangedHandler_script = (asIScriptFunction *)handler;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -477,16 +461,16 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 		this->BuildInternalTexture();
 
 		//Call Callback
-		/* TODO
+		
 #ifdef TRP_USE_BINDING
-		if (this->onSelectionChangedHandler_script != NULL)
+		if (this->listbox_p->onSelectionChangedHandler_script != NULL)
 			{			
-				this->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("ListBox"));
-				ret = ScriptManager::Get().RunCallback(this->onSelectionChangedHandler_script, &(this->sender_script), &(this->userData_script));
-			this->sender_script.Set(NULL,NULL);
+				this->listbox_p->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("ListBox"));
+				ret = ScriptManager::Get().RunCallback(this->listbox_p->onSelectionChangedHandler_script,&(this->listbox_p->sender_script), &(this->listbox_p->userData_script));
+				this->listbox_p->sender_script.Set(NULL, NULL);
 			}
 #endif
-			*/
+		
 		if (this->on_selection_changed_handler != NULL)
 			{
 			bool ret = this->on_selection_changed_handler(this->sender,this->user_data);

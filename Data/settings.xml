@@ -5,8 +5,8 @@
 <datafolder2 directory="gamedata-shooter"/>
 <datafolder2 directory="gamedata-amilate"/>
 <datafolder2 directory="gamedata-cocci"/>
-<datafolder2 directory="gamedata-sample"/>
-<datafolder directory="gamedata-naked"/>
+<datafolder directory="gamedata-sample"/>
+<datafolder2 directory="gamedata-naked"/>
 <autorestart value="1"/>
 <allowdebug value="1"/>
 <verbose value="0"/>

@@ -210,14 +210,13 @@ Button::~Button()
 }
 
 
-void Button::SetUserDataScript(void * userdata)
+/*----------------------------------------------------------------------------*/
+void Button::SetUserDataScript(CScriptHandle userdata)
 {
-
+	this->button_p->user_data_script = userdata;
 }
-void Button::SetSenderScript(void *sender)
-{
 
-}
+/*----------------------------------------------------------------------------*/
 void Button::SetSelectionClickHandlerScript(void * handler)
 {
 	this->button_p->on_click_handler_script = (asIScriptFunction *)handler;

@@ -35,7 +35,7 @@
 #include <memory>
 
 class ComboBox_p;
-
+class CScriptHandle;
 class ComboBox : public Widget
 {
 public:
@@ -66,8 +66,7 @@ public:
 	
 public:
 
-	void SetUserDataScript(void * userdata);
-	void SetSenderScript(void *sender);
+	void SetUserDataScript(CScriptHandle userdata);
 	void SetSelectionChangedHandlerScript(void * handler);
 
 private:

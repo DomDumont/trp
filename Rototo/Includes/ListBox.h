@@ -35,6 +35,7 @@
 #include <memory>
 
 class ListBox_p;
+class CScriptHandle;
 class ListBox : public Widget
 {
 public:
@@ -76,8 +77,7 @@ public:
 	void SetSender(void *sender);
 	void SetSelectionClickHandler(on_selection_changed_handler_type handler);
 
-	void SetUserDataScript(void * userdata); 
-	void SetSenderScript(void *sender);
+	void SetUserDataScript(CScriptHandle);
 	void SetSelectionChangedHandlerScript(void * handler);
 
 private:
