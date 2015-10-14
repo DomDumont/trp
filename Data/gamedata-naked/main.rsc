@@ -5,11 +5,15 @@ int                 windowY;
 
 Label  				monLabel;
 
+Button              myButton;
 
 
 
-
-
+bool OnClickHandler(ref @ _sender,ref @ _userData)
+    {
+    UTI_Log("====> OnClickHandler");
+    return true;
+    }
 
 void OnInit()
 {
@@ -20,13 +24,20 @@ void OnInit()
     string ts = "Logical Size =  "+formatInt(windowX,"")+" , "+formatInt(windowY,"");
     UTI_Log(ts);
 
-        GUI_LoadTheme("aeon");
+    GUI_LoadTheme("aeon");
  
     //monLabel.SetText(UTI_GetLanguage());
-monLabel.SetText("Français");
+    monLabel.SetText("Français");
     monLabel.SetPosition(windowX/2,windowY/2);
    
+    myButton.SetText("Coucou le gros bouton");
+    myButton.SetSize(300,200);
+    myButton.SetPosition(windowX/2,windowY/2);    
+    myButton.SetClickHandler(OnClickHandler);
+    myButton.SetEnabled(true);
+    //myButton.SetScale(1,1);
 
+    GUI_AddWidget(myButton);
 
 }
 
@@ -47,7 +58,7 @@ UTI_Log(ts);
 void OnRender(uint64 _delta)
 {
     WND_Clear();
-    monLabel.Render();
+    myButton.Render();
 }
 
 void OnTouch(uint32 _button,uint32 _x,uint32 _y)

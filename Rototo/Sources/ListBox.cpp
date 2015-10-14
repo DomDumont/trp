@@ -252,16 +252,20 @@ void ListBox::SetSelectionClickHandler(on_selection_changed_handler_type handler
 }
 
 
+/*----------------------------------------------------------------------------*/
 void ListBox::SetUserDataScript(void * userdata)
 {
 
 }
+
+/*----------------------------------------------------------------------------*/
 void ListBox::SetSenderScript(void *sender)
 {
 
 }
 
-void ListBox::SetSelectionClickHandlerScript(void * handler)
+/*----------------------------------------------------------------------------*/
+void ListBox::SetSelectionChangedHandlerScript(void * handler)
 {
 
 }
@@ -596,6 +600,9 @@ void RegisterListBox()
 	SDL_assert( r >= 0 );
 
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox", "void SetUserData( ref @userdata)", asMETHOD(ListBox, SetUserDataScript), asCALL_THISCALL);
+	SDL_assert(r >= 0);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ListBox", "void SetSelectionChangedHandler( CallbackHandler @)", asMETHOD(ListBox, SetSelectionChangedHandlerScript), asCALL_THISCALL);
 	SDL_assert(r >= 0);
 
 	/*

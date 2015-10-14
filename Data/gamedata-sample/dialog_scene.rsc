@@ -32,7 +32,7 @@ class DialogScene:Scene
         buttonBack.SetPosition(800,650);        
         buttonBack.Rotation = 5;
         buttonBack.SetEnabled(true);
-        @buttonBack.SetClickHandler(CallbackHandler(helloworldScene.OnClickHandler));
+        buttonBack.SetClickHandler(CallbackHandler(helloworldScene.OnClickHandler));
         buttonBack.SetUserData(@this);
         buttonBack.SetScale(1.0,1.0);
         GUI_AddWidget(buttonBack);

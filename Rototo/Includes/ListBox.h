@@ -78,7 +78,7 @@ public:
 
 	void SetUserDataScript(void * userdata); 
 	void SetSenderScript(void *sender);
-	void SetSelectionClickHandlerScript(void * handler);
+	void SetSelectionChangedHandlerScript(void * handler);
 
 private:
 	std::unique_ptr<ListBox_p> listbox_p; // opaque type here

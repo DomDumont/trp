@@ -98,7 +98,7 @@ void RegisterButton()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetUserData( ref @userdata)", asMETHOD(Button, SetUserDataScript), asCALL_THISCALL);
 	SDL_assert(r >= 0);
 
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ ch)", asMETHOD(Button, SetSelectionClickHandlerScript), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", asMETHOD(Button, SetSelectionClickHandlerScript), asCALL_THISCALL);
 	SDL_assert(r >= 0);
 
 	/*
@@ -220,7 +220,7 @@ void Button::SetSenderScript(void *sender)
 }
 void Button::SetSelectionClickHandlerScript(void * handler)
 {
-
+	this->button_p->on_click_handler_script = (asIScriptFunction *)handler;
 }
 
 
@@ -449,18 +449,18 @@ int Button::OnMouseButtonDown( SDL_Event * event)
 		else
 			this->state = STATE_UP;
 		}
-	/*
+	
 #ifdef TRP_USE_BINDING
 	//Call Callback
-	if (this->on_click_handler_script != NULL)
+	if (this->button_p->on_click_handler_script != NULL)
 		{
-			this->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("Button"));
-			int ret = ScriptManager::Get().RunCallback(this->on_click_handler_script, &(this->sender_script), &(this->user_data_script));
-		this->sender_script.Set(NULL,NULL);
+		this->button_p->sender_script.Set(this, ScriptManager::Get().engine->GetObjectTypeByName("Button"));
+		int ret = ScriptManager::Get().RunCallback(this->button_p->on_click_handler_script, &(this->button_p->sender_script), &(this->button_p->user_data_script));
+		this->button_p->sender_script.Set(NULL, NULL);
 		return ret;
 		}
 #endif
-		*/
+	
 	if (this->on_click_handler != NULL)
 		{
 		bool ret = this->on_click_handler(this->sender,this->user_data);

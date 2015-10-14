@@ -24,7 +24,7 @@ void Init()
     buttonBack.SetPosition(800,650);    
     buttonBack.set_Rotation(5);
     buttonBack.SetEnabled(true);
-    @buttonBack.SetClickHandler(CallbackHandler(gameScene.OnClickHandler));
+    buttonBack.SetClickHandler(CallbackHandler(gameScene.OnClickHandler));
     buttonBack.SetUserData(@this);
     buttonBack.SetScale(1.0,1.0);
     GUI_AddWidget(buttonBack);	

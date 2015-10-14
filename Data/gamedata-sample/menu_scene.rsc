@@ -116,18 +116,18 @@ void Init()
 	buttonStart.set_Rotation(5);
 	buttonStart.SetEnabled(false);
 	buttonStart.SetScale(1.0,1.0);
-	buttonStart.SetClickHandler(CallbackHandler(menuScene.OnClickHandler));
+	//buttonStart.SetClickHandler(CallbackHandler(menuScene.OnClickHandler));
 
-	buttonStart.SetUserData(@this);
+	//buttonStart.SetUserData(@this);
 	GUI_AddWidget(buttonStart);
 
 	// Setup Listbox
 
 	listBox.SetSize(400,400);
 	listBox.SetPosition(200,380);
-	//listBox.SetFont(fonteMed);
-	@listBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandler);
-	listBox.SetUserData(@this);
+	
+	//listBox.SetSelectionChangedHandler(CallbackHandler(menuScene.OnSelectionChangedHandler));
+	//listBox.SetUserData(@this);
 	
     listBox.AddItem("Particles");
     listBox.AddItem("Hello World");
@@ -162,8 +162,8 @@ void Init()
     comboBox.AddItem("Lithuania");
 	comboBox.SetSelectedIndex(thisIsBad);
 
- 	@comboBox.onSelectionChangedHandler = CallbackHandler(menuScene.OnSelectionChangedHandlerCB);
-	comboBox.SetUserData(@this);       
+ 	//comboBox.SetSelectionChangedHandler(CallbackHandler(menuScene.OnSelectionChangedHandlerCB));
+	//comboBox.SetUserData(@this);       
 
 	comboBox.SetEnabled(true);
 	GUI_AddWidget(comboBox);
@@ -211,17 +211,17 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 	UTI_Log("====> menuScene Shutdown");	
 	
 	listBox.ResetContent();
-	@listBox.onSelectionChangedHandler = null;
-	listBox.SetUserData(null);
+	//listBox.SetSelectionChangedHandler(null);
+	//listBox.SetUserData(null);
 	GUI_RemoveWidget(listBox);
 
 	comboBox.ResetContent();
-	@comboBox.onSelectionChangedHandler = null;
-	comboBox.SetUserData(null);
+	//comboBox.SetSelectionChangedHandler(null);
+	//comboBox.SetUserData(null);
 	GUI_RemoveWidget(comboBox);
 
-	buttonStart.SetClickHandler(null);
-	buttonStart.SetUserData(null);
+	//buttonStart.SetClickHandler(null);
+	//buttonStart.SetUserData(null);
 	GUI_RemoveWidget(buttonStart);
 
 

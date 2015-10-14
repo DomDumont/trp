@@ -120,11 +120,15 @@ void ComboBox::SetUserDataScript(void * userdata)
 {
 
 }
+
+/*----------------------------------------------------------------------------*/
 void ComboBox::SetSenderScript(void *sender)
 {
 
 }
-void ComboBox::SetSelectionClickHandlerScript(void * handler)
+
+/*----------------------------------------------------------------------------*/
+void ComboBox::SetSelectionChangedHandlerScript(void * handler)
 {
 
 }
@@ -586,8 +590,11 @@ void RegisterComboBox()
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "float get_Rotation()", asMETHOD(ComboBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 
-	
-	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetUserData( ref @userdata)", asMETHOD(ComboBox, SetUserDataScript), asCALL_THISCALL);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetSelectionChangedHandler( CallbackHandler @)", asMETHOD(ComboBox, SetSelectionChangedHandlerScript), asCALL_THISCALL);
+	SDL_assert(r >= 0);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetUserData( ref @)", asMETHOD(ComboBox, SetUserDataScript), asCALL_THISCALL);
 	SDL_assert(r >= 0);
 
 	/*
