@@ -251,7 +251,7 @@ void ListBox::SetUserDataScript(CScriptHandle userdata)
 /*----------------------------------------------------------------------------*/
 void ListBox::SetSelectionChangedHandlerScript(asIScriptFunction * handler)
 {
-	if (this->listbox_p->onSelectionChangedHandler_script != handler)
+	if ((this->listbox_p->onSelectionChangedHandler_script) && (this->listbox_p->onSelectionChangedHandler_script != handler))
 	{
 		this->listbox_p->onSelectionChangedHandler_script->Release();
 	}

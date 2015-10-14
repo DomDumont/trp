@@ -214,7 +214,7 @@ void Button::SetUserDataScript(CScriptHandle userdata)
 /*----------------------------------------------------------------------------*/
 void Button::SetSelectionClickHandlerScript(asIScriptFunction * handler)
 {
-	if (this->button_p->on_click_handler_script != handler)
+	if ((this->button_p->on_click_handler_script) && (this->button_p->on_click_handler_script != handler))
 	{
 		this->button_p->on_click_handler_script->Release();
 	}

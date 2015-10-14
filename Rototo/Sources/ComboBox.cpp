@@ -125,7 +125,7 @@ void ComboBox::SetUserDataScript(CScriptHandle userdata)
 void ComboBox::SetSelectionChangedHandlerScript(asIScriptFunction * handler)
 {
 
-	if (this->combobox_p->onSelectionChangedHandler_script != handler)
+	if ((this->combobox_p->onSelectionChangedHandler_script) && (this->combobox_p->onSelectionChangedHandler_script != handler))
 	{
 		this->combobox_p->onSelectionChangedHandler_script->Release();
 	}
