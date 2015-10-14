@@ -622,10 +622,13 @@ void RegisterComboBox()
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox","float get_Rotation()", WRAP_MFN(ComboBox, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
 
-	
-	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox, onSelectionChangedHandler_script));
-	
-	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox, userData_script));
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetSelectionChangedHandler( CallbackHandler @)", WRAP_MFN(ComboBox, SetSelectionChangedHandlerScript), asCALL_GENERIC);
+	SDL_assert(r >= 0);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("ComboBox", "void SetUserData( ref @)", WRAP_MFN(ComboBox, SetUserDataScript), asCALL_GENERIC);
+	SDL_assert(r >= 0);
+
+
 	
 	
 #endif

@@ -142,7 +142,7 @@ void ScriptManager::Init()
 #ifndef TRP_EMSCRIPTEN
 	engine->SetMessageCallback(asMETHOD(ScriptManager, MessageCallback), this, asCALL_THISCALL);
 #else
-	engine->SetMessageCallback(WRAP_FN(ScriptManager, MessageCallback), this, asCALL_GENERIC);
+	engine->SetMessageCallback(asMETHOD(ScriptManager, MessageCallback), this, asCALL_THISCALL);
 #endif
 	
 	RegisterStdString(engine);

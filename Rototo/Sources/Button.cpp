@@ -151,10 +151,12 @@ void RegisterButton()
 	///func:void SetState(int state)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetState(int _state)", WRAP_MFN(Button, SetState), asCALL_GENERIC);SDL_assert( r >= 0 );
 
-	///prop:CallbackHandler @on_click_handler
-	ScriptManager::Get().engine->RegisterObjectProperty("Button", "CallbackHandler @on_click_handler", asOFFSET(Button, on_click_handler_script));
-	///prop:ref @user_data
-	ScriptManager::Get().engine->RegisterObjectProperty("Button", "ref @user_data", asOFFSET(Button, user_data_script));
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetUserData( ref @userdata)", WRAP_MFN(Button, SetUserDataScript), asCALL_GENERIC);
+	SDL_assert(r >= 0);
+
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", WRAP_MFN(Button, SetSelectionClickHandlerScript), asCALL_GENERIC);
+	SDL_assert(r >= 0);
+
 
 #endif	
 }
