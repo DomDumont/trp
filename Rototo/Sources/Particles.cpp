@@ -79,7 +79,7 @@ Particle::~Particle()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Particle::Update(Uint64 _elapsed)
+void Particle::Update(unsigned int _elapsed)
 {
     TTL--;
     this->position.x += (int) this->velocityX;
@@ -136,8 +136,8 @@ void RegisterEmitter()
     ///func:void SetPosition(int x,int y,int from=0)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void SetPosition(int _x,int _y,int _from=0)", asMETHOD(Emitter, SetPosition), asCALL_THISCALL);
     SDL_assert( r >= 0 );
-    ///func:void Update(uint64 elapsed)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void Update(uint64 _elapsed)", asMETHOD(Emitter, Update), asCALL_THISCALL);
+    ///func:void Update(unsigned int elapsed)
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void Update(uint32 _elapsed)", asMETHOD(Emitter, Update), asCALL_THISCALL);
     SDL_assert( r >= 0 );
     ///func:void Render()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter", "void Render()", asMETHOD(Emitter, Render), asCALL_THISCALL);
@@ -155,7 +155,7 @@ void RegisterEmitter()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void SetPosition(int _x,int _y,int _from=0)", WRAP_MFN(Emitter, SetPosition), asCALL_GENERIC);
     SDL_assert( r >= 0 );
 
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void Update(uint64 _elapsed)", WRAP_MFN(Emitter, Update), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void Update(uint32 _elapsed)", WRAP_MFN(Emitter, Update), asCALL_GENERIC);
     SDL_assert( r >= 0 );
 
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Emitter","void Render()", WRAP_MFN(Emitter, Render), asCALL_GENERIC);
@@ -231,7 +231,7 @@ Emitter::Emitter(const Emitter &other)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Emitter::Update(Uint64 _elapsed)
+void Emitter::Update(unsigned int _elapsed)
 {
     for (int i = 0; i < this->emissionRate; i++)
         {

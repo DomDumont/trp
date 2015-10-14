@@ -101,7 +101,7 @@ WND_SetCapFPS(30);
 //-----------------------------------------------------------------------------
 // 
 //-----------------------------------------------------------------------------
-void OnUpdate(uint64 _delta)
+void OnUpdate(uint32 _delta)
 {
 theSceneManager.OnUpdate(_delta);
 }
@@ -111,7 +111,7 @@ void OnKeyUp(uint32 _scancode)
 string ts = "OnKeyUp "+formatInt(_scancode,"");
 UTI_Log(ts);
 }
-void OnRender(uint64 _delta)
+void OnRender(uint32 _delta)
 {
 //menuScene.Render(_delta);
 theSceneManager.OnRender(_delta);

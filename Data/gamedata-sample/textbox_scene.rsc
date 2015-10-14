@@ -49,11 +49,11 @@ class CTextboxScene:CScene
 		GUI_AddWidget(maTextBox);
 		}
 		
-	void OnUpdate(uint64 _delta)
+	void OnUpdate(uint32 _delta)
 		{	
 		}
 
-	void OnRender(uint64 _delta)
+	void OnRender(uint32 _delta)
 		{
 		monBG.Render();
 		maTextBox.Render();

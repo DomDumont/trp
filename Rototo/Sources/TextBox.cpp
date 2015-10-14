@@ -287,7 +287,7 @@ void RegisterTextBox()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "string GetText()", asMETHOD(TextBox, GetText), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:float GetRotation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "float get_Rotation()", asMETHOD(TextBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
-	//ScriptManager::Get().RegisterClassMethod("TextBox","void Update(uint64 _elapsed)", asMETHOD(TextBox, Update));
+	//ScriptManager::Get().RegisterClassMethod("TextBox","void Update(uint32 _elapsed)", asMETHOD(TextBox, Update));
 
 #else
 	r = ScriptManager::Get().engine->RegisterObjectType("TextBox", 0, asOBJ_REF); SDL_assert( r >= 0 );

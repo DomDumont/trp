@@ -47,7 +47,7 @@ public:
 	virtual void	SetRotation(float _angle);
 	virtual float	GetRotation();
 	virtual void	SetScale(double _xFactor,double _yFactor);
-	virtual void	Update(Uint64 _elapsed);
+	virtual void	Update(unsigned int _elapsed);
 	virtual int		OnMouseButtonDown( SDL_Event * event);
 	virtual int		OnMouseButtonUp( SDL_Event * event);
 	virtual void	OnMouseMotion( SDL_Event * event);

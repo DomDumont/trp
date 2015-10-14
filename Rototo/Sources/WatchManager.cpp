@@ -144,7 +144,7 @@ void WatchManager::Init()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void WatchManager::Update(Uint64 _elapsed)
+void WatchManager::Update(unsigned int _elapsed)
 {
 #if defined WIN32 || defined TRP_OSX
 	//fileWatcher->update(); //TODO Check where the update is done now.

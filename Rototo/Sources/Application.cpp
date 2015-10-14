@@ -55,8 +55,8 @@ void Application_p::Init()
 
 	// New register scripts functions before using them
 	this->on_init_func = ScriptManager::Get().RegisterScript("void OnInit()", (char*)"");
-	this->on_update_func = ScriptManager::Get().RegisterScript("void OnUpdate(uint64 _delta)", (char*)"L");
-	this->on_render_func = ScriptManager::Get().RegisterScript("void OnRender(uint64 _delta)", (char*)"L");
+	this->on_update_func = ScriptManager::Get().RegisterScript("void OnUpdate(uint32 _delta)", (char*)"d");
+	this->on_render_func = ScriptManager::Get().RegisterScript("void OnRender(uint32 _delta)", (char*)"d");
 
 	ScriptManager::Get().RunFunctionEntry(this->on_init_func, "");
 

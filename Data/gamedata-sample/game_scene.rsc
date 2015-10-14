@@ -76,12 +76,12 @@ void Init()
 	}
 	
 
-void OnUpdate(uint64 _delta)
+void OnUpdate(uint32 _delta)
 	{
 	currentAnim.Update(_delta);
 	}	
 
-void OnRender(uint64 _delta)
+void OnRender(uint32 _delta)
 	{
 	WND_ClearWithColor(80,80,80,255);
 	monBG.Render();

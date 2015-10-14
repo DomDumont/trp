@@ -299,7 +299,7 @@ bool Widget::Touched(int _x,int _y)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Widget::Update(Uint64 _elapsed)
+void Widget::Update(unsigned int _elapsed)
 {
 
 }

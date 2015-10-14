@@ -110,7 +110,7 @@ void TweenManager::Shutdown()
 		}
 }
 
-void TweenManager::Update(Uint64 _elapsed)
+void TweenManager::Update(unsigned int _elapsed)
 {
 
 	for (tweensIT = tweens.begin();  tweensIT != tweens.end(); ++tweensIT ) 

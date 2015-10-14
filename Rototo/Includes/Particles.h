@@ -50,7 +50,7 @@ public:
     Particle( AtlasEntry	* _entry);
     ~Particle();
 
-    void Update(Uint64 _elapsed);
+    void Update(unsigned int _elapsed);
     void Render();
 };
 
@@ -92,7 +92,7 @@ public:
     void Load(Atlas * _atlas,const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
 
     void SetPosition(int _x,int _y,int _from = 0);
-    void Update(Uint64 _elapsed);
+    void Update(unsigned int _elapsed);
     void Render();
 
     std::vector<Particle *>  particles;

@@ -113,7 +113,7 @@ public:
 	~PhysicsManager();
 
 	void Init();
-	void Update(Uint64 _elapsed);
+	void Update(unsigned int _elapsed);
 	void Render();
 	void Shutdown();
 	void ShowDebugDraw(bool _value);

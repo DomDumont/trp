@@ -308,7 +308,7 @@ Body * PhysicsManager::GetContactB()
     return this->contactB;
 }
 
-void PhysicsManager::Update(Uint64 _elapsed)
+void PhysicsManager::Update(unsigned int _elapsed)
 {
 float32 timeStep = (float32) _elapsed/60.0f;
 //float32 timeStep = 1.0f / 120.0f;

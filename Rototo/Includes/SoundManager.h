@@ -76,11 +76,11 @@ public:
 
 private:
 	
-	int	rate;
-	Uint16	format;
-	int	channels;
-	int	buffers;
-	int	initialized;
+	int				rate;
+	unsigned short 	format;
+	int				channels;
+	int				buffers;
+	int				initialized;
 
 
 

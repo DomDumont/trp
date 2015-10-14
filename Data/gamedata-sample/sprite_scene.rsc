@@ -32,7 +32,7 @@ class SpriteScene:Scene
         currentScale = 1;
         }
         
-    void OnUpdate(uint64 _delta)
+    void OnUpdate(uint32 _delta)
         {   
         
         }
@@ -47,7 +47,7 @@ class SpriteScene:Scene
         }
 
 
-    void OnRender(uint64 _delta)
+    void OnRender(uint32 _delta)
         {
         WND_Clear();
         mySprite.Render(); 

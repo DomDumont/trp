@@ -25,12 +25,12 @@ class MusicScene:Scene
 
         }
         
-    void OnUpdate(uint64 _delta)
+    void OnUpdate(uint32 _delta)
         {   
         
         }
 
-      void OnRender(uint64 _delta)
+      void OnRender(uint32 _delta)
         {
         WND_Clear();
         buttonBack.Render();

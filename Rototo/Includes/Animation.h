@@ -51,7 +51,7 @@ public:
 	Animation(const Animation &other);
 	void Load(Atlas * _atlas, const std::string& _name,const std::string& _format,int _nbFrames);
 	void UnLoad();
-	void Update(Uint64 _elapsed);
+	void Update(unsigned int _elapsed);
 	void Render();
 
 	void SetFPS(int _fps);

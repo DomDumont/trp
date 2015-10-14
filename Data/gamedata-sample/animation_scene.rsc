@@ -31,12 +31,12 @@ class AnimationScene:Scene
         GUI_AddWidget(buttonBack);        
         }
         
-    void OnUpdate(uint64 _delta)
+    void OnUpdate(uint32 _delta)
         {   
         myAnim.Update(_delta);
         }
 
-    void OnRender(uint64 _delta)
+    void OnRender(uint32 _delta)
         {
         WND_Clear();
         myAnim.Render();

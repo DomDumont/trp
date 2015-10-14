@@ -188,7 +188,7 @@ void Animation::SetFPS(int _fps)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Animation::Update(Uint64 _elapsed)
+void Animation::Update(unsigned int _elapsed)
 {
 if (this->playing != 0)
 	{
@@ -410,8 +410,8 @@ void RegisterAnimation()
 	///role: Set the speed of the animation in frames per second
 	///arg: _fps : frames per second
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void SetFPS(int _fps)", asMETHOD(Animation, SetFPS), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void Update(uint64 elapsed)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void Update(uint64 _elapsed)", asMETHOD(Animation, Update), asCALL_THISCALL); SDL_assert(r >= 0);
+	///func:void Update(unsigned int elapsed)
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void Update(uint32 _elapsed)", asMETHOD(Animation, Update), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void Render()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void Render()", asMETHOD(Animation, Render), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void Play(int mode = 0, int nbLoops = 1)
@@ -452,7 +452,7 @@ void RegisterAnimation()
 
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Load(Atlas @ _atlas, string &in _name,string &in _format,int _nbFrames)", WRAP_MFN(Animation, Load),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void SetFPS(int _fps)", WRAP_MFN(Animation, SetFPS),asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Update(uint64 _elapsed)", WRAP_MFN(Animation, Update),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Update(uint32 _elapsed)", WRAP_MFN(Animation, Update),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Render()", WRAP_MFN(Animation, Render),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Play(int _mode = 0, int _nbLoops = 1)", WRAP_MFN(Animation, Play),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Stop(bool _waitEnd = true)", WRAP_MFN(Animation, Stop),asCALL_GENERIC);SDL_assert( r >= 0 );

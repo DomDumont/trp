@@ -595,7 +595,7 @@ void RegisterComboBox()
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "CallbackHandler @onSelectionChangedHandler", asOFFSET(ComboBox_p, onSelectionChangedHandler_script));
 	///prop:ref @userData
 	ScriptManager::Get().RegisterObjectProperty("ComboBox", "ref @userData", asOFFSET(ComboBox_p, userData_script));
-	//ScriptManager::Get().RegisterClassMethod("ComboBox","void Update(uint64 _elapsed)", asMETHOD(ComboBox, Update));
+	//ScriptManager::Get().RegisterClassMethod("ComboBox","void Update(uint32 _elapsed)", asMETHOD(ComboBox, Update));
 	*/
 #else
 	///class:ComboBox

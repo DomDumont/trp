@@ -41,7 +41,7 @@ public:
 	~WatchManager();
 
 	void Init();
-	void Update(Uint64 _elapsed);
+	void Update(unsigned int _elapsed);
 	void Shutdown();
 
 private:

@@ -5,12 +5,12 @@ void Init()
 
 	}
 
-void OnRender(uint64 _delta)
+void OnRender(uint32 _delta)
 	{
 
 	}
 
-void OnUpdate(uint64 _delta)
+void OnUpdate(uint32 _delta)
 	{
 
 	}
@@ -61,7 +61,7 @@ class SceneManager
 	    @currentScene = @_newScene;
 	}
 
-	void OnRender(uint64 _delta)
+	void OnRender(uint32 _delta)
 	{	
 		if (currentScene !is null) 
 			{
@@ -70,7 +70,7 @@ class SceneManager
 
 	}
 
-	void OnUpdate(uint64 _delta)
+	void OnUpdate(uint32 _delta)
 	{	
 		if (currentScene !is null) 
 			{
