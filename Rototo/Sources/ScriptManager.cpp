@@ -444,7 +444,11 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 		}
 
 	if ((_fe == NULL) || (_fe->func == NULL))
+	{
+		this->FreeContext(tempCtx);
 		return;
+	}
+		
 
 
 	tempCtx->Prepare(_fe->func);

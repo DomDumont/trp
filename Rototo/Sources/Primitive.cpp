@@ -152,7 +152,7 @@ void Primitive::BuildInternalTexture()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Primitive::SetScale(double _xFactor,double _yFactor)
+void Primitive::SetScale(float _xFactor, float _yFactor)
 {
 	Widget::SetScale(_xFactor,_yFactor);
 	//BuildInternalTexture();
@@ -249,7 +249,7 @@ void RegisterPrimitive()
 	SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetSize(int _w,int _h)", asMETHODPR(Primitive, SetSize, (int, int), void), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetScale(double _xFactor,double _yFactor)", asMETHOD(Primitive, SetScale), asCALL_THISCALL);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetScale(float _xFactor,float _yFactor)", asMETHOD(Primitive, SetScale), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive", "void SetShape(int _shape)", asMETHOD(Primitive, SetShape), asCALL_THISCALL);
 	SDL_assert( r >= 0 );
@@ -277,7 +277,7 @@ void RegisterPrimitive()
 	SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetSize(int _w,int _h)", WRAP_MFN_PR(Primitive, SetSize,(int,int),void), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Primitive, SetScale), asCALL_GENERIC);
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetScale(float _xFactor,float _yFactor)", WRAP_MFN(Primitive, SetScale), asCALL_GENERIC);
 	SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Primitive","void SetShape(int _shape)", WRAP_MFN(Primitive, SetShape), asCALL_GENERIC);
 	SDL_assert( r >= 0 );

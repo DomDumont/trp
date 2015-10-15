@@ -59,7 +59,7 @@ public:
 	void Stop(bool _waitEnd = true);
 	bool Touched(int _x,int _y);
 	void SetPosition(int _x,int _y);
-	void SetScale(double _xFactor,double _yFactor);
+	void SetScale(float _xFactor, float _yFactor);
 	void SetRotation(float _angle);
 
 public:

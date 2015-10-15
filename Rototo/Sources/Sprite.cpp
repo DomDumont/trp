@@ -42,7 +42,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-void Sprite::SetScale(double _xFactor,double _yFactor)
+void Sprite::SetScale(float _xFactor, float _yFactor)
 {
 	Widget::SetScale(_xFactor,_yFactor);
 }
@@ -398,8 +398,8 @@ void RegisterSprite()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite", "void set_Position(Vector2D _pos)", asMETHODPR(Sprite, SetPosition, (Vector2D), void), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:bool Touched(int x,int y)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite", "bool Touched(int _x,int _y)", asMETHOD(Sprite, Touched), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetScale(double xFactor,double yFactor)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite", "void SetScale(double _xFactor,double _yFactor)", asMETHOD(Sprite, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
+	///func:void SetScale(float xFactor,float yFactor)
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite", "void SetScale(float _xFactor,float _yFactor)", asMETHOD(Sprite, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void SetRotation(float angle)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite", "void set_Rotation(float _angle)", asMETHOD(Sprite, SetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:float get_Rotation()
@@ -427,7 +427,7 @@ void RegisterSprite()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Sprite, SetPosition,(int,int),void),asCALL_GENERIC);SDL_assert( r >= 0 );	
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","void set_Position(Vector2D _pos)", WRAP_MFN_PR(Sprite, SetPosition,(Vector2D),void),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","bool Touched(int _x,int _y)", WRAP_MFN(Sprite, Touched),asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Sprite, SetScale),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","void SetScale(float _xFactor,float _yFactor)", WRAP_MFN(Sprite, SetScale),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","void set_Rotation(float _angle)", WRAP_MFN(Sprite, SetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","float get_Rotation()", WRAP_MFN(Sprite, GetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Sprite","void Render()", WRAP_MFN(Sprite, Render),asCALL_GENERIC);SDL_assert( r >= 0 );

@@ -67,7 +67,7 @@ public:
 	void SetSize		(Vector2D _pos);
 	void SetTextColor	(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	void SetRotation	(float _angle);
-	void SetScale		(double _xFactor,double _yFactor);
+	void SetScale(float _xFactor, float _yFactor);
 	void SetEnabled		(bool _value);
 	int  OnMouseButtonDown	( SDL_Event * event);
 	void SetType		(int _type);

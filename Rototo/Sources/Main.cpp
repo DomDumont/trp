@@ -57,10 +57,15 @@ int main(int argc, char *argv[])
 
 #endif
 
+#ifdef __EMSCRIPTEN__	
 void mainLoopForEmscripten()
 {
+
+	
 	g_app->Run();
+	
 }
+#endif
 
 Application * GetApp()
 {

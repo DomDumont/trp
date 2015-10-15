@@ -243,7 +243,7 @@ float Widget::GetRotation()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Widget::SetScale(double _xFactor,double _yFactor)
+void Widget::SetScale(float _xFactor, float _yFactor)
 {
 	
 	int newWidth = (int) (this->frame.w * _yFactor);

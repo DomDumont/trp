@@ -359,7 +359,7 @@ void  Animation::SetPosition(int _x,int _y)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Animation::SetScale(double _xFactor,double _yFactor)
+void Animation::SetScale(float _xFactor, float _yFactor)
 {
 	
 	for (int i=0;i<this->nbFrames;i++)
@@ -422,8 +422,8 @@ void RegisterAnimation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void SetPosition(int _x,int _y)", asMETHOD(Animation, SetPosition), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:bool Touched(int x,int y)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "bool Touched(int _x,int _y)", asMETHOD(Animation, Touched), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetScale(double xFactor,double yFactor)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void SetScale(double _xFactor,double _yFactor)", asMETHOD(Animation, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
+	///func:void SetScale(float xFactor,float yFactor)
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void SetScale(float _xFactor,float _yFactor)", asMETHOD(Animation, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void SetRotation(float angle)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation", "void set_Rotation(float _angle)", asMETHOD(Animation, SetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:float get_Rotation()
@@ -452,7 +452,7 @@ void RegisterAnimation()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void Stop(bool _waitEnd = true)", WRAP_MFN(Animation, Stop),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void SetPosition(int _x,int _y)", WRAP_MFN(Animation, SetPosition),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","bool Touched(int _x,int _y)", WRAP_MFN(Animation, Touched),asCALL_GENERIC);SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Animation, SetScale),asCALL_GENERIC);SDL_assert( r >= 0 );
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void SetScale(float _xFactor,float _yFactor)", WRAP_MFN(Animation, SetScale),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void set_Rotation(float _angle)", WRAP_MFN(Animation, SetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","float get_Rotation()", WRAP_MFN(Animation, GetRotation),asCALL_GENERIC);SDL_assert( r >= 0 );
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Animation","void UnLoad()", WRAP_MFN(Animation, UnLoad),asCALL_GENERIC);SDL_assert( r >= 0 );

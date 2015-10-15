@@ -46,7 +46,7 @@ public:
 	virtual bool	Touched(int _x,int _y);
 	virtual void	SetRotation(float _angle);
 	virtual float	GetRotation();
-	virtual void	SetScale(double _xFactor,double _yFactor);
+	virtual void	SetScale(float _xFactor, float _yFactor);
 	virtual void	Update(unsigned int _elapsed);
 	virtual int		OnMouseButtonDown( SDL_Event * event);
 	virtual int		OnMouseButtonUp( SDL_Event * event);
@@ -60,23 +60,26 @@ public:
 	void			Hide();
 
 
-	void AddRef()
+	virtual void AddRef()
 	{
 		// Increase the reference counter
 		refCount++;
-		//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
+		printf("Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
 	}
 
-	void Release()
+	virtual void Release()
 	{
 		// Decrease ref count and delete if it reaches 0
 	refCount --;
-		if ( refCount == 0 )
-			delete this;
+	if (refCount == 0)
+		{
+			printf("deleted\n");
+		delete this;
+		}
 		else
 	if ( refCount > 0 )
 		{
-		//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
+		printf("Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
 		}
 	else
 		SDL_assert(0);
@@ -87,8 +90,8 @@ public:
 	SDL_Rect	position;
 	float		angle;
 	int		anchor;
-	double		xScale;
-	double		yScale;
+	float		xScale;
+	float		yScale;
 	bool		enabled;
 	bool		shown;
 

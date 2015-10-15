@@ -86,8 +86,8 @@ void RegisterButton()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "float get_Rotation()", asMETHOD(Button, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:bool Touched(int x,int y)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "bool Touched(int _x,int _y)", asMETHOD(Button, Touched), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetScale(double xFactor,double yFactor)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetScale(double _xFactor,double _yFactor)", asMETHOD(Button, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
+	///func:void SetScale(float xFactor,float yFactor)
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetScale(float _xFactor,float _yFactor)", asMETHOD(Button, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void SetEnabled(bool value)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetEnabled(bool _value)", asMETHOD(Button, SetEnabled), asCALL_THISCALL); SDL_assert(r >= 0);
 	///func:void SetType(int type)
@@ -135,8 +135,8 @@ void RegisterButton()
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","float get_Rotation()", WRAP_MFN(Button, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:bool Touched(int x,int y)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","bool Touched(int _x,int _y)", WRAP_MFN(Button, Touched), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetScale(double xFactor,double yFactor)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetScale(double _xFactor,double _yFactor)", WRAP_MFN(Button, SetScale), asCALL_GENERIC);SDL_assert( r >= 0 );
+	///func:void SetScale(float xFactor,float yFactor)
+	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetScale(float _xFactor,float _yFactor)", WRAP_MFN(Button, SetScale), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void SetEnabled(bool value)
 	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetEnabled(bool _value)", WRAP_MFN(Button, SetEnabled), asCALL_GENERIC);SDL_assert( r >= 0 );
 	///func:void SetType(int type)
@@ -591,8 +591,9 @@ void Button::SetPosition(int _x,int _y)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Button::SetScale(double _xFactor,double _yFactor)
+void Button::SetScale(float _xFactor, float _yFactor)
 {
+	printf("SetScale %f %f\n", _xFactor, _yFactor);
 	Widget::SetScale(_xFactor,_yFactor);
 
 	this->sprite_up.SetScale(_xFactor,_yFactor);

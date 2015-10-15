@@ -48,7 +48,7 @@ Label *Label_Factory()
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-void Label::SetScale(double _xFactor,double _yFactor)
+void Label::SetScale(float _xFactor, float _yFactor)
 {
 	Widget::SetScale(_xFactor,_yFactor);
 }
