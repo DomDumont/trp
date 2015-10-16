@@ -4,9 +4,9 @@
 #include "Music.h"
 #include "Application.h"
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
 
 #include "ScriptManager.h"
 
@@ -42,29 +42,32 @@ void RegisterMusic()
 {
 	int r;
 
-#ifndef __EMSCRIPTEN__
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
 
-	///class:Music
-	r = ScriptManager::Get().engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
-	//this->RegisterClass<Music>("Music");
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(ConstructMusic), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(DestructMusic), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Load(string &in _file)", asMETHOD(Music, Load), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", asMETHOD(Music, Play), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void UnLoad()", asMETHOD(Music, UnLoad), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Stop()", asMETHOD(Music, Stop), asCALL_THISCALL); SDL_assert(r >= 0);
-#else
+		///class:Music
+		r = ScriptManager::Get().engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
+		//this->RegisterClass<Music>("Music");
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", asFUNCTION(ConstructMusic), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", asFUNCTION(DestructMusic), asCALL_CDECL_OBJLAST); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Load(string &in _file)", asMETHOD(Music, Load), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", asMETHOD(Music, Play), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void UnLoad()", asMETHOD(Music, UnLoad), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Stop()", asMETHOD(Music, Stop), asCALL_THISCALL); SDL_assert(r >= 0);
+	}
+	else
+	{
 
-	r = ScriptManager::Get().engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", WRAP_CON(Music,()), asCALL_GENERIC); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", WRAP_DES(Music), asCALL_GENERIC);SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectType("Music", sizeof(Music), asOBJ_VALUE | asOBJ_APP_CLASS_CDK/*asOBJ_POD*/); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_CONSTRUCT, "void f()", WRAP_CON(Music, ()), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Music", asBEHAVE_DESTRUCT, "void f()", WRAP_DES(Music), asCALL_GENERIC); SDL_assert(r >= 0);
 
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Load(string &in _file)", WRAP_MFN(Music, Load), asCALL_GENERIC);SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", WRAP_MFN(Music, Play), asCALL_GENERIC);SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void UnLoad()", WRAP_MFN(Music, UnLoad), asCALL_GENERIC);SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Stop()", WRAP_MFN(Music, Stop), asCALL_GENERIC);SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Load(string &in _file)", WRAP_MFN(Music, Load), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Play(int _nbLoops=-1, int _timeFadeIn=1000)", WRAP_MFN(Music, Play), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void UnLoad()", WRAP_MFN(Music, UnLoad), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Music", "void Stop()", WRAP_MFN(Music, Stop), asCALL_GENERIC); SDL_assert(r >= 0);
 
-#endif	
+	}
 
 }
 #endif

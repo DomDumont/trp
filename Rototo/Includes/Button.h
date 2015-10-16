@@ -112,4 +112,6 @@ private:
 Button	*ButtonFactory();
 void	RegisterButton();
 
+Widget* refCastButton2Widget(Button* a);
+
 #endif

@@ -27,9 +27,9 @@
 #include "Application.h"
 #include "Font.h"
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
 
 #include "ScriptManager.h"
 
@@ -271,38 +271,40 @@ void RegisterTextBox()
 {
 	int r;
 
-#ifndef __EMSCRIPTEN__
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
 
-	///class:TextBox
-	r = ScriptManager::Get().engine->RegisterObjectType("TextBox", 0, asOBJ_REF); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_FACTORY, "TextBox@ f()", asFUNCTION(TextBox_Factory), asCALL_CDECL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_ADDREF, "void f()", asMETHOD(TextBox, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_RELEASE, "void f()", asMETHOD(TextBox, Release), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void Render()", asMETHOD(TextBox, Render), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetSize(int _w,int _h)", asMETHODPR(TextBox, SetSize, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetPosition(int _x,int _y,int _from=0)", asMETHOD(TextBox, SetPosition), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetFont(Font @ _font)", asMETHOD(TextBox, SetFont), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetText(string &in _newText)", asMETHOD(TextBox, SetText), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(TextBox, SetTextColor), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "string GetText()", asMETHOD(TextBox, GetText), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:float GetRotation()
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "float get_Rotation()", asMETHOD(TextBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
-	//ScriptManager::Get().RegisterClassMethod("TextBox","void Update(uint32 _elapsed)", asMETHOD(TextBox, Update));
+		///class:TextBox
+		r = ScriptManager::Get().engine->RegisterObjectType("TextBox", 0, asOBJ_REF); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_FACTORY, "TextBox@ f()", asFUNCTION(TextBox_Factory), asCALL_CDECL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_ADDREF, "void f()", asMETHOD(TextBox, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_RELEASE, "void f()", asMETHOD(TextBox, Release), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void Render()", asMETHOD(TextBox, Render), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetSize(int _w,int _h)", asMETHODPR(TextBox, SetSize, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetPosition(int _x,int _y,int _from=0)", asMETHOD(TextBox, SetPosition), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetFont(Font @ _font)", asMETHOD(TextBox, SetFont), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetText(string &in _newText)", asMETHOD(TextBox, SetText), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(TextBox, SetTextColor), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "string GetText()", asMETHOD(TextBox, GetText), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:float GetRotation()
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "float get_Rotation()", asMETHOD(TextBox, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
+	}
 
-#else
-	r = ScriptManager::Get().engine->RegisterObjectType("TextBox", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_FACTORY, "TextBox@ f()", WRAP_FN(TextBox_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_ADDREF, "void f()", WRAP_MFN(TextBox,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(TextBox,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","void Render()", WRAP_MFN(TextBox, Render), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","void SetSize(int _w,int _h)", WRAP_MFN_PR(TextBox, SetSize,(int,int),void), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","void SetPosition(int _x,int _y,int _from=0)", WRAP_MFN(TextBox, SetPosition), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","void SetFont(Font @ _font)", WRAP_MFN(TextBox, SetFont), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","void SetText(string &in _newText)", WRAP_MFN(TextBox, SetText), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(TextBox, SetTextColor), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","string GetText()", WRAP_MFN(TextBox, GetText), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox","float get_Rotation()", WRAP_MFN(TextBox, GetRotation), asCALL_GENERIC); SDL_assert( r >= 0 );
+	else
+	{
+		r = ScriptManager::Get().engine->RegisterObjectType("TextBox", 0, asOBJ_REF); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_FACTORY, "TextBox@ f()", WRAP_FN(TextBox_Factory), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_ADDREF, "void f()", WRAP_MFN(TextBox, AddRef), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("TextBox", asBEHAVE_RELEASE, "void f()", WRAP_MFN(TextBox, Release), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void Render()", WRAP_MFN(TextBox, Render), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetSize(int _w,int _h)", WRAP_MFN_PR(TextBox, SetSize, (int, int), void), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetPosition(int _x,int _y,int _from=0)", WRAP_MFN(TextBox, SetPosition), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetFont(Font @ _font)", WRAP_MFN(TextBox, SetFont), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetText(string &in _newText)", WRAP_MFN(TextBox, SetText), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(TextBox, SetTextColor), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "string GetText()", WRAP_MFN(TextBox, GetText), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("TextBox", "float get_Rotation()", WRAP_MFN(TextBox, GetRotation), asCALL_GENERIC); SDL_assert(r >= 0);
 
-#endif
+	}
 }
 #endif

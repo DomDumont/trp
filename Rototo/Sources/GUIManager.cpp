@@ -35,9 +35,9 @@
 #include "Sprite.h"
 #include "Atlas.h"
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
 
 #include "ScriptManager.h"
 
@@ -438,23 +438,26 @@ void GUIManager::UnLoadTheme()
 void RegisterGUI()
 {
 
-#ifndef __EMSCRIPTEN__ //TODO Pout this elsewhese.
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
 
-	///sect:GUI
-	///glob:void GUI_AddWidget(Widget @)
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asMETHOD(GUIManager, AddWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
-	///glob:void GUI_RemoveWidget(Widget @)
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asMETHOD(GUIManager, RemoveWidget), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
-	///glob:void GUI_LoadTheme(string &in file)
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asMETHOD(GUIManager, LoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
-	///glob:void GUI_UnLoadTheme()
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_UnLoadTheme()", asMETHOD(GUIManager, UnLoadTheme), asCALL_THISCALL_ASGLOBAL, g_app->guiManager);
-#else
+		///sect:GUI
+		///glob:void GUI_AddWidget(Widget @)
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_AddWidget(Widget @)", asFUNCTION(GUI_AddWidget), asCALL_CDECL);
+		///glob:void GUI_RemoveWidget(Widget @)
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", asFUNCTION(GUI_RemoveWidget), asCALL_CDECL);
+		///glob:void GUI_LoadTheme(string &in file)
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", asFUNCTION(GUI_LoadTheme), asCALL_CDECL);
+		///glob:void GUI_UnLoadTheme()
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_UnLoadTheme()", asFUNCTION(GUI_UnLoadTheme), asCALL_CDECL);
+	}
+	else
+	{
 
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_AddWidget(Widget @)", WRAP_FN(GUI_AddWidget), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", WRAP_FN(GUI_RemoveWidget), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", WRAP_FN(GUI_LoadTheme), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void GUI_UnLoadTheme()", WRAP_FN(GUI_UnLoadTheme), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_AddWidget(Widget @)", WRAP_FN(GUI_AddWidget), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_RemoveWidget(Widget @)", WRAP_FN(GUI_RemoveWidget), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_LoadTheme(string &in _file)", WRAP_FN(GUI_LoadTheme), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void GUI_UnLoadTheme()", WRAP_FN(GUI_UnLoadTheme), asCALL_GENERIC);
 
-#endif	
+	}
 }

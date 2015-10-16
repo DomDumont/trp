@@ -33,9 +33,9 @@
 
 #include "pugixml.hpp"
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
 
 #include "ScriptManager.h"
 
@@ -47,20 +47,23 @@
 void RegisterTextManager()
 {
 	
-#ifndef __EMSCRIPTEN__	
-	///sect:Text
-	///glob:string TXT_GetString(string &id)
-	ScriptManager::Get().RegisterGlobalFunction("string TXT_GetString(string &in id)", asFUNCTION(TXT_GetString), asCALL_CDECL);
-	///glob:void TXT_Load(string &in file,int flags=13)
-	ScriptManager::Get().RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asFUNCTION(TXT_Load), asCALL_CDECL);
-	///glob:void TXT_UnLoad()
-	ScriptManager::Get().RegisterGlobalFunction("void TXT_UnLoad()", asFUNCTION(TXT_UnLoad), asCALL_CDECL);
-#else
-	ScriptManager::Get().RegisterGlobalFunction("string TXT_GetString(string &in id)", WRAP_FN(TXT_GetString), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", WRAP_FN(TXT_Load), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void TXT_UnLoad()", WRAP_FN(TXT_UnLoad), asCALL_GENERIC);
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
+		///sect:Text
+		///glob:string TXT_GetString(string &id)
+		ScriptManager::Get().RegisterGlobalFunction("string TXT_GetString(string &in id)", asFUNCTION(TXT_GetString), asCALL_CDECL);
+		///glob:void TXT_Load(string &in file,int flags=13)
+		ScriptManager::Get().RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", asFUNCTION(TXT_Load), asCALL_CDECL);
+		///glob:void TXT_UnLoad()
+		ScriptManager::Get().RegisterGlobalFunction("void TXT_UnLoad()", asFUNCTION(TXT_UnLoad), asCALL_CDECL);
+	}
+	else
+	{
+		ScriptManager::Get().RegisterGlobalFunction("string TXT_GetString(string &in id)", WRAP_FN(TXT_GetString), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void TXT_Load(string &in _file,int _flags=13)", WRAP_FN(TXT_Load), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void TXT_UnLoad()", WRAP_FN(TXT_UnLoad), asCALL_GENERIC);
 
-#endif	
+	}
 	
 }
 #endif

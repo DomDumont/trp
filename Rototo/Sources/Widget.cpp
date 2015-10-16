@@ -27,9 +27,9 @@
 #include "Widget.h"
 #include "Vector2D.h"
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
 
 #include "ScriptManager.h"
 
@@ -52,18 +52,21 @@ void RegisterWidget()
 {
 	int r;
 
-#ifndef __EMSCRIPTEN__	
-	r = ScriptManager::Get().engine->RegisterObjectType("Widget", 0, asOBJ_REF); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_FACTORY, "Widget@ f()", asFUNCTION(Widget_Factory), asCALL_CDECL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_ADDREF, "void f()", asMETHOD(Widget, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", asMETHOD(Widget, Release), asCALL_THISCALL); SDL_assert(r >= 0);
-#else
-	r = ScriptManager::Get().engine->RegisterObjectType("Widget", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_FACTORY, "Widget@ f()", WRAP_FN(Widget_Factory), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Widget,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Widget,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
+		r = ScriptManager::Get().engine->RegisterObjectType("Widget", 0, asOBJ_REF); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_FACTORY, "Widget@ f()", asFUNCTION(Widget_Factory), asCALL_CDECL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_ADDREF, "void f()", asMETHOD(Widget, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", asMETHOD(Widget, Release), asCALL_THISCALL); SDL_assert(r >= 0);
+	}
+	else
+	{
+		r = ScriptManager::Get().engine->RegisterObjectType("Widget", 0, asOBJ_REF); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_FACTORY, "Widget@ f()", WRAP_FN(Widget_Factory), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Widget, AddRef), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Widget", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Widget, Release), asCALL_GENERIC); SDL_assert(r >= 0);
 
-#endif	
+	}
 
 }
 #endif

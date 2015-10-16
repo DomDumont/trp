@@ -41,9 +41,9 @@
 #include "stb_image.h"
 
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
   
 
 #include "ScriptManager.h"
@@ -630,86 +630,88 @@ void RegisterUtils()
 	int r;
 
 
-#ifndef __EMSCRIPTEN__
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
 
-///sect:Utils
-	r = ScriptManager::Get().engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert(r >= 0);
+		///sect:Utils
+		r = ScriptManager::Get().engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert(r >= 0);
 
-///glob:void UTI_Log(string &in toto)
-	ScriptManager::Get().RegisterGlobalFunction("void UTI_Log(string &in _toto)", asFUNCTION(UTI_Log), asCALL_CDECL);
-///glob:void UTI_Exit()
-	ScriptManager::Get().RegisterGlobalFunction("void UTI_Exit()", asFUNCTION(UTI_Exit), asCALL_CDECL);
-///glob:void UTI_SRand(uint seed)
-	ScriptManager::Get().RegisterGlobalFunction("void UTI_SRand(uint _seed)", asFUNCTION(UTI_SRand), asCALL_CDECL);
-///glob:int  UTI_Rand(int min,int max)
-	ScriptManager::Get().RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", asFUNCTION(UTI_Rand), asCALL_CDECL);
-///glob:string UTI_GetLanguage()
-	ScriptManager::Get().RegisterGlobalFunction("string UTI_GetLanguage()", asFUNCTION(UTI_GetLanguage), asCALL_CDECL);
-///glob:string UTI_GetVersion()
-	ScriptManager::Get().RegisterGlobalFunction("string UTI_GetVersion()", asFUNCTION(UTI_GetVersion), asCALL_CDECL);
+		///glob:void UTI_Log(string &in toto)
+		ScriptManager::Get().RegisterGlobalFunction("void UTI_Log(string &in _toto)", asFUNCTION(UTI_Log), asCALL_CDECL);
+		///glob:void UTI_Exit()
+		ScriptManager::Get().RegisterGlobalFunction("void UTI_Exit()", asFUNCTION(UTI_Exit), asCALL_CDECL);
+		///glob:void UTI_SRand(uint seed)
+		ScriptManager::Get().RegisterGlobalFunction("void UTI_SRand(uint _seed)", asFUNCTION(UTI_SRand), asCALL_CDECL);
+		///glob:int  UTI_Rand(int min,int max)
+		ScriptManager::Get().RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", asFUNCTION(UTI_Rand), asCALL_CDECL);
+		///glob:string UTI_GetLanguage()
+		ScriptManager::Get().RegisterGlobalFunction("string UTI_GetLanguage()", asFUNCTION(UTI_GetLanguage), asCALL_CDECL);
+		///glob:string UTI_GetVersion()
+		ScriptManager::Get().RegisterGlobalFunction("string UTI_GetVersion()", asFUNCTION(UTI_GetVersion), asCALL_CDECL);
 
-///sect:Window
-///glob:void WND_SetWindowTitle(string &in title)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", asFUNCTION(WND_SetWindowTitle), asCALL_CDECL);
-///glob:void WND_SetLogicalSize(int w,int h)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", asFUNCTION(WND_SetLogicalSize), asCALL_CDECL);
-///glob:void WND_GetLogicalSize(int &out w,int &out h)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", asFUNCTION(WND_GetLogicalSize), asCALL_CDECL);
-///glob:void WND_SetOrientation(int orientation)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", asFUNCTION(WND_SetOrientation), asCALL_CDECL);
-///glob:void WND_SetCapFPS(int capFPS)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", asFUNCTION(WND_SetCapFPS), asCALL_CDECL);
-///glob:void WND_ClearWithColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asFUNCTION(WND_ClearWithColor), asCALL_CDECL);
-///glob:void WND_Clear()
-	ScriptManager::Get().RegisterGlobalFunction("void WND_Clear()", asFUNCTION(WND_Clear), asCALL_CDECL);
-///glob:void WND_ClearRect(int x,int y,int w,int h)
-	ScriptManager::Get().RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", asFUNCTION(WND_ClearRect), asCALL_CDECL);
-
-
-///sect:IO
-///glob:uint64  IO_Open(string &in name,string &in mode)
-	ScriptManager::Get().RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", asFUNCTION(IO_Open), asCALL_CDECL);
-///glob:int  IO_WriteString(uint64 handle,string &in string)
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", asFUNCTION(IO_WriteString), asCALL_CDECL);
-///glob:int  IO_ReadString(uint64 handle,string &out string)
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", asFUNCTION(IO_ReadString), asCALL_CDECL);
-///glob:int  IO_WriteInt(uint64 handle,int value)
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", asFUNCTION(IO_WriteInt), asCALL_CDECL);
-///glob:int  IO_ReadInt(uint64 handle,int &out value)
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", asFUNCTION(IO_ReadInt), asCALL_CDECL);
-///glob:void IO_Close(uint64 handle)
-	ScriptManager::Get().RegisterGlobalFunction("void IO_Close(uint64 _handle)", asFUNCTION(IO_Close), asCALL_CDECL);
-
-#else
-
-	r = ScriptManager::Get().engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert( r >= 0 );
-
-	ScriptManager::Get().RegisterGlobalFunction("void UTI_Log(string &in _toto)", WRAP_FN(UTI_Log), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void UTI_Exit()", WRAP_FN(UTI_Exit), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void UTI_SRand(uint _seed)", WRAP_FN(UTI_SRand), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", WRAP_FN(UTI_Rand), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("string UTI_GetLanguage()", WRAP_FN(UTI_GetLanguage), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("string UTI_GetVersion()", WRAP_FN(UTI_GetVersion), asCALL_GENERIC);
-
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", WRAP_FN(WND_SetWindowTitle), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", WRAP_FN(WND_SetLogicalSize), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", WRAP_FN(WND_GetLogicalSize), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", WRAP_FN(WND_SetOrientation), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", WRAP_FN(WND_SetCapFPS), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_FN(WND_ClearWithColor), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_Clear()", WRAP_FN(WND_Clear), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", WRAP_FN(WND_ClearRect), asCALL_GENERIC);
+		///sect:Window
+		///glob:void WND_SetWindowTitle(string &in title)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", asFUNCTION(WND_SetWindowTitle), asCALL_CDECL);
+		///glob:void WND_SetLogicalSize(int w,int h)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", asFUNCTION(WND_SetLogicalSize), asCALL_CDECL);
+		///glob:void WND_GetLogicalSize(int &out w,int &out h)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", asFUNCTION(WND_GetLogicalSize), asCALL_CDECL);
+		///glob:void WND_SetOrientation(int orientation)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", asFUNCTION(WND_SetOrientation), asCALL_CDECL);
+		///glob:void WND_SetCapFPS(int capFPS)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", asFUNCTION(WND_SetCapFPS), asCALL_CDECL);
+		///glob:void WND_ClearWithColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asFUNCTION(WND_ClearWithColor), asCALL_CDECL);
+		///glob:void WND_Clear()
+		ScriptManager::Get().RegisterGlobalFunction("void WND_Clear()", asFUNCTION(WND_Clear), asCALL_CDECL);
+		///glob:void WND_ClearRect(int x,int y,int w,int h)
+		ScriptManager::Get().RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", asFUNCTION(WND_ClearRect), asCALL_CDECL);
 
 
-	ScriptManager::Get().RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", WRAP_FN(IO_Open), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", WRAP_FN(IO_WriteString), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", WRAP_FN(IO_ReadString), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", WRAP_FN(IO_WriteInt), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", WRAP_FN(IO_ReadInt), asCALL_GENERIC);
-	ScriptManager::Get().RegisterGlobalFunction("void IO_Close(uint64 _handle)", WRAP_FN(IO_Close), asCALL_GENERIC);
+		///sect:IO
+		///glob:uint64  IO_Open(string &in name,string &in mode)
+		ScriptManager::Get().RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", asFUNCTION(IO_Open), asCALL_CDECL);
+		///glob:int  IO_WriteString(uint64 handle,string &in string)
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", asFUNCTION(IO_WriteString), asCALL_CDECL);
+		///glob:int  IO_ReadString(uint64 handle,string &out string)
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", asFUNCTION(IO_ReadString), asCALL_CDECL);
+		///glob:int  IO_WriteInt(uint64 handle,int value)
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", asFUNCTION(IO_WriteInt), asCALL_CDECL);
+		///glob:int  IO_ReadInt(uint64 handle,int &out value)
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", asFUNCTION(IO_ReadInt), asCALL_CDECL);
+		///glob:void IO_Close(uint64 handle)
+		ScriptManager::Get().RegisterGlobalFunction("void IO_Close(uint64 _handle)", asFUNCTION(IO_Close), asCALL_CDECL);
+	}
+	else
+	{
 
-#endif
+		r = ScriptManager::Get().engine->RegisterFuncdef("bool CallbackHandler(ref @ _sender,ref @ _userData)"); SDL_assert(r >= 0);
+
+		ScriptManager::Get().RegisterGlobalFunction("void UTI_Log(string &in _toto)", WRAP_FN(UTI_Log), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void UTI_Exit()", WRAP_FN(UTI_Exit), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void UTI_SRand(uint _seed)", WRAP_FN(UTI_SRand), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("int  UTI_Rand(int _min,int _max)", WRAP_FN(UTI_Rand), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("string UTI_GetLanguage()", WRAP_FN(UTI_GetLanguage), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("string UTI_GetVersion()", WRAP_FN(UTI_GetVersion), asCALL_GENERIC);
+
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetWindowTitle(string &in _title)", WRAP_FN(WND_SetWindowTitle), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetLogicalSize(int _w,int _h)", WRAP_FN(WND_SetLogicalSize), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_GetLogicalSize(int &out _w,int &out _h)", WRAP_FN(WND_GetLogicalSize), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetOrientation(int _orientation)", WRAP_FN(WND_SetOrientation), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_SetCapFPS(int _capFPS)", WRAP_FN(WND_SetCapFPS), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_ClearWithColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_FN(WND_ClearWithColor), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_Clear()", WRAP_FN(WND_Clear), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void WND_ClearRect(int _x,int _y,int _w,int _h)", WRAP_FN(WND_ClearRect), asCALL_GENERIC);
+
+
+		ScriptManager::Get().RegisterGlobalFunction("uint64  IO_Open(string &in _name,string &in _mode)", WRAP_FN(IO_Open), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteString(uint64 _handle,string &in _string)", WRAP_FN(IO_WriteString), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadString(uint64 _handle,string &out _string)", WRAP_FN(IO_ReadString), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_WriteInt(uint64 _handle,int _value)", WRAP_FN(IO_WriteInt), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("int  IO_ReadInt(uint64 _handle,int &out _value)", WRAP_FN(IO_ReadInt), asCALL_GENERIC);
+		ScriptManager::Get().RegisterGlobalFunction("void IO_Close(uint64 _handle)", WRAP_FN(IO_Close), asCALL_GENERIC);
+
+	}
 }
 #endif
 

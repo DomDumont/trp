@@ -28,13 +28,28 @@
 #include "Font.h"
 #include "Vector2D.h"
 
-#ifdef __EMSCRIPTEN__
+
 #include "binding\aswrappedcall.h"
-#endif
+
 
 #include "ScriptManager.h"
 
 #include "Button_p.h"
+
+/*----------------------------------------------------------------------------*/
+Widget* refCastButton2Widget(Button* a)
+{
+	// If the handle already is a null handle, then just return the null handle
+	if (!a) return 0;
+	// Now try to dynamically cast the pointer to the wanted type
+	Widget* b = dynamic_cast<Widget*>(a);
+	if (b != 0)
+	{
+		// Since the cast was made, we need to increase the ref counter for the returned handle
+		b->AddRef();
+	}
+	return b;
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -54,104 +69,106 @@ void RegisterButton()
 {
 	int r;
 
-#ifndef __EMSCRIPTEN__
+	if (strstr(asGetLibraryOptions(), "AS_MAX_PORTABILITY") == 0)
+	{
 
-	///class:Button
-	r = ScriptManager::Get().engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", asFUNCTION(ButtonFactory), asCALL_CDECL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_ADDREF, "void f()", asMETHOD(Button, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", asMETHOD(Button, Release), asCALL_THISCALL); SDL_assert(r >= 0);
+		///class:Button
+		r = ScriptManager::Get().engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", asFUNCTION(ButtonFactory), asCALL_CDECL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_ADDREF, "void f()", asMETHOD(Button, AddRef), asCALL_THISCALL); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", asMETHOD(Button, Release), asCALL_THISCALL); SDL_assert(r >= 0);
 
-	///func:void SetText(string &in newText)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetText(string &in _newText)", asMETHOD(Button, SetText), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void Render()
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void Render()", asMETHOD(Button, Render), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetSize(int w,int h)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void set_Position(Vector2D vec)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize, (Vector2D), void), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetPosition(int x,int y)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void set_Position(Vector2D vec)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition, (Vector2D), void), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetFont(Font @ font)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetFont(Font @ _font)", asMETHOD(Button, SetFont), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", asMETHOD(Button, SetSprite), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Button, SetTextColor), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetRotation(float angle)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Rotation(float _angle)", asMETHOD(Button, SetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:float get_Rotation()
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "float get_Rotation()", asMETHOD(Button, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:bool Touched(int x,int y)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "bool Touched(int _x,int _y)", asMETHOD(Button, Touched), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetScale(float xFactor,float yFactor)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetScale(float _xFactor,float _yFactor)", asMETHOD(Button, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetEnabled(bool value)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetEnabled(bool _value)", asMETHOD(Button, SetEnabled), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetType(int type)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetType(int _type)", asMETHOD(Button, SetType), asCALL_THISCALL); SDL_assert(r >= 0);
-	///func:void SetState(int state)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetState(int _state)", asMETHOD(Button, SetState), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetText(string &in newText)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetText(string &in _newText)", asMETHOD(Button, SetText), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void Render()
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void Render()", asMETHOD(Button, Render), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetSize(int w,int h)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetSize(int _w,int _h)", asMETHODPR(Button, SetSize, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void set_Position(Vector2D vec)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Size(Vector2D _vec)", asMETHODPR(Button, SetSize, (Vector2D), void), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetPosition(int x,int y)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetPosition(int _x,int _y)", asMETHODPR(Button, SetPosition, (int, int), void), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void set_Position(Vector2D vec)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Position(Vector2D _vec)", asMETHODPR(Button, SetPosition, (Vector2D), void), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetFont(Font @ font)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetFont(Font @ _font)", asMETHOD(Button, SetFont), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", asMETHOD(Button, SetSprite), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", asMETHOD(Button, SetTextColor), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetRotation(float angle)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Rotation(float _angle)", asMETHOD(Button, SetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:float get_Rotation()
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "float get_Rotation()", asMETHOD(Button, GetRotation), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:bool Touched(int x,int y)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "bool Touched(int _x,int _y)", asMETHOD(Button, Touched), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetScale(float xFactor,float yFactor)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetScale(float _xFactor,float _yFactor)", asMETHOD(Button, SetScale), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetEnabled(bool value)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetEnabled(bool _value)", asMETHOD(Button, SetEnabled), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetType(int type)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetType(int _type)", asMETHOD(Button, SetType), asCALL_THISCALL); SDL_assert(r >= 0);
+		///func:void SetState(int state)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetState(int _state)", asMETHOD(Button, SetState), asCALL_THISCALL); SDL_assert(r >= 0);
 
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetUserData( ref @userdata)", asMETHOD(Button, SetUserDataScript), asCALL_THISCALL);
-	SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetUserData( ref @userdata)", asMETHOD(Button, SetUserDataScript), asCALL_THISCALL);
+		SDL_assert(r >= 0);
 
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", asMETHOD(Button, SetSelectionClickHandlerScript), asCALL_THISCALL);
-	SDL_assert(r >= 0);
-
-
-	
-#else
-
-	///class:Button
-	r = ScriptManager::Get().engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", WRAP_FN(ButtonFactory), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Button,AddRef), asCALL_GENERIC); SDL_assert( r >= 0 );
-	r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Button,Release), asCALL_GENERIC); SDL_assert( r >= 0 );
-
-	///func:void SetText(string &in newText)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetText(string &in _newText)", WRAP_MFN(Button, SetText), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void Render()
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void Render()", WRAP_MFN(Button, Render), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetSize(int w,int h)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetSize(int _w,int _h)", WRAP_MFN_PR(Button, SetSize,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void set_Position(Vector2D vec)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void set_Size(Vector2D _vec)", WRAP_MFN_PR(Button, SetSize,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetPosition(int x,int y)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetPosition(int _x,int _y)", WRAP_MFN_PR(Button, SetPosition,(int,int),void), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void set_Position(Vector2D vec)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void set_Position(Vector2D _vec)", WRAP_MFN_PR(Button, SetPosition,(Vector2D),void), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetFont(Font @ font)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetFont(Font @ _font)", WRAP_MFN(Button, SetFont), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", WRAP_MFN(Button, SetSprite), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Button, SetTextColor), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetRotation(float angle)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void set_Rotation(float _angle)", WRAP_MFN(Button, SetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:float get_Rotation()
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","float get_Rotation()", WRAP_MFN(Button, GetRotation), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:bool Touched(int x,int y)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","bool Touched(int _x,int _y)", WRAP_MFN(Button, Touched), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetScale(float xFactor,float yFactor)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetScale(float _xFactor,float _yFactor)", WRAP_MFN(Button, SetScale), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetEnabled(bool value)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetEnabled(bool _value)", WRAP_MFN(Button, SetEnabled), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetType(int type)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetType(int _type)", WRAP_MFN(Button, SetType), asCALL_GENERIC);SDL_assert( r >= 0 );
-	///func:void SetState(int state)
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button","void SetState(int _state)", WRAP_MFN(Button, SetState), asCALL_GENERIC);SDL_assert( r >= 0 );
-
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetUserData( ref @userdata)", WRAP_MFN(Button, SetUserDataScript), asCALL_GENERIC);
-	SDL_assert(r >= 0);
-
-	r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", WRAP_MFN(Button, SetSelectionClickHandlerScript), asCALL_GENERIC);
-	SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", asMETHOD(Button, SetSelectionClickHandlerScript), asCALL_THISCALL);
+		SDL_assert(r >= 0);
 
 
-#endif	
+	}
+	else
+	{
+
+		///class:Button
+		r = ScriptManager::Get().engine->RegisterObjectType("Button", 0, asOBJ_REF); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_FACTORY, "Button@ f()", WRAP_FN(ButtonFactory), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_ADDREF, "void f()", WRAP_MFN(Button, AddRef), asCALL_GENERIC); SDL_assert(r >= 0);
+		r = ScriptManager::Get().engine->RegisterObjectBehaviour("Button", asBEHAVE_RELEASE, "void f()", WRAP_MFN(Button, Release), asCALL_GENERIC); SDL_assert(r >= 0);
+
+		///func:void SetText(string &in newText)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetText(string &in _newText)", WRAP_MFN(Button, SetText), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void Render()
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void Render()", WRAP_MFN(Button, Render), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetSize(int w,int h)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetSize(int _w,int _h)", WRAP_MFN_PR(Button, SetSize, (int, int), void), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void set_Position(Vector2D vec)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Size(Vector2D _vec)", WRAP_MFN_PR(Button, SetSize, (Vector2D), void), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetPosition(int x,int y)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetPosition(int _x,int _y)", WRAP_MFN_PR(Button, SetPosition, (int, int), void), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void set_Position(Vector2D vec)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Position(Vector2D _vec)", WRAP_MFN_PR(Button, SetPosition, (Vector2D), void), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetFont(Font @ font)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetFont(Font @ _font)", WRAP_MFN(Button, SetFont), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetSprite(int index,Atlas @ atlas, string &in name, bool ninePatch = false)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetSprite(int _index,Atlas @ _atlas, string &in _name, bool _ninePatch = false)", WRAP_MFN(Button, SetSprite), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetTextColor(uint8 r=255,uint8 g=255,uint8 b=255,uint8 a=255)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetTextColor(uint8 _r=255,uint8 _g=255,uint8 _b=255,uint8 _a=255)", WRAP_MFN(Button, SetTextColor), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetRotation(float angle)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void set_Rotation(float _angle)", WRAP_MFN(Button, SetRotation), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:float get_Rotation()
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "float get_Rotation()", WRAP_MFN(Button, GetRotation), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:bool Touched(int x,int y)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "bool Touched(int _x,int _y)", WRAP_MFN(Button, Touched), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetScale(float xFactor,float yFactor)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetScale(float _xFactor,float _yFactor)", WRAP_MFN(Button, SetScale), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetEnabled(bool value)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetEnabled(bool _value)", WRAP_MFN(Button, SetEnabled), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetType(int type)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetType(int _type)", WRAP_MFN(Button, SetType), asCALL_GENERIC); SDL_assert(r >= 0);
+		///func:void SetState(int state)
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetState(int _state)", WRAP_MFN(Button, SetState), asCALL_GENERIC); SDL_assert(r >= 0);
+
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetUserData( ref @userdata)", WRAP_MFN(Button, SetUserDataScript), asCALL_GENERIC);
+		SDL_assert(r >= 0);
+
+		r = ScriptManager::Get().engine->RegisterObjectMethod("Button", "void SetClickHandler( CallbackHandler @ch)", WRAP_MFN(Button, SetSelectionClickHandlerScript), asCALL_GENERIC);
+		SDL_assert(r >= 0);
+
+
+	}
 }
 #endif
 
