@@ -36,7 +36,7 @@
 #include "Atlas.h"
 
 
-#include "binding\aswrappedcall.h"
+#include "binding/aswrappedcall.h"
 
 
 #include "ScriptManager.h"
@@ -208,6 +208,7 @@ void GUIManager::AddWidget(Widget *_widget)
 	if( _widget )
 		{
 		widgets.push_back(_widget);
+		_widget->AddRef();
 		}
 }
 
