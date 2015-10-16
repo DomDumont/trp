@@ -66,7 +66,7 @@ class Atlas
 	{
 		// Increase the reference counter
 		refCount++;
-		SDL_Log("Atlas 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
+		//SDL_Log("Atlas 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
 	}
 
 	void Release()
@@ -78,7 +78,7 @@ class Atlas
 		else
 		if ( refCount > 0 )
 		{
-		SDL_Log("Atlas 0x%x Release : nb active ref = %d\n",(unsigned int)this,refCount);
+		//SDL_Log("Atlas 0x%x Release : nb active ref = %d\n",(unsigned int)this,refCount);
 		}
 		else
 			SDL_assert(0);
