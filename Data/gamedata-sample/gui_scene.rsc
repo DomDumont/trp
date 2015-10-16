@@ -77,8 +77,8 @@ class GUIScene:Scene
         {
         UTI_Log("====> GUIScene Shutdown");    
         
-        buttonBack.SetClickHandler(null);
-        buttonBack.SetUserData(null);
+        //buttonBack.SetClickHandler(null);
+        //buttonBack.SetUserData(null);
         GUI_RemoveWidget(buttonBack);   
         GUI_RemoveWidget(checkboxTest);   
         GUI_RemoveWidget(radioboxTest);           

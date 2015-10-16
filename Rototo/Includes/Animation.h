@@ -63,9 +63,9 @@ public:
 	void SetRotation(float _angle);
 
 public:
-	void SetUserDataScript(void * userdata);
-	void SetSenderScript(void *sender);
-	void SetOnCompleteHandlerScript(void * handler);
+	void SetUserDataScript(CScriptHandle userdata);
+	void SetSenderScript(CScriptHandle sender);
+	void SetOnCompleteHandlerScript(asIScriptFunction * handler);
 
 #ifdef TRP_USE_BINDING
 	asIScriptFunction *onCompleteHandler;

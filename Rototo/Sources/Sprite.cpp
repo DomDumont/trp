@@ -193,6 +193,7 @@ void Sprite::Load(Atlas * _atlas, const std::string& _name)
 	MY_SAFE_RELEASE(this->atlas);
 
 	this->atlas = _atlas;	
+	this->atlas->AddRef();
 	this->angle = 0;
 
 	this->entry = _atlas->FindEntry(_name);

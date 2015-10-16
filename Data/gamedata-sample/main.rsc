@@ -94,7 +94,7 @@ allScenes.insertLast(@dialogScene);
 theSceneManager.ChangeScene(menuScene);
 //theSceneManager.ChangeScene(textboxScene);
 //theSceneManager.ChangeScene(physicsScene);
-//menuScene.Init();
+
 WND_SetCapFPS(30);
 }
 

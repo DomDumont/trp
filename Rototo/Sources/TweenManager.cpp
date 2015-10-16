@@ -67,15 +67,23 @@ void Tween::Init(float _duration,int _effect,int _easeMode)
 
 
 /*----------------------------------------------------------------------------*/
-void Tween::SetOnCompleteHandlerScript(void * cb)
+void Tween::SetOnCompleteHandlerScript(asIScriptFunction * handler)
 {
-
+	if ((this->onCompleteHandler_script) && (this->onCompleteHandler_script != handler))
+	{
+		this->onCompleteHandler_script->Release();
+	}
+	if (handler != NULL)
+	{
+		this->onCompleteHandler_script = (asIScriptFunction *)handler;
+		handler->AddRef();
+	}
 }
 
 /*----------------------------------------------------------------------------*/
-void Tween::SetUserDataScript(void * ud)
+void Tween::SetUserDataScript(CScriptHandle  ud)
 {
-
+	this->user_data_script = ud;
 }
 
 /*
@@ -139,11 +147,11 @@ void TweenManager::Update(unsigned int _elapsed)
 			{
 			//Call Callback
 #ifdef TRP_USE_BINDING
-			if (pTemp->onCompleteHandler != NULL)
+			if (pTemp->onCompleteHandler_script != NULL)
 				{
-					pTemp->sender.Set(pTemp, ScriptManager::Get().engine->GetObjectTypeByName("Tween"));
-					ScriptManager::Get().RunCallback(pTemp->onCompleteHandler, &(pTemp->sender), &(pTemp->userData));
-        pTemp->sender.Set(NULL,NULL);
+				pTemp->sender_script.Set(pTemp, ScriptManager::Get().engine->GetObjectTypeByName("Tween"));
+				ScriptManager::Get().RunCallback(pTemp->onCompleteHandler_script, &(pTemp->sender_script), &(pTemp->user_data_script));
+				pTemp->sender_script.Set(NULL, NULL);
 				}
 #endif
 			RemoveTween(*tweensIT);
@@ -163,6 +171,7 @@ void TweenManager::AddTween(Tween* _tween)
 
 
 	tweens.push_back(_tween);
+	_tween->AddRef();
 
 
 }

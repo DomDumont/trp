@@ -453,7 +453,12 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 		
 
 
-	tempCtx->Prepare(_fe->func);
+	int r = tempCtx->Prepare(_fe->func);
+	if (r < 0)
+	{
+		SDL_Log("Error cannot prepare function\n");
+	}
+
 
 	va_list ap;
 	int currentArg = 0;
@@ -466,7 +471,7 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 
 			case 'd':
 				{
-				int tempInt = va_arg (ap, int);
+				int tempInt = va_arg (ap,int);
 				tempCtx->SetArgDWord(currentArg++, tempInt);
 				}
 				break;
@@ -481,8 +486,8 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 
 			case 'f':
 				{
-				double tempFloat = va_arg (ap, double);
-				tempCtx->SetArgDouble(currentArg++, tempFloat);
+				float tempFloat = va_arg (ap, float);
+				tempCtx->SetArgFloat(currentArg++, tempFloat);
 				}
 				break;
 
@@ -494,7 +499,7 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 
 
 
-	int r = tempCtx->Execute();
+	r = tempCtx->Execute();
 	if( r != asEXECUTION_FINISHED )
 		{
 		// The execution didn't complete as expected. Determine what happened.
@@ -504,7 +509,6 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 			SDL_Log("An exception '%s' occurred. Please correct the code and try again.\n", tempCtx->GetExceptionString());
 			}
 		}
-
 	//Test
 	//Do not release the context as we have only one ctx->Release();
 	this->FreeContext(tempCtx);
@@ -573,7 +577,7 @@ void ScriptManager::RunScript(const std::string& _prototype, char * _fmt, ...)
 					
 			case 'd':
 				{
-				int tempInt = va_arg (ap, int);
+				int tempInt = va_arg (ap,int);
 				tempCtx->SetArgDWord(currentArg++, tempInt);
 				}
 				break;
@@ -588,8 +592,8 @@ void ScriptManager::RunScript(const std::string& _prototype, char * _fmt, ...)
 
 			case 'f':
 				{
-				double tempFloat = va_arg (ap, double);
-				tempCtx->SetArgDouble(currentArg++, tempFloat);
+				float tempFloat = va_arg (ap, float);
+				tempCtx->SetArgFloat(currentArg++, tempFloat);
 				}
 				break;
 			

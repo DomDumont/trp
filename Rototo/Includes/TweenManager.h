@@ -221,7 +221,7 @@ public:
 	transition = 0;
 	equation = 0;
 #ifdef TRP_USE_BINDING
-	this->onCompleteHandler = NULL; //Very Important
+	this->onCompleteHandler_script = NULL; //Very Important
 #endif
 	//this->userData = NULL;
 	// Let the constructor initialize the reference counter to 1
@@ -234,10 +234,10 @@ public:
 	this->timeElapsed = other.timeElapsed;
 	this->duration = other.duration;
 #ifdef TRP_USE_BINDING
-	this->onCompleteHandler = other.onCompleteHandler;
+	this->onCompleteHandler_script = other.onCompleteHandler_script;
 	// Let the constructor initialize the reference counter to 1
-  this->sender.Set(NULL,NULL);
-  this->userData.Set(NULL,NULL);
+	this->sender_script.Set(NULL, NULL);
+	this->user_data_script.Set(NULL, NULL);
 #endif
 	refCount = 1;
 	}
@@ -258,10 +258,7 @@ public:
 	~Tween()
 	{
 #ifdef TRP_USE_BINDING      
-	if (this->onCompleteHandler != NULL)
-		{
-		this->onCompleteHandler->Release();
-		}
+		MY_SAFE_RELEASE(this->onCompleteHandler_script);
 #endif
 
 	// Clean all properties.
@@ -311,13 +308,13 @@ public:
 	std::vector<TweenedFloat *>  properties;
 	std::vector<TweenedFloat *>::iterator propsIT;
 
-	void SetOnCompleteHandlerScript(void * cb);
-	void SetUserDataScript (void * ud);
+	void SetOnCompleteHandlerScript(asIScriptFunction * cb);
+	void SetUserDataScript(CScriptHandle  ud);
 
 #ifdef TRP_USE_BINDING
-	asIScriptFunction *onCompleteHandler;
-	CScriptHandle		userData;
-	CScriptHandle		sender;
+	asIScriptFunction *onCompleteHandler_script;
+	CScriptHandle		user_data_script;
+	CScriptHandle		sender_script;
 #endif
 
 private:

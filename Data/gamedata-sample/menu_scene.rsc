@@ -64,7 +64,33 @@ void Init()
 
 	
 
+	// Setup Listbox
+
+	listBox.SetSize(400,400);
+	listBox.SetPosition(200,380);
 	
+	listBox.SetSelectionChangedHandler(CallbackHandler(menuScene.OnSelectionChangedHandler));
+	listBox.SetUserData(this);
+	
+    listBox.AddItem("Particles");
+    listBox.AddItem("Hello World");
+    listBox.AddItem("GUI");    
+    listBox.AddItem("Physics");
+    listBox.AddItem("Sprites");
+    listBox.AddItem("Animation");
+    listBox.AddItem("Sound");
+    listBox.AddItem("Music");
+    listBox.AddItem("Mini Game");
+    listBox.AddItem("Tween");
+    listBox.AddItem("IO");
+    listBox.AddItem("Primitives");
+    listBox.AddItem("Platform");
+	listBox.AddItem("Dialog");    
+        
+
+	listBox.SetEnabled(true);
+	GUI_AddWidget(listBox);
+		
 	
 
     
@@ -97,7 +123,7 @@ void Init()
 	tempText += UTI_GetVersion();
 	monLabel.SetText(tempText);
 	monLabel.SetPosition(260,100);
-	monLabel.Rotation = -5;
+	//monLabel.Rotation = -5;
 	
 	//labelChosen.SetFont(fonte8);
 
@@ -108,46 +134,23 @@ void Init()
 
 
 	//buttonStart.SetFont(fonte35);
-	buttonStart.SetText(TXT_GetString("STR_START"));
+	buttonStart.SetText("coucou");
 	//buttonStart.SetSprite(myAtlas,"button9.png",true);
-	buttonStart.SetSize(300,100);
+	UTI_Log("SA");
 	buttonStart.SetPosition(750,windowY/2);	
-	//buttonStart.SetTextColor(255,150,150);		
-	buttonStart.set_Rotation(5);
+	//buttonStart.set_Rotation(5);
 	buttonStart.SetEnabled(false);
-	buttonStart.SetScale(1.0,1.0);
+	buttonStart.SetScale(1.0,1.0);	
+	buttonStart.SetSize(300,100);
+	UTI_Log("SB");
+	
+	//buttonStart.SetTextColor(255,150,150);		
 	buttonStart.SetClickHandler(CallbackHandler(menuScene.OnClickHandler));
-	buttonStart.SetUserData(@this);
+	buttonStart.SetUserData(this);
 
 	GUI_AddWidget(buttonStart);
 
-	// Setup Listbox
 
-	listBox.SetSize(400,400);
-	listBox.SetPosition(200,380);
-	
-	listBox.SetSelectionChangedHandler(CallbackHandler(menuScene.OnSelectionChangedHandler));
-	listBox.SetUserData(@this);
-	
-    listBox.AddItem("Particles");
-    listBox.AddItem("Hello World");
-    listBox.AddItem("GUI");    
-    listBox.AddItem("Physics");
-    listBox.AddItem("Sprites");
-    listBox.AddItem("Animation");
-    listBox.AddItem("Sound");
-    listBox.AddItem("Music");
-    listBox.AddItem("Mini Game");
-    listBox.AddItem("Tween");
-    listBox.AddItem("IO");
-    listBox.AddItem("Primitives");
-    listBox.AddItem("Platform");
-	listBox.AddItem("Dialog");    
-        
-
-	listBox.SetEnabled(true);
-	GUI_AddWidget(listBox);
-	
 
 	// Setup Combobox
 
@@ -163,7 +166,7 @@ void Init()
 	comboBox.SetSelectedIndex(thisIsBad);
 
  	comboBox.SetSelectionChangedHandler(CallbackHandler(menuScene.OnSelectionChangedHandlerCB));
-	comboBox.SetUserData(@this);       
+	comboBox.SetUserData(this);       
 
 	comboBox.SetEnabled(true);
 	GUI_AddWidget(comboBox);
@@ -211,17 +214,17 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 	UTI_Log("====> menuScene Shutdown");	
 	
 	listBox.ResetContent();
-	listBox.SetSelectionChangedHandler(null);
-	listBox.SetUserData(null);
+	//listBox.SetSelectionChangedHandler(null);
+	//listBox.SetUserData(null);
 	GUI_RemoveWidget(listBox);
 
 	comboBox.ResetContent();
-	comboBox.SetSelectionChangedHandler(null);
-	comboBox.SetUserData(null);
+	//comboBox.SetSelectionChangedHandler(null);
+	//comboBox.SetUserData(null);
 	GUI_RemoveWidget(comboBox);
 
-	buttonStart.SetClickHandler(null);
-	buttonStart.SetUserData(null);
+	//buttonStart.SetClickHandler(null);
+	//buttonStart.SetUserData(null);
 	GUI_RemoveWidget(buttonStart);
 
 

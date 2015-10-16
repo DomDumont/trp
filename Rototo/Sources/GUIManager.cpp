@@ -234,7 +234,7 @@ void GUIManager::RemoveWidget(Widget *_widget)
 				break;
 				}
 			}
-		_widget->Release();
+		//_widget->Release();
 		}
 
 }

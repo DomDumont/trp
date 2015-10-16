@@ -94,7 +94,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 			const double PI = 3.141592653589793; //TODO WTF !!!
 
 #ifdef TRP_USE_BINDING
-			ScriptManager::Get().RunScript("void OnMultiGesture(int _numFingers, double _x, double _y, double _theta, double _dist )",
+			ScriptManager::Get().RunScript("void OnMultiGesture(int _numFingers, float _x, float _y, float _theta, float _dist )",
 
 			(char*)"dffff",
 			event->mgesture.numFingers,

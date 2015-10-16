@@ -75,8 +75,8 @@ void OnTouch(uint32 _button,uint32 _x,uint32 _y)
 
 	void OnShutdown()
 	{
-    buttonBack.SetClickHandler(null);
-    buttonBack.SetUserData(null);
+    //buttonBack.SetClickHandler(null);
+    //buttonBack.SetUserData(null);
     GUI_RemoveWidget(buttonBack);  
 
 	mySprite.UnLoad();	

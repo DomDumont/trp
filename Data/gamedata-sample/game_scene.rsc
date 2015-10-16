@@ -17,7 +17,7 @@ bool OnClickHandler(ref @ _sender,ref @ _userData)
 void Init()
 	{
 	
-	myAtlasUI.Load("graphics/sheet");
+
 
     buttonBack.SetText("Back");
     buttonBack.SetSize(250,100);
@@ -137,8 +137,8 @@ void OnShutdown()
 	{
 	UTI_Log("SHUTDOWN GAME SCENE\n");
 
-	animBroute.SetUserData(null);
-	animTortue.SetUserData(null);
+	//animBroute.SetUserData(null);
+	//animTortue.SetUserData(null);
 
 	animBroute.UnLoad();
 	animReverse.UnLoad();
@@ -151,18 +151,18 @@ void OnShutdown()
 		
 	myAtlas.UnLoad();
 
-    buttonBack.SetClickHandler(null);
-    buttonBack.SetUserData(null);    
+    //buttonBack.SetClickHandler(null);
+    //buttonBack.SetUserData(null);    
     GUI_RemoveWidget(buttonBack);   
 
-	myAtlasUI.UnLoad();
+	
 	
 	}
 	
 	Atlas 	myAtlasBG;
 	Sprite monBG;
 	Atlas 	myAtlas;
-	Atlas 	myAtlasUI;
+
 	Music  myMusic;
 
 	Animation animBroute;

@@ -3,7 +3,7 @@ int                 windowX;
 int                 windowY;
 
 
-Label  				monLabel;
+
 
 Button              myButton;
 
@@ -12,6 +12,8 @@ Button              myButton;
 bool OnClickHandler(ref @ _sender,ref @ _userData)
     {
     UTI_Log("====> OnClickHandler");
+    GUI_AddWidget(myButton);
+    GUI_RemoveWidget(myButton);
     return true;
     }
 
@@ -26,16 +28,13 @@ void OnInit()
 
     GUI_LoadTheme("aeon");
  
-    //monLabel.SetText(UTI_GetLanguage());
-    monLabel.SetText("Français");
-    monLabel.SetPosition(windowX/2,windowY/2);
    
-    myButton.SetText("Coucou le gros bouton");
+    myButton.SetText("Coucou le gros bouton 2");
     myButton.SetSize(300,200);
     myButton.SetPosition(windowX/2,windowY/2);    
     myButton.SetClickHandler(OnClickHandler);
     myButton.SetEnabled(true);
-    //myButton.SetScale(1,1);
+    myButton.SetScale(1,1);
 
     GUI_AddWidget(myButton);
 
@@ -44,7 +43,7 @@ void OnInit()
 //-----------------------------------------------------------------------------
 // 
 //-----------------------------------------------------------------------------
-void OnUpdate(uint64 _delta)
+void OnUpdate(uint32 _delta)
 {
 
 }
@@ -55,7 +54,7 @@ string ts = "OnKeyUp "+formatInt(_scancode,"");
 UTI_Log(ts);
 }
 
-void OnRender(uint64 _delta)
+void OnRender(uint32 _delta)
 {
     WND_Clear();
     myButton.Render();
@@ -72,5 +71,6 @@ void OnCollide()
 
 void OnShutdown()
 {
-   GUI_UnLoadTheme();
+    GUI_RemoveWidget(myButton);
+    GUI_UnLoadTheme();
 }

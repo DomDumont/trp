@@ -3,6 +3,7 @@ class HelloWorldScene:Scene
 
     bool OnClickHandler(ref @ _sender,ref @ _userData)
         {
+        //theSceneManager.RestartScene();            
         theSceneManager.ChangeScene(menuScene);
         return true;
         }
@@ -17,7 +18,7 @@ class HelloWorldScene:Scene
 						rititi += 10;
         myAtlas.Load("graphics/sheet"); 
 
-        maFonte.Load("fonts/casual.ttf",50);
+
 
 
         monLabel.SetText("Hello World");
@@ -31,7 +32,6 @@ class HelloWorldScene:Scene
         buttonBack.set_Rotation(5);
         buttonBack.SetEnabled(true);
         buttonBack.SetClickHandler(CallbackHandler(helloworldScene.OnClickHandler));
-        buttonBack.SetUserData(@this);
         buttonBack.SetScale(1.0,1.0);
         GUI_AddWidget(buttonBack);
 
@@ -52,14 +52,14 @@ class HelloWorldScene:Scene
     void OnShutdown()
         {
         UTI_Log("====> helloWorldScene Shutdown");    
-        maFonte.UnLoad();
-        buttonBack.SetClickHandler(null);
-        buttonBack.SetUserData(null);    
+
+        //buttonBack.SetClickHandler(null);
+        //buttonBack.SetUserData(null);    
         GUI_RemoveWidget(buttonBack);   
         myAtlas.UnLoad();
         }
         
-    Font   maFonte;
+
     Label  monLabel;
     Button buttonBack; 
     Atlas  myAtlas;

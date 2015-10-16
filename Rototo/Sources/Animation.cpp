@@ -104,17 +104,22 @@ Animation::Animation(const Animation &other)
 	}
 
 
-void Animation::SetUserDataScript(void * userdata)
+void Animation::SetUserDataScript(CScriptHandle userdata)
 {
 
 }
-void Animation::SetSenderScript(void *sender)
-{
 
-}
-void Animation::SetOnCompleteHandlerScript(void * handler)
+void Animation::SetOnCompleteHandlerScript(asIScriptFunction * handler)
 {
-
+	if ((this->onCompleteHandler) && (this->onCompleteHandler != handler))
+	{
+		this->onCompleteHandler->Release();
+	}
+	if (handler != NULL)
+	{
+		this->onCompleteHandler = (asIScriptFunction *)handler;
+		handler->AddRef();
+	}
 }
 
 /*----------------------------------------------------------------------------*/
