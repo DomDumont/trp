@@ -73,5 +73,12 @@ It is strongly advised to open these script files (extension .rsc = Rototo Scrip
 	
 	tuto1-hello
 	tuto2-sprite
+	tuto3-animation
+	tuto4-sound
+	tuto5-music
+	tuto6-button
+	tuto7-listbox
+	tuto8-io
+	
 
 
