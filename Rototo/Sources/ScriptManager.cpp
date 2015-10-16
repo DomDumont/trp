@@ -486,7 +486,7 @@ void ScriptManager::RunFunctionEntry(FunctionEntry * _fe, ...)
 
 			case 'f':
 				{
-				float tempFloat = va_arg (ap, float);
+				float tempFloat = (float) va_arg (ap, double);
 				tempCtx->SetArgFloat(currentArg++, tempFloat);
 				}
 				break;
@@ -592,7 +592,7 @@ void ScriptManager::RunScript(const std::string& _prototype, char * _fmt, ...)
 
 			case 'f':
 				{
-				float tempFloat = va_arg (ap, float);
+				float tempFloat = (float) va_arg (ap, double);
 				tempCtx->SetArgFloat(currentArg++, tempFloat);
 				}
 				break;

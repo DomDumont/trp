@@ -332,6 +332,7 @@ Application::Application() : application_p(new Application_p)
 	this->sdlRenderer = NULL;
 	this->capFPS = -1; //Desactivated //TODO remove this hardcoded value
 
+	this->lasttimeEmscripten = 0;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -503,7 +504,8 @@ int Application::Run()
 		{
 		beginLoop = SDL_GetTicks();
 #else
-	double lasttime = emscripten_get_now(); 
+	if (lasttimeEmscripten == 0)
+		lasttimeEmscripten = emscripten_get_now(); 
 	double beginLoop;
 	double endLoop;
 	beginLoop = emscripten_get_now();
@@ -522,8 +524,8 @@ int Application::Run()
 		lasttime = now;
 #else
 		double now =  emscripten_get_now();	
-		unsigned int elapsed = (unsigned int) (now -lasttime);
-		lasttime = now;
+		unsigned int elapsed = (unsigned int) (now -lasttimeEmscripten);
+		lasttimeEmscripten = now;
 #endif		
 			
 		watchManager->Update(elapsed);

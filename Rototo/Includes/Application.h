@@ -118,6 +118,7 @@ private:
 	std::string			title;
 
 
+	unsigned int lasttimeEmscripten;
 
 private:
 	std::unique_ptr<Application_p> application_p; // opaque type here
