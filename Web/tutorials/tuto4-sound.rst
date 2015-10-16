@@ -5,7 +5,7 @@ Your First Sound
 ====================
 
 
-~~~~ { .Cpp }
+.. code-block:: cpp
 
     class SoundScene:Scene
         {
@@ -34,7 +34,7 @@ Your First Sound
         Sound  mySFX;
         }
 
-~~~~
+
 
 Of course, this is a minimal sample, you can do a lot more with sounds, 
 Please take a look at the reference documentation for sound

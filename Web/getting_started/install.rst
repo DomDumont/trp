@@ -42,7 +42,7 @@ T.R.P. use it a lot for sprites and animations.
 To install it, you must first install the adobe air environment (if you don't already have it of course)
 Just go to
 
-`http://get.adobe.com/fr/air/<http://get.adobe.com/fr/air/>`_
+` Get Adobe Air <http://get.adobe.com/fr/air/>`_
 
 and follow the instructions.
 

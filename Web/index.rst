@@ -19,4 +19,5 @@ Contents:
 	introducing_trp/index
 	getting_started/index
 	tutorials/index
+	ratata/index
 

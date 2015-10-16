@@ -4,7 +4,7 @@
 Your First Music
 ===================
 
-~~~~ { .Cpp }
+.. code-block:: cpp
 
     class MusicScene:Scene
         {
@@ -33,7 +33,7 @@ Your First Music
         Music  myMusic;
         }
 
-~~~~
+
 
 Of course, this is a minimal sample, you can do a lot more with music, 
 Please take a look at the reference documentation for music

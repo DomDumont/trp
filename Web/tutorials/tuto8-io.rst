@@ -5,7 +5,7 @@ Input/Output
 ===============
 
 
-~~~~ { .Cpp }
+.. code-block:: cpp
 
     int handle;
     handle  = IO_Open("slot0.txt","w");
@@ -16,9 +16,9 @@ Input/Output
     IO_WriteInt(handle,24);
     IO_Close(handle);
 
-~~~~
 
-~~~~ { .Cpp }
+
+.. code-block:: cpp
 
     int handle;
     handle  = IO_Open("slot0.txt","r");
@@ -35,7 +35,8 @@ Input/Output
     UTI_Log(ts);
     
     IO_Close(handle);
-~~~~
+
+
 
 
 
