@@ -64,7 +64,7 @@ public:
 	{
 		// Increase the reference counter
 		refCount++;
-		printf("Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
+		//printf("Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
 	}
 
 	virtual void Release()
@@ -79,7 +79,7 @@ public:
 		else
 	if ( refCount > 0 )
 		{
-		printf("Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
+		//printf("Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
 		}
 	else
 		SDL_assert(0);
