@@ -1,6 +1,7 @@
 Build/
 BuildVisual/
 BuildEmscripten/
+Web/_build
 
 Rototo/Extern/SDL2/
 
