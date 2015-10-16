@@ -9,6 +9,9 @@
 T.R.P. is in an early alpha stage with lots of stuff missing and crashes but it starts to be fun ;-)
 You can see my tasklist on Trello : [here](https://trello.com/b/BuZnyeq9)
 
+## Documentation
+
+[Preliminary Sphinx Doc](http://domdumont.github.io/trp/introducing_trp/index.html)
 
 ## Binaries 
 
