@@ -204,6 +204,10 @@ void Atlas::Load(const std::string& _file,int _flags)
 
   pugi::xml_document doc;
   pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+    if (result.status != pugi::status_ok)
+        {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"cannot parse xml file %s %s\n",fullPath.c_str(),SDL_GetError());
+        }
   pugi::xml_node root = doc.first_child();
   for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
     {

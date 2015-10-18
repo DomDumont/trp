@@ -50,7 +50,7 @@ ListBox_p::ListBox_p()
 /*----------------------------------------------------------------------------*/
 
 ListBox::ListBox():
-bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1), listbox_p(new ListBox_p)
+listbox_p(new ListBox_p),bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1)
 {
 
 

@@ -176,7 +176,7 @@ void RegisterButton()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Button::Button() : state(0), type(0), button_p(new Button_p)
+Button::Button() : button_p(new Button_p),state(0), type(0)
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Button Constructor\n");
 

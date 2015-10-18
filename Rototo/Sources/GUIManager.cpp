@@ -295,12 +295,17 @@ void GUIManager::LoadTheme(const std::string& _file)
 	return;
 	}
 
-  pugi::xml_document doc;
-  pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
-  pugi::xml_node root = doc.first_child();
-  for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
-	{
-	SDL_Log(elem.name());
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_string(loadedString.c_str());
+    if (result.status != pugi::status_ok)
+    {
+    SDL_Log("cannot find parse xml for theme %s",fullPath.c_str());
+    }
+    
+    pugi::xml_node root = doc.first_child();
+    for (pugi::xml_node elem = root.first_child(); elem != NULL; elem = elem.next_sibling())
+        {
+            SDL_Log(elem.name());
 		
   if (strcmp(elem.name(), "font") == 0)
 		{

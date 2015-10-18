@@ -51,7 +51,7 @@ ComboBox_p::ComboBox_p()
 /*----------------------------------------------------------------------------*/
 
 ComboBox::ComboBox() :
-bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1), state(0), combobox_p(new ComboBox_p)
+combobox_p(new ComboBox_p),bgTexture(NULL), offsetBG(0), dragState(0), font(NULL), selectedIndex(-1), state(0)
 {
 	
 	

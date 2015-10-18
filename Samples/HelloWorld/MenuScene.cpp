@@ -25,9 +25,9 @@ bool OnClickHandler(void * _sender,void * _userData)
 		UTI_Log("click on start");
 
 	Button *tempButton = (Button*)(_sender);
-	MenuScene *tempScene = (MenuScene*)(_userData);
+	//MenuScene *tempScene = (MenuScene*)(_userData);
 	tempButton->SetScale(1.5,1.5);
-	int sel = tempScene->listBox.GetSelectedIndex();
+//	int sel = tempScene->listBox.GetSelectedIndex();
 	
 
 	//theSceneManager.ChangeScene();

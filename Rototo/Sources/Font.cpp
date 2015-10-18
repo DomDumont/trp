@@ -54,7 +54,7 @@ Font_p::Font_p()
 }
 
 
-Font::Font() : refCount(1), font_p(new Font_p)
+Font::Font() : font_p(new Font_p),refCount(1)
 	{
 		
 	}

@@ -356,9 +356,6 @@ int ScriptManager::RunCallback(asIScriptFunction * _callback, CScriptHandle *_se
 		}
 
 	
-	printf("before prepare in runCallback\n");
-	asIScriptEngine *engine = _callback->GetEngine();
-	printf("before prepare in runCallback2\n");
 	r = tempCtx->Prepare(_callback);
 	if (r<0)
 		SDL_LogCritical(SDL_LOG_CATEGORY_APPLICATION,"Couldn't Prepare callback: %s\n",SDL_GetError());
