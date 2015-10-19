@@ -33,6 +33,7 @@
 #include "TextManager.h"
 #include "ResourceManager.h"
 #include "GUIManager.h"
+#include "WatchManager.h"
 
 Application *g_app;
 
@@ -314,7 +315,7 @@ Application::Application() : application_p(new Application_p)
 
 
 
-	this->watchManager	= new WatchManager();
+
 #ifdef TRP_USE_NETWORK
 	this->networkManager  = new NetworkManager();
 #endif
@@ -346,7 +347,7 @@ Application::~Application()
 	delete physicsManager;
 #endif
 
-	delete watchManager;
+
 #ifdef TRP_USE_NETWORK
 	delete networkManager;
 #endif
@@ -425,7 +426,7 @@ void Application::Init()
 		SoundManager::Get().Init();
 		TextManager::Get().Init();	
 		ResourceManager::Get().Init();
-		watchManager->Init();
+		WatchManager::Get().Init();
 #ifdef TRP_USE_NETWORK
 		networkManager->Init();	
 #endif
@@ -526,7 +527,7 @@ int Application::Run()
 		lasttimeEmscripten = now;
 #endif		
 			
-		watchManager->Update(elapsed);
+		WatchManager::Get().Update(elapsed);
 #ifdef TRP_USE_NETWORK
 		networkManager->Update();
 #endif
@@ -596,7 +597,7 @@ void Application::Shutdown()
 #ifdef TRP_USE_NETWORK
 		networkManager->Shutdown();
 #endif
-		watchManager->Shutdown();
+		WatchManager::Get().Shutdown();
 		ResourceManager::Get().Shutdown();
 		TextManager::Get().Shutdown();
 		SoundManager::Get().Shutdown();

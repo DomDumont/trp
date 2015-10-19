@@ -28,7 +28,7 @@
 
 //TODO replace this with forward declarations ?
 
-#include "WatchManager.h"
+
 #include "NetworkManager.h"
 #include "PhysicsManager.h"
 #include "Settings.h"
@@ -88,7 +88,7 @@ public:
 
 
 
-	WatchManager		*watchManager;
+	
 #ifdef TRP_USE_NETWORK
 	NetworkManager		*networkManager;
 #endif

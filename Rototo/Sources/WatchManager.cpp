@@ -39,6 +39,12 @@
 #include <libgen.h>
 #endif
 
+WatchManager& WatchManager::Get()
+{
+	static WatchManager foo;
+	return foo;
+}
+
 #ifdef TRP_USE_WATCH
 
 /*----------------------------------------------------------------------------*/

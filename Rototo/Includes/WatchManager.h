@@ -37,7 +37,8 @@ namespace efsw
 class WatchManager
 {
 public:
-	WatchManager();
+	static WatchManager& Get();
+	
 	~WatchManager();
 
 	void Init();
@@ -45,6 +46,7 @@ public:
 	void Shutdown();
 
 private:
+	WatchManager();
 #if defined WIN32 || defined TRP_OSX
 	efsw::FileWatcher *fileWatcher;
 	efsw::FileWatchListener* watcherListener;
