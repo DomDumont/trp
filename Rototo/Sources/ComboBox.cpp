@@ -32,6 +32,7 @@
 
 
 #include "ScriptManager.h"
+#include "GUIManager.h"
 
 #include "ComboBox_p.h"
 
@@ -276,7 +277,7 @@ int ComboBox::AddItem(const std::string& _text)
 	
 	if (this->font == NULL)
 	{
-		this->font = g_app->guiManager->font;
+		this->font = GUIManager::Get().font;
 		this->font->AddRef();
 	}
 	tempLabel->SetFont(*this->font);
@@ -341,12 +342,12 @@ void ComboBox::BuildInternalTexture()
 	//TODO Check this :  Assign themes textures, should certainly be elsewhere
 	
 	if (this->sprite_item.entry == NULL)
-		if (g_app->guiManager->list_normal_item != NULL)
-			this->sprite_item = *(g_app->guiManager->list_normal_item);
+		if (GUIManager::Get().list_normal_item != NULL)
+			this->sprite_item = *(GUIManager::Get().list_normal_item);
 	
 	if (this->sprite_selected.entry == NULL)
-		if (g_app->guiManager->list_selected_item != NULL)
-			this->sprite_selected = *(g_app->guiManager->list_selected_item);
+		if (GUIManager::Get().list_selected_item != NULL)
+			this->sprite_selected = *(GUIManager::Get().list_selected_item);
 	
 	//Compute the size and then create the texture
 	sizeYBG = 0;

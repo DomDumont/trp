@@ -27,7 +27,7 @@
 #include "Application.h"
 #include "Font.h"
 #include "Renderer.h"
-
+#include "GUIManager.h"
 
 #include "binding/aswrappedcall.h"
 
@@ -298,9 +298,9 @@ void Label::SetText(const std::string& _text,bool _justified)
 	// If the font is not set, try to set it to the theme font.
 	if (this->font == NULL)
 		{
-		if (g_app->guiManager->font != NULL)
+			if (GUIManager::Get().font != NULL)
 			{
-			this->font = g_app->guiManager->font;
+				this->font = GUIManager::Get().font;
 			this->font->AddRef();
 			}
 		else
@@ -308,10 +308,10 @@ void Label::SetText(const std::string& _text,bool _justified)
 		}
 
 	if (this->primary_text_color.a == 253) //TODO remove this magic number
-		this->primary_text_color = g_app->guiManager->primary_text_color;
+		this->primary_text_color = GUIManager::Get().primary_text_color;
 
 	if (this->disable_text_color.a == 253) //TODO remove this magic number
-		this->disable_text_color = g_app->guiManager->disable_text_color;
+		this->disable_text_color = GUIManager::Get().disable_text_color;
 
 
 	BuildInternalTexture(_text,_justified);

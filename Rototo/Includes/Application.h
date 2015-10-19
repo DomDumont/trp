@@ -30,7 +30,6 @@
 
 #include "WatchManager.h"
 #include "NetworkManager.h"
-#include "GUIManager.h"
 #include "PhysicsManager.h"
 #include "Settings.h"
 
@@ -93,7 +92,7 @@ public:
 #ifdef TRP_USE_NETWORK
 	NetworkManager		*networkManager;
 #endif
-	GUIManager			*guiManager;
+
 
 	SDL_Window			*sdlWindow;
 	SDL_Renderer		*sdlRenderer;

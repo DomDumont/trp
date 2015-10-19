@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -44,41 +44,43 @@
 #include "ResourceManager.h"
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+
+GUIManager& GUIManager::Get()
+{
+	static GUIManager foo;
+	return foo;
+}
+
 /*----------------------------------------------------------------------------*/
+
 void GUI_LoadTheme(const std::string& _file)
 {
-	g_app->guiManager->LoadTheme(_file);
+	GUIManager::Get().LoadTheme(_file);
 }
 
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
+
 void GUI_UnLoadTheme()
 {
-	g_app->guiManager->UnLoadTheme();
+	GUIManager::Get().UnLoadTheme();
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
+
 void GUI_AddWidget(Widget *_widget)
 {
-	g_app->guiManager->AddWidget(_widget);
+	GUIManager::Get().AddWidget(_widget);
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
+
 void GUI_RemoveWidget(Widget *_widget)
 {
-	g_app->guiManager->RemoveWidget(_widget);
+	GUIManager::Get().RemoveWidget(_widget);
 }
 
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 GUIManager::GUIManager(): font(NULL), atlas(NULL), button_up(NULL),button_down(NULL), button_disable(NULL),
@@ -105,16 +107,12 @@ GUIManager::GUIManager(): font(NULL), atlas(NULL), button_up(NULL),button_down(N
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 GUIManager::~GUIManager()
 {
 	UnLoadTheme(); //TODO Check this. Just in case ????
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void GUIManager::Init()
@@ -123,8 +121,6 @@ void GUIManager::Init()
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 void GUIManager::Shutdown()
 {
@@ -132,8 +128,6 @@ void GUIManager::Shutdown()
 	widgets.clear(); //TODO perhaps release also the widgets, to check.
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void GUIManager::HandleEvent( SDL_Event * event)
@@ -202,8 +196,6 @@ void GUIManager::HandleEvent( SDL_Event * event)
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 void GUIManager::AddWidget(Widget *_widget)
 {
@@ -214,8 +206,6 @@ void GUIManager::AddWidget(Widget *_widget)
 		}
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void GUIManager::RemoveWidget(Widget *_widget)
@@ -241,8 +231,6 @@ void GUIManager::RemoveWidget(Widget *_widget)
 
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 Sprite * GUIManager::LoadSprite(void* _elem)

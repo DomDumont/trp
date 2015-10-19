@@ -27,7 +27,7 @@
 #include "Application.h"
 #include "Font.h"
 #include "Vector2D.h"
-
+#include "GUIManager.h"
 
 #include "binding/aswrappedcall.h"
 
@@ -352,36 +352,36 @@ switch(this->type)
 	{
 			
 	case TYPE_BUTTON :
-		if ((this->sprite_up.entry == NULL) && (g_app->guiManager->button_up != NULL))
-			this->sprite_up = *(g_app->guiManager->button_up);
+		if ((this->sprite_up.entry == NULL) && (GUIManager::Get().button_up != NULL))
+			this->sprite_up = *(GUIManager::Get().button_up);
 
-		if ((this->sprite_down.entry == NULL) && (g_app->guiManager->button_down != NULL))
-			this->sprite_down = *(g_app->guiManager->button_down);
+		if ((this->sprite_down.entry == NULL) && (GUIManager::Get().button_down != NULL))
+			this->sprite_down = *(GUIManager::Get().button_down);
 
-		if ((this->sprite_disable.entry == NULL) && (g_app->guiManager->button_disable != NULL))
-			this->sprite_disable = *(g_app->guiManager->button_disable);
+		if ((this->sprite_disable.entry == NULL) && (GUIManager::Get().button_disable != NULL))
+			this->sprite_disable = *(GUIManager::Get().button_disable);
 		break;
 			
 	case TYPE_CHECKBOX :
-		if ((this->sprite_up.entry == NULL) && (g_app->guiManager->checkbox_up != NULL))
-			this->sprite_up = *(g_app->guiManager->checkbox_up);
+		if ((this->sprite_up.entry == NULL) && (GUIManager::Get().checkbox_up != NULL))
+			this->sprite_up = *(GUIManager::Get().checkbox_up);
 
-		if ((this->sprite_down.entry == NULL) && (g_app->guiManager->checkbox_down != NULL))
-			this->sprite_down = *(g_app->guiManager->checkbox_down);
+		if ((this->sprite_down.entry == NULL) && (GUIManager::Get().checkbox_down != NULL))
+			this->sprite_down = *(GUIManager::Get().checkbox_down);
 
-		if ((this->sprite_disable.entry == NULL) && (g_app->guiManager->checkbox_disable != NULL))
-			this->sprite_disable = *(g_app->guiManager->checkbox_disable);
+		if ((this->sprite_disable.entry == NULL) && (GUIManager::Get().checkbox_disable != NULL))
+			this->sprite_disable = *(GUIManager::Get().checkbox_disable);
 		break;
 
 	case TYPE_RADIOBOX :
-		if ((this->sprite_up.entry == NULL) && (g_app->guiManager->radiobox_up != NULL))
-			this->sprite_up = *(g_app->guiManager->radiobox_up);
+		if ((this->sprite_up.entry == NULL) && (GUIManager::Get().radiobox_up != NULL))
+			this->sprite_up = *(GUIManager::Get().radiobox_up);
 		
-		if ((this->sprite_down.entry == NULL) && (g_app->guiManager->radiobox_down != NULL))
-			this->sprite_down = *(g_app->guiManager->radiobox_down);
+		if ((this->sprite_down.entry == NULL) && (GUIManager::Get().radiobox_down != NULL))
+			this->sprite_down = *(GUIManager::Get().radiobox_down);
 		
-		if ((this->sprite_disable.entry == NULL) && (g_app->guiManager->radiobox_disable != NULL))
-			this->sprite_disable = *(g_app->guiManager->radiobox_disable);
+		if ((this->sprite_disable.entry == NULL) && (GUIManager::Get().radiobox_disable != NULL))
+			this->sprite_disable = *(GUIManager::Get().radiobox_disable);
 		break;
 	default:
 		SDL_assert(0);

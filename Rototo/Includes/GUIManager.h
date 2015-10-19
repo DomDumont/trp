@@ -40,8 +40,8 @@ class GUIManager
 {
 
 public:
-
-	GUIManager	();
+	static GUIManager& Get();
+	
 	~GUIManager	();
 	
 	void Init		();
@@ -53,6 +53,7 @@ public:
 	void UnLoadTheme	();
 
 private:
+	GUIManager();
 	Sprite *  LoadSprite	(void* _elem);
 
 public:

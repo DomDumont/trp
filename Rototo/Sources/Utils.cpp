@@ -49,6 +49,7 @@
 #include "ScriptManager.h"
 
 #include "ResourceManager.h"
+#include "GUIManager.h"
 
 FILE *rwLogFile = NULL;
 
@@ -507,7 +508,7 @@ void IO_Close(Uint64 _handle)
 
 void WND_Clear()
 {
-	SDL_SetRenderDrawColor(g_app->sdlRenderer, g_app->guiManager->background_color.r, g_app->guiManager->background_color.g, g_app->guiManager->background_color.b, g_app->guiManager->background_color.a);
+	SDL_SetRenderDrawColor(g_app->sdlRenderer, GUIManager::Get().background_color.r, GUIManager::Get().background_color.g, GUIManager::Get().background_color.b, GUIManager::Get().background_color.a);
 	SDL_RenderClear(g_app->sdlRenderer);
 }
 

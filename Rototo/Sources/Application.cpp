@@ -32,7 +32,7 @@
 #include "SoundManager.h"
 #include "TextManager.h"
 #include "ResourceManager.h"
-
+#include "GUIManager.h"
 
 Application *g_app;
 
@@ -318,7 +318,6 @@ Application::Application() : application_p(new Application_p)
 #ifdef TRP_USE_NETWORK
 	this->networkManager  = new NetworkManager();
 #endif
-	this->guiManager		= new GUIManager();
 
 #ifdef TRP_USE_PHYSICS
 	this->physicsManager  = new PhysicsManager();
@@ -346,7 +345,7 @@ Application::~Application()
 #ifdef TRP_USE_PHYSICS
 	delete physicsManager;
 #endif
-	delete guiManager;
+
 	delete watchManager;
 #ifdef TRP_USE_NETWORK
 	delete networkManager;
@@ -481,7 +480,7 @@ void Application::Init()
 #ifdef TRP_USE_BINDING
 	ScriptManager::Get().Init();
 #endif
-	guiManager->Init();
+	GUIManager::Get().Init();
 	TweenManager::Get().Init();
 	application_p->Init();
 	this->OnInit();
@@ -513,7 +512,7 @@ int Application::Run()
 		/* Check for events */
 		while (SDL_PollEvent(&event))
 			{
-			guiManager->HandleEvent(&event);
+			GUIManager::Get().HandleEvent(&event);
 			this->HandleEvent(&event, &doneCode);
 			}
 
@@ -586,7 +585,7 @@ void Application::Shutdown()
 #ifdef TRP_USE_BINDING
 	ScriptManager::Get().Shutdown();
 #endif
-	guiManager->Shutdown(); // Must be here to release the widgets.
+	GUIManager::Get().Shutdown(); // Must be here to release the widgets.
 
 	if (doneCode != DONECODE_RESTART_ONLY)
 		{

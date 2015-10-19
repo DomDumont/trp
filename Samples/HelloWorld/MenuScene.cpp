@@ -1,4 +1,5 @@
 #include "MenuScene.h"
+#include "GUIManager.h"
 
 
 bool OnSelectionChangedHandler(void * _sender,void * _userData)
