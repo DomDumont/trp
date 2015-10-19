@@ -139,7 +139,7 @@ void Font_p::Load(const std::string& _file, int _size, int _flags)
 
 unsigned char *bitmap = new unsigned char[512 * 512];
 
-SDL_RWops*  tempFlow = g_app->resourceManager->Load(_file, _flags);
+SDL_RWops*  tempFlow = ResourceManager::Get().Load(_file, _flags);
 if (tempFlow != NULL)
   {
   int flowSize = (int)SDL_RWsize(tempFlow);

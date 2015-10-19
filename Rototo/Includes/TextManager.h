@@ -31,8 +31,8 @@
 class TextManager
 {
 public:
-
-	TextManager();
+	static TextManager& Get();
+	
 	~TextManager();
 
 	void Init();
@@ -46,6 +46,8 @@ public:
 	//TTF_Font *font;
 	SDL_Color color;
 	
+private:
+	TextManager();
 private:
 	std::map<std::string,std::string> mapStrings;
 };

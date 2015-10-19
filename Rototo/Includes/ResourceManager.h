@@ -41,7 +41,8 @@ enum ResourceManagerFlags
 class ResourceManager
 {
 public:
-	ResourceManager        ();
+	static ResourceManager& Get();
+	
 	~ResourceManager       ();
     
 	void        Init        ();
@@ -49,7 +50,8 @@ public:
     
 	SDL_RWops*  Load        (const std::string & _file, unsigned int _flags);
 	SDL_RWops*  Save        (const std::string & _file, unsigned int _flags);
-
+private:
+	ResourceManager();
 
 	
 };

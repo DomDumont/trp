@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -51,8 +51,6 @@
 FILE *rwLogFile = NULL;
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems)
 {
@@ -66,8 +64,6 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 std::vector<std::string> split(const std::string &s, char delim)
 {
@@ -76,8 +72,6 @@ std::vector<std::string> split(const std::string &s, char delim)
 	return elems;
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void PadTo(std::string &str, const size_t num, const char paddingChar)
@@ -89,16 +83,12 @@ void PadTo(std::string &str, const size_t num, const char paddingChar)
 
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 bool StartsWith(const std::string& s1, const std::string& s2)
 {
 	return s2.size() <= s1.size() && s1.compare(0, s2.size(), s2) == 0;
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void LogToOutputAndNetwork(const std::string &str)
@@ -111,8 +101,6 @@ void LogToOutputAndNetwork(const std::string &str)
 
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 std::string UTI_GetLanguage()
@@ -140,8 +128,6 @@ std::string UTI_GetLanguage()
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 void GetBundlePath(char * _buf,int _length)
 {
@@ -161,8 +147,6 @@ void GetBundlePath(char * _buf,int _length)
 	#endif
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void ScanGameData(const std::string & _path)
@@ -218,7 +202,7 @@ std::string LoadTextFile(const std::string& _file, unsigned int _flags)
 	
 	SDL_RWops *rw;
 	
-	rw = g_app->resourceManager->Load(_file,_flags);
+	rw = ResourceManager::Get().Load(_file, _flags);
 	
 	if (rw != NULL)
 	{
@@ -420,13 +404,13 @@ Uint64 IO_Open(const std::string& _name,const std::string& _mode)
 	if (_mode == "r")
 		{
 		SDL_RWops * handle;
-		handle = g_app->resourceManager->Load(modifiedFilename,GAMEDATA|BOTH);
+		handle = ResourceManager::Get().Load(modifiedFilename, GAMEDATA | BOTH);
 		return (Uint64)(handle);
 		}
 	else
 		{
 		SDL_RWops * handle;
-		handle = g_app->resourceManager->Save(modifiedFilename,GAMEDATA|BOTH);
+		handle = ResourceManager::Get().Save(modifiedFilename, GAMEDATA | BOTH);
 		return (Uint64)(handle);
 		}
 	return -1;

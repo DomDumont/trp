@@ -59,7 +59,8 @@ void RegisterSound();
 class SoundManager
 {
 public:
-	SoundManager();
+	static SoundManager& Get();
+	
 	~SoundManager();
 
 	void	Init();
@@ -74,6 +75,8 @@ public:
 	int	volumeSFX;
 	int	volume;
 
+private:
+	SoundManager();
 private:
 	
 	int				rate;

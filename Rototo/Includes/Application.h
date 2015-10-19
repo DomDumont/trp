@@ -88,10 +88,10 @@ public:
 #ifdef TRP_USE_PHYSICS
 	PhysicsManager		*physicsManager;
 #endif
-	SoundManager		*soundManager;
-	TextManager			*textManager;
 
-	ResourceManager		*resourceManager;
+
+
+
 	WatchManager		*watchManager;
 #ifdef TRP_USE_NETWORK
 	NetworkManager		*networkManager;

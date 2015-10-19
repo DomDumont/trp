@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -43,11 +43,18 @@
 
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+
+SoundManager& SoundManager::Get()
+  {
+	  static SoundManager foo;
+	  return foo;
+  }
+
 /*----------------------------------------------------------------------------*/
+
 void SND_SetMusicVolume(int _newVolume)
 {
-	g_app->soundManager->SetMusicVolume(_newVolume);
+	SoundManager::Get().SetMusicVolume(_newVolume);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -55,7 +62,7 @@ void SND_SetMusicVolume(int _newVolume)
 /*----------------------------------------------------------------------------*/
 void SND_SetSFXVolume(int _newVolume)
 {
-	g_app->soundManager->SetSFXVolume(_newVolume);
+	SoundManager::Get().SetSFXVolume(_newVolume);
 }
 
 /*----------------------------------------------------------------------------*/

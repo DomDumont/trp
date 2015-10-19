@@ -307,11 +307,9 @@ Application::Application() : application_p(new Application_p)
 		SDL_SetHint("SDL_HINT_IDLE_TIMER_DISABLED", "1");
 		}
 
-	this->soundManager	= new SoundManager();
-	this->textManager	= new TextManager();
 
 
-	this->resourceManager = new ResourceManager(); 
+
 	this->watchManager	= new WatchManager();
 #ifdef TRP_USE_NETWORK
 	this->networkManager  = new NetworkManager();
@@ -345,9 +343,6 @@ Application::~Application()
 	delete physicsManager;
 #endif
 	delete guiManager;
-	delete soundManager;
-	delete textManager;
-	delete resourceManager;
 	delete watchManager;
 #ifdef TRP_USE_NETWORK
 	delete networkManager;
@@ -424,9 +419,9 @@ void Application::Init()
 		if (this->settings.logtofile != 0)
 			UTI_CreateLogFile();
 
-		soundManager->Init();
-		textManager->Init();	
-		resourceManager->Init();
+		SoundManager::Get().Init();
+		TextManager::Get().Init();	
+		ResourceManager::Get().Init();
 		watchManager->Init();
 #ifdef TRP_USE_NETWORK
 		networkManager->Init();	
@@ -599,9 +594,9 @@ void Application::Shutdown()
 		networkManager->Shutdown();
 #endif
 		watchManager->Shutdown();
-		resourceManager->Shutdown();
-		textManager->Shutdown();
-		soundManager->Shutdown();
+		ResourceManager::Get().Shutdown();
+		TextManager::Get().Shutdown();
+		SoundManager::Get().Shutdown();
 		SDL_Quit();
 		settings.Write(); //TODO check if it must be here
 

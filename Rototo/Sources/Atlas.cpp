@@ -153,7 +153,7 @@ void Atlas::LoadFromImage(const std::string& _file,int _flags)
 	// First load and create the Texture
 	fullPath = _file ;
 
-	texture = IMG_LoadTexture_RW(g_app->sdlRenderer,g_app->resourceManager->Load(fullPath,GAMEDATA|BOTH),1);//Todo check freesrc
+	texture = IMG_LoadTexture_RW(g_app->sdlRenderer, ResourceManager::Get().Load(fullPath, GAMEDATA | BOTH), 1);//Todo check freesrc
 	if (texture == NULL)
 		{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"cannot load texture %s\n",_file.c_str());
@@ -190,7 +190,7 @@ void Atlas::Load(const std::string& _file,int _flags)
 	// First load and create the Texture
 	fullPath = _file + ".png";
 
-	texture = IMG_LoadTexture_RW(g_app->sdlRenderer,g_app->resourceManager->Load(fullPath,_flags),1);//Todo check freesrc
+	texture = IMG_LoadTexture_RW(g_app->sdlRenderer, ResourceManager::Get().Load(fullPath, _flags), 1);//Todo check freesrc
 	if (texture == NULL)
 		{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"cannot load texture %s %s\n",_file.c_str(),SDL_GetError());

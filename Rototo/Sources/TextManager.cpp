@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -39,8 +39,15 @@
 
 #include "ScriptManager.h"
 
+
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+
+TextManager& TextManager::Get()
+{
+	static TextManager foo;
+	return foo;
+}
+
 /*----------------------------------------------------------------------------*/
 
 #ifdef TRP_USE_BINDING
@@ -74,7 +81,7 @@ void RegisterTextManager()
 /*----------------------------------------------------------------------------*/
 std::string TXT_GetString(const std::string& _id)
 {
-	std::string toto = g_app->textManager->GetString(_id);
+	std::string toto = TextManager::Get().GetString(_id);
 	UTI_Log(toto.c_str());
 	return toto;
 }
@@ -84,7 +91,7 @@ std::string TXT_GetString(const std::string& _id)
 /*----------------------------------------------------------------------------*/
 void TXT_Load(const std::string& _file,int _flags=13)
 {
-g_app->textManager->Load(_file,_flags);
+	TextManager::Get().Load(_file, _flags);
 }
 
 /*----------------------------------------------------------------------------*/
@@ -92,7 +99,7 @@ g_app->textManager->Load(_file,_flags);
 /*----------------------------------------------------------------------------*/
 void TXT_UnLoad()
 {
-	g_app->textManager->UnLoad();
+	TextManager::Get().UnLoad();
 }
 
 /*----------------------------------------------------------------------------*/
