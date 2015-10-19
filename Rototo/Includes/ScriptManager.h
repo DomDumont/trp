@@ -69,36 +69,20 @@ public:
 	void RegisterGlobalFunction(const std::string& function_definition, const asSFuncPtr &funcPointer,asDWORD callConv, void * objFOrThisCall = 0);
 
 
-	// Contexts is what you use to call AngelScript functions and methods. They say you must pool them to avoid overhead. So I do as they say.
-	asIScriptContext* NewContext()
-	{
-		asIScriptContext *ctx = 0;
-		if( contexts.size() )
-			{
-			ctx = *contexts.rbegin();
-			contexts.pop_back();
-			}
-		else
-			{
-			ctx = engine->CreateContext();
-			}
-
-		return ctx;
-	}
 	
-	// After you're done calling your AngelScript function, you get the context back into the pool for re-use
-	void FreeContext(asIScriptContext *ctx)
-	{
-		contexts.push_back(ctx);
-		ctx->Unprepare();
-	}
-	//std::string LoadScript(const std::string& _file);
+
+
 
 public:
 	asIScriptEngine		*engine;
 private:
 	
 	ScriptManager();
+
+	// Contexts is what you use to call AngelScript functions and methods. They say you must pool them to avoid overhead. So I do as they say.
+	asIScriptContext* NewContext();
+	void FreeContext(asIScriptContext *ctx);
+
 
 	asIScriptModule		*module;
 	

@@ -808,4 +808,34 @@ void ScriptManager::RegisterGlobalFunction(const std::string& function_definitio
 	SDL_assert( r >= 0 );
 	
 }
+
+/*----------------------------------------------------------------------------*/
+asIScriptContext* ScriptManager::NewContext()
+{
+	asIScriptContext *ctx = 0;
+	if (contexts.size())
+	{
+		ctx = *contexts.rbegin();
+		contexts.pop_back();
+	}
+	else
+	{
+		ctx = engine->CreateContext();
+	}
+
+	return ctx;
+}
+
+
+// After you're done calling your AngelScript function, you get the context back into the pool for re-use
+
+/*----------------------------------------------------------------------------*/
+
+void ScriptManager::FreeContext(asIScriptContext *ctx)
+{
+	contexts.push_back(ctx);
+	ctx->Unprepare();
+}
+
+
 #endif
