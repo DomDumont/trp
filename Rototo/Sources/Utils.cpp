@@ -48,6 +48,8 @@
 
 #include "ScriptManager.h"
 
+#include "ResourceManager.h"
+
 FILE *rwLogFile = NULL;
 
 /*----------------------------------------------------------------------------*/

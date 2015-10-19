@@ -34,6 +34,8 @@
 
 #include "ScriptManager.h"
 
+#include "ResourceManager.h"
+
 #define STB_TRUETYPE_IMPLEMENTATION  // force following include to generate implementation
 
 #include "Font_p.h"

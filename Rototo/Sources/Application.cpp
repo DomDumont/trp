@@ -29,6 +29,10 @@
 #include "Utils.h"
 #include "pugixml.hpp"
 
+#include "SoundManager.h"
+#include "TextManager.h"
+#include "ResourceManager.h"
+
 
 Application *g_app;
 

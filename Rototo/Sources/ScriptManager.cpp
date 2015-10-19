@@ -70,6 +70,12 @@
 
 #include "binding/aswrappedcall.h"
 
+#include "SoundManager.h"
+#include "TextManager.h"
+#include "ResourceManager.h"
+
+
+
 
 using namespace std;
 

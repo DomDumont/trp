@@ -28,9 +28,6 @@
 
 //TODO replace this with forward declarations ?
 
-#include "SoundManager.h"
-#include "TextManager.h"
-#include "ResourceManager.h"
 #include "WatchManager.h"
 #include "NetworkManager.h"
 #include "GUIManager.h"
