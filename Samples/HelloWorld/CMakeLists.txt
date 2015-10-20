@@ -5,10 +5,10 @@ option(BUILD_HTML "Build HTML instead of JS " OFF)
 
 file(GLOB_RECURSE HelloWorld_SOURCES "./*.cpp")
 
-if (NOT DEFINED EMSCRIPTEN)
-	find_package(SDL2 REQUIRED)
-	include_directories(${SDL2_INCLUDE_DIR})
-endif()
+#if (NOT DEFINED EMSCRIPTEN)
+#	find_package(SDL2 REQUIRED)
+#	include_directories(${SDL2_INCLUDE_DIR})
+#endif()
 
 include_directories("../../Rototo/Includes")
 # include_directories("../../Rototo/Extern/AngelScript/sdk/angelscript/include")

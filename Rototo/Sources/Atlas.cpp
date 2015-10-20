@@ -37,9 +37,37 @@
 
 #include "ResourceManager.h"
 
+#include "SDL.h"
+
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+
+void Atlas::AddRef()
+{
+	// Increase the reference counter
+	refCount++;
+	//SDL_Log("Atlas 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
+}
+
 /*----------------------------------------------------------------------------*/
+
+void Atlas::Release()
+{
+	// Decrease ref count and delete if it reaches 0
+	refCount--;
+	if (refCount == 0)
+		delete this;
+	else
+		if (refCount > 0)
+		{
+			//SDL_Log("Atlas 0x%x Release : nb active ref = %d\n",(unsigned int)this,refCount);
+		}
+		else
+			SDL_assert(0);
+
+}
+
+/*----------------------------------------------------------------------------*/
+
 #ifdef TRP_USE_BINDING
 void RegisterAtlas()
 {
@@ -139,6 +167,7 @@ void Atlas::UnLoad()
 		this->texture = NULL;
 		}
 }
+
 
 
 /*----------------------------------------------------------------------------*/

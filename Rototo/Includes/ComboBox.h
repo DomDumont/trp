@@ -31,6 +31,7 @@
 
 
 #include "Sprite.h"
+#include "Color.h"
 
 #include <memory>
 
@@ -57,9 +58,9 @@ public:
 	void		SetTextColor(int _r,int _g,int _b,int _a);
 	
 	
-	int			OnMouseButtonDown( SDL_Event * event);
-	int			OnMouseButtonUp( SDL_Event * event);
-	void		OnMouseMotion( SDL_Event * event);
+	int			OnMouseButtonDown(Event * event);
+	int			OnMouseButtonUp( Event * event);
+	void		OnMouseMotion( Event * event);
 	
 	int			GetSelectedIndex();
 	void				SetSelectedIndex(int _newIndex);
@@ -87,10 +88,10 @@ private:
 	int				sizeItemBG;
 private:
 	//int refCount;
-	SDL_Color			backgroundColor;
-	SDL_Color			itemColor;
-	SDL_Color			selectedItemColor;
-	SDL_Color			textColor;
+	Color			backgroundColor;
+	Color			itemColor;
+	Color			selectedItemColor;
+	Color			textColor;
 	
 	Sprite                  	sprite_selected;
 	Sprite                  	sprite_item;

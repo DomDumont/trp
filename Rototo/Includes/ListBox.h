@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -31,12 +31,15 @@
 
 
 #include "Sprite.h"
+#include "Color.h"
 
 #include <memory>
 
 class ListBox_p;
 class CScriptHandle;
 class asIScriptFunction;
+class Event;
+
 class ListBox : public Widget
 {
 public:
@@ -57,9 +60,9 @@ public:
 	void SetTextColor(int _r,int _g,int _b,int _a);
 	
 
-	int OnMouseButtonDown( SDL_Event * event);
-	int OnMouseButtonUp( SDL_Event * event);
-	void OnMouseMotion( SDL_Event * event);
+	int OnMouseButtonDown( Event * event);
+	int OnMouseButtonUp( Event * event);
+	void OnMouseMotion( Event * event);
 
 	int  GetSelectedIndex();
 	std::string GetItemText(int _index);
@@ -93,10 +96,10 @@ private:
 
 private:
 	//int refCount;
-		SDL_Color			backgroundColor;
-    	SDL_Color			itemColor;
-    	SDL_Color			selectedItemColor;
-    	SDL_Color			textColor;
+		Color			backgroundColor;
+    	Color			itemColor;
+    	Color			selectedItemColor;
+    	Color			textColor;
 
     	Sprite                  		sprite_selected;
     	Sprite                  		sprite_item;

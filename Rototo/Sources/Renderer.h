@@ -26,13 +26,15 @@ available: visit veed.fr for more information.
 #define __RENDERER_H__
 
 class Font;
+class Color;
+class SDL_Texture; //TODO change this
 
 class Renderer
 {
 
 public:
 	static Renderer& Get();
-	SDL_Texture * RenderText(Font * _font,const std::string& _text, SDL_Color _color);
+	SDL_Texture * RenderText(Font * _font,const std::string& _text, Color _color);
 
 private:
 	Renderer();

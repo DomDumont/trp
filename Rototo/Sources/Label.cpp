@@ -34,6 +34,8 @@
 
 #include "ScriptManager.h"
 
+#include "SDL.h"
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -130,7 +132,7 @@ Label::Label() : font(NULL),texture(NULL)
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Label Constructor\n");
 
 	//TODO change this magic number 253 for alpha
-	SDL_Color tempColor = {255,255,255,253 };
+	Color tempColor = {255,255,255,253 };
 	this->primary_text_color = tempColor;
 	this->disable_text_color = tempColor;
 	this->color_background.r = 0;
@@ -169,7 +171,7 @@ void Label::SetFont(Font & _font)
 
 void Label::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigned char _a)
 {
-	SDL_Color tempColor = { _r, _g, _b, _a };
+	Color tempColor = { _r, _g, _b, _a };
 	this->primary_text_color = tempColor;
 	if (this->texture)
 		SDL_SetTextureAlphaMod(this->texture,_a);
@@ -183,7 +185,7 @@ void Label::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigned
 
 void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 {
-	SDL_Color tempColor;
+	Color tempColor;
 	std::string text = _text;
 	std::size_t len = text.size();
 	std::vector<SDL_Surface*> lines;
@@ -339,7 +341,7 @@ void Label::Render()
 	if ((this->shown == false)|| (this->texture == NULL))
 		return;
 
-	SDL_RenderCopyEx(g_app->sdlRenderer,this->texture , &this->frame, &this->position,this->angle,NULL,SDL_FLIP_NONE); 
+	SDL_RenderCopyEx(g_app->sdlRenderer, this->texture, (SDL_Rect *)&this->frame, (SDL_Rect *)&this->position, this->angle, NULL, SDL_FLIP_NONE);
 }
 
 

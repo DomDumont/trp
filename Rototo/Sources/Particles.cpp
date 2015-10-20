@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -40,6 +40,9 @@
 
 #include "ScriptManager.h"
 
+
+#include "SDL.h"
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -47,7 +50,7 @@
 Particle::Particle( AtlasEntry	* _entry)
 {
     this->entry = _entry;
-    SDL_Color tempColor = {255,255,255,255 };
+    Color tempColor = {255,255,255,255 };
     this->color = tempColor;
     this->angle = 0;
     this->velocityX = 0;
@@ -67,7 +70,30 @@ Particle::Particle( AtlasEntry	* _entry)
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+void Emitter::AddRef()
+{
+	// Increase the reference counter
+	refCount++;
+	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter 0x%x AddRef : nb active Emitter = %d\n",(unsigned int)this,refCount);
+}
+
+/*----------------------------------------------------------------------------*/
+void Emitter::Release()
+{
+	// Decrease ref count and delete if it reaches 0
+	refCount--;
+	if (refCount == 0)
+		delete this;
+	else
+		if (refCount > 0)
+		{
+			//   SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter 0x%x Release : nb active Emitter = %d\n",(unsigned int)this,refCount);
+		}
+		else
+			SDL_assert(0);
+
+}
+
 /*----------------------------------------------------------------------------*/
 
 Particle::~Particle()
@@ -97,7 +123,7 @@ void Particle::Render()
         {
         SDL_SetTextureColorMod(this->entry->atlas->texture,this->color.r,this->color.g,this->color.b);
         SDL_SetTextureAlphaMod(this->entry->atlas->texture,this->color.a);
-        SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &this->frame, &this->position,this->angle,NULL,SDL_FLIP_NONE);
+		SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture, (SDL_Rect*)&this->frame, (SDL_Rect*)&this->position, this->angle, NULL, SDL_FLIP_NONE);
         }
 }
 

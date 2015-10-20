@@ -27,9 +27,12 @@
 
 #include "Widget.h"
 #include <string>
+#include "Vector2D.h"
+#include "Color.h"
+#include "Rect.h"
+
 class Atlas;
 class AtlasEntry;
-#include "Vector2D.h"
 
 class Sprite : public Widget
 {
@@ -58,9 +61,9 @@ public:
 	AtlasEntry		*entry;
 
 private:
-	SDL_Color		color;
+	Color			color;
 	bool			nine_patch;
-	SDL_Rect		nine_rect;
+	Rect			nine_rect;
 
 };
 

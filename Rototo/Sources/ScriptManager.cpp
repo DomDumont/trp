@@ -76,7 +76,8 @@
 #include "GUIManager.h"
 
 
-
+#include <stdarg.h>  //va-arg
+#include "SDL.h"
 
 using namespace std;
 

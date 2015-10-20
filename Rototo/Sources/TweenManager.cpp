@@ -1,3 +1,27 @@
+/*
+==============================================================================
+
+This file is part of the T.R.P. Engine
+Copyright (c) 2015 - Dominique Dumont
+
+Permission is granted to use this software under the terms of either:
+a) the GPL v3 (or any later version)
+b) the Affero GPL v3
+
+Details of these licenses can be found at: www.gnu.org/licenses
+
+T.R.P. is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+-----------------------------------------------------------------------------
+
+To release a closed-source product which uses T.R.P., commercial licenses are
+available: visit veed.fr for more information.
+
+==============================================================================
+*/
+
 #include "Global.h"
 
 
@@ -12,6 +36,7 @@
 
 #include "ScriptManager.h"
 
+#include "SDL.h"
 
 TweenManager& TweenManager::Get()
 {
@@ -19,9 +44,58 @@ TweenManager& TweenManager::Get()
 	return foo;
 }
 
+
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+
+void Tween::AddRef()
+{
+	// Increase the reference counter
+	refCount++;
+	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : nb active tweens = %d\n", refCount);
+}
+
 /*----------------------------------------------------------------------------*/
+
+void Tween::Release()
+{
+	// Decrease ref count and delete if it reaches 0
+	refCount--;
+	if (refCount == 0)
+		delete this;
+	else
+		if (refCount > 0)
+			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Release : nb active tweens = %d\n", refCount);
+		else
+			SDL_assert(0);
+}
+
+
+/*----------------------------------------------------------------------------*/
+
+void TweenedFloat::AddRef()
+{
+	// Increase the reference counter
+	refCount++;
+}
+
+/*----------------------------------------------------------------------------*/
+
+void TweenedFloat::Release()
+{
+	// Decrease ref count and delete if it reaches 0
+	refCount--;
+	if (refCount == 0)
+		delete this;
+	else
+		if (refCount > 0)
+			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : nb active TweenedFloat  = %d\n", refCount);
+		else
+			SDL_assert(0);
+
+}
+
+/*----------------------------------------------------------------------------*/
+
 void 	TWN_AddTween(Tween * _tween)
 {
 	TweenManager::Get().AddTween(_tween);

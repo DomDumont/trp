@@ -33,6 +33,8 @@
 
 #include "ScriptManager.h"
 
+#include "SDL.h"
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -41,7 +43,7 @@ Primitive::Primitive() : bgTexture(NULL),shape(0)
 {
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Primitive Constructor\n");
 
-	SDL_Color tempColor = {255,255,255,255 };
+	Color tempColor = {255,255,255,255 };
 	this->color = tempColor;
 	this->colorBG.r = 0;
 	this->colorBG.b = 0;
@@ -83,7 +85,7 @@ void Primitive::SetPosition(int _x,int _y)
 
 void Primitive::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigned char _a)
 {
-	SDL_Color tempColor = { _r, _g, _b, _a };
+	Color tempColor = { _r, _g, _b, _a };
 	this->color = tempColor;
 	BuildInternalTexture();
 	/*
@@ -181,7 +183,7 @@ void Primitive::Render()
 	SDL_SetTextureBlendMode(this->bgTexture, SDL_BLENDMODE_BLEND);
 
 
-	SDL_RenderCopyEx(g_app->sdlRenderer,this->bgTexture, &this->frame,&this->position,this->angle,NULL,SDL_FLIP_NONE);
+	SDL_RenderCopyEx(g_app->sdlRenderer, this->bgTexture, (SDL_Rect*)&this->frame, (SDL_Rect*)&this->position, this->angle, NULL, SDL_FLIP_NONE);
 
 	SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
 }

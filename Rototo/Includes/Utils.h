@@ -80,14 +80,21 @@ void UTI_SRand(unsigned int _seed);
 int  UTI_Rand(int _min,int _max);
 std::string UTI_GetVersion();
 
-Uint64 IO_Open(const std::string& _name,const std::string& _mode);
-int  IO_WriteString(Uint64  _handle,const std::string& _string);
-int  IO_ReadString(Uint64  _handle,std::string& _string);
-int  IO_WriteInt(Uint64 _handle,int _value);
-int  IO_ReadInt(Uint64 _handle,int& _value);
-void IO_Close(Uint64  _handle);
+unsigned long long IO_Open(const std::string& _name, const std::string& _mode);
+int  IO_WriteString(unsigned long long  _handle, const std::string& _string);
+int  IO_ReadString(unsigned long long  _handle, std::string& _string);
+int  IO_WriteInt(unsigned long long _handle, int _value);
+int  IO_ReadInt(unsigned long long _handle, int& _value);
+void IO_Close(unsigned long long  _handle);
 
-SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer,SDL_RWops * _flow, bool _freesrc);
+
+class SDL_Texture;
+class SDL_Renderer;
+class SDL_RWops;
+//TODO should definitely not be here
+SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops * _flow, bool _freesrc);
+
+
 
 void RegisterUtils();
 #endif

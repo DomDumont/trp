@@ -26,9 +26,12 @@
 #define __WIDGET_H__
 
 class Vector2D;
+class Event;
 
 #define ANCHOR_CENTER  0
 #define ANCHOR_TOPLEFT 1
+
+#include "Rect.h"
 
 class Widget
 {
@@ -48,10 +51,10 @@ public:
 	virtual float	GetRotation();
 	virtual void	SetScale(float _xFactor, float _yFactor);
 	virtual void	Update(unsigned int _elapsed);
-	virtual int		OnMouseButtonDown( SDL_Event * event);
-	virtual int		OnMouseButtonUp( SDL_Event * event);
-	virtual void	OnMouseMotion( SDL_Event * event);
-	virtual void	OnKeyUp( SDL_Event * event);
+	virtual int		OnMouseButtonDown( Event * event);
+	virtual int		OnMouseButtonUp( Event * event);
+	virtual void	OnMouseMotion( Event * event);
+	virtual void	OnKeyUp( Event * event);
 	virtual void	SetEnabled(bool _value);
 	virtual void	SetAnchor(int _value);
 	virtual int		GetAnchor();
@@ -60,34 +63,13 @@ public:
 	void			Hide();
 
 
-	virtual void AddRef()
-	{
-		// Increase the reference counter
-		refCount++;
-		//printf("Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
-	}
+	virtual void AddRef();
 
-	virtual void Release()
-	{
-		// Decrease ref count and delete if it reaches 0
-	refCount --;
-	if (refCount == 0)
-		{
-			printf("deleted\n");
-		delete this;
-		}
-		else
-	if ( refCount > 0 )
-		{
-		//printf("Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
-		}
-	else
-		SDL_assert(0);
-	}
+	virtual void Release();
 	
 public:
-	SDL_Rect	frame;
-	SDL_Rect	position;
+	Rect	frame;
+	Rect	position;
 	float		angle;
 	int		anchor;
 	float		xScale;

@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -35,6 +35,8 @@
 #include "ScriptManager.h"
 
 #include "Button_p.h"
+
+#include "SDL.h"
 
 /*----------------------------------------------------------------------------*/
 Widget* refCastButton2Widget(Button* a)
@@ -390,8 +392,6 @@ switch(this->type)
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
 void Button::Render()
 {
@@ -402,7 +402,7 @@ void Button::Render()
 	if (0)
 		{
 		SDL_SetRenderDrawColor(g_app->sdlRenderer,0,0,0,255);
-		SDL_RenderFillRect(g_app->sdlRenderer,&this->position);
+		SDL_RenderFillRect(g_app->sdlRenderer,(SDL_Rect*)&this->position);
 		}
 
 	if (this->enabled)
@@ -446,7 +446,7 @@ void Button::SetRotation(float _angle)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int Button::OnMouseButtonDown( SDL_Event * event)
+int Button::OnMouseButtonDown( Event * event)
 {
 	
 

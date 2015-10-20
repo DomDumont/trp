@@ -28,6 +28,10 @@
 #include "Widget.h"
 #include <vector>
 #include "Label.h"
+#include "Color.h"
+
+class Event;
+
 class TextBox : public Widget
 {
 public:
@@ -43,16 +47,16 @@ public:
     void SetTextColor(unsigned char _r=255,unsigned char _g=255,unsigned char _b=255,unsigned char _a=255);
 	
 
-	int OnMouseButtonDown( SDL_Event * event);
-	int OnMouseButtonUp( SDL_Event * event);
-	void OnMouseMotion( SDL_Event * event);
-    void OnKeyUp( SDL_Event * event);
+	int OnMouseButtonDown( Event * event);
+	int OnMouseButtonUp( Event * event);
+	void OnMouseMotion( Event * event);
+    void OnKeyUp( Event * event);
 
 	std::string GetText(int _index);
 
 private:
-	SDL_Color	color;
-	SDL_Color	backup_text_color;
+	Color	color;
+	Color	backup_text_color;
 	Label label; 
 	int state;
 	int cursor;

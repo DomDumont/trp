@@ -26,7 +26,8 @@
 #include "ListBox.h"
 #include "Application.h"
 #include "Font.h"
-
+#include "Event_p.h"
+#include "Event.h"
 
 #include "binding/aswrappedcall.h"
 
@@ -36,6 +37,7 @@
 
 #include "ListBox_p.h"
 
+#include "SDL.h"
 
 /*----------------------------------------------------------------------------*/
 ListBox_p::ListBox_p()
@@ -178,7 +180,7 @@ void ListBox::Render()
 	//SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, (this->backgroundColor.a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(g_app->sdlRenderer,this->backgroundColor.r,this->backgroundColor.g,this->backgroundColor.b,this->backgroundColor.a);
-	SDL_RenderFillRect(g_app->sdlRenderer,&this->position);
+	SDL_RenderFillRect(g_app->sdlRenderer,(SDL_Rect *)&this->position);
 
 	SDL_Rect sourceRect;
 	sourceRect.x = 0;
@@ -186,7 +188,7 @@ void ListBox::Render()
 	sourceRect.h = this->position.h;
 	sourceRect.w = this->position.w;
 	
-	SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, &sourceRect, &this->position); // On copy la textuer
+	SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, (SDL_Rect*)&sourceRect, (SDL_Rect*)&this->position); // On copy la textuer
 
 	SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
 }
@@ -440,7 +442,7 @@ void ListBox::BuildInternalTexture()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int ListBox::OnMouseButtonDown( SDL_Event * event)
+int ListBox::OnMouseButtonDown( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox OnMouseButtonDown\n");
 	this->dragState = 1;
@@ -451,7 +453,7 @@ int ListBox::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int ListBox::OnMouseButtonUp( SDL_Event * event)
+int ListBox::OnMouseButtonUp( Event * event)
 {
 	int ret = 0;
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox OnMouseButtonUp\n");
@@ -461,7 +463,7 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 		//Only Drag not motion
 		//Compute selected item
 		
-	this->selectedIndex = (int) ((this->offsetBG + event->button.y-this->position.y)/this->sizeItemBG);
+	this->selectedIndex = (int) ((this->offsetBG + event->event_p->evt.button.y-this->position.y)/this->sizeItemBG);
 
 	if (this->selectedIndex > (int)labels.size())
 		this->selectedIndex = -1;
@@ -496,13 +498,13 @@ int ListBox::OnMouseButtonUp( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void ListBox::OnMouseMotion( SDL_Event * event)
+void ListBox::OnMouseMotion( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ListBox OnMouseMotion\n");
 	if (this->dragState >= 1)
 		{
 		this->dragState = 2; //Drag + motion
-		offsetBG -= event->motion.yrel;
+		offsetBG -= event->event_p->evt.motion.yrel;
 		if (this->offsetBG<0) this->offsetBG = 0;
 		if (this->offsetBG>(sizeYBG-this->position.h)) this->offsetBG = (sizeYBG-this->position.h);
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"offsetBG = %d\n",this->offsetBG);

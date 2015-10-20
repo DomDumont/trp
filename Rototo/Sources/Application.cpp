@@ -35,6 +35,11 @@
 #include "GUIManager.h"
 #include "WatchManager.h"
 
+#include "Event_p.h"
+#include "Event.h"
+
+#include "SDL.h"
+
 Application *g_app;
 
 #ifdef __EMSCRIPTEN__
@@ -83,18 +88,18 @@ void Application_p::Update(unsigned int elapsed)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Application::HandleEvent( SDL_Event * event, Uint32 *done)
+void Application::HandleEvent( Event * event, unsigned short *done)
 {
-	switch (event->type)
+	switch (event->event_p->evt.type)
 		{
 		case SDL_MULTIGESTURE:
 			{
 			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Multi Gesture: x = %f, y = %f, dAng = %f, dR = %f",
-			event->mgesture.x,
-			event->mgesture.y,
-			event->mgesture.dTheta,
-			event->mgesture.dDist);
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"MG: numDownTouch = %i",event->mgesture.numFingers);
+				event->event_p->evt.mgesture.x,
+				event->event_p->evt.mgesture.y,
+				event->event_p->evt.mgesture.dTheta,
+				event->event_p->evt.mgesture.dDist);
+			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "MG: numDownTouch = %i", event->event_p->evt.mgesture.numFingers);
 
 			const double PI = 3.141592653589793; //TODO WTF !!!
 
@@ -102,11 +107,11 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 			ScriptManager::Get().RunScript("void OnMultiGesture(int _numFingers, float _x, float _y, float _theta, float _dist )",
 
 			(char*)"dffff",
-			event->mgesture.numFingers,
-			event->mgesture.x,
-			event->mgesture.y,
-			event->mgesture.dTheta * (180/PI),
-			event->mgesture.dDist);
+			event->event_p->evt.mgesture.numFingers,
+			event->event_p->evt.mgesture.x,
+			event->event_p->evt.mgesture.y,
+			event->event_p->evt.mgesture.dTheta * (180 / PI),
+			event->event_p->evt.mgesture.dDist);
 #endif
 			}
 		break;
@@ -120,18 +125,18 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 					SDL_Log(SDL_GetError());
 			int nbDetectedFingers = SDL_GetNumTouchFingers(touchDevice);
 
-			//SDL_FingerID titi = event->tfinger.fingerId;
+			//SDL_FingerID titi = event->event_p->evt.tfinger.fingerId;
 			SDL_Log("nb Fingers = %d",nbDetectedFingers);
 			}
 			break;
 
 #if defined WIN32 || defined TRP_OSX
 		case SDL_WINDOWEVENT:
-			switch (event->window.event) 
+			switch (event->event_p->evt.window.event) 
 				{
 				case SDL_WINDOWEVENT_CLOSE:
 					{
-					SDL_Window *window = SDL_GetWindowFromID(event->window.windowID);
+					SDL_Window *window = SDL_GetWindowFromID(event->event_p->evt.window.windowID);
 					if (window)
 						{
 						SDL_DestroyWindow(window);
@@ -139,7 +144,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 					}
 					break;
 				case SDL_WINDOWEVENT_MOVED:
-					SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Windows Moved (%d,%d)\n",event->window.data1,event->window.data2);
+					SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Windows Moved (%d,%d)\n", event->event_p->evt.window.data1, event->event_p->evt.window.data2);
 					break;
 				}
 			break;
@@ -148,7 +153,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 		
 			//F6 Restart
 
-			if ((event->key.keysym.mod & KMOD_CTRL) && (event->key.keysym.scancode == SDL_SCANCODE_R))
+			if ((event->event_p->evt.key.keysym.mod & KMOD_CTRL) && (event->event_p->evt.key.keysym.scancode == SDL_SCANCODE_R))
 				{
 				*done = DONECODE_RESTART_ONLY; //! \TODO change this
 #ifdef TRP_USE_NETWORK
@@ -159,7 +164,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 			// F7 Change Screen Orientation
 
 			else
-			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_O))
+				if ((event->event_p->evt.key.keysym.mod & KMOD_CTRL) && (event->event_p->evt.key.keysym.scancode == SDL_SCANCODE_O))
 				{
 				if (this->orientation == ORIENTATION_PORTRAIT)
 					{
@@ -178,7 +183,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 				}
 			else
 			// F12 Launch GameDataFolder ?
-			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_F))
+			if ((event->event_p->evt.key.keysym.mod & KMOD_CTRL) && (event->event_p->evt.key.keysym.scancode == SDL_SCANCODE_F))
 				{
 #ifdef WIN32
 				{
@@ -209,7 +214,7 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 #endif
 				}
 			else
-			if ((event->key.keysym.mod & KMOD_CTRL) &&(event->key.keysym.scancode == SDL_SCANCODE_H))
+				if ((event->event_p->evt.key.keysym.mod & KMOD_CTRL) && (event->event_p->evt.key.keysym.scancode == SDL_SCANCODE_H))
 				{
 #ifdef WIN32
 				{
@@ -240,14 +245,14 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 #endif
 				}
 			else
-			if (event->key.keysym.scancode == SDL_SCANCODE_S)
+				if (event->event_p->evt.key.keysym.scancode == SDL_SCANCODE_S)
 				{
 				std::string pathToScan = ".//"+g_app->settings.gamedataURL+"//";
 				ScanGameData(pathToScan);
 				}
 
 #ifdef TRP_USE_BINDING
-			ScriptManager::Get().RunScript("void OnKeyUp(uint32 _scancode)", (char*)"d", event->key.keysym.scancode);
+			ScriptManager::Get().RunScript("void OnKeyUp(uint32 _scancode)", (char*)"d", event->event_p->evt.key.keysym.scancode);
 #endif
 			
 		break;
@@ -255,10 +260,10 @@ void Application::HandleEvent( SDL_Event * event, Uint32 *done)
 		case SDL_MOUSEBUTTONDOWN:
 
 			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Mouse button %d pressed at (%d,%d)\n",
-					event->button.button, event->button.x, event->button.y);
+				event->event_p->evt.button, event->event_p->evt.button.x, event->event_p->evt.button.y);
 
 #ifdef TRP_USE_BINDING
-			ScriptManager::Get().RunScript("void OnTouch(uint32 _button,uint32 _x,uint32 _y)", (char*)"ddd", event->button.button, event->button.x, event->button.y);
+			ScriptManager::Get().RunScript("void OnTouch(uint32 _button,uint32 _x,uint32 _y)", (char*)"ddd", event->event_p->evt.button, event->event_p->evt.button.x, event->event_p->evt.button.y);
 #endif
 
 			break;
@@ -335,6 +340,8 @@ Application::Application() : application_p(new Application_p)
 	this->capFPS = -1; //Desactivated //TODO remove this hardcoded value
 
 	this->lasttimeEmscripten = 0;
+
+	this->event = new Event();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -511,10 +518,10 @@ int Application::Run()
 #endif		
 
 		/* Check for events */
-		while (SDL_PollEvent(&event))
+		while (SDL_PollEvent(&(event->event_p->evt)))
 			{
-			GUIManager::Get().HandleEvent(&event);
-			this->HandleEvent(&event, &doneCode);
+				GUIManager::Get().HandleEvent(event);
+			this->HandleEvent(event, &doneCode);
 			}
 
 #ifndef __EMSCRIPTEN__

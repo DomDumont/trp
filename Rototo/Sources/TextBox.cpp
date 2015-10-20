@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -26,12 +26,15 @@
 #include "TextBox.h"
 #include "Application.h"
 #include "Font.h"
-
+#include "Event_p.h"
+#include "Event.h"
 
 #include "binding/aswrappedcall.h"
 
 
 #include "ScriptManager.h"
+
+#include "SDL.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -87,7 +90,7 @@ void TextBox::Render()
 	if (this->shown == false)
 		return;
 
-	SDL_RenderFillRect(g_app->sdlRenderer,&this->position);
+	SDL_RenderFillRect(g_app->sdlRenderer,(SDL_Rect *) &this->position);
 	this->label.Render();
 	if(true)
 		{
@@ -178,12 +181,12 @@ void TextBox::SetTextColor(unsigned char _r,unsigned char _g,unsigned char _b,un
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int TextBox::OnMouseButtonDown( SDL_Event * event)
+int TextBox::OnMouseButtonDown( Event * event)
 {
 	
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"TextBox OnMouseButtonDown\n");
 	SDL_StartTextInput();
-	SDL_SetTextInputRect(&(this->position));
+	SDL_SetTextInputRect((SDL_Rect *)&(this->position));
 	
 	return false;
 	
@@ -193,7 +196,7 @@ int TextBox::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int TextBox::OnMouseButtonUp( SDL_Event * event)
+int TextBox::OnMouseButtonUp( Event * event)
 {
 	return false;
 }
@@ -202,7 +205,7 @@ int TextBox::OnMouseButtonUp( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void TextBox::OnMouseMotion( SDL_Event * event)
+void TextBox::OnMouseMotion( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"TextBox OnMouseMotion\n");
 }
@@ -212,10 +215,10 @@ void TextBox::OnMouseMotion( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void TextBox::OnKeyUp( SDL_Event * event)
+void TextBox::OnKeyUp( Event * event)
 {
 
-	char c = 0; int key = event->key.keysym.sym;
+	char c = 0; int key = event->event_p->evt.key.keysym.sym;
 	
 	if(key>=SDLK_a&&key<=SDLK_z)
 		{

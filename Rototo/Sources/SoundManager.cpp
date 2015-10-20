@@ -41,6 +41,7 @@
 
 #include "ScriptManager.h"
 
+#include "SDL.h"
 
 /*----------------------------------------------------------------------------*/
 
@@ -290,10 +291,10 @@ void Sound::Load(const std::string & _file)
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
-static Uint64 lasttime32; 
+static unsigned long long lasttime32;
 void Sound::Play(int _nbLoops)
 {
-	Uint64 now = SDL_GetTicks();
+	unsigned long long now = SDL_GetTicks();
 
 	//SDL_Log("play at %lu\n", now- lasttime32);
 	lasttime32 = now ;

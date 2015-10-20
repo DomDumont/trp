@@ -27,6 +27,9 @@
 #include "Application.h"
 #include "Font.h"
 
+#include "Event_p.h"
+#include "Event.h"
+
 
 #include "binding/aswrappedcall.h"
 
@@ -36,6 +39,8 @@
 
 #include "ComboBox_p.h"
 
+#include "Event.h"
+#include "SDL.h"
 
 ComboBox_p::ComboBox_p()
 {
@@ -220,7 +225,7 @@ void ComboBox::Render()
 		//SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, (this->backgroundColor.a == 255) ? SDL_BLENDMODE_NONE : SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawColor(g_app->sdlRenderer,this->backgroundColor.r,this->backgroundColor.g,this->backgroundColor.b,this->backgroundColor.a);
-		SDL_RenderFillRect(g_app->sdlRenderer,&this->position);
+		SDL_RenderFillRect(g_app->sdlRenderer,(SDL_Rect *)&this->position);
 		
 		SDL_Rect sourceRect;
 		sourceRect.x = 0;
@@ -228,28 +233,28 @@ void ComboBox::Render()
 		sourceRect.h = this->position.h;
 		sourceRect.w = this->position.w;
 		
-		SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, &sourceRect, &this->position); // On copy la textuer
+		SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, (SDL_Rect *)&sourceRect, (SDL_Rect *)&this->position); // On copy la textuer
 		
 		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
 		}
 	else
 		{
 		// Closed State
-		SDL_Rect	closedPosition;
+		Rect	closedPosition;
 		closedPosition  = this->position;
 		closedPosition.h = this->sizeItemBG - 5; //Todo change this
 			
 		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_BLEND);
 		SDL_SetRenderDrawColor(g_app->sdlRenderer,this->backgroundColor.r,this->backgroundColor.g,this->backgroundColor.b,this->backgroundColor.a);
-		SDL_RenderFillRect(g_app->sdlRenderer,&closedPosition);
+		SDL_RenderFillRect(g_app->sdlRenderer, (SDL_Rect *)&closedPosition);
 		
-		SDL_Rect sourceRect;
+		Rect sourceRect;
 		sourceRect.x = 0;
 		sourceRect.y = this->selectedIndex * this->sizeItemBG;
 		sourceRect.h = this->sizeItemBG-5;
 		sourceRect.w = this->position.w;
 		
-		SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, &sourceRect, &closedPosition); // On copy la textuer
+		SDL_RenderCopy(g_app->sdlRenderer, this->bgTexture, (SDL_Rect *)&sourceRect, (SDL_Rect *)&closedPosition); // On copy la textuer
 		
 		SDL_SetRenderDrawBlendMode(g_app->sdlRenderer, SDL_BLENDMODE_NONE);
 		}
@@ -444,7 +449,7 @@ void ComboBox::BuildInternalTexture()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int ComboBox::OnMouseButtonDown( SDL_Event * event)
+int ComboBox::OnMouseButtonDown( Event * event)
 {
 	if (state == 1)
 		{
@@ -463,7 +468,7 @@ int ComboBox::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int ComboBox::OnMouseButtonUp( SDL_Event * event)
+int ComboBox::OnMouseButtonUp( Event * event)
 {
 	int ret = 0;
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox OnMouseButtonUp\n");
@@ -474,7 +479,7 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 		//Only Drag not motion
 		//Compute selected item
 		
-		this->selectedIndex = (int) ((this->offsetBG + event->button.y-this->position.y)/this->sizeItemBG);
+		this->selectedIndex = (int) ((this->offsetBG + event->event_p->evt.button.y-this->position.y)/this->sizeItemBG);
 		
 		if (this->selectedIndex > (int)labels.size())
 			this->selectedIndex = -1;
@@ -507,13 +512,13 @@ int ComboBox::OnMouseButtonUp( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void ComboBox::OnMouseMotion( SDL_Event * event)
+void ComboBox::OnMouseMotion( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"ComboBox OnMouseMotion\n");
 	if (this->dragState >= 1)
 	{
 		this->dragState = 2; //Drag + motion
-		offsetBG -= event->motion.yrel;
+		offsetBG -= event->event_p->evt.motion.yrel;
 		if (this->offsetBG<0) this->offsetBG = 0;
 		if (this->offsetBG>(sizeYBG-this->position.h)) this->offsetBG = (sizeYBG-this->position.h);
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"offsetBG = %d\n",this->offsetBG);

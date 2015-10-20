@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -40,6 +40,8 @@
 
 #include "Font_p.h"
 
+#include "SDL.h"
+
 Font *Font_Factory()
 {
     // The class constructor is initializing the reference counter to 1
@@ -70,6 +72,28 @@ Font::~Font()
 {
 }
 
+
+void Font::AddRef()
+{
+	// Increase the reference counter
+	refCount++;
+	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : 0x%x font nb active ref = %d\n", (unsigned int)this, refCount);
+}
+
+void Font::Release()
+{
+	// Decrease ref count and delete if it reaches 0
+	refCount--;
+	if (refCount == 0)
+		delete this;
+	else
+		if (refCount > 0)
+		{
+			//   SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Release : 0x%x font nb active refs = %d\n",(unsigned int) this, refCount);
+		}
+		else
+			SDL_assert(0);
+}
 
 float Font_p::GetFontHeight()
 {

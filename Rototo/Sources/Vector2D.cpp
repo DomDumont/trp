@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -36,6 +36,8 @@
 
 
 #include "ScriptManager.h"
+
+#include "SDL.h"
 
 Vector2D::Vector2D()
 {

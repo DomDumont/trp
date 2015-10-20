@@ -29,6 +29,8 @@
 #include <string>
 
 class Atlas;
+class SDL_Texture; //TODO change this
+#include "Rect.h"
 
 class AtlasEntry
 {
@@ -36,7 +38,7 @@ class AtlasEntry
 	
 	Atlas *		atlas;
 	std::string	name;
-	SDL_Rect	frame;
+	Rect		frame;
 
 	AtlasEntry()
 	{
@@ -62,28 +64,9 @@ class Atlas
 	void UnLoad();
 	AtlasEntry * FindEntry(const std::string& _name);
 
-	void AddRef()
-	{
-		// Increase the reference counter
-		refCount++;
-		//SDL_Log("Atlas 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
-	}
+	void AddRef();
 
-	void Release()
-	{
-		// Decrease ref count and delete if it reaches 0
-		refCount--;
-		if ( refCount == 0 )
-			delete this;
-		else
-		if ( refCount > 0 )
-		{
-		//SDL_Log("Atlas 0x%x Release : nb active ref = %d\n",(unsigned int)this,refCount);
-		}
-		else
-			SDL_assert(0);
-			
-	}
+	void Release();
 
 	public:
 	
@@ -94,7 +77,7 @@ class Atlas
 
 	//Now in utils.cpp std::string LoadString(const std::string& _sourceFile);
 	 
-	SDL_Rect	size;
+	Rect	size;
 	int		refCount;
 };
 

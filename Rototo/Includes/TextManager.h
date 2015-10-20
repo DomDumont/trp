@@ -28,6 +28,8 @@
 #include <map>
 #include <string>
 
+#include "Color.h"
+
 class TextManager
 {
 public:
@@ -44,7 +46,7 @@ public:
 
 public:
 	//TTF_Font *font;
-	SDL_Color color;
+	Color color;
 	
 private:
 	TextManager();

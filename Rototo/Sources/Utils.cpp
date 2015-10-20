@@ -51,6 +51,8 @@
 #include "ResourceManager.h"
 #include "GUIManager.h"
 
+#include "SDL.h"
+
 FILE *rwLogFile = NULL;
 
 /*----------------------------------------------------------------------------*/
@@ -399,7 +401,7 @@ void WND_SetOrientation(int _orientation)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Uint64 IO_Open(const std::string& _name,const std::string& _mode)
+unsigned long long IO_Open(const std::string& _name,const std::string& _mode)
 {
 	std::string modifiedFilename;
 
@@ -408,13 +410,13 @@ Uint64 IO_Open(const std::string& _name,const std::string& _mode)
 		{
 		SDL_RWops * handle;
 		handle = ResourceManager::Get().Load(modifiedFilename, GAMEDATA | BOTH);
-		return (Uint64)(handle);
+		return (unsigned long long)(handle);
 		}
 	else
 		{
 		SDL_RWops * handle;
 		handle = ResourceManager::Get().Save(modifiedFilename, GAMEDATA | BOTH);
-		return (Uint64)(handle);
+		return (unsigned long long)(handle);
 		}
 	return -1;
 }
@@ -423,7 +425,7 @@ Uint64 IO_Open(const std::string& _name,const std::string& _mode)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int  IO_WriteString(Uint64 _handle,const std::string& _string)
+int  IO_WriteString(unsigned long long _handle, const std::string& _string)
 {
 	unsigned int len = (unsigned int)_string.size();
 	
@@ -442,7 +444,7 @@ int  IO_WriteString(Uint64 _handle,const std::string& _string)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int  IO_ReadString(Uint64  _handle,std::string& _string)
+int  IO_ReadString(unsigned long long  _handle, std::string& _string)
 {
 	int len;
 	char *pBuffer;
@@ -463,7 +465,7 @@ int  IO_ReadString(Uint64  _handle,std::string& _string)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int  IO_WriteInt(Uint64 _handle,int _value)
+int  IO_WriteInt(unsigned long long _handle, int _value)
 {
 	if (_handle == 0)
 		return -1;
@@ -476,7 +478,7 @@ int  IO_WriteInt(Uint64 _handle,int _value)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int  IO_ReadInt(Uint64  _handle,int & _value)
+int  IO_ReadInt(unsigned long long  _handle, int & _value)
 {
 	int len;
 	
@@ -492,7 +494,7 @@ int  IO_ReadInt(Uint64  _handle,int & _value)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void IO_Close(Uint64 _handle)
+void IO_Close(unsigned long long _handle)
 {
 	int ret;
 	if (_handle != 0)
@@ -541,71 +543,74 @@ void WND_ClearWithColor(unsigned char _r,unsigned char _g,unsigned char _b,unsig
 	SDL_RenderClear(g_app->sdlRenderer);
 }
 
+
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops  *_flow,bool _freesrc)
-  {
-  int x, y, comp;
-  unsigned char *data;
 
-  if (_flow == NULL)
-    return NULL;
-  
-  int size = (int) SDL_RWsize(_flow);
-  
+SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops  *_flow, bool _freesrc)
+{
 
-  unsigned char *raw = new unsigned char[size];
-  SDL_RWread(_flow, raw, size, 1);
-  data = stbi_load_from_memory(raw,size, &x, &y, &comp, 0);
-  delete[] raw;
 
-  Uint32 rmask, gmask, bmask, amask;
+	int x, y, comp;
+	unsigned char *data;
 
-  /* SDL interprets each pixel as a 32-bit number, so our masks must depend
-  on the endianness (byte order) of the machine */
+	if (_flow == NULL)
+		return NULL;
+
+	int size = (int)SDL_RWsize(_flow);
+
+
+	unsigned char *raw = new unsigned char[size];
+	SDL_RWread(_flow, raw, size, 1);
+	data = stbi_load_from_memory(raw, size, &x, &y, &comp, 0);
+	delete[] raw;
+
+	Uint32 rmask, gmask, bmask, amask;
+
+	/* SDL interprets each pixel as a 32-bit number, so our masks must depend
+	on the endianness (byte order) of the machine */
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-  rmask = 0xff000000;
-  gmask = 0x00ff0000;
-  bmask = 0x0000ff00;
-  amask = 0x000000ff;
+	rmask = 0xff000000;
+	gmask = 0x00ff0000;
+	bmask = 0x0000ff00;
+	amask = 0x000000ff;
 #else
-  rmask = 0x000000ff;
-  gmask = 0x0000ff00;
-  bmask = 0x00ff0000;
-  amask = 0xff000000;
+	rmask = 0x000000ff;
+	gmask = 0x0000ff00;
+	bmask = 0x00ff0000;
+	amask = 0xff000000;
 #endif
 
-  SDL_Surface *surface;
+	SDL_Surface *surface;
 
-  if (comp == 4)
-    {
-    surface = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
-    }
-  else if (comp == 3)
-    {
-    surface = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
-    }
-  else
-    {
-    stbi_image_free(data);
-    return 0;
-    }
+	if (comp == 4)
+	{
+		surface = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+	}
+	else if (comp == 3)
+	{
+		surface = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+	}
+	else
+	{
+		stbi_image_free(data);
+		return 0;
+	}
 
-  memcpy(surface->pixels, data, comp * x * y);
-  stbi_image_free(data);
+	memcpy(surface->pixels, data, comp * x * y);
+	stbi_image_free(data);
 
-  SDL_Texture *texture = SDL_CreateTextureFromSurface(_renderer, surface);
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(_renderer, surface);
 
-  if (texture == NULL)
-    {
-    //fprintf(stderr, "CreateTextureFromSurface failed: %s\n", SDL_GetError());
-    }
+	if (texture == NULL)
+	{
+		//fprintf(stderr, "CreateTextureFromSurface failed: %s\n", SDL_GetError());
+	}
 
-  SDL_FreeSurface(surface);
-  surface = NULL;
-  return texture;
-  }
+	SDL_FreeSurface(surface);
+	surface = NULL;
+	return texture;
+}
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/

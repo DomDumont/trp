@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -32,6 +32,36 @@
 
 
 #include "ScriptManager.h"
+
+#include "SDL.h"
+
+
+/*----------------------------------------------------------------------------*/
+void Widget::AddRef()
+{
+	// Increase the reference counter
+	refCount++;
+	//printf("Widget 0x%x AddRef : nb active ref = %d\n",(unsigned int)this,refCount);
+}
+
+/*----------------------------------------------------------------------------*/
+void Widget::Release()
+{
+	// Decrease ref count and delete if it reaches 0
+	refCount--;
+	if (refCount == 0)
+	{
+		printf("deleted\n");
+		delete this;
+	}
+	else
+		if (refCount > 0)
+		{
+			//printf("Widget 0x%x Release : nb active ref = %d\n",(unsigned int)this, refCount);
+		}
+		else
+			SDL_assert(0);
+}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -312,7 +342,7 @@ void Widget::Update(unsigned int _elapsed)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int Widget::OnMouseButtonDown( SDL_Event * event)
+int Widget::OnMouseButtonDown( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget OnMouseButtonDown\n");
 	return false;
@@ -322,7 +352,7 @@ int Widget::OnMouseButtonDown( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-int Widget::OnMouseButtonUp( SDL_Event * event)
+int Widget::OnMouseButtonUp( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget OnMouseButtonUp\n");
 	return false;
@@ -332,7 +362,7 @@ int Widget::OnMouseButtonUp( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Widget::OnMouseMotion( SDL_Event * event)
+void Widget::OnMouseMotion( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget OnMouseMotion\n");
 }
@@ -341,7 +371,7 @@ void Widget::OnMouseMotion( SDL_Event * event)
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Widget::OnKeyUp( SDL_Event * event)
+void Widget::OnKeyUp( Event * event)
 {
 	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Widget OnMouseMotion\n");
 }

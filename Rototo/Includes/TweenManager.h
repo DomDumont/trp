@@ -178,24 +178,9 @@ public :
 		targetValue = 0;
 		}
 
-	void AddRef()
-	{
-		// Increase the reference counter
-		refCount++;
-	}
-	void Release()
-	{
-		// Decrease ref count and delete if it reaches 0
-        refCount --;
-		if (refCount == 0 )
-			delete this;
-        else
-        if (refCount > 0 )
-  		    SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"AddRef : nb active TweenedFloat  = %d\n",refCount);
-        else
-            SDL_assert(0);
+	void AddRef();
+	void Release();
 
-	}
 
 public:
 	float initialValue;
@@ -271,24 +256,9 @@ public:
 	this->properties.clear();
 	}
 
-	void AddRef()
-	{
-		// Increase the reference counter
-		refCount++;
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"AddRef : nb active tweens = %d\n",refCount);
-	}
-	void Release()
-	{
-		// Decrease ref count and delete if it reaches 0
-        refCount--;
-		if ( refCount == 0 )
-			delete this;
-		else
-        if ( refCount > 0 )
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Release : nb active tweens = %d\n",refCount);
-        else
-            SDL_assert(0);
-	}
+	void AddRef();
+	void Release();
+
 	void Init(float _duration,int _effect,int _easeMode);
 
 	void AddProp(TweenedFloat * _toto)

@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -38,6 +38,7 @@
 
 #include "ScriptManager.h"
 
+#include "SDL.h"
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -86,7 +87,7 @@ Sprite *Sprite_Factory()
 
 Sprite::Sprite() : nine_patch(false)
 {
-	SDL_Color tempColor = {255,255,255,255 };
+	Color tempColor = {255,255,255,255 };
 	this->color = tempColor;
 
 this->atlas = NULL;
@@ -223,7 +224,7 @@ if ((this->entry) && (this->entry->atlas->texture))
 	SDL_SetTextureAlphaMod(this->entry->atlas->texture,this->color.a);
 	if (nine_patch == false)
 	{
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &this->frame, &this->position,this->angle,NULL,SDL_FLIP_NONE);
+		SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture, (SDL_Rect*)&this->frame, (SDL_Rect*)&this->position, this->angle, NULL, SDL_FLIP_NONE);
 	}
 	else
 	{
@@ -367,7 +368,7 @@ if ((this->entry) && (this->entry->atlas->texture))
 
 void Sprite::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigned char _a)
 {
-	SDL_Color tempColor = { _r, _g, _b, _a };
+	Color tempColor = { _r, _g, _b, _a };
 	color = tempColor;
 	//if (this->texture)
 	//	SDL_SetTextureAlphaMod(this->texture,_a);

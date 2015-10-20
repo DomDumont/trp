@@ -27,7 +27,9 @@ available: visit veed.fr for more information.
 #include "Application.h"
 #include "Font.h"
 #include "Font_p.h"
+#include "Color.h"
 
+#include "SDL.h"
 
 Renderer& Renderer::Get() {
 	static Renderer renderer;
@@ -39,7 +41,7 @@ Renderer::Renderer()
 
 }
 
-SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, SDL_Color _color)
+SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color _color)
 {
 	float extX;
 	float extY;

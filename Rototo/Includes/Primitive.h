@@ -26,6 +26,9 @@
 #define __PRIMITIVE_H__
 
 #include "Widget.h"
+#include "Color.h"
+
+class SDL_Texture; //TODO remove this
 
 class Primitive : public Widget
 {
@@ -46,8 +49,8 @@ private:
 public:
 
 	SDL_Texture *   bgTexture;
-	SDL_Color	    color;
-	SDL_Color	    colorBG;
+	Color		    color;
+	Color		    colorBG;
     int             shape;
     int             startAngle;
     int             endAngle;

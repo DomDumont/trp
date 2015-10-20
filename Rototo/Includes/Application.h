@@ -34,6 +34,8 @@
 #include "Settings.h"
 
 
+
+
 #include <memory>
 
 
@@ -51,6 +53,12 @@
 #define DONECODE_RESTART_ONLY 2
 
 class Application_p;
+
+class SDL_Window; //TODO change this
+class SDL_Renderer;//TODO change this
+
+class Event;
+
 class Application
 {
 public:
@@ -65,7 +73,7 @@ public:
 
 	int		Run();
 	void	Shutdown();
-	void	HandleEvent( SDL_Event * event, Uint32 *done);
+	void	HandleEvent( Event * event, unsigned short *done);
 
 #ifdef TRP_ANDROID
 	void	PrepareAndroidEnvironment();
@@ -99,7 +107,7 @@ public:
 
 	std::string			platform;
 	
-	Uint32				doneCode;
+	unsigned short		doneCode;
 
 	int					orientation;
 
@@ -110,7 +118,7 @@ public:
 
 
 private:
-	SDL_Event			event;
+	Event				*event;
 	std::string			title;
 
 

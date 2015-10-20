@@ -30,11 +30,13 @@
 #include <string>
 #include <vector>
 #include "Widget.h"
+#include "Color.h"
 
 class Font;
 class Sprite;
 class Atlas;
 
+class Event;
 
 class GUIManager
 {
@@ -46,7 +48,7 @@ public:
 	
 	void Init		();
 	void Shutdown		();
-	void HandleEvent	( SDL_Event * event);
+	void HandleEvent	( Event * event);
 	void AddWidget		(Widget *_widget);
 	void RemoveWidget	(Widget *_widget);
 	void LoadTheme		(const std::string& _file);
@@ -74,9 +76,9 @@ public:
 	Sprite			*radiobox_down;
 	Sprite			*radiobox_disable;
 
-	SDL_Color		primary_text_color;
-	SDL_Color		disable_text_color;
-	SDL_Color		background_color;
+	Color		primary_text_color;
+	Color		disable_text_color;
+	Color		background_color;
 
 private:
 

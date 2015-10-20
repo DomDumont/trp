@@ -26,9 +26,10 @@
 #define __LABEL_H__
 
 #include "Widget.h"
+#include "Color.h"
 
 class Font;
-
+class SDL_Texture;
 class Label : public Widget
 {
 public:
@@ -54,10 +55,10 @@ public:
 	Font	*		font;
 	SDL_Texture *		texture;
 
-	SDL_Color		primary_text_color;
-	SDL_Color		disable_text_color;
+	Color		primary_text_color;
+	Color		disable_text_color;
+	Color		color_background;
 
-	SDL_Color		color_background;
 	std::string 		text;
 private:
 	

@@ -31,6 +31,8 @@
 #include "Application.h"
 
 
+#include "SDL.h"
+
 /*----------------------------------------------------------------------------*/
 
 ResourceManager& ResourceManager::Get()

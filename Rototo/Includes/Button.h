@@ -49,6 +49,8 @@
 class Button_p;
 class CScriptHandle;
 class asIScriptFunction;
+class Event;
+
 class Button : public Widget
 {
 public:
@@ -69,7 +71,7 @@ public:
 	void SetRotation	(float _angle);
 	void SetScale(float _xFactor, float _yFactor);
 	void SetEnabled		(bool _value);
-	int  OnMouseButtonDown	( SDL_Event * event);
+	int  OnMouseButtonDown	( Event * event);
 	void SetType		(int _type);
 	void SetState		(int _state);
 

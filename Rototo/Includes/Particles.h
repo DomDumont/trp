@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -26,6 +26,8 @@
 #define __PARTICLES_H__
 
 #include <vector>
+#include "Color.h"
+#include "Rect.h"
 
 class Atlas;
 class AtlasEntry;
@@ -39,9 +41,9 @@ class Particle
 public:
     double		angle;
     int         TTL;
-    SDL_Color		color;
-    SDL_Rect	frame;
-    SDL_Rect	position;
+    Color		color;
+    Rect		frame;
+    Rect		position;
     double      velocityX, velocityY;
     double      angularVelocity;
     AtlasEntry	*entry;
@@ -66,28 +68,9 @@ public:
     ~Emitter();
     Emitter(const Emitter &other);
 
-    void AddRef()
-    {
-        // Increase the reference counter
-        refCount++;
-        //SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter 0x%x AddRef : nb active Emitter = %d\n",(unsigned int)this,refCount);
-    }
+	void AddRef();
 
-    void Release()
-    {
-        // Decrease ref count and delete if it reaches 0
-        refCount--;
-        if ( refCount == 0 )
-            delete this;
-        else
-            if ( refCount > 0 )
-            {
-             //   SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter 0x%x Release : nb active Emitter = %d\n",(unsigned int)this,refCount);
-            }
-            else
-                SDL_assert(0);
-
-    }
+	void Release();
 
     void Load(Atlas * _atlas,const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
 
@@ -104,8 +87,8 @@ private:
     AtlasEntry	*entry;
     float       emissionRate;
     std::string textureName;
-    SDL_Rect	frame;
-    SDL_Rect	position;
+    Rect		frame;
+    Rect		position;
     int         TTL;
 };
 

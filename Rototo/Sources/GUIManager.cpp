@@ -35,6 +35,8 @@
 #include "Sprite.h"
 #include "Atlas.h"
 
+#include "Event_p.h"
+#include "Event.h"
 
 #include "binding/aswrappedcall.h"
 
@@ -42,6 +44,8 @@
 #include "ScriptManager.h"
 
 #include "ResourceManager.h"
+
+#include "SDL.h"
 
 /*----------------------------------------------------------------------------*/
 
@@ -130,9 +134,9 @@ void GUIManager::Shutdown()
 
 /*----------------------------------------------------------------------------*/
 
-void GUIManager::HandleEvent( SDL_Event * event)
+void GUIManager::HandleEvent( Event * event)
 {
-	switch (event->type) 
+	switch (event->event_p->evt.type) 
 	{
 	case SDL_MOUSEBUTTONDOWN:
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Nb Widgets = %d\n",widgets.size());
@@ -141,7 +145,7 @@ void GUIManager::HandleEvent( SDL_Event * event)
 			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Pouet Pouet %d\n",widgets.size());
 			Widget *pTemp;
 			pTemp = *widgetsIT;
-			if (pTemp->Touched(event->button.x,event->button.y))
+			if (pTemp->Touched(event->event_p->evt.button.x, event->event_p->evt.button.y))
 				{
 				if (pTemp->OnMouseButtonDown(event) != 0)
 					break;
