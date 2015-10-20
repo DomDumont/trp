@@ -20,7 +20,6 @@ Open Source License
    WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
    A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-   -----------------------------------------------------------------------------
 
    To release a closed-source product which uses T.R.P., commercial licenses are
    available: visit veed.fr for more information.

@@ -136,7 +136,7 @@ see OutputDebugString (and eventually turn on the verbose mode)
 
 Use the application Dbgview.exe located in the Tools directory
 
-`Download it Here <http://technet.microsoft.com/en-us/sysinternals/bb896647.aspx>`_
+`Dbgview <http://technet.microsoft.com/en-us/sysinternals/bb896647.aspx>`_
 
 * Under OSX
 
@@ -149,13 +149,13 @@ If you only want to see your logs, it's easier to turn on the logtofile option
 and use a file logger to see trp.log modifications in real time.
 For example you can use the free version of BareTail
 
-`Download it Here <http://www.baremetalsoft.com/baretail/index.php>`_
+`baretail <http://www.baremetalsoft.com/baretail/index.php>`_
 
 
 or Glogg 
 
 
-`Download it Here <http://glogg.bonnefon.org/>`_
+`glogg <http://glogg.bonnefon.org/>`_
 
 
 
