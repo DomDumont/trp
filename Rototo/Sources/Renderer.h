@@ -27,7 +27,7 @@ available: visit veed.fr for more information.
 
 class Font;
 class Color;
-class SDL_Texture; //TODO change this
+struct SDL_Texture; //TODO change this
 
 class Renderer
 {

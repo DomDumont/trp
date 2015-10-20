@@ -29,7 +29,7 @@
 #include <string>
 
 class Atlas;
-class SDL_Texture; //TODO change this
+struct SDL_Texture; //TODO change this
 #include "Rect.h"
 
 class AtlasEntry

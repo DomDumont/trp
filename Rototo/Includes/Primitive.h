@@ -28,7 +28,7 @@
 #include "Widget.h"
 #include "Color.h"
 
-class SDL_Texture; //TODO remove this
+struct SDL_Texture; //TODO remove this
 
 class Primitive : public Widget
 {

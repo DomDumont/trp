@@ -88,9 +88,9 @@ int  IO_ReadInt(unsigned long long _handle, int& _value);
 void IO_Close(unsigned long long  _handle);
 
 
-class SDL_Texture;
-class SDL_Renderer;
-class SDL_RWops;
+struct SDL_Texture;
+struct SDL_Renderer;
+struct SDL_RWops;
 //TODO should definitely not be here
 SDL_Texture * IMG_LoadTexture_RW(SDL_Renderer * _renderer, SDL_RWops * _flow, bool _freesrc);
 

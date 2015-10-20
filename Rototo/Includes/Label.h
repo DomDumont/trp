@@ -29,7 +29,7 @@
 #include "Color.h"
 
 class Font;
-class SDL_Texture;
+struct SDL_Texture;
 class Label : public Widget
 {
 public:

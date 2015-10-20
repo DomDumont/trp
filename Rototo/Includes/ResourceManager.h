@@ -38,7 +38,7 @@ enum ResourceManagerFlags
     BOTH       = 12 // Both internal & external
 };
 
-class SDL_RWops; //TODO certainly remove this one also
+struct SDL_RWops; //TODO certainly remove this one also
 
 class ResourceManager
 {

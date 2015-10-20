@@ -27,7 +27,7 @@ available: visit veed.fr for more information.
 
 #include "stb_truetype.h"
 
-class SDL_Texture; //TODO remove this one
+struct SDL_Texture; //TODO remove this one
 
 class Font_p
 {

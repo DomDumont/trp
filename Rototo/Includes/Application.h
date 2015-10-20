@@ -54,8 +54,8 @@
 
 class Application_p;
 
-class SDL_Window; //TODO change this
-class SDL_Renderer;//TODO change this
+struct SDL_Window; //TODO change this
+struct SDL_Renderer;//TODO change this
 
 class Event;
 
