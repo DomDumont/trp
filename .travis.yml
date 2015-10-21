@@ -30,7 +30,7 @@ before_script:
   - cmake ..
 
 script: 
-  - make
+  - if ! [ $TRP_DOC ]; then make; fi
   - if [ $TRP_DOC ]; then cd ../Web; make clean;make html;cd ..; fi
 
 deploy:
