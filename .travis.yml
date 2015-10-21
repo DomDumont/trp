@@ -1,52 +1,42 @@
 language: cpp
-
 compiler:
-  - gcc
-  - clang
-
+- gcc
+- clang
 os:
-  - linux
-  - osx
-  
+- linux
+- osx
 matrix:
   include:
   - os: linux
     env: TRP_DOC=1
-
 install:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa -y; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
-  
-
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
-  - if [ $TRP_DOC ]; then sudo apt-get install python-sphinx; fi
-
-
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa
+  -y; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
+- if [ $TRP_DOC ]; then sudo apt-get install python-sphinx; fi
 before_script:
-  - mkdir Build
-  - cd Build
-  - cmake ..
-
-script: 
-  - if ! [ $TRP_DOC ]; then make; fi
-  - if [ $TRP_DOC ]; then cd ../Web; make clean;make html;sudo chmod +x ./deploy-ghpages.sh;./deploy-ghpages.sh;cd ..; fi
-
+- mkdir Build
+- cd Build
+- cmake ..
+script:
+- if ! [ $TRP_DOC ]; then make; fi
+- if [ $TRP_DOC ]; then cd ../Web; make clean;make html;sudo chmod +x ./deploy-ghpages.sh;./deploy-ghpages.sh;cd
+  ..; fi
 deploy:
   provider: releases
-
   api_key:
     secure: CTQ9kAUprr9cGiUcRdHvk1h3O6CWGf+f0CI/y6dWQqpRWi0jzdPbZQTvXByz/QpJKJsJF80qlNbxC+hmvU9sEGqgOlnCu1LYxZM8R4/TTuYfu44eIh0qQCrJelXZBOm74PBsYEZ5SAujnvPIRlTQA157PVdseumCYX6BXwnr1xw=
-
   skip_cleanup: true
-
-  file: 
-    - "Docs/en/out/trp-manual.docx"
-    - "Docs/en/out/trp-manual.html"
-
-
+  file:
+  - Docs/en/out/trp-manual.docx
+  - Docs/en/out/trp-manual.html
   on:
     repo: DomDumont/trp
     tags: true
     all_branches: true
+env:
+  global:
+    secure: GpAAZGcxKPf9JB95mA5DBUE6lfbl0giDoSjI2RUMSDP1iJeYq2qTcK5lMxLrIzLP4HmlRzgvKZYYV9Oiuvvicg7ZInhWSiSSaTbpzcfUJuXEeCVGtmjJ/yBHYEuryOfd83KYuWkMT6WaDeuTEGnHa03OuyGXySW0fa7Z0Wtxqus=
