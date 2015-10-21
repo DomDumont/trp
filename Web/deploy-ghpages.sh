@@ -1,6 +1,7 @@
 #!/bin/bash
 (
 cd _build/html
+touch .nojekyll
 git init
 git config user.name "Travis-CI"
 git config user.email "travis@travis.com"
