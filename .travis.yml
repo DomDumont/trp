@@ -31,9 +31,9 @@ before_script:
 script: 
   - make
   - cd ../Web
-  - ./make clean
-  - ./make html
-  - cd ../..
+  - make clean
+  - make html
+  - cd ..
 
 deploy:
   provider: releases
