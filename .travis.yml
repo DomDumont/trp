@@ -11,7 +11,7 @@ os:
 matrix:
   include:
   - os: linux
-    env: TRP_DOC=true
+    env: TRP_DOC=1
 
 install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa -y; fi
@@ -21,7 +21,7 @@ install:
 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
-  - if [$TRP_DOC]; then sudo apt-get install python-sphinx; fi
+  - if [ $TRP_DOC ]; then sudo apt-get install python-sphinx; fi
 
 
 before_script:
@@ -31,7 +31,7 @@ before_script:
 
 script: 
   - make
-  - if [$TRP_DOC]; then cd ../Web; make clean;make html;cd ..; fi
+  - if [ $TRP_DOC ]; then cd ../Web; make clean;make html;cd ..; fi
 
 deploy:
   provider: releases
