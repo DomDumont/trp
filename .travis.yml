@@ -31,7 +31,7 @@ before_script:
 
 script: 
   - if ! [ $TRP_DOC ]; then make; fi
-  - if [ $TRP_DOC ]; then cd ../Web; make clean;make html;cd ..; fi
+  - if [ $TRP_DOC ]; then cd ../Web; make clean;make html;deploy-ghpages.sh;cd ..; fi
 
 deploy:
   provider: releases
