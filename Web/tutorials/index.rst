@@ -11,6 +11,11 @@ Tutorials
 Basic principle
 ================
 
+T.R.P is a c++ library but a special one ;-)
+You can use it like a classic library from your c++ code
+But you can also use it throught a a script langage.
+
+
 T.R.P. use a script langage(AngelScript)
 and search for its data in the gamedata directory (at the same level as the executable directory).
 If you want to use another folder (or if you work on multiple projects), you can indicate your

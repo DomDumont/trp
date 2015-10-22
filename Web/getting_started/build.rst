@@ -14,7 +14,7 @@ Emscripten
 
 	mkdir Build
 	cd Build
-	cmake -G "MinGW Makefiles" ..
+	emconfigure cmake -G "MinGW Makefiles" ..
 	cmake --build .
 
 
