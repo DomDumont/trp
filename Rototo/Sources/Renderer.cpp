@@ -29,6 +29,9 @@ available: visit veed.fr for more information.
 #include "Font_p.h"
 #include "Color.h"
 
+#include "Atlas.h"
+#include "Sprite.h"
+
 #include "SDL.h"
 
 Renderer& Renderer::Get() {
@@ -40,6 +43,158 @@ Renderer::Renderer()
 {
 
 }
+
+void Renderer::RenderSprite(Sprite * _sprite)
+{
+
+
+	if (_sprite->shown == false)
+		return;
+	if ((_sprite->entry) && (_sprite->entry->atlas->texture))
+	{
+		SDL_SetTextureColorMod(_sprite->entry->atlas->texture, _sprite->color.r, _sprite->color.g, _sprite->color.b);
+		SDL_SetTextureAlphaMod(_sprite->entry->atlas->texture, _sprite->color.a);
+		if (_sprite->nine_patch == false)
+		{
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, (SDL_Rect*)&_sprite->frame, (SDL_Rect*)&_sprite->position, _sprite->angle, NULL, SDL_FLIP_NONE);
+		}
+		else
+		{
+			SDL_Rect src_rect;
+			SDL_Rect dst_rect;
+
+			int src_w = _sprite->frame.w - (_sprite->nine_rect.x + _sprite->nine_rect.w);
+			int src_h = _sprite->frame.h - (_sprite->nine_rect.y + _sprite->nine_rect.h);
+
+			int dst_w = _sprite->position.w - (_sprite->frame.w - _sprite->nine_rect.w);
+			int dst_h = _sprite->position.h - (_sprite->frame.h - _sprite->nine_rect.h);
+
+			// 0  1 2
+			// 3  4 5
+			// 6  7 8
+
+			//OK 0
+			src_rect.x = _sprite->frame.x;
+			src_rect.y = _sprite->frame.y;
+			src_rect.w = _sprite->nine_rect.x;
+			src_rect.h = _sprite->nine_rect.y;
+
+			dst_rect.x = _sprite->position.x;
+			dst_rect.y = _sprite->position.y;
+			dst_rect.w = _sprite->nine_rect.x;
+			dst_rect.h = _sprite->nine_rect.y;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 1
+			src_rect.x = _sprite->frame.x + _sprite->nine_rect.x;
+			src_rect.y = _sprite->frame.y;
+			src_rect.w = _sprite->nine_rect.w;
+			src_rect.h = _sprite->nine_rect.y;
+
+			dst_rect.x = _sprite->position.x + _sprite->nine_rect.x;
+			dst_rect.y = _sprite->position.y;
+			dst_rect.w = dst_w;
+			dst_rect.h = _sprite->nine_rect.y;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 2
+			src_rect.x = _sprite->frame.x + _sprite->nine_rect.x + _sprite->nine_rect.w; //OK
+			src_rect.y = _sprite->frame.y; //OK
+			src_rect.w = src_w; //OK
+			src_rect.h = _sprite->nine_rect.y; //OK
+
+			dst_rect.x = _sprite->position.x + _sprite->nine_rect.x + dst_w;
+			dst_rect.y = _sprite->position.y;
+			dst_rect.w = src_w;
+			dst_rect.h = _sprite->nine_rect.y; //OK
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 3
+			src_rect.x = _sprite->frame.x; //OK
+			src_rect.y = _sprite->frame.y + _sprite->nine_rect.y; //OK
+			src_rect.w = _sprite->nine_rect.x;
+			src_rect.h = _sprite->nine_rect.h;
+
+			dst_rect.x = _sprite->position.x; //OK
+			dst_rect.y = _sprite->position.y + _sprite->nine_rect.y; //OK
+			dst_rect.w = _sprite->nine_rect.x;
+			dst_rect.h = dst_h;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 4
+			src_rect.x = _sprite->frame.x + _sprite->nine_rect.x; //OK
+			src_rect.y = _sprite->frame.y + _sprite->nine_rect.y; //OK
+			src_rect.w = _sprite->nine_rect.w;
+			src_rect.h = _sprite->nine_rect.h;
+
+			dst_rect.x = _sprite->position.x + +_sprite->nine_rect.x; //OK
+			dst_rect.y = _sprite->position.y + _sprite->nine_rect.y; //OK
+			dst_rect.w = dst_w;
+			dst_rect.h = dst_h;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 5
+			src_rect.x = _sprite->frame.x + _sprite->nine_rect.x + _sprite->nine_rect.w; //OK
+			src_rect.y = _sprite->frame.y + _sprite->nine_rect.y; //OK
+			src_rect.w = src_w; //OK
+			src_rect.h = _sprite->nine_rect.h; //OK
+
+			dst_rect.x = _sprite->position.x + _sprite->nine_rect.x + dst_w;
+			dst_rect.y = _sprite->position.y + _sprite->nine_rect.y;
+			dst_rect.w = src_w;
+			dst_rect.h = dst_h; //OK
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 6
+			src_rect.x = _sprite->frame.x; //OK
+			src_rect.y = _sprite->frame.y + _sprite->nine_rect.y + _sprite->nine_rect.h; //OK
+			src_rect.w = _sprite->nine_rect.x;
+			src_rect.h = src_h;
+
+			dst_rect.x = _sprite->position.x; //OK
+			dst_rect.y = _sprite->position.y + _sprite->nine_rect.y + dst_h; //OK
+			dst_rect.w = _sprite->nine_rect.x;
+			dst_rect.h = src_h;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 7
+			src_rect.x = _sprite->frame.x + _sprite->nine_rect.x; //OK
+			src_rect.y = _sprite->frame.y + _sprite->nine_rect.y + _sprite->nine_rect.h; //OK
+			src_rect.w = _sprite->nine_rect.w;
+			src_rect.h = src_h;
+
+			dst_rect.x = _sprite->position.x + +_sprite->nine_rect.x; //OK
+			dst_rect.y = _sprite->position.y + _sprite->nine_rect.y + dst_h; //OK
+			dst_rect.w = dst_w;
+			dst_rect.h = src_h;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+
+			//OK 8
+			src_rect.x = _sprite->frame.x + _sprite->nine_rect.x + _sprite->nine_rect.w; //OK
+			src_rect.y = _sprite->frame.y + _sprite->nine_rect.y + _sprite->nine_rect.h; //OK
+			src_rect.w = src_w; //OK
+			src_rect.h = src_h;
+
+			dst_rect.x = _sprite->position.x + _sprite->nine_rect.x + dst_w;
+			dst_rect.y = _sprite->position.y + _sprite->nine_rect.y + dst_h; //OK
+			dst_rect.w = src_w;
+			dst_rect.h = src_h;
+
+			SDL_RenderCopyEx(g_app->sdlRenderer, _sprite->entry->atlas->texture, &(src_rect), &(dst_rect), 0, NULL, SDL_FLIP_NONE);
+		}
+
+	}
+
+}
+
 
 SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color _color)
 {

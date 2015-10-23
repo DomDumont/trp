@@ -36,6 +36,8 @@ class AtlasEntry;
 
 class Sprite : public Widget
 {
+	friend class Renderer;
+
 public:
 	
 	Sprite();

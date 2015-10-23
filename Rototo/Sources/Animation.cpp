@@ -294,7 +294,7 @@ if (this->playing != 0)
 
 void Animation::Render()
 {
-	Widget::Render();
+	//Widget::Render();
 	if (this->shown == false)
 		return;
 

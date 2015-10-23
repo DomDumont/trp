@@ -40,6 +40,8 @@
 
 #include "SDL.h"
 
+#include "Renderer.h"
+
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
@@ -209,161 +211,14 @@ void Sprite::Load(Atlas * _atlas, const std::string& _name)
 }
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
+
 
 void Sprite::Render()
 {
-	
-	Widget::Render();
-if (this->shown == false)
-	return;
-if ((this->entry) && (this->entry->atlas->texture))
-	{
-	SDL_SetTextureColorMod(this->entry->atlas->texture,this->color.r,this->color.g,this->color.b);
-	SDL_SetTextureAlphaMod(this->entry->atlas->texture,this->color.a);
-	if (nine_patch == false)
-	{
-		SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture, (SDL_Rect*)&this->frame, (SDL_Rect*)&this->position, this->angle, NULL, SDL_FLIP_NONE);
-	}
-	else
-	{
-	SDL_Rect src_rect;
-	SDL_Rect dst_rect;
-
-	int src_w = this->frame.w - (this->nine_rect.x + this->nine_rect.w);
-	int src_h = this->frame.h - (this->nine_rect.y + this->nine_rect.h);
-
-	int dst_w = this->position.w - (this->frame.w - this->nine_rect.w);
-	int dst_h = this->position.h - (this->frame.h - this->nine_rect.h);
-
-	// 0  1 2
-	// 3  4 5
-	// 6  7 8
-
-	//OK 0
-	src_rect.x = this->frame.x;
-	src_rect.y = this->frame.y;
-	src_rect.w = this->nine_rect.x;
-	src_rect.h = this->nine_rect.y;
-
-	dst_rect.x = this->position.x;
-	dst_rect.y = this->position.y;
-	dst_rect.w = this->nine_rect.x;
-	dst_rect.h = this->nine_rect.y;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 1
-	src_rect.x = this->frame.x + this->nine_rect.x;
-	src_rect.y = this->frame.y;
-	src_rect.w = this->nine_rect.w;
-	src_rect.h = this->nine_rect.y;
-
-	dst_rect.x = this->position.x + this->nine_rect.x;
-	dst_rect.y = this->position.y;
-	dst_rect.w = dst_w;
-	dst_rect.h = this->nine_rect.y;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 2
-	src_rect.x = this->frame.x + this->nine_rect.x + this->nine_rect.w; //OK
-	src_rect.y = this->frame.y; //OK
-	src_rect.w = src_w; //OK
-	src_rect.h = this->nine_rect.y; //OK
-
-	dst_rect.x = this->position.x + this->nine_rect.x + dst_w;
-	dst_rect.y = this->position.y;
-	dst_rect.w = src_w ;
-	dst_rect.h = this->nine_rect.y; //OK
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 3
-	src_rect.x = this->frame.x; //OK
-	src_rect.y = this->frame.y+ this->nine_rect.y; //OK
-	src_rect.w = this->nine_rect.x;
-	src_rect.h = this->nine_rect.h;
-
-	dst_rect.x = this->position.x ; //OK
-	dst_rect.y = this->position.y+ this->nine_rect.y; //OK
-	dst_rect.w = this->nine_rect.x;
-	dst_rect.h = dst_h;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 4
-	src_rect.x = this->frame.x+ this->nine_rect.x; //OK
-	src_rect.y = this->frame.y+ this->nine_rect.y; //OK
-	src_rect.w = this->nine_rect.w;
-	src_rect.h = this->nine_rect.h;
-
-	dst_rect.x = this->position.x + + this->nine_rect.x; //OK
-	dst_rect.y = this->position.y+ this->nine_rect.y; //OK
-	dst_rect.w = dst_w;
-	dst_rect.h = dst_h;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 5
-	src_rect.x = this->frame.x + this->nine_rect.x + this->nine_rect.w; //OK
-	src_rect.y = this->frame.y  + this->nine_rect.y; //OK
-	src_rect.w = src_w; //OK
-	src_rect.h = this->nine_rect.h; //OK
-
-	dst_rect.x = this->position.x + this->nine_rect.x + dst_w;
-	dst_rect.y = this->position.y  + this->nine_rect.y;
-	dst_rect.w = src_w ;
-	dst_rect.h = dst_h; //OK
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 6
-	src_rect.x = this->frame.x; //OK
-	src_rect.y = this->frame.y+ this->nine_rect.y + this->nine_rect.h; //OK
-	src_rect.w = this->nine_rect.x;
-	src_rect.h = src_h;
-
-	dst_rect.x = this->position.x ; //OK
-	dst_rect.y = this->position.y+ this->nine_rect.y + dst_h; //OK
-	dst_rect.w = this->nine_rect.x;
-	dst_rect.h = src_h;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 7
-	src_rect.x = this->frame.x+ this->nine_rect.x; //OK
-	src_rect.y = this->frame.y+ this->nine_rect.y + this->nine_rect.h; //OK
-	src_rect.w = this->nine_rect.w;
-	src_rect.h = src_h;
-
-	dst_rect.x = this->position.x + + this->nine_rect.x; //OK
-	dst_rect.y = this->position.y+ this->nine_rect.y + dst_h; //OK
-	dst_rect.w = dst_w;
-	dst_rect.h = src_h;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-
-	//OK 8
-	src_rect.x = this->frame.x + this->nine_rect.x + this->nine_rect.w; //OK
-	src_rect.y = this->frame.y+ this->nine_rect.y + this->nine_rect.h; //OK
-	src_rect.w = src_w; //OK
-	src_rect.h = src_h;
-
-	dst_rect.x = this->position.x + this->nine_rect.x + dst_w;
-	dst_rect.y = this->position.y+ this->nine_rect.y + dst_h; //OK
-	dst_rect.w = src_w ;
-	dst_rect.h = src_h;
-
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->entry->atlas->texture , &(src_rect), &(dst_rect),0,NULL,SDL_FLIP_NONE);
-	}
-	
-	}
+	//For script only
+	Renderer::Get().RenderSprite(this);
 }
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void Sprite::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigned char _a)

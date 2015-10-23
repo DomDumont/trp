@@ -28,13 +28,14 @@ available: visit veed.fr for more information.
 class Font;
 class Color;
 struct SDL_Texture; //TODO change this
-
+class Sprite;
 class Renderer
 {
 
 public:
 	static Renderer& Get();
 	SDL_Texture * RenderText(Font * _font,const std::string& _text, Color _color);
+	void RenderSprite(Sprite * _sprite);
 
 private:
 	Renderer();

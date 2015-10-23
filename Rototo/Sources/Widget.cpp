@@ -70,7 +70,8 @@ void Widget::Release()
 Widget *Widget_Factory()
 {
 	// The class constructor is initializing the reference counter to 1
-	return new Widget();
+	//return new Widget();
+	return NULL;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -163,7 +164,7 @@ void Widget::Hide()
 
 void Widget::Render()
 {
-	//SDL_assert(false);
+	SDL_assert(false);
 }
 
 /*----------------------------------------------------------------------------*/
