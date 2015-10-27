@@ -32,6 +32,8 @@ class Font;
 struct SDL_Texture;
 class Label : public Widget
 {
+	friend class Renderer;
+
 public:
 	Label();
 	~Label();
@@ -48,7 +50,7 @@ public:
 
 private:
 
-	void BuildInternalTexture(const std::string& _text,bool _justified);
+
 
 public:
 
@@ -59,10 +61,11 @@ public:
 	Color		disable_text_color;
 	Color		color_background;
 
-	std::string 		text;
+	std::string 	text;
+	bool			justified;
 private:
 	
-
+	bool isDirty;
 
 
 };

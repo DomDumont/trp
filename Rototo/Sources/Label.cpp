@@ -139,6 +139,8 @@ Label::Label() : font(NULL),texture(NULL)
 	this->color_background.b = 0;
 	this->color_background.g = 0;
 	this->color_background.a = 253;
+
+	this->isDirty = true;
 	
 }
 
@@ -183,111 +185,6 @@ void Label::SetColor(unsigned char _r,unsigned char _g,unsigned char _b,unsigned
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-void Label::BuildInternalTexture(const std::string& _text,bool _justified)
-{
-	Color tempColor;
-	std::string text = _text;
-	std::size_t len = text.size();
-	std::vector<SDL_Surface*> lines;
-	int width = 0;
-	int height = 0;
-
-	if (this->enabled)
-		tempColor = this->primary_text_color;
-	else
-		tempColor = this->disable_text_color;
-
-  this->texture = 	Renderer::Get().RenderText(this->font,_text, tempColor);
-
-  this->frame.x = 0;
-  this->frame.y = 0;
-  SDL_QueryTexture(this->texture, NULL, NULL, &(this->frame.w), &(this->frame.h));
-
-  SDL_SetTextureAlphaMod(this->texture, tempColor.a);
-  SDL_SetTextureBlendMode(this->texture, SDL_BLENDMODE_BLEND);
-
-
-  /*
-	if (len > 0)
-		{
-		for (std::size_t off = 0; off != std::string::npos;)
-			{
-			std::size_t next_off = text.find("\n");
-			if (next_off != std::string::npos)
-				{
-				text[next_off] = '\0';
-				++next_off;
-				if (next_off >= len)
-					next_off = std::string::npos;
-				}
-			SDL_Surface* line;
-		
-      
-      line = this->font->Render(&text[off], tempColor);
-
-			if (line)
-				{
-				SDL_SetSurfaceBlendMode(line, SDL_BLENDMODE_NONE);
-				//SDL_SetSurfaceBlendMode(line, SDL_BLENDMODE_BLEND);
-				//SDL_SetSurfaceAlphaMod(line,255);
-					
-				if (line->w > width)
-					width = line->w;
-				height += line->h;
-				}
-			lines.push_back(line);
-			off = next_off;
-			}
-		} //Len > 0
-	
-	
-	SDL_Surface* surface;
-
-
-	
-	if (lines.empty())
-		surface = SDL_CreateRGBSurface(SDL_SWSURFACE, 0, 0, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
-	else
-		surface = SDL_CreateRGBSurface(SDL_SWSURFACE,width,height,32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
-
-	
-	if (surface)
-		{
-		SDL_SetSurfaceBlendMode(surface, SDL_BLENDMODE_NONE);
-		//SDL_FillRect(surface, NULL, SDL_MapRGBA(surface->format, 0, 0, 0,0));
-		//SDL_SetSurfaceAlphaMod(surface,this->color.a);
-		
-		SDL_Rect dstrect = {0};
-		std::vector<SDL_Surface*>::const_iterator it = lines.begin();
-		std::vector<SDL_Surface*>::const_iterator end = lines.end();
-		while (it != end)
-			{
-			SDL_Surface* line = *it;
-      if (line != NULL)
-        {
-        if (_justified)
-          dstrect.x = (width - line->w) / 2;
-        SDL_BlitSurface(line, NULL, surface, &dstrect);
-        dstrect.y += line->h;
-        }
-			SDL_FreeSurface(line); // clean up as we go
-			++it;
-			}
-		
-		}
-	
-	
-	this->texture = SDL_CreateTextureFromSurface(g_app->sdlRenderer, surface);
-	SDL_SetTextureAlphaMod(this->texture,tempColor.a);
-	SDL_SetTextureBlendMode(this->texture,SDL_BLENDMODE_BLEND);
-	this->frame.x = 0;
-	this->frame.y = 0;
-	this->frame.w = width;
-	this->frame.h = height;
-	
-	SDL_FreeSurface(surface);
-  */
-}
 
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -296,39 +193,10 @@ void Label::BuildInternalTexture(const std::string& _text,bool _justified)
 void Label::SetText(const std::string& _text,bool _justified)
 {
 	this->text = _text; //Backup for later use
+	this->justified = _justified;
 
-	// If the font is not set, try to set it to the theme font.
-	if (this->font == NULL)
-		{
-			if (GUIManager::Get().font != NULL)
-			{
-				this->font = GUIManager::Get().font;
-			this->font->AddRef();
-			}
-		else
-			return;
-		}
+	this->isDirty = true;
 
-	if (this->primary_text_color.a == 253) //TODO remove this magic number
-		this->primary_text_color = GUIManager::Get().primary_text_color;
-
-	if (this->disable_text_color.a == 253) //TODO remove this magic number
-		this->disable_text_color = GUIManager::Get().disable_text_color;
-
-
-	BuildInternalTexture(_text,_justified);
-
-	//Update only size not position
-	int difW = this->position.w - this->frame.w;
-	int difH = this->position.h - this->frame.h;
-	this->position.x  += (difW/2);
-	this->position.y += (difH/2);
-	this->position.h = this->frame.h;
-	this->position.w = this->frame.w;	
-	//this->angle = 0;
-
-	//Restore Previous Scale
-	this->SetScale(this->xScale,this->yScale);
 	
 }
 
@@ -338,10 +206,12 @@ void Label::SetText(const std::string& _text,bool _justified)
 
 void Label::Render()
 {
-	if ((this->shown == false)|| (this->texture == NULL))
-		return;
 
-	SDL_RenderCopyEx(g_app->sdlRenderer, this->texture, (SDL_Rect *)&this->frame, (SDL_Rect *)&this->position, this->angle, NULL, SDL_FLIP_NONE);
+
+
+	//For script only
+	Renderer::Get().RenderLabel(this);
+
 }
 
 

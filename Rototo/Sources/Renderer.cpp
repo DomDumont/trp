@@ -31,7 +31,9 @@ available: visit veed.fr for more information.
 
 #include "Atlas.h"
 #include "Sprite.h"
+#include "Label.h"
 
+#include "GUIManager.h"
 #include "SDL.h"
 
 Renderer& Renderer::Get() {
@@ -43,6 +45,47 @@ Renderer::Renderer()
 {
 
 }
+
+void Renderer::RenderLabel(Label * _label)
+{
+	if ((_label->shown == false))
+		return;
+
+	if (_label->isDirty)
+	{
+		// Rebuild internal texture
+		Color tempColor;
+
+
+		if (_label->enabled)
+			tempColor = _label->primary_text_color;
+		else
+			tempColor = _label->disable_text_color;
+
+		_label->texture = Renderer::Get().RenderText(_label->font, _label->text, tempColor);
+
+		_label->frame.x = 0;
+		_label->frame.y = 0;
+		SDL_QueryTexture(_label->texture, NULL, NULL, &(_label->frame.w), &(_label->frame.h));
+		
+		SDL_SetTextureAlphaMod(_label->texture, tempColor.a);
+		SDL_SetTextureBlendMode(_label->texture, SDL_BLENDMODE_BLEND);
+		_label->isDirty = false;
+
+		int difW = _label->position.w - _label->frame.w;
+		int difH = _label->position.h - _label->frame.h;
+		_label->position.x += (difW / 2);
+		_label->position.y += (difH / 2);
+		_label->position.h = _label->frame.h;
+		_label->position.w = _label->frame.w;
+		_label->SetScale(_label->xScale, _label->yScale);
+	}
+
+	//and then just blit the texture.
+	SDL_RenderCopyEx(g_app->sdlRenderer, _label->texture, (SDL_Rect *)&_label->frame, (SDL_Rect *)&_label->position, _label->angle, NULL, SDL_FLIP_NONE);
+
+}
+
 
 void Renderer::RenderSprite(Sprite * _sprite)
 {
@@ -200,7 +243,19 @@ SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color
 {
 	float extX;
 	float extY;
-	_font->GetTextExtent(_text, extX, extY);
+
+	Font * tempFont = _font;
+
+	if (_font == NULL)
+	{
+		tempFont = GUIManager::Get().font;
+	
+	}
+
+	if (tempFont == NULL)
+		return NULL;
+
+	tempFont->GetTextExtent(_text, extX, extY);
 
 	SDL_Texture * tempTexture = SDL_CreateTexture(g_app->sdlRenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, (int)extX, (int)extY);
 	SDL_SetTextureColorMod(tempTexture, _color.r, _color.g, _color.b);
@@ -217,7 +272,7 @@ SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color
 		if (ch == '\n')
 		{
 			x = 0;
-			y += _font->GetFontHeight();
+			y += tempFont->GetFontHeight();
 			continue;
 		}
 
@@ -225,7 +280,7 @@ SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color
 			ch = '?';
 
 		stbtt_aligned_quad q;
-		stbtt_GetBakedQuad(_font->font_p->cdata,
+		stbtt_GetBakedQuad(tempFont->font_p->cdata,
 			512,
 			512,
 			ch - 32,  // position of character in font
@@ -241,7 +296,7 @@ SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color
 
 		SDL_Rect rect;
 		rect.x = (int)q.x0;
-		rect.y = (int)(_font->GetFontHeight() + q.y0);
+		rect.y = (int)(tempFont->GetFontHeight() + q.y0);
 		rect.w = (int)w;
 		rect.h = (int)h;
 
@@ -251,7 +306,7 @@ SDL_Texture * Renderer::RenderText(Font * _font, const std::string& _text, Color
 		tex.w = (int)((q.s1 - q.s0) * 512);
 		tex.h = (int)((q.t1 - q.t0) * 512);
 
-		SDL_RenderCopy(g_app->sdlRenderer, _font->font_p->texture, &tex, &rect);
+		SDL_RenderCopy(g_app->sdlRenderer, tempFont->font_p->texture, &tex, &rect);
 	}
 
 	SDL_RenderCopy(g_app->sdlRenderer, tempTexture, NULL, NULL); // On fait le rendu de la texture

@@ -29,6 +29,7 @@ class Font;
 class Color;
 struct SDL_Texture; //TODO change this
 class Sprite;
+class Label;
 class Renderer
 {
 
@@ -36,6 +37,7 @@ public:
 	static Renderer& Get();
 	SDL_Texture * RenderText(Font * _font,const std::string& _text, Color _color);
 	void RenderSprite(Sprite * _sprite);
+	void RenderLabel(Label * _label);
 
 private:
 	Renderer();
