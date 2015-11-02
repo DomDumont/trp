@@ -26,7 +26,7 @@
 #define __MYAPP_H__
 
 #include <QApplication>
-#include <QtGui>
+//#include <QtGui>
 
 class MDIMainWindow;
 class MyApp : public QApplication
