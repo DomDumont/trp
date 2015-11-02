@@ -26,4 +26,10 @@ ENDIF(WIN32)
 add_subdirectory (Rototo)
 add_subdirectory (Samples)
 add_subdirectory (Docs)
+add_subdirectory (Tools)
 
+INSTALL(DIRECTORY Data DESTINATION .)
+SET(CPACK_GENERATOR "ZIP")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Dominique Dumont") #required
+ 
+INCLUDE(CPack)
