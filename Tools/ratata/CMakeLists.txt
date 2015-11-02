@@ -2,9 +2,12 @@ project (Ratata)
 
 cmake_minimum_required (VERSION 2.8.3)
 
-cmake_policy(SET CMP0020 NEW)
+#cmake_policy(SET CMP0020 OLD)
 
+if (WIN32)
 set(CMAKE_PREFIX_PATH C:/Qt/5.5/msvc2013_64/lib/cmake)
+endif(WIN32)
+
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
