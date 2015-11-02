@@ -14,8 +14,12 @@ install:
   -y; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install -qq qtbase5-dev; fi
+
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install qt5; fi
+
 - if [ $TRP_DOC ]; then sudo apt-get install python-sphinx; fi
 before_script:
 - mkdir Build
