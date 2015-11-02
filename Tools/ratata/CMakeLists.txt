@@ -9,7 +9,7 @@ if (WIN32)
 endif(WIN32)
 
 if (APPLE)
-	set(CMAKE_PREFIX_PATH "/usr/local/Cellar/qt5/5.5/lib/cmake")
+	set(CMAKE_PREFIX_PATH "/usr/local/opt/qt5")
 endif(APPLE)
 
 
