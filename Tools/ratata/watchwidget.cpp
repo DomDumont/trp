@@ -22,7 +22,8 @@
   ==============================================================================
 */
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 #include <QDomDocument>
 #include <QFile>
 
@@ -44,16 +45,16 @@ WatchWidget::WatchWidget(QWidget *parent): QTabWidget(parent)
 
      labels << tr("Name") << tr("Value");
      localVar.setHeaderLabels(labels);
-     localVar.header()->setResizeMode(0, QHeaderView::Interactive);
-     localVar.header()->setResizeMode(1, QHeaderView::Interactive);
+     localVar.header()->setSectionResizeMode(0, QHeaderView::Interactive);
+     localVar.header()->setSectionResizeMode(1, QHeaderView::Interactive);
 
      globalVar.setHeaderLabels(labels);
-     globalVar.header()->setResizeMode(0, QHeaderView::Interactive);
-     globalVar.header()->setResizeMode(1, QHeaderView::Interactive);
+     globalVar.header()->setSectionResizeMode(0, QHeaderView::Interactive);
+     globalVar.header()->setSectionResizeMode(1, QHeaderView::Interactive);
 
      memberVar.setHeaderLabels(labels);
-     memberVar.header()->setResizeMode(0, QHeaderView::Interactive);
-     memberVar.header()->setResizeMode(1, QHeaderView::Interactive);
+     memberVar.header()->setSectionResizeMode(0, QHeaderView::Interactive);
+     memberVar.header()->setSectionResizeMode(1, QHeaderView::Interactive);
 
 
      this->addTab(&localVar,tr("Local"));

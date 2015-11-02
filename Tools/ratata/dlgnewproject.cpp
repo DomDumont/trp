@@ -22,7 +22,8 @@
   ==============================================================================
 */
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 
 #include "dlgnewproject.h"
 

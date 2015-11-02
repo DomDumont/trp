@@ -25,9 +25,11 @@
 
 #include "myapp.h"
 
+#include <QtWidgets>
+
 int main(int argc, char *argv[])
 {
-    QApplication::setStyle(new QPlastiqueStyle);
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
     //QApplication::setStyle(new QCDEStyle);
     //QApplication::setStyle(new QCleanlooksStyle);
     //QApplication::setStyle(new QMotifStyle);

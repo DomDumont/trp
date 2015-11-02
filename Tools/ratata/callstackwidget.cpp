@@ -22,7 +22,8 @@
   ==============================================================================
 */
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 #include <QDomDocument>
 #include <QFile>
 
@@ -50,9 +51,9 @@ CallstackWidget::CallstackWidget(QWidget *parent): QTreeWidget(parent)
   //   header()->setResizeMode(1, QHeaderView::Stretch);
      //header()->setResizeMode(2, QHeaderView::Stretch);
 
-     header()->setResizeMode(0, QHeaderView::Interactive);
-     header()->setResizeMode(1, QHeaderView::Interactive);
-     header()->setResizeMode(2, QHeaderView::Interactive);
+     header()->setSectionResizeMode(0, QHeaderView::Interactive);
+     header()->setSectionResizeMode(1, QHeaderView::Interactive);
+     header()->setSectionResizeMode(2, QHeaderView::Interactive);
 
      groupIcon.addPixmap(style()->standardPixmap(QStyle::SP_DirClosedIcon),
                          QIcon::Normal, QIcon::Off);

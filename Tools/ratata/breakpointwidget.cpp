@@ -24,7 +24,8 @@
 
 #include "breakpointwidget.h"
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 #include <QDomDocument>
 #include <QFile>
 
@@ -47,8 +48,8 @@ void BreakpointWidget::InitWidget()
     labels << tr("File")<< tr("Line");
     setHeaderLabels(labels);
 
-    header()->setResizeMode(0, QHeaderView::Interactive);
-    header()->setResizeMode(1, QHeaderView::Interactive);
+    header()->setSectionResizeMode(0, QHeaderView::Interactive);
+    header()->setSectionResizeMode(1, QHeaderView::Interactive);
 
 
     groupIcon.addPixmap(style()->standardPixmap(QStyle::SP_DirClosedIcon),
@@ -60,7 +61,7 @@ void BreakpointWidget::InitWidget()
     this->setSortingEnabled(true);
 
     header()->setSortIndicatorShown(true);
-    header()->setClickable(true);
+    header()->setSectionsClickable(true);
 }
 
 

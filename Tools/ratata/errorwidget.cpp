@@ -22,7 +22,8 @@
   ==============================================================================
 */
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 #include <QDomDocument>
 #include <QFile>
 
@@ -45,11 +46,11 @@ void ErrorWidget::InitWidget()
     labels << tr("Type") << tr("File")<< tr("Line")<< tr("Col")<< tr("Msg");
     setHeaderLabels(labels);
 
-    header()->setResizeMode(0, QHeaderView::Interactive);
-    header()->setResizeMode(1, QHeaderView::Interactive);
-    header()->setResizeMode(2, QHeaderView::Interactive);
-    header()->setResizeMode(3, QHeaderView::Interactive);
-    header()->setResizeMode(4, QHeaderView::Interactive);
+    header()->setSectionResizeMode(0, QHeaderView::Interactive);
+    header()->setSectionResizeMode(1, QHeaderView::Interactive);
+    header()->setSectionResizeMode(2, QHeaderView::Interactive);
+    header()->setSectionResizeMode(3, QHeaderView::Interactive);
+    header()->setSectionResizeMode(4, QHeaderView::Interactive);
 
 
     groupIcon.addPixmap(style()->standardPixmap(QStyle::SP_DirClosedIcon),
@@ -61,7 +62,7 @@ void ErrorWidget::InitWidget()
     this->setSortingEnabled(true);
 
     header()->setSortIndicatorShown(true);
-    header()->setClickable(true);
+    header()->setSectionsClickable(true);
 }
 
 

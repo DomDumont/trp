@@ -24,7 +24,8 @@
 
 #include "grepwidget.h"
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 #include <QDomDocument>
 #include <QFile>
 #include "mdimainwindow.h"

@@ -22,7 +22,8 @@
   ==============================================================================
 */
 
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 #include <QDomDocument>
 #include <QFile>
 #include <QMessageBox>
@@ -256,7 +257,7 @@ void ProjectWidget::deleteFileFromProject()
          QStringList labels;
      labels << tr("Project Explorer") ;
      setHeaderLabels(labels);
-     header()->setResizeMode(0, QHeaderView::Interactive);
+     header()->setSectionResizeMode(0, QHeaderView::Interactive);
 
  }
  bool ProjectWidget::createEmptyProject(const QString &fileName)

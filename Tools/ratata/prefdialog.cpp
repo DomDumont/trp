@@ -23,7 +23,8 @@
 */
 
 #include "prefdialog.h"
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
 
 PrefDialog::PrefDialog(QWidget *parent) :
     QDialog(parent)
