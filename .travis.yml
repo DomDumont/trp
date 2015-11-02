@@ -10,8 +10,8 @@ matrix:
   - os: linux
     env: TRP_DOC=1
 install:
-- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa
-  -y; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa -y; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install qt5-default; fi
