@@ -13,11 +13,7 @@ matrix:
 
 before_install:
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:team-xbmc/ppa -y; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa; fi
-
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:ubuntu-toolchain-r/test; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$CXX" = "clang++" ]; then sudo sh -c "echo 'deb http://llvm.org/apt/precise/ llvm-toolchain-precise-3.6 main' >> /etc/apt/sources.list"; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$CXX" = "clang++" ]; then wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add -; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-add-repository ppa:beineri/opt-qt55; fi
 
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
 
@@ -26,13 +22,10 @@ before_install:
 
 install:
 
- # clang setup
-  
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$CXX" = "clang++" ]; then apt-cache search clang; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" -a "$CXX" = "clang++" ]; then sudo apt-get install -y clang-3.6; fi
 
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install qt5-default; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install qt-latest; fi
+
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install qt5; fi
