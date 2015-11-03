@@ -56,5 +56,6 @@ deploy:
     all_branches: true
 env:
   global:
-    secure: GpAAZGcxKPf9JB95mA5DBUE6lfbl0giDoSjI2RUMSDP1iJeYq2qTcK5lMxLrIzLP4HmlRzgvKZYYV9Oiuvvicg7ZInhWSiSSaTbpzcfUJuXEeCVGtmjJ/yBHYEuryOfd83KYuWkMT6WaDeuTEGnHa03OuyGXySW0fa7Z0Wtxqus=
     - GCC_VERSION="4.8"
+    - secure: GpAAZGcxKPf9JB95mA5DBUE6lfbl0giDoSjI2RUMSDP1iJeYq2qTcK5lMxLrIzLP4HmlRzgvKZYYV9Oiuvvicg7ZInhWSiSSaTbpzcfUJuXEeCVGtmjJ/yBHYEuryOfd83KYuWkMT6WaDeuTEGnHa03OuyGXySW0fa7Z0Wtxqus=
+    
