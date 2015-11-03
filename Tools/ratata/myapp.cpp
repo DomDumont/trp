@@ -22,8 +22,10 @@
   ==============================================================================
 */
 
+
 #include "myapp.h"
 #include "mdimainwindow.h"
+#include <QtGui>
 
 MyApp::MyApp( int &argc, char **argv )
  : QApplication(argc, argv)
