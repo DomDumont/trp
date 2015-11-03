@@ -9,8 +9,9 @@ Emscripten
 ==========
 
 * Install Emscripten
-* On Windows install also MinGW ::
+* On Windows install also MinGW 
 
+::
 
 	mkdir Build
 	cd Build
@@ -18,8 +19,15 @@ Emscripten
 	cmake --build .
 
 
-Visual
+Visual 
 ====== 
+
+::
+
+	mkdir Build
+	cd Build
+	cmake -G "Visual Studio 12 2013 Win64" ..
+
 
 If visual is the only generator available on your machine 
 use a simple cmake otherwise you may have to specify the generator
