@@ -23,9 +23,9 @@ before_install:
 
 install:
 
-- if [ "$CXX" = "g++" ]; then sudo apt-get install "g++-${GCC_VERSION}"; fi
+- if [ "$CXX" = "g++" ]; then sudo apt-get install g++-${GCC_VERSION}; fi
 - if [ "$CXX" = "g++" ]; then export CXX="g++-${GCC_VERSION}" CC="gcc-${GCC_VERSION}"; fi
-- if [ "$CXX" = "clang++" ]; then sudo apt-get install "libstdc++-${GCC_VERSION}-dev"; fi
+- if [ "$CXX" = "clang++" ]; then sudo apt-get install libstdc++-${GCC_VERSION}-dev; fi
 
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install qt5-default; fi
