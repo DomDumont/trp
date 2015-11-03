@@ -2,10 +2,11 @@ project (Ratata)
 
 cmake_minimum_required (VERSION 2.8.3)
 
-#cmake_policy(SET CMP0020 OLD)
+cmake_policy(SET CMP0020 OLD)
 
 if (WIN32)
 	set(CMAKE_PREFIX_PATH C:/Qt/5.5/msvc2013_64/lib/cmake)
+	SET(MY_QT_DLL_DIR C:/Qt/5.5/msvc2013_64/bin)
 endif(WIN32)
 
 if (APPLE)
@@ -88,3 +89,27 @@ add_executable(Ratata ${RATATA_SRC}	${RATATA_MOC_SRC})
 
 #Link the helloworld executable to the Qt 5 widgets library.
 target_link_libraries(Ratata Qt5::Core Qt5::Widgets Qt5::Network Qt5::Xml)
+
+
+
+IF(WIN32)
+    INSTALL(TARGETS Ratata DESTINATION Ratata)
+	INSTALL(FILES
+    "${MY_QT_DLL_DIR}/Qt5Cored.dll"
+	"${MY_QT_DLL_DIR}/Qt5Widgetsd.dll"
+	"${MY_QT_DLL_DIR}/Qt5Guid.dll"
+	"${MY_QT_DLL_DIR}/Qt5Networkd.dll"
+	"${MY_QT_DLL_DIR}/Qt5Xmld.dll"
+    DESTINATION Ratata
+    )
+	INSTALL(FILES
+    "${MY_QT_DLL_DIR}/Qt5Core.dll"
+	"${MY_QT_DLL_DIR}/Qt5Widgets.dll"
+	"${MY_QT_DLL_DIR}/Qt5Gui.dll"
+	"${MY_QT_DLL_DIR}/Qt5Network.dll"
+	"${MY_QT_DLL_DIR}/Qt5Xml.dll"
+    DESTINATION Ratata
+    )
+
+
+ENDIF(WIN32)
