@@ -3,12 +3,18 @@ file(GLOB_RECURSE Rototo_HEADERS "Sources/*.h" "Includes/*.h")
 
 option(ROTOTO_USE_AUDIO "Rototo has audio features " OFF)
 option(ROTOTO_USE_BINDING "Rototo has binding features " ON)
+option(ROTOTO_USE_NETWORK "Rototo has network features " ON)
 
 
 if (NOT DEFINED EMSCRIPTEN)
 	find_package(SDL2 REQUIRED)
 	include_directories(${SDL2_INCLUDE_DIR})
 	message( "SDL2 include path found = " ${SDL2_INCLUDE_DIR})
+
+	find_package(SDL2_NET REQUIRED)
+	include_directories(${SDL2_NET_INCLUDE_DIR})
+	message( "SDL2 NET include path found = " ${SDL2_NET_INCLUDE_DIR})
+
 endif()
 
 include_directories("Extern/stb")
@@ -24,6 +30,11 @@ endif()
 if (ROTOTO_USE_AUDIO)
     SET(TRP_USE_AUDIO 1)
     add_definitions(-DTRP_USE_AUDIO)
+endif()
+
+if (ROTOTO_USE_NETWORK)
+    SET(TRP_USE_NETWORK 1)
+    add_definitions(-DTRP_USE_NETWORK)
 endif()
 
 

@@ -31,7 +31,7 @@
 
 #ifdef TRP_USE_NETWORK
 
-#include "SDL_net.h"
+
 class Server
 {
 public:

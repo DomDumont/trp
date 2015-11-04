@@ -27,7 +27,7 @@
 
 #ifdef TRP_USE_NETWORK
 
-#include "SDL_net.h"
+
 #include <string>
 #include "Server.h"
 #include "Client.h"

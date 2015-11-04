@@ -30,6 +30,7 @@
 
 #include "Application.h"
 #include "Utils.h"
+#include "ResourceManager.h"
 
 #ifdef TRP_USE_NETWORK
 
@@ -229,7 +230,7 @@ void Server::SendFileToAllClients(const std::string& _filename)
 
 
 
-	SDL_RWops *rw = g_app->resourceManager->Load(_filename,GAMEDATA|BOTH);
+	SDL_RWops *rw = ResourceManager::Get().Load(_filename, GAMEDATA | BOTH);
 	if (rw == NULL)
 		{
 		SDL_Log("bizarre %s\n",SDL_GetError());

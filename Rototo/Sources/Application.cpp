@@ -472,9 +472,9 @@ void Application::Init()
       }
 		else
 			{
-			if (this->settings_serverIP.empty() == false)
+			if (this->settings.serverIP.empty() == false)
 				{
-				networkManager->ConnectToServer(this->settings_serverIP);
+				networkManager->ConnectToServer(this->settings.serverIP);
 				}
 			//	networkManager->ConnectToServer("192.168.0.17");
 			}

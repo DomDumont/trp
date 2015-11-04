@@ -25,6 +25,7 @@
 #include "Client.h"
 #include "Application.h"
 #include "Utils.h"
+#include "ResourceManager.h"
 
 #ifdef TRP_USE_NETWORK
 
@@ -244,7 +245,7 @@ void Client::ReceiveFile(SDL_RWops * _rw)
 
 	
 
-	SDL_RWops *out = g_app->resourceManager->Save(fileName,GAMEDATA|BOTH);
+	SDL_RWops *out = ResourceManager::Get().Save(fileName, GAMEDATA | BOTH);
 
 
 	char *tempBuffer = NULL;
