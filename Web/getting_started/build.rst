@@ -11,7 +11,7 @@ Emscripten
 * Install Emscripten
 * On Windows install also MinGW 
 
-::
+ ::
 
 	mkdir Build
 	cd Build
@@ -19,17 +19,25 @@ Emscripten
 	cmake --build .
 
 
-Visual 
-====== 
+Windows 
+=======
 
-::
+First you have to install SDL2 visual dev libraries.
+and add an environment variable called "SDL2" to your system
+
+Then, in order to build Ratata (the I.D.E.) you must install QT5
+if you don't use the regular install directory, you may need to change the cmake files;
+
+
+
+ ::
 
 	mkdir Build
 	cd Build
 	cmake -G "Visual Studio 12 2013 Win64" ..
 
 
-If visual is the only generator available on your machine 
+If visual is the only ins available on your machine 
 use a simple cmake otherwise you may have to specify the generator
 with the -G option .
 In order to build a 64 bits version, it's also done through the generator.
