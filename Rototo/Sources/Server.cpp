@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -32,23 +32,25 @@
 #include "Utils.h"
 #include "ResourceManager.h"
 
+#include "Server_p.h" //TODO Maybe not here ?
+
 #ifdef TRP_USE_NETWORK
 
 const std::string Server::SERVER_NOT_FULL = "OK\n";
 const std::string Server::SERVER_FULL     = "FULL";
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
 
-Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSockets)
+Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSockets):server_p(new Server_p)
 	{
+	
+
 	port       = _port;                      // The port number on the server we're connecting to
 	bufferSize = _bufferSize;                // The maximum size of a message
 	maxSockets = _maxSockets;                // Maximum number of sockets in our socket set
 	maxClients = _maxSockets - 1;            // Maximum number of clients who can connect to the server
 
-	pClientSocket = new TCPsocket[maxClients]; // Create the array to the client sockets
+	server_p->pClientSocket = new TCPsocket[maxClients]; // Create the array to the client sockets
 	pSocketIsFree = new bool[maxClients];      // Create the array to the client socket free status'
 	pBuffer = new char[bufferSize];            // Create the transmission buffer character array
 
@@ -56,8 +58,8 @@ Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSo
 
 
 	// Create the socket set with enough space to store our desired number of connections (i.e. sockets)
-	socketSet = SDLNet_AllocSocketSet(maxSockets);
-	if (socketSet == NULL)
+	server_p->socketSet = SDLNet_AllocSocketSet(maxSockets);
+	if (server_p->socketSet == NULL)
 		{
 		SDL_Log("Failed to allocate the socket set: %s",SDLNet_GetError());		
 		}
@@ -65,7 +67,7 @@ Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSo
 	// Initialize all the client sockets (i.e. blank them ready for use!)
 	for (unsigned int loop = 0; loop < maxClients; loop++)
 		{
-		pClientSocket[loop] = NULL;
+		server_p->pClientSocket[loop] = NULL;
 		pSocketIsFree[loop] = true; // Set all our sockets to be free (i.e. available for use for new client connections)
 		}
 
@@ -74,7 +76,7 @@ Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSo
 	// provided port number.
 	// Note: Passing the second parameter as "NULL" means "make a listening port". SDLNet_ResolveHost returns one of two
 	// values: -1 if resolving failed, and 0 if resolving was successful
-	int hostResolved = SDLNet_ResolveHost(&serverIP, NULL, port);
+	int hostResolved = SDLNet_ResolveHost(&(server_p->serverIP), NULL, port);
 
 	if (hostResolved == -1)
 		{
@@ -83,16 +85,16 @@ Server::Server(unsigned int _port, unsigned int _bufferSize, unsigned int _maxSo
 
 
 	// Try to open the server socket
-	serverSocket = SDLNet_TCP_Open(&serverIP);
+	server_p->serverSocket = SDLNet_TCP_Open(&(server_p->serverIP));
 
-	if (!serverSocket)
+	if (!server_p->serverSocket)
 		{
 		SDL_Log("Failed to open the server socket: ",SDLNet_GetError());
 		}
 
 
 	// Add our server socket (i.e. the listening socket) to the socket set
-	SDLNet_TCP_AddSocket(socketSet, serverSocket);
+	SDLNet_TCP_AddSocket(server_p->socketSet, server_p->serverSocket);
 
 	
 
@@ -110,19 +112,19 @@ Server::~Server()
 		{
 		if (pSocketIsFree[loop] == false)
 			{
-			SDLNet_TCP_Close(pClientSocket[loop]);
+			SDLNet_TCP_Close(server_p->pClientSocket[loop]);
 			pSocketIsFree[loop] = true;
 			}
 		}
 
 	// Close our server socket
-	SDLNet_TCP_Close(serverSocket);
+	SDLNet_TCP_Close(server_p->serverSocket);
 
 	// Free our socket set
-	SDLNet_FreeSocketSet(socketSet);
+	SDLNet_FreeSocketSet(server_p->socketSet);
 
 	// Release any properties on the heap
-	delete [] pClientSocket;
+	delete [] server_p->pClientSocket;
 	delete [] pSocketIsFree;
 	delete [] pBuffer;
 	}
@@ -140,14 +142,14 @@ void Server::CheckForConnections()
 	// I've used 1ms below, so we're polling 1,000 times per second, which is overkill for a small chat server, but might
 	// be a good choice for a FPS server where every ms counts! Also, 1,000 polls per second produces negligable CPU load,
 	// if you put it on 0 then it WILL eat all the available CPU time on one of your cores...
-	int numActiveSockets = SDLNet_CheckSockets(socketSet, 1);
+	int numActiveSockets = SDLNet_CheckSockets(server_p->socketSet, 1);
 
 	if (numActiveSockets != 0)
 		{
 		// Check if our server socket has received any data
 		// Note: SocketReady can only be called on a socket which is part of a set and that has CheckSockets called on it (the set, that is)
 		// SDLNet_SocketRead returns non-zero for activity, and zero is returned for no activity. Which is a bit bass-ackwards IMHO, but there you go.
-		int serverSocketActivity = SDLNet_SocketReady(serverSocket);
+		int serverSocketActivity = SDLNet_SocketReady(server_p->serverSocket);
 
 		// If there is activity on our server socket (i.e. a client has trasmitted data to us) then...
 		if (serverSocketActivity != 0)
@@ -168,10 +170,10 @@ void Server::CheckForConnections()
 					}
 
 				// ...accept the client connection and then...
-				pClientSocket[freeSpot] = SDLNet_TCP_Accept(serverSocket);
+				server_p->pClientSocket[freeSpot] = SDLNet_TCP_Accept(server_p->serverSocket);
 
 				// ...add the new client socket to the socket set (i.e. the list of sockets we check for activity)
-				SDLNet_TCP_AddSocket(socketSet, pClientSocket[freeSpot]);
+				SDLNet_TCP_AddSocket(server_p->socketSet, server_p->pClientSocket[freeSpot]);
 
 				// Increase our client count
 				clientCount++;
@@ -179,7 +181,7 @@ void Server::CheckForConnections()
 				// Send a message to the client saying "OK" to indicate the incoming connection has been accepted
 				strcpy( pBuffer, SERVER_NOT_FULL.c_str() );
 				int msgLength = (int) strlen(pBuffer) + 1;
-				SDLNet_TCP_Send(pClientSocket[freeSpot], (void *)pBuffer, msgLength);
+				SDLNet_TCP_Send(server_p->pClientSocket[freeSpot], (void *)pBuffer, msgLength);
 
 
 
@@ -190,7 +192,7 @@ void Server::CheckForConnections()
 				SDL_Log("Max client count reached - rejecting client connection\n");
 
 				// Accept the client connection to clear it from the incoming connections list
-				TCPsocket tempSock = SDLNet_TCP_Accept(serverSocket);
+				TCPsocket tempSock = SDLNet_TCP_Accept(server_p->serverSocket);
 
 				// Send a message to the client saying "FULL" to tell the client to go away
 				strcpy( pBuffer, SERVER_FULL.c_str() );
@@ -255,7 +257,7 @@ void Server::SendFileToAllClients(const std::string& _filename)
 		{
 		if (pSocketIsFree[loop] == false)
 			{
-			SDLNet_TCP_Send(pClientSocket[loop], (void *)&length, 4);						
+			SDLNet_TCP_Send(server_p->pClientSocket[loop], (void *)&length, 4);						
 			}
 		}
 
@@ -269,7 +271,7 @@ void Server::SendFileToAllClients(const std::string& _filename)
 			{
 			if (pSocketIsFree[loop] == false)
 				{
-				SDLNet_TCP_Send(pClientSocket[loop], (void *)pBuffer, nbbytes);						
+				SDLNet_TCP_Send(server_p->pClientSocket[loop], (void *)pBuffer, nbbytes);						
 				}
 			}
 		}
@@ -308,7 +310,7 @@ void Server::SendMessageToAllClients(const std::string& _msg)
 		{
 		if (pSocketIsFree[loop] == false)
 			{
-			SDLNet_TCP_Send(pClientSocket[loop], (void *)pBuffer, msgLength);
+			SDLNet_TCP_Send(server_p->pClientSocket[loop], (void *)pBuffer, msgLength);
 			}
 		}
 
@@ -327,7 +329,7 @@ SDL_RWops * Server::CheckForActivity()
 	for (unsigned int clientNumber = 0; clientNumber < maxClients; clientNumber++)
 		{
 		// If the socket is has activity then SDLNet_SocketReady() returns non-zero
-		int clientSocketActivity = SDLNet_SocketReady(pClientSocket[clientNumber]);
+		int clientSocketActivity = SDLNet_SocketReady(server_p->pClientSocket[clientNumber]);
 
 		// The line below produces a LOT of debug, so only uncomment if the code's seriously misbehaving!
 		//cout << "Client number " << clientNumber << " has activity status: " << clientSocketActivity << endl;
@@ -336,7 +338,7 @@ SDL_RWops * Server::CheckForActivity()
 		if (clientSocketActivity != 0)
 			{
 			// Check if the client socket has transmitted any data by reading from the socket and placing it in the buffer character array
-			int receivedByteCount = SDLNet_TCP_Recv(pClientSocket[clientNumber], pBuffer, bufferSize);
+			int receivedByteCount = SDLNet_TCP_Recv(server_p->pClientSocket[clientNumber], pBuffer, bufferSize);
 
 			// If there's activity, but we didn't read anything from the client socket, then the client has disconnected...
 			if (receivedByteCount <= 0)
@@ -345,9 +347,9 @@ SDL_RWops * Server::CheckForActivity()
 				SDL_Log("Client %d disconnected.\n",clientNumber);
 
 				//... remove the socket from the socket set, then close and reset the socket ready for re-use and finally...
-				SDLNet_TCP_DelSocket(socketSet, pClientSocket[clientNumber]);
-				SDLNet_TCP_Close(pClientSocket[clientNumber]);
-				pClientSocket[clientNumber] = NULL;
+				SDLNet_TCP_DelSocket(server_p->socketSet, server_p->pClientSocket[clientNumber]);
+				SDLNet_TCP_Close(server_p->pClientSocket[clientNumber]);
+				server_p->pClientSocket[clientNumber] = NULL;
 
 				// ...free up their slot so it can be reused...
 				pSocketIsFree[clientNumber] = true;

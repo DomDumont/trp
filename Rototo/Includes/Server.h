@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -31,6 +31,8 @@
 
 #ifdef TRP_USE_NETWORK
 
+struct SDL_RWops;
+class Server_p;
 
 class Server
 {
@@ -54,20 +56,17 @@ public:
 
 
 private:
+		std::unique_ptr<Server_p> server_p; // opaque type here
+
 		unsigned int port;          // The port our server will listen for incoming connecions on
 		unsigned int bufferSize;    // Size of our message buffer
 		unsigned int maxSockets;    // Max number of sockets
 		unsigned int maxClients;    // Max number of clients in our socket set (defined as maxSockets - 1 as the server socket itself take 1 port)
 
-		IPaddress serverIP;         // The IP of the socket server (this will end up being 0.0.0.0 - which means roughly "any IP address")
-		TCPsocket serverSocket;     // The server socket that clients will connect to
 
-
-		TCPsocket *pClientSocket;   // A pointer to (what will be) an array of sockets for the clients
 		bool *pSocketIsFree;        // A pointer to (what will be) an array of flags indicating which client sockets are free
 		char *pBuffer;              // A pointer to (what will be) an array of characters used to store the messages we receive
 
-		SDLNet_SocketSet socketSet; // Our entire set of sockets
 
 		unsigned int clientCount;   // Count of how many clients are currently connected to the server
 
