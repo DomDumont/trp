@@ -28,6 +28,7 @@
 
 
 #include <string>
+#include <memory>
 
 #ifdef TRP_USE_NETWORK
 

@@ -27,7 +27,10 @@
 #include "NetworkManager.h"
 #include "Application.h"
 
+
 #ifdef TRP_USE_NETWORK
+
+#include "SDL_net.h"
 
 	NetworkManager::NetworkManager() : command(NULL)
 	{

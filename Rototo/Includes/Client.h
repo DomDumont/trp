@@ -27,11 +27,15 @@
 
 #ifdef TRP_USE_NETWORK
 
-#include "SDL_net.h"
+
 
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <memory>
+
+class Client_p;
+struct SDL_RWops;
 
 class Client
 {
@@ -53,8 +57,9 @@ public:
 
 
 private:
+		std::unique_ptr<Client_p> client_p; // opaque type here
 
-    std::string    dotQuadString;    // The IP address of the server to connect to as a dot-quad (i.e. 127.0.0.1)
+		std::string    dotQuadString;    // The IP address of the server to connect to as a dot-quad (i.e. 127.0.0.1)
 		unsigned int serverPort;    // The port of the server to connect to
 		int			bufferSize;    // The size of our message buffer
 
@@ -63,12 +68,6 @@ private:
 		char   *pBuffer;            // A pointer to (what will be) an array of characters used to store the messages we send and receive
 
 
-		SDLNet_SocketSet socketSet; // Our entire set of sockets (i.e. just the server socket and our client socket)
-
-		TCPsocket serverSocket;     // The server socket
-		TCPsocket clientSocket;     // Our own client socket
-
-		IPaddress serverIP;         // The IP address of the server to connect to (NOT in dot-quad format)
 
 
 

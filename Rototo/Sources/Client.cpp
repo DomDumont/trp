@@ -2,7 +2,7 @@
   ==============================================================================
 
    This file is part of the T.R.P. Engine
-   Copyright (c) 2014 - Dominique Dumont
+   Copyright (c) 2015 - Dominique Dumont
 
    Permission is granted to use this software under the terms of either:
    a) the GPL v3 (or any later version)
@@ -27,6 +27,9 @@
 #include "Utils.h"
 #include "ResourceManager.h"
 
+#include "SDL_net.h"
+#include "Client_p.h" //TODO Maybe not here ?
+
 #ifdef TRP_USE_NETWORK
 
 
@@ -40,10 +43,15 @@ const unsigned int Client::SOCKET_SET_POLL_PERIOD    = 0;          // 10ms, so p
 
 
 /*----------------------------------------------------------------------------*/
-/*                                                                            */
+Client_p::Client_p()
+{
+	//TODO Initialize members here
+}
+
+
 /*----------------------------------------------------------------------------*/
 
-Client::Client(std::string _theServerAddress, unsigned int _theServerPort, unsigned int _theBufferSize)
+Client::Client(std::string _theServerAddress, unsigned int _theServerPort, unsigned int _theBufferSize) :client_p(new Client_p)
 {
 
 	// The host name of the server.
@@ -59,10 +67,10 @@ Client::Client(std::string _theServerAddress, unsigned int _theServerPort, unsig
 
 
 	// Create a socket set big enough to hold the server socket and our own client socket
-	socketSet = SDLNet_AllocSocketSet(2);
+	client_p->socketSet = SDLNet_AllocSocketSet(2);
 
 	// If we couldn't create the socket set then throw an exception
-	if (socketSet == NULL)
+	if (client_p->socketSet == NULL)
 		{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Failed to allocate the socket set in ClientSocket constructor: %s ",SDLNet_GetError());
 		}
@@ -76,11 +84,11 @@ Client::Client(std::string _theServerAddress, unsigned int _theServerPort, unsig
 Client::~Client()
 {
 	// Close our server and client sockets
-	SDLNet_TCP_Close(serverSocket);
-	SDLNet_TCP_Close(clientSocket);
+	SDLNet_TCP_Close(client_p->serverSocket);
+	SDLNet_TCP_Close(client_p->clientSocket);
 
 	// Free our socket set (i.e. all the clients in our socket set)
-	SDLNet_FreeSocketSet(socketSet);
+	SDLNet_FreeSocketSet(client_p->socketSet);
 
 	// Release any properties on the heap
 	delete pBuffer;
@@ -98,7 +106,7 @@ void Client::ConnectToServer()
 {
 	// Try to resolve the hostname to an IP address, if it's already an IP address then that's fine
 	// If successful, this places the connection details in the serverIP object.
-	int hostResolved = SDLNet_ResolveHost(&serverIP, serverHostname.c_str(), serverPort);
+	int hostResolved = SDLNet_ResolveHost(&(client_p->serverIP), serverHostname.c_str(), serverPort);
 
 	// If we couldn't resolve the hostname then throw an error
 	if (hostResolved == -1)
@@ -110,7 +118,7 @@ void Client::ConnectToServer()
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"SDLNet_ResolveHost OK 2\n");
 		}
 
-	Uint8 * dotQuad = (Uint8*)&serverIP.host;
+	Uint8 * dotQuad = (Uint8*)&(client_p->serverIP.host);
 	
 	dotQuadString  = toString( (unsigned short)dotQuad[0] );
 	dotQuadString += ".";
@@ -124,8 +132,8 @@ void Client::ConnectToServer()
 
 	
 	// Try to open a connection between the client and the server - quit out if we can't connect
-	clientSocket = SDLNet_TCP_Open(&serverIP);
-	if (!clientSocket)
+	client_p->clientSocket = SDLNet_TCP_Open(&client_p->serverIP);
+	if (!client_p->clientSocket)
 		{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,"Error: Failed to open connection to server: %s",SDLNet_GetError());
 		}
@@ -134,12 +142,12 @@ void Client::ConnectToServer()
 		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Connection okay, about to read connection status from the server...\n");
 
 		// Add our socket to the socket set for polling
-		SDLNet_TCP_AddSocket(socketSet, clientSocket);
+		SDLNet_TCP_AddSocket(client_p->socketSet, client_p->clientSocket);
 
 		// Wait for up to five seconds for a response from the server.
 		// Note: If we don't check the socket set and WAIT for the response, we'll be checking before the
 		// server can respond, and it'll look as if the server sent us nothing back!
-		int activeSockets = SDLNet_CheckSockets(socketSet, Client::CONNECTION_TIMEOUT_PERIOD);
+		int activeSockets = SDLNet_CheckSockets(client_p->socketSet, Client::CONNECTION_TIMEOUT_PERIOD);
 
 		//cout << "There are " << activeSockets << " socket(s) with data on them at the moment." << endl;
 	
@@ -147,12 +155,12 @@ void Client::ConnectToServer()
 			{
 
 			// Check if we got a response from the server
-			int gotServerResponse = SDLNet_SocketReady(clientSocket);
+				int gotServerResponse = SDLNet_SocketReady(client_p->clientSocket);
 
 			if (gotServerResponse != 0)
 				{
 				// Read the message on the client socket
-				int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, pBuffer, bufferSize);
+				int serverResponseByteCount = SDLNet_TCP_Recv(client_p->clientSocket, pBuffer, bufferSize);
 
 				if (serverResponseByteCount != 0)
 					{
@@ -238,7 +246,7 @@ void Client::ReceiveFile(SDL_RWops * _rw)
 	if (ret != 4)
 		{
 		//Not enough data in the stream, ask myself for more (blocking)
-		int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, &length, 4);
+			int serverResponseByteCount = SDLNet_TCP_Recv(client_p->clientSocket, &length, 4);
 		SDL_assert(serverResponseByteCount == 4);
 	}
 	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"LENGTH OF THE RECEIVED FILE = %d \n",length);
@@ -262,7 +270,7 @@ void Client::ReceiveFile(SDL_RWops * _rw)
 		do
 			{
 			int nbToread =  MYMIN(remain,bufferSize);
-			int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, tempBuffer, nbToread);
+			int serverResponseByteCount = SDLNet_TCP_Recv(client_p->clientSocket, tempBuffer, nbToread);
 			SDL_RWwrite(out, tempBuffer, serverResponseByteCount, 1);
 			remain = remain - serverResponseByteCount;
 		
@@ -290,7 +298,7 @@ SDL_RWops* Client::CheckForIncomingMessages()
 SDL_RWops* tempFile = NULL;
 
 	// Poll for messages for a specified time (default: 10ms, so 100 times per second)
-	int activeSockets = SDLNet_CheckSockets(socketSet, Client::SOCKET_SET_POLL_PERIOD);
+int activeSockets = SDLNet_CheckSockets(client_p->socketSet, Client::SOCKET_SET_POLL_PERIOD);
 
 	// This produces a LOT of debug output, so only uncomment if the code's really misbehaving...
 	//if (debug) { cout << "There are " << activeSockets << " socket(s) with data on them at the moment." << endl; }
@@ -298,11 +306,11 @@ SDL_RWops* tempFile = NULL;
 	if (activeSockets != 0)
 		{
 		// Check if we got a message from the server
-		int gotMessage = SDLNet_SocketReady(clientSocket);
+			int gotMessage = SDLNet_SocketReady(client_p->clientSocket);
 
 		if (gotMessage != 0)
 			{
-			int serverResponseByteCount = SDLNet_TCP_Recv(clientSocket, pBuffer, bufferSize);
+				int serverResponseByteCount = SDLNet_TCP_Recv(client_p->clientSocket, pBuffer, bufferSize);
 
 			if (serverResponseByteCount > 0)
 				{

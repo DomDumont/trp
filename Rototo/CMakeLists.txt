@@ -68,6 +68,7 @@ endif()
 
 target_link_libraries(Rototo PugiXml)
 target_link_libraries(Rototo ${SDL2_LIBRARY})
+target_link_libraries(Rototo ${SDL2_NET_LIBRARY})
 target_link_libraries(Rototo angelscript)
 
 

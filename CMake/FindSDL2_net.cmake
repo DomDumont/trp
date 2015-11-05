@@ -39,7 +39,9 @@ find_library(SDL2_NET_LIBRARY
   HINTS
     ENV SDL2NET
     ENV SDL2
-  PATH_SUFFIXES lib
+  	PATH_SUFFIXES lib64 lib
+	lib/x64
+	x86_64-w64-mingw32/lib
 )
 
 if(SDL2_NET_INCLUDE_DIR AND EXISTS "${SDL2_NET_INCLUDE_DIR}/SDL_net.h")

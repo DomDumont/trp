@@ -8,6 +8,8 @@
 #include <sstream> // stringstream
 #include <stdlib.h> // atoi
 
+#include "SDL.h"
+
 using namespace std;
 
 #ifdef TRP_USE_BINDING

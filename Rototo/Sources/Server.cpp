@@ -32,12 +32,21 @@
 #include "Utils.h"
 #include "ResourceManager.h"
 
+#include "SDL_net.h"
 #include "Server_p.h" //TODO Maybe not here ?
 
 #ifdef TRP_USE_NETWORK
 
 const std::string Server::SERVER_NOT_FULL = "OK\n";
 const std::string Server::SERVER_FULL     = "FULL";
+
+
+/*----------------------------------------------------------------------------*/
+Server_p::Server_p()
+{
+//TODO Initialize members here
+}
+
 
 /*----------------------------------------------------------------------------*/
 
