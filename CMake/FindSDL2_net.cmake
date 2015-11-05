@@ -31,9 +31,22 @@ find_path(SDL2_NET_INCLUDE_DIR SDL_net.h
   HINTS
     ENV SDL2NET
     ENV SDL2
-  PATH_SUFFIXES include/SDL2 include
+  	PATH_SUFFIXES include/SDL2 include
+	i686-w64-mingw32/include/SDL2
+	x86_64-w64-mingw32/include/SDL2  	
+	PATHS
+	~/Library/Frameworks
+	/Library/Frameworks
+	/usr/local/include/SDL2
+	/usr/include/SDL2
+	/sw # Fink
+	/opt/local # DarwinPorts
+	/opt/csw # Blastwave
+	/opt  
 )
 
+# Lookup the 64 bit libs on x64
+IF(CMAKE_SIZEOF_VOID_P EQUAL 8)
 find_library(SDL2_NET_LIBRARY
   NAMES SDL2_net
   HINTS
@@ -42,8 +55,29 @@ find_library(SDL2_NET_LIBRARY
   	PATH_SUFFIXES lib64 lib
 	lib/x64
 	x86_64-w64-mingw32/lib
+	PATHS
+	/sw
+	/opt/local
+	/opt/csw
+	/opt	
 )
-
+# On 32bit build find the 32bit libs
+ELSE(CMAKE_SIZEOF_VOID_P EQUAL 8)
+find_library(SDL2_NET_LIBRARY
+  NAMES SDL2_net
+  HINTS
+    ENV SDL2NET
+    ENV SDL2
+  	PATH_SUFFIXES lib64 lib
+	lib/x86
+	i686-w64-mingw32/lib
+	PATHS
+		/sw
+		/opt/local
+		/opt/csw
+		/opt	
+)	
+ENDIF(CMAKE_SIZEOF_VOID_P EQUAL 8)
 if(SDL2_NET_INCLUDE_DIR AND EXISTS "${SDL2_NET_INCLUDE_DIR}/SDL_net.h")
   file(STRINGS "${SDL2_NET_INCLUDE_DIR}/SDL_net.h" SDL2_NET_VERSION_MAJOR_LINE REGEX "^#define[ \t]+SDL_NET_MAJOR_VERSION[ \t]+[0-9]+$")
   file(STRINGS "${SDL2_NET_INCLUDE_DIR}/SDL_net.h" SDL2_NET_VERSION_MINOR_LINE REGEX "^#define[ \t]+SDL_NET_MINOR_VERSION[ \t]+[0-9]+$")
