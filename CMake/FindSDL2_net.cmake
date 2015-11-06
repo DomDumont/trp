@@ -27,6 +27,8 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
+MESSAGE ("coucou from findSDL2")
+
 find_path(SDL2_NET_INCLUDE_DIR SDL_net.h
   HINTS
     ENV SDL2NET

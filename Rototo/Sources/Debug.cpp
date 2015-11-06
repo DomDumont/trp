@@ -288,19 +288,19 @@ for(;;)
 	{
 	std::string contents = "";
 #ifdef TRP_USE_NETWORK
-	if (g_app->networkManager->command != NULL)
+	if (NetworkManager::Get().command != NULL)
 	{
-	Sint64 length = SDL_RWseek(g_app->networkManager->command,0,SEEK_END);
-	SDL_RWseek(g_app->networkManager->command,0,SEEK_SET);// ON retourne au d?but
+		Sint64 length = SDL_RWseek(NetworkManager::Get().command, 0, SEEK_END);
+		SDL_RWseek(NetworkManager::Get().command, 0, SEEK_SET);// ON retourne au d?but
 		if (length > 0)
 		{
 		contents.resize((unsigned int)length);
-		if (SDL_RWread(g_app->networkManager->command,&contents[0], contents.size(),1) != 1)
+		if (SDL_RWread(NetworkManager::Get().command, &contents[0], contents.size(), 1) != 1)
 		{
 		}
 		}
-	SDL_RWclose(g_app->networkManager->command);
-	g_app->networkManager->command = NULL;
+		SDL_RWclose(NetworkManager::Get().command);
+	NetworkManager::Get().command = NULL;
 	}
 #endif	
 	std::vector<std::string> subCommands = split(contents, '\n');
@@ -314,7 +314,7 @@ for(;;)
   else
     {
 #ifdef TRP_USE_NETWORK
-    g_app->networkManager->Update();
+		NetworkManager::Get().Update();
 #endif
     }
 	currentCommand++;
@@ -324,7 +324,7 @@ for(;;)
   else
     {
 #ifdef TRP_USE_NETWORK
-    g_app->networkManager->Update();
+		NetworkManager::Get().Update();
 #endif
     }
 
@@ -499,7 +499,7 @@ bool CDebug::InterpretCommand(const string &cmd, asIScriptContext *ctx)
 	g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
 	//Tells also all the clients to restart
 #ifdef TRP_USE_NETWORK
-	g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
+	NetworkManager::Get().SendMessageToAllClients("R>\n"); //Restart
 #endif
 	// Continue execution
 	return true;

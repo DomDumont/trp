@@ -25,7 +25,17 @@ Windows
 First you have to install SDL2 visual dev libraries.
 and add an environment variable called "SDL2" to your system
 
+
+`SDL2 <https://www.libsdl.org/download-2.0.php>`_
+
+and SDL2-Net dev libraries for visual also
+
+`SDL2_NET <https://www.libsdl.org/projects/SDL_net/>`_
+
 Then, in order to build Ratata (the I.D.E.) you must install QT5
+
+`QT5 <http://www.qt.io/download/>`_
+
 if you don't use the regular install directory, you may need to change the cmake files;
 
 
@@ -51,6 +61,19 @@ variable on your system to indicate cmake where your sdl2 library is installed
 	cd Build
 	cmake ..
 	cmake --build .
+
+
+You can also clean
+
+ ::
+
+	cmake --build . --target clean
+
+or install TRP
+
+ ::
+
+	cmake --build . --target install
 
 XCode
 =====

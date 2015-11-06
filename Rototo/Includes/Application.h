@@ -97,9 +97,6 @@ public:
 
 
 	
-#ifdef TRP_USE_NETWORK
-	NetworkManager		*networkManager;
-#endif
 
 
 	SDL_Window			*sdlWindow;

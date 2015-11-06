@@ -42,7 +42,8 @@
 class NetworkManager
 {
 public:
-	NetworkManager();
+	static NetworkManager& Get();
+	
 	~NetworkManager();
 
 	void Init();
@@ -55,6 +56,7 @@ public:
 	void Shutdown();
 
 private:
+	NetworkManager();
 	Server *server;
 	int		mode;
 

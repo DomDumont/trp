@@ -157,7 +157,7 @@ void Application::HandleEvent( Event * event, unsigned short *done)
 				{
 				*done = DONECODE_RESTART_ONLY; //! \TODO change this
 #ifdef TRP_USE_NETWORK
-				networkManager->SendMessageToAllClients("R>\n"); //Restart
+				NetworkManager::Get().SendMessageToAllClients("R>\n"); //Restart
 #endif
 				}
 
@@ -178,7 +178,7 @@ void Application::HandleEvent( Event * event, unsigned short *done)
 					}
 				*done = 2; //! \TODO change this
 #ifdef TRP_USE_NETWORK
-				networkManager->SendMessageToAllClients("R>\n"); //Restart
+				NetworkManager::Get().SendMessageToAllClients("R>\n"); //Restart
 #endif
 				}
 			else
@@ -321,9 +321,6 @@ Application::Application() : application_p(new Application_p)
 
 
 
-#ifdef TRP_USE_NETWORK
-	this->networkManager  = new NetworkManager();
-#endif
 
 #ifdef TRP_USE_PHYSICS
 	this->physicsManager  = new PhysicsManager();
@@ -355,9 +352,6 @@ Application::~Application()
 #endif
 
 
-#ifdef TRP_USE_NETWORK
-	delete networkManager;
-#endif
 }
 
 #ifdef TRP_ANDROID
@@ -435,7 +429,7 @@ void Application::Init()
 		ResourceManager::Get().Init();
 		WatchManager::Get().Init();
 #ifdef TRP_USE_NETWORK
-		networkManager->Init();	
+		NetworkManager::Get().Init();
 #endif
 #ifdef TRP_USE_PHYSICS
 		physicsManager->Init();
@@ -468,13 +462,13 @@ void Application::Init()
 #ifdef TRP_USE_NETWORK
     if ((g_app->platform == "Windows") || (g_app->platform == "Mac OS X") || (g_app->platform == "Linux"))
       {
-      networkManager->CreateServer(); //To Test
+		  NetworkManager::Get().CreateServer(); //To Test
       }
 		else
 			{
 			if (this->settings.serverIP.empty() == false)
 				{
-				networkManager->ConnectToServer(this->settings.serverIP);
+					NetworkManager::Get().ConnectToServer(this->settings.serverIP);
 				}
 			//	networkManager->ConnectToServer("192.168.0.17");
 			}
@@ -536,7 +530,7 @@ int Application::Run()
 			
 		WatchManager::Get().Update(elapsed);
 #ifdef TRP_USE_NETWORK
-		networkManager->Update();
+		NetworkManager::Get().Update();
 #endif
 		TweenManager::Get().Update(elapsed);
 #ifdef TRP_USE_PHYSICS
@@ -602,7 +596,7 @@ void Application::Shutdown()
 		physicsManager->Shutdown();//TODO check if it must be here
 #endif
 #ifdef TRP_USE_NETWORK
-		networkManager->Shutdown();
+		NetworkManager::Get().Shutdown();
 #endif
 		WatchManager::Get().Shutdown();
 		ResourceManager::Get().Shutdown();

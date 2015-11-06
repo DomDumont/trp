@@ -101,7 +101,7 @@ void LogToOutputAndNetwork(const std::string &str)
 	SDL_Log(str.c_str());
 	printf("%s\n",str.c_str()); //For emscripten
 #ifdef TRP_USE_NETWORK
-	g_app->networkManager->SendMessageToAllClients(str);
+	NetworkManager::Get().SendMessageToAllClients(str);
 #endif
 
 }
@@ -172,7 +172,7 @@ void ScanGameData(const std::string & _path)
 		if (( strcmp(FindFileData.cFileName,".") != 0 ) && (strcmp(FindFileData.cFileName,"..") != 0 ) )
 			{
 #ifdef TRP_USE_NETWORK
-			g_app->networkManager->MakeDirToAllClients(FindFileData.cFileName);
+				NetworkManager::Get().MakeDirToAllClients(FindFileData.cFileName);
 #endif
 			std::string newPath  = _path;
 			newPath += FindFileData.cFileName;

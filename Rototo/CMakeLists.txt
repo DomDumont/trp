@@ -44,6 +44,7 @@ add_library (Rototo ${Rototo_SOURCES} ${Rototo_HEADERS})
 
 INSTALL(FILES
     "$ENV{SDL2}/lib/x64/SDL2.dll"
+	"$ENV{SDL2NET}/lib/x64/SDL2_net.dll"
     DESTINATION bin
     )
 
