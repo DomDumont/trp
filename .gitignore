@@ -4,6 +4,8 @@ BuildEmscripten/
 Web/_build
 
 Rototo/Extern/SDL2/
+Rototo/Extern/SDL2_net/
+Rototo/Extern/SDL2_mixer/
 
 # Compiled Object files
 *.slo
