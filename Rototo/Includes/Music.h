@@ -26,9 +26,10 @@ available: visit veed.fr for more information.
 #define __MUSIC_H__
 
 #include <string>
+#include <memory>
 
-class Mix_Music;
 
+class Music_p;
 class Music
 {
 public:
@@ -42,8 +43,9 @@ public:
 	void	Stop();
 
 private:
+	std::unique_ptr<Music_p> music_p; // opaque type here
 
-	Mix_Music *music;
+
 };
 
 void ConstructMusic(Music *thisPointer);

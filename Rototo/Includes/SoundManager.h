@@ -29,7 +29,7 @@
 #include <string>
 
 class Mix_Chunk;
-class Mix_Music;
+
 
 class Sound
 {

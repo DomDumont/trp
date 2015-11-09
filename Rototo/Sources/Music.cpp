@@ -26,6 +26,8 @@ available: visit veed.fr for more information.
 
 
 #include "Music.h"
+#include "Music_p.h"
+
 #include "Application.h"
 
 
@@ -33,15 +35,15 @@ available: visit veed.fr for more information.
 
 
 #include "ScriptManager.h"
+#include "ResourceManager.h"
 
 #include "SDL.h"
+#include "SDL_mixer.h"
 
 //-----------------------------------------------------------------------------
 // Music
 //-----------------------------------------------------------------------------
 
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 void ConstructMusic(Music *thisPointer)
@@ -103,9 +105,9 @@ void RegisterMusic()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Music::Music()
+Music::Music() : music_p(new Music_p)
 {
-	music = NULL;
+	music_p->music = NULL;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -114,12 +116,12 @@ Music::Music()
 
 Music::~Music()
 {
-	if (music != NULL)
+	if (music_p->music != NULL)
 	{
 #ifdef TRP_USE_AUDIO 		
-		Mix_FreeMusic(music);
+		Mix_FreeMusic(music_p->music);
 #endif	
-		music = NULL;
+		music_p->music = NULL;
 	}
 }
 
@@ -129,12 +131,12 @@ Music::~Music()
 
 void Music::UnLoad()
 {
-	if (music != NULL)
+	if (music_p->music != NULL)
 	{
 #ifdef TRP_USE_AUDIO 		
-		Mix_FreeMusic(music);
+		Mix_FreeMusic(music_p->music);
 #endif	
-		music = NULL;
+		music_p->music = NULL;
 	}
 }
 
@@ -145,10 +147,10 @@ void Music::UnLoad()
 void Music::Load(const std::string & _file)
 {
 #ifdef TRP_USE_AUDIO   	
-	music = Mix_LoadMUS_RW(g_app->resourceManager->Load(_file, GAMEDATA | BOTH)); //todo check this FreeSrc ?
+	music_p->music = Mix_LoadMUS_RW(ResourceManager::Get().Load(_file, GAMEDATA | BOTH),1); //todo check this FreeSrc ?
 #endif	
 
-	if (music == NULL)
+	if (music_p->music == NULL)
 	{
 		SDL_Log("Cannot load music %s %s", _file.c_str(), SDL_GetError());
 	}
@@ -165,7 +167,7 @@ void Music::Load(const std::string & _file)
 void Music::Play(int _nbLoops, int _timeFadeIn)
 {
 #ifdef TRP_USE_AUDIO 	
-	Mix_PlayMusic(music, _nbLoops);
+	Mix_PlayMusic(music_p->music, _nbLoops);
 #endif	
 }
 

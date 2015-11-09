@@ -61,7 +61,7 @@ public:
 	{
 		std::string tempString;
 
-		SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"%s %d\n",filename.c_str(),action);
+		//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"%s %d\n",filename.c_str(),action);
 		tempString = filename;
 #ifdef TRP_OSX
 		//TODO REMOVE THIS ANTIBUG OSX
@@ -72,10 +72,10 @@ public:
 		if (StartsWith(tempString,"save_")== false)
 			{
 #ifdef TRP_USE_NETWORK
-			g_app->networkManager->SendFileToAllClients(tempString);
-			if (g_app->settings_autorestart)
+				NetworkManager::Get().SendFileToAllClients(tempString);
+			if (g_app->settings.autorestart)
 				{
-				g_app->networkManager->SendMessageToAllClients("R>\n"); //Restart
+				NetworkManager::Get().SendMessageToAllClients("R>\n"); //Restart
 				g_app->doneCode = DONECODE_RESTART_ONLY; //Restart
 				}
 #endif
@@ -121,7 +121,7 @@ void WatchManager::Init()
 	// add a watch to the system
 	watcherListener = new UpdateListener();
 	strcpy(pathbuf,"./");
-	strcat(pathbuf,g_app->settings_gamedataURL.c_str());
+	strcat(pathbuf,g_app->settings.gamedataURL.c_str());
 	efsw::WatchID watchID = fileWatcher->addWatch(pathbuf,watcherListener);
 #endif
 

@@ -30,15 +30,14 @@
 #include "Application.h"
 
 #ifdef TRP_USE_AUDIO
-  dfgsdg
-	//#include <SDL/SDL_Mixer.h>
+	#include <SDL_Mixer.h>
 #endif
 
 
 
 #include "binding/aswrappedcall.h"
 
-
+#include "ResourceManager.h"
 #include "ScriptManager.h"
 
 #include "SDL.h"
@@ -271,7 +270,7 @@ void Sound::UnLoad()
 void Sound::Load(const std::string & _file)
   {
 #ifdef TRP_USE_AUDIO 
-	this->sample = Mix_LoadWAV_RW(g_app->resourceManager->Load(_file,GAMEDATA|BOTH),1); //todo check this FreeSrc ?
+	  this->sample = Mix_LoadWAV_RW(ResourceManager::Get().Load(_file, GAMEDATA | BOTH), 1); //todo check this FreeSrc ?
 #endif	
 	
 	if ( sample == NULL ) 
@@ -302,7 +301,7 @@ void Sound::Play(int _nbLoops)
 #ifdef TRP_USE_AUDIO 	
 	this->channel = Mix_PlayChannel(-1,this->sample,_nbLoops);
 	//SDL_Log("Mix_PlayChannel returns : %d\n", this->channel);
-	Mix_Volume(this->channel, g_app->soundManager->volumeSFX);
+	Mix_Volume(this->channel, SoundManager::Get().volumeSFX);
 #endif	
 }
 

@@ -1,9 +1,10 @@
 file(GLOB_RECURSE Rototo_SOURCES "Sources/*.cpp")
 file(GLOB_RECURSE Rototo_HEADERS "Sources/*.h" "Includes/*.h")
 
-option(ROTOTO_USE_AUDIO "Rototo has audio features " OFF)
+option(ROTOTO_USE_AUDIO "Rototo has audio features " ON)
 option(ROTOTO_USE_BINDING "Rototo has binding features " ON)
 option(ROTOTO_USE_NETWORK "Rototo has network features " ON)
+option(ROTOTO_USE_WATCH "Rototo has watch features " ON)
 
 
 if (NOT DEFINED EMSCRIPTEN)
@@ -14,6 +15,10 @@ if (NOT DEFINED EMSCRIPTEN)
 	find_package(SDL2_NET REQUIRED)
 	include_directories(${SDL2_NET_INCLUDE_DIR})
 	message( "SDL2 NET include path found = " ${SDL2_NET_INCLUDE_DIR})
+
+	find_package(SDL2_MIXER REQUIRED)
+	include_directories(${SDL2_MIXER_INCLUDE_DIR})
+	message( "SDL2 MIXER include path found = " ${SDL2_MIXER_INCLUDE_DIR})
 
 endif()
 
@@ -35,6 +40,12 @@ endif()
 if (ROTOTO_USE_NETWORK)
     SET(TRP_USE_NETWORK 1)
     add_definitions(-DTRP_USE_NETWORK)
+endif()
+
+if (ROTOTO_USE_WATCH)
+	include_directories("Extern/EFSW/include")
+    SET(TRP_USE_WATCH 1)
+    add_definitions(-DTRP_USE_WATCH)
 endif()
 
 
@@ -70,7 +81,9 @@ endif()
 target_link_libraries(Rototo PugiXml)
 target_link_libraries(Rototo ${SDL2_LIBRARY})
 target_link_libraries(Rototo ${SDL2_NET_LIBRARY})
+target_link_libraries(Rototo ${SDL2_MIXER_LIBRARY})
 target_link_libraries(Rototo angelscript)
+target_link_libraries(Rototo efsw)
 
 
 add_subdirectory(Extern)
