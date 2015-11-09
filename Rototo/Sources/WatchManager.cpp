@@ -29,7 +29,7 @@
 #include "Utils.h"
 
 #ifdef TRP_USE_WATCH
-  #if defined WIN32 || defined TRP_OSX
+#if defined WIN32 || defined TRP_OSX || defined TRP_LINUX
     #include <efsw/efsw.hpp>
   #endif
 #endif
@@ -92,7 +92,7 @@ public:
 
 WatchManager::WatchManager()
 {
-#if defined WIN32 || defined TRP_OSX
+#if defined WIN32 || defined TRP_OSX || defined TRP_LINUX
 	fileWatcher = NULL;
 	watcherListener = NULL;
 #endif
@@ -152,7 +152,7 @@ void WatchManager::Init()
 
 void WatchManager::Update(unsigned int _elapsed)
 {
-#if defined WIN32 || defined TRP_OSX
+#if defined WIN32 || defined TRP_OSX || defined TRP_LINUX
 	//fileWatcher->update(); //TODO Check where the update is done now.
 #endif
 }

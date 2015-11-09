@@ -47,7 +47,7 @@ public:
 
 private:
 	WatchManager();
-#if defined WIN32 || defined TRP_OSX
+#if defined WIN32 || defined TRP_OSX || defined TRP_LINUX
 	efsw::FileWatcher *fileWatcher;
 	efsw::FileWatchListener* watcherListener;
 #endif
