@@ -30,7 +30,7 @@
 #include "Application.h"
 
 #ifdef TRP_USE_AUDIO
-	#include <SDL_Mixer.h>
+	#include <SDL_mixer.h>
 #endif
 
 
