@@ -273,7 +273,7 @@ void Server::SendFileToAllClients(const std::string& _filename)
 
 	int nbbytes = 0;
 	 
-	while ((nbbytes = SDL_RWread(rw,pBuffer,1,bufferSize)) != 0)
+	while ((nbbytes = (int)SDL_RWread(rw,pBuffer,1,bufferSize)) != 0)
 		{
 		SDL_Log("Send %d bytes of file\n",nbbytes);
 		for (unsigned int loop = 0; loop < maxClients; loop++)
@@ -306,7 +306,7 @@ void Server::SendMessageToAllClients(const std::string& _msg)
 		{
 		// Sent everything then
 		strcpy( pBuffer, stringToSend.c_str() );
-		msgLength = strlen(pBuffer);
+		msgLength = (int) strlen(pBuffer);
 		stringToSend = "";
 		}
 	else

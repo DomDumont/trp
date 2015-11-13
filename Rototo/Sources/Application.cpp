@@ -49,6 +49,7 @@ Application *g_app;
 
 #include "Application_p.h"
 
+/*------------------------------------------------------------------------------*/
 Application_p::Application_p()
 {
 	this->on_init_func = NULL;
