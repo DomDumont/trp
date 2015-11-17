@@ -27,16 +27,15 @@ int Object::GetReferenceCount() const
 }
 
 void Object::AddRef()
-{
-	count.fetch_add(1, std::memory_order_relaxed);
+{	
+	count++;
 }
 
 void Object::Release()
 {
-
-	if (count.fetch_sub(1, std::memory_order_release) == 1)
+	count--;
+	if (count == 0)
 	{
-		std::atomic_thread_fence(std::memory_order_acquire);
 		delete this;
 	}
 }
