@@ -69,30 +69,6 @@ Particle::Particle( AtlasEntry	* _entry)
 	this->position.h = 0;
 }
 
-/*----------------------------------------------------------------------------*/
-void Emitter::AddRef()
-{
-	// Increase the reference counter
-	refCount++;
-	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter 0x%x AddRef : nb active Emitter = %d\n",(unsigned int)this,refCount);
-}
-
-/*----------------------------------------------------------------------------*/
-void Emitter::Release()
-{
-	// Decrease ref count and delete if it reaches 0
-	refCount--;
-	if (refCount == 0)
-		delete this;
-	else
-		if (refCount > 0)
-		{
-			//   SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Emitter 0x%x Release : nb active Emitter = %d\n",(unsigned int)this,refCount);
-		}
-		else
-			SDL_assert(0);
-
-}
 
 /*----------------------------------------------------------------------------*/
 
@@ -200,7 +176,7 @@ void RegisterEmitter()
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-Emitter::Emitter():refCount(1),atlas(NULL),entry(NULL)
+Emitter::Emitter():atlas(NULL),entry(NULL)
 {
 
 	this->emissionRate = 0;
@@ -235,7 +211,7 @@ Emitter::~Emitter()
 
 Emitter::Emitter(const Emitter &other) 
 {
-	this->refCount = 1;
+
 	this->atlas = other.atlas;
 	this->atlas->AddRef();
 	this->entry = other.entry;

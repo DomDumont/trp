@@ -30,10 +30,10 @@
 #include <string>
 #include <memory>
 
-
+#include "Object.h"
 
 class Font_p;
-class Font
+class Font : public Object
 {
 	friend class Renderer;
  public:
@@ -43,23 +43,12 @@ class Font
     void Load(const std::string& _file, int _size, int _flags = 13 /*GAMEDATA|BOTH*/);
     void UnLoad();
 
-
-	void AddRef();
-	void Release();
-
-
 	void GetTextExtent(const std::string& _text, float & _x, float &_y);
 	float GetFontHeight();
 
 private:
 	std::unique_ptr<Font_p> font_p; // opaque type here
   
-  
-
- private:
-    int               refCount;
-
- 
 };
 
 

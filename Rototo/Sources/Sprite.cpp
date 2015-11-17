@@ -114,7 +114,6 @@ Sprite::Sprite(const Sprite &other)
 	this->color = other.color;
 	this->nine_patch = other.nine_patch;
 	this->nine_rect = other.nine_rect;
-	this->refCount = 1;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -136,8 +135,6 @@ void Sprite::operator= (const Sprite & other)
 	this->color = other.color;
 	this->nine_patch = other.nine_patch;
 	this->nine_rect = other.nine_rect;
-	this->refCount = 1;
-	
 }
 
 

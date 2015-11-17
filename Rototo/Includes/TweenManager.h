@@ -9,6 +9,8 @@
 #include "binding/scripthandle.h"
 #endif
 
+#include "Object.h"
+
 #ifndef C_PI
 #define C_PI 3.1415926535897932384626433832795
 #endif
@@ -166,36 +168,28 @@ class CLinearEffect : public CEasing
 	
 
 
-class TweenedFloat
+class TweenedFloat : public Object
 {
 public :
 	TweenedFloat()
 		{
 		// Let the constructor initialize the reference counter to 1
-		refCount = 1;
 		initialValue = 0;
 		value = 0;
 		targetValue = 0;
 		}
-
-	void AddRef();
-	void Release();
-
 
 public:
 	float initialValue;
 	float value;
 	float targetValue;
 
-private:
-	int refCount;
-	
 };
 
 TweenedFloat *TweenedFloat_Factory();
 
 
-class Tween
+class Tween: public Object
 {
 
 public:
@@ -210,7 +204,6 @@ public:
 #endif
 	//this->userData = NULL;
 	// Let the constructor initialize the reference counter to 1
-	refCount = 1;
 
 	}
 
@@ -224,7 +217,6 @@ public:
 	this->sender_script.Set(NULL, NULL);
 	this->user_data_script.Set(NULL, NULL);
 #endif
-	refCount = 1;
 	}
 
 	//Assign
@@ -256,8 +248,6 @@ public:
 	this->properties.clear();
 	}
 
-	void AddRef();
-	void Release();
 
 	void Init(float _duration,int _effect,int _easeMode);
 
@@ -286,10 +276,6 @@ public:
 	CScriptHandle		user_data_script;
 	CScriptHandle		sender_script;
 #endif
-
-private:
-	int refCount;
-
 
 };
 

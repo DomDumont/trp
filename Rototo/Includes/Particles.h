@@ -29,6 +29,8 @@
 #include "Color.h"
 #include "Rect.h"
 
+#include "Object.h"
+
 class Atlas;
 class AtlasEntry;
 
@@ -60,20 +62,14 @@ public:
 //-------------------------------------------------------------
 // Class Emitter
 //-------------------------------------------------------------
-class Emitter
+class Emitter : public Object
 {
 public:
 
     Emitter();
     ~Emitter();
     Emitter(const Emitter &other);
-
-	void AddRef();
-
-	void Release();
-
     void Load(Atlas * _atlas,const std::string& _file,int _flags = 13 /*GAMEDATA|BOTH*/);
-
     void SetPosition(int _x,int _y,int _from = 0);
     void Update(unsigned int _elapsed);
     void Render();
@@ -82,7 +78,6 @@ public:
     std::vector<Particle *>::iterator particlesIT;
 
 private:
-    int         refCount;
     Atlas       *atlas;
     AtlasEntry	*entry;
     float       emissionRate;

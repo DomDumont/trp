@@ -34,27 +34,6 @@ class Body
 public:
 	Body();
 	~Body();
-	void AddRef()
-	{
-		// Increase the reference counter
-		refCount++;
-		//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"AddRef : nb active body = %d\n",refCount);
-        SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"AddRef : nb active body = %d\n",refCount);
-	}
-
-	void Release()
-	{
-		// Decrease ref count and delete if it reaches 0
-        refCount--;
-		if ( refCount == 0 )
-			delete this;
-		else
-        if ( refCount > 0 )
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION,"Release : nb active body = %d\n",refCount);
-        else
-            SDL_assert(0);
-            
-	}
 
 	void	Create();
     void	Destroy();
@@ -73,7 +52,7 @@ public:
 
 
 private:
-	int refCount;
+
 	b2BodyDef	bodyDef;
 	b2Body*		body;
 	b2Shape*	shape;

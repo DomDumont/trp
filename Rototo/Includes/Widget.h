@@ -31,9 +31,10 @@ class Event;
 #define ANCHOR_CENTER  0
 #define ANCHOR_TOPLEFT 1
 
+#include "Object.h"
 #include "Rect.h"
 
-class Widget
+class Widget: public Object
 {
 public:
 	Widget();
@@ -63,9 +64,6 @@ public:
 	void			Hide();
 
 
-	virtual void AddRef();
-
-	virtual void Release();
 	
 public:
 	Rect	frame;
@@ -77,9 +75,6 @@ public:
 	bool		enabled;
 	bool		shown;
 
-protected:
-
-	int refCount;
 };
 
 Widget *Widget_Factory();

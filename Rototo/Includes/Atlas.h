@@ -32,6 +32,8 @@ class Atlas;
 struct SDL_Texture; //TODO change this
 #include "Rect.h"
 
+#include "Object.h"
+
 class AtlasEntry
 {
 	public:
@@ -52,7 +54,8 @@ class AtlasEntry
 
 };
 
-class Atlas
+
+class Atlas : public Object
 {
 	public:
 	
@@ -64,9 +67,6 @@ class Atlas
 	void UnLoad();
 	AtlasEntry * FindEntry(const std::string& _name);
 
-	void AddRef();
-
-	void Release();
 
 	public:
 	
@@ -74,11 +74,9 @@ class Atlas
 	SDL_Texture *			texture;
 
 	private:
-
-	//Now in utils.cpp std::string LoadString(const std::string& _sourceFile);
 	 
 	Rect	size;
-	int		refCount;
+
 };
 
 Atlas *Atlas_Factory();

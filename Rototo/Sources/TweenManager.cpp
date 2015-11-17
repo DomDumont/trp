@@ -44,56 +44,6 @@ TweenManager& TweenManager::Get()
 	return foo;
 }
 
-
-/*----------------------------------------------------------------------------*/
-
-void Tween::AddRef()
-{
-	// Increase the reference counter
-	refCount++;
-	SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : nb active tweens = %d\n", refCount);
-}
-
-/*----------------------------------------------------------------------------*/
-
-void Tween::Release()
-{
-	// Decrease ref count and delete if it reaches 0
-	refCount--;
-	if (refCount == 0)
-		delete this;
-	else
-		if (refCount > 0)
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Release : nb active tweens = %d\n", refCount);
-		else
-			SDL_assert(0);
-}
-
-
-/*----------------------------------------------------------------------------*/
-
-void TweenedFloat::AddRef()
-{
-	// Increase the reference counter
-	refCount++;
-}
-
-/*----------------------------------------------------------------------------*/
-
-void TweenedFloat::Release()
-{
-	// Decrease ref count and delete if it reaches 0
-	refCount--;
-	if (refCount == 0)
-		delete this;
-	else
-		if (refCount > 0)
-			SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : nb active TweenedFloat  = %d\n", refCount);
-		else
-			SDL_assert(0);
-
-}
-
 /*----------------------------------------------------------------------------*/
 
 void 	TWN_AddTween(Tween * _tween)
@@ -253,7 +203,7 @@ void TweenManager::AddTween(Tween* _tween)
 void TweenManager::RemoveTween(Tween  *param) 
 {
 
-	int total_tweens = tweens.size();
+	int total_tweens = (int) tweens.size();
 	tweensIT = tweens.begin();
 	for (int i=0; i <  total_tweens; i++,tweensIT++) 
 		{

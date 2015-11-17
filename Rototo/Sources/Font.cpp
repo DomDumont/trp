@@ -58,42 +58,19 @@ Font_p::Font_p()
 }
 
 
-Font::Font() : font_p(new Font_p),refCount(1)
+Font::Font() : font_p(new Font_p)
 	{
 		
 	}
 
 Font::Font(const Font &other)
 	{
-		this->refCount = 1;
 	}
 
 Font::~Font()
 {
 }
 
-
-void Font::AddRef()
-{
-	// Increase the reference counter
-	refCount++;
-	//SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "AddRef : 0x%x font nb active ref = %d\n", (unsigned int)this, refCount);
-}
-
-void Font::Release()
-{
-	// Decrease ref count and delete if it reaches 0
-	refCount--;
-	if (refCount == 0)
-		delete this;
-	else
-		if (refCount > 0)
-		{
-			//   SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Release : 0x%x font nb active refs = %d\n",(unsigned int) this, refCount);
-		}
-		else
-			SDL_assert(0);
-}
 
 float Font_p::GetFontHeight()
 {
