@@ -90,7 +90,12 @@ void TiledMap::UnLoad()
 /************************************************************************/
 void TiledMap::Load(const std::string& _fullPath)
 {
-
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_string(_fullPath.c_str());
+	if (result.status != pugi::status_ok)
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "cannot parse xml file %s %s\n", _fullPath.c_str(), SDL_GetError());
+	}
 }
 
 

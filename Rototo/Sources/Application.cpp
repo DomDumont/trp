@@ -348,6 +348,10 @@ Application::Application() : application_p(new Application_p)
 
 Application::~Application()
 {
+
+	if (this->event)
+		delete this->event;
+
 #ifdef TRP_USE_PHYSICS
 	delete physicsManager;
 #endif
