@@ -21,6 +21,8 @@ set (CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
 IF(WIN32)
 	MESSAGE("Coucou win32")
 	SET(ENV{SDL2} ${CMAKE_SOURCE_DIR}/Rototo/Extern/SDL2)
+	SET(ENV{SDL2NET} ${CMAKE_SOURCE_DIR}/Rototo/Extern/SDL2_net)
+	SET(ENV{SDL2MIXER} ${CMAKE_SOURCE_DIR}/Rototo/Extern/SDL2_mixer)
 ENDIF(WIN32)
 
 add_subdirectory (Rototo)
