@@ -27,17 +27,22 @@ find_package(Qt5Widgets)
 find_package(Qt5Network)
 find_package(Qt5Xml)
 
+include_directories(${Qt5Core_INCLUDE_DIRS})
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
 include_directories(${Qt5Network_INCLUDE_DIRS})
 include_directories(${Qt5Xml_INCLUDE_DIRS})
 
 # Use the compile definitions defined in the Qt 5 Widgets module
+add_definitions(${Qt5Core_DEFINITIONS})
 add_definitions(${Qt5Widgets_DEFINITIONS})
 add_definitions(${Qt5Network_DEFINITIONS})
 add_definitions(${Qt5Xml_DEFINITIONS})
 
 # Add compiler flags for building executables (-fPIE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Network_EXECUTABLE_COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Wml_EXECUTABLE_COMPILE_FLAGS}")
 
 
 
