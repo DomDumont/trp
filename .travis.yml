@@ -13,7 +13,7 @@ matrix:
 
 before_install:
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo add-apt-repository ppa:zoogie/sdl2-snapshots -y; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-add-repository ppa:beineri/opt-qt55 -y; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-add-repository ppa:beineri/opt-qt56 -y; fi
 
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get update -q; fi
 
@@ -26,7 +26,7 @@ install:
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-dev; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-net-dev; fi
 - if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install libsdl2-mixer-dev; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install qt55base; source /opt/qt55/bin/qt55-env.sh; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ];  then sudo apt-get install qt56base; source /opt/qt56/bin/qt56-env.sh; fi
 
 
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install sdl2; fi
