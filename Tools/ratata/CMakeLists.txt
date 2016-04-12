@@ -5,8 +5,8 @@ cmake_minimum_required (VERSION 2.8.3)
 #cmake_policy(SET CMP0020 OLD)
 
 if (WIN32)
-	set(CMAKE_PREFIX_PATH C:/Qt/5.5/msvc2013_64/lib/cmake)
-	SET(MY_QT_DLL_DIR C:/Qt/5.5/msvc2013_64/bin)
+	set(CMAKE_PREFIX_PATH C:/Qt/5.6/msvc2015_64/lib/cmake)
+	SET(MY_QT_DLL_DIR C:/Qt/5.6/msvc2015_64/bin)
 endif(WIN32)
 
 if (APPLE)
