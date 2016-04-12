@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Your first Sprite &mdash; TRP 1.05 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="TRP 1.05 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Your First Animation" href="tuto3-animation.html"/>
+        <link rel="prev" title="Your first T.R.P. project (aka HelloWorld version 1)" href="tuto1-hello.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TRP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.05
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introducing_trp/index.html">Introducing T.R.P.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-principle">Basic principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#learn-the-angelscript-syntax">Learn the AngelScript syntax</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#try-the-samples">Try the samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tuto1-hello.html">Your first T.R.P. project (aka HelloWorld version 1)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Your first Sprite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto3-animation.html">Your First Animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto4-sound.html">Your First Sound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto5-music.html">Your First Music</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto6-button.html">Your First Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto7-listbox.html">Your First ListBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto8-io.html">Input/Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ratata/index.html">Ratata : the I.D.E.</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">TRP</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Your first Sprite</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="your-first-sprite">
+<span id="tuto2-sprite"></span><h1>Your first Sprite<a class="headerlink" href="#your-first-sprite" title="Permalink to this headline">¶</a></h1>
+<p>T.R.P. does not use images directly. It uses atlas (= spriteSheets) to optimize drawings.
+The recommended tool to create spritesheets is Shoebox.
+Drag your images into shoebox</p>
+<img alt="../_images/shoebox.jpg" src="../_images/shoebox.jpg" />
+<p>Shoebox will create 2 files for you.</p>
+<ul class="simple">
+<li>sheet.png : contains all your images into one big spritesheet</li>
+<li>sheet.xml : an xml file containing the location of each of your files.</li>
+</ul>
+<p>Let&#8217;s see an example of xml file produced by ShoeBox</p>
+<div class="highlight-python"><pre>&lt;TextureAtlas imagePath="sheet.png"&gt;
+    &lt;SubTexture name="Bullet.png" x="0" y="116" width="28" height="9"/&gt;
+    &lt;SubTexture name="Player.png" x="0" y="74" width="39" height="40"/&gt;
+    &lt;SubTexture name="Pointer.png" x="41" y="74" width="22" height="31"/&gt;
+    &lt;SubTexture name="Seeker.png" x="0" y="0" width="40" height="30"/&gt;
+    &lt;SubTexture name="Wanderer.png" x="0" y="32" width="40" height="40"/&gt;
+&lt;/TextureAtlas&gt;</pre>
+</div>
+<p>You can see that the name of your images stay the same, but now each image has coordinates into the big spritesheet.</p>
+<p>Thus to load your image into T.R.P. this is a 2 steps process</p>
+<ul class="simple">
+<li>Load the Atlas (= the spritesheet)</li>
+<li>Load the sprite</li>
+</ul>
+<ol class="arabic simple">
+<li>Load the Atlas</li>
+</ol>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Atlas</span> <span class="n">atlas</span><span class="p">;</span>
+<span class="n">atlas</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&quot;sheet&quot;</span><span class="p">);</span> <span class="c1">//without extension because trp will read both the xml and image file</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Load the sprite</li>
+</ol>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Sprite</span> <span class="n">mySprite</span><span class="p">;</span>
+<span class="n">mySprite</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">atlas</span><span class="p">,</span><span class="s">&quot;Player.png&quot;</span><span class="p">);</span> <span class="c1">// atlas is the preloaded atlas, the 2nd param is the original name of your image file.</span>
+</pre></div>
+</div>
+<p>Here&#8217;s the minimal sample for sprites</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SpriteScene</span><span class="o">:</span><span class="n">Scene</span>
+    <span class="p">{</span>
+    <span class="n">Sprite</span> <span class="n">mySprite</span><span class="p">;</span>
+    <span class="n">Atlas</span>  <span class="n">myAtlas</span><span class="p">;</span>
+
+    <span class="kt">void</span> <span class="n">Init</span><span class="p">()</span>
+        <span class="p">{</span>
+        <span class="n">myAtlas</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&quot;graphics/sheet&quot;</span><span class="p">);</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">myAtlas</span><span class="p">,</span><span class="s">&quot;sheep.png&quot;</span><span class="p">);</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">windowX</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">windowY</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="n">uint64</span> <span class="n">_delta</span><span class="p">)</span>
+        <span class="p">{</span>
+
+        <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">OnRender</span><span class="p">(</span><span class="n">uint64</span> <span class="n">_delta</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="n">WND_ClearWithColor</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">255</span><span class="p">);</span>
+        <span class="n">mySprite</span><span class="p">.</span><span class="n">Render</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">OnShutdown</span><span class="p">()</span>
+        <span class="p">{</span>
+        <span class="n">myAtlas</span><span class="p">.</span><span class="n">UnLoad</span><span class="p">();</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Of course, this is a minimal sample, you can do a lot more with sprites,
+Please take a look at the reference documentation for sprites</p>
+<p>[Sprite](#class-sprite)</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tuto3-animation.html" class="btn btn-neutral float-right" title="Your First Animation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tuto1-hello.html" class="btn btn-neutral" title="Your first T.R.P. project (aka HelloWorld version 1)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, DomDom.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.05',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

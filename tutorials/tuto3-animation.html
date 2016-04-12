@@ -1,0 +1,279 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Your First Animation &mdash; TRP 1.05 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="TRP 1.05 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Your First Sound" href="tuto4-sound.html"/>
+        <link rel="prev" title="Your first Sprite" href="tuto2-sprite.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TRP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.05
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introducing_trp/index.html">Introducing T.R.P.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-principle">Basic principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#learn-the-angelscript-syntax">Learn the AngelScript syntax</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#try-the-samples">Try the samples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tuto1-hello.html">Your first T.R.P. project (aka HelloWorld version 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto2-sprite.html">Your first Sprite</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Your First Animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto4-sound.html">Your First Sound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto5-music.html">Your First Music</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto6-button.html">Your First Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto7-listbox.html">Your First ListBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto8-io.html">Input/Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ratata/index.html">Ratata : the I.D.E.</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">TRP</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Your First Animation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="your-first-animation">
+<span id="tuto3-animation"></span><h1>Your First Animation<a class="headerlink" href="#your-first-animation" title="Permalink to this headline">¶</a></h1>
+<p>Concerning animations, T.R.P. uses sequences of images.
+Again, T.R.P. gets all images from a spritesheet.</p>
+<p>In order to play an animation you must</p>
+<ol class="arabic simple">
+<li>Export your animation as a sequence of images</li>
+<li>Build a spritesheet with all your images (again use shoebox for this)</li>
+</ol>
+<p>You can use any nomenclature you want, the only constraint is to start at frame 0 and end at nbframe-1;
+The magic then append in the Load function where you can explain T.R.P. the naming you want to use.
+Let me try to explain this better throught an example :</p>
+<p>Let&#8217;s say you have a ten frames animation called horse_run.</p>
+<p>you can use any naming and any image format you want for your frames for example horse-001.png Horse_00001.jpg
+but you must tell T.R.P. how your namaing works.</p>
+<p>For example, if you want to call each frame like this : horse-000.png ... horse-009.png</p>
+<p>then the &#8220;FORMAT&#8221; will be &#8220;horse&#8221;,&#8221;%s-%03d.png&#8221;</p>
+<p>some other samples :</p>
+<p>for Horse_00000.jpg to Horse_00009.jpg the format will be &#8220;horse&#8221;,&#8221;%s_%05d.jpg&#8221;</p>
+<p>Load(myAtlas,&#8221;cocci&#8221;,&#8221;%s_%05d.png&#8221;,10);</p>
+<p>The minimal sample you can have to play an animation is this one</p>
+<p>~~~~ { .Cpp }</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>class AnimationScene:Scene</dt>
+<dd><p class="first">{
+Animation myAnim;
+Atlas  myAtlas;</p>
+<dl class="docutils">
+<dt>void Init()</dt>
+<dd>{
+myAtlas.Load(&#8220;graphics/broute&#8221;);
+myAnim.Load(myAtlas,&#8221;broute&#8221;,&#8221;%s_%05d.tga&#8221;,30);
+myAnim.SetFPS(12);
+myAnim.Play(E_MODE_NORMAL,C_INFINITE_LOOP);
+}</dd>
+<dt>void OnUpdate(uint64 _delta)</dt>
+<dd>{
+myAnim.Update(_delta);
+}</dd>
+<dt>void OnRender(uint64 _delta)</dt>
+<dd>{
+WND_ClearWithColor(80,80,80,255);
+myAnim.Render();
+}</dd>
+<dt>void OnShutdown()</dt>
+<dd>{
+myAtlas.UnLoad();
+myAnim.UnLoad();
+}</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+</div></blockquote>
+<hr class="docutils" />
+<p>Of course, this is a minimal sample, you can do a lot more with animations,
+Please take a look at the reference documentation for animations</p>
+<p>[Animation](#class-animation)</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tuto4-sound.html" class="btn btn-neutral float-right" title="Your First Sound" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tuto2-sprite.html" class="btn btn-neutral" title="Your first Sprite" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, DomDom.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.05',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

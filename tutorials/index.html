@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorials &mdash; TRP 1.05 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="TRP 1.05 documentation" href="../index.html"/>
+        <link rel="next" title="Your first T.R.P. project (aka HelloWorld version 1)" href="tuto1-hello.html"/>
+        <link rel="prev" title="install" href="../getting_started/install.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TRP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.05
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introducing_trp/index.html">Introducing T.R.P.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-principle">Basic principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learn-the-angelscript-syntax">Learn the AngelScript syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#try-the-samples">Try the samples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tuto1-hello.html">Your first T.R.P. project (aka HelloWorld version 1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto2-sprite.html">Your first Sprite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto3-animation.html">Your First Animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto4-sound.html">Your First Sound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto5-music.html">Your First Music</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto6-button.html">Your First Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto7-listbox.html">Your First ListBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto8-io.html">Input/Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ratata/index.html">Ratata : the I.D.E.</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">TRP</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Tutorials</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorials">
+<span id="turorials-index"></span><h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-principle">
+<h2>Basic principle<a class="headerlink" href="#basic-principle" title="Permalink to this headline">¶</a></h2>
+<p>T.R.P is a c++ library but a special one ;-)
+You can use it like a classic library from your c++ code
+But you can also use it throught a a script langage.</p>
+<p>T.R.P. use a script langage(AngelScript)
+and search for its data in the gamedata directory (at the same level as the executable directory).
+If you want to use another folder (or if you work on multiple projects), you can indicate your
+gamedata folder in the file settings.xml</p>
+<div class="highlight-python"><pre>&lt;settings&gt;
+...
+&lt;datafolder directory="mygamedata"/&gt;
+...
+&lt;/settings&gt;</pre>
+</div>
+</div>
+<div class="section" id="learn-the-angelscript-syntax">
+<h2>Learn the AngelScript syntax<a class="headerlink" href="#learn-the-angelscript-syntax" title="Permalink to this headline">¶</a></h2>
+<p>AngelScript is very close to the c++ langage but there are still some differences (such as references)
+Basically, no new or delete.
+Pointers are replaced by &#64;
+You can simulate new and delete by usgin a scope trick . Let&#8217;s see this example :</p>
+<div class="highlight-python"><pre>class A;
+
+A @refA; // This is a reference (= a pointer)
+
+// This is a new
+
+{
+A a;    // The object a is instantiated, it should be deleted at the end of the scope
+
+@refA = @a; // But in fact, it will stay allocated because there is still a reference on it
+}
+
+// This is a delete
+
+@refA = NULL; // No more reference on object 'a' so we can finally call delete</pre>
+</div>
+<p>For any additionnal informations , please go directly to the AngelScript website</p>
+<p><a class="reference external" href="http://www.angelcode.com/angelscript/sdk/docs/manual/doc_script.html">Here</a></p>
+</div>
+<div class="section" id="try-the-samples">
+<h2>Try the samples<a class="headerlink" href="#try-the-samples" title="Permalink to this headline">¶</a></h2>
+<p>T.R.P. comes by default with a lot of samples.</p>
+<p>Simply launch the application, you&#8217;ll fall over them.</p>
+<p>It is strongly advised to open these script files (extension .rsc = Rototo Script File) and study them.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tuto1-hello.html">Your first T.R.P. project (aka HelloWorld version 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto2-sprite.html">Your first Sprite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto3-animation.html">Your First Animation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto4-sound.html">Your First Sound</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto5-music.html">Your First Music</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto6-button.html">Your First Button</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto7-listbox.html">Your First ListBox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tuto8-io.html">Input/Output</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tuto1-hello.html" class="btn btn-neutral float-right" title="Your first T.R.P. project (aka HelloWorld version 1)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../getting_started/install.html" class="btn btn-neutral" title="install" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, DomDom.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.05',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

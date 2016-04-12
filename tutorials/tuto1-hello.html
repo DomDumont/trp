@@ -1,0 +1,319 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Your first T.R.P. project (aka HelloWorld version 1) &mdash; TRP 1.05 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="TRP 1.05 documentation" href="../index.html"/>
+        <link rel="up" title="Tutorials" href="index.html"/>
+        <link rel="next" title="Your first Sprite" href="tuto2-sprite.html"/>
+        <link rel="prev" title="Tutorials" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TRP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.05
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introducing_trp/index.html">Introducing T.R.P.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#basic-principle">Basic principle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#learn-the-angelscript-syntax">Learn the AngelScript syntax</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#try-the-samples">Try the samples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Your first T.R.P. project (aka HelloWorld version 1)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enhanced-helloworld-version-2">Enhanced HelloWorld (Version 2)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tuto2-sprite.html">Your first Sprite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto3-animation.html">Your First Animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto4-sound.html">Your First Sound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto5-music.html">Your First Music</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto6-button.html">Your First Button</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto7-listbox.html">Your First ListBox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tuto8-io.html">Input/Output</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ratata/index.html">Ratata : the I.D.E.</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">TRP</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Tutorials</a> &raquo;</li>
+      
+    <li>Your first T.R.P. project (aka HelloWorld version 1)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="your-first-t-r-p-project-aka-helloworld-version-1">
+<span id="tuto1-hello"></span><h1>Your first T.R.P. project (aka HelloWorld version 1)<a class="headerlink" href="#your-first-t-r-p-project-aka-helloworld-version-1" title="Permalink to this headline">¶</a></h1>
+<p>T.R.P. needs at least one file called main.rsc in the gamedata directory</p>
+<p>Take your favorite text editor and create a file called main.rsc. Paste the code below. This is the minimal TRP program.</p>
+<ul class="simple">
+<li>OnInit</li>
+<li>OnUpdate</li>
+<li>OnRender</li>
+<li>OnShutdown</li>
+</ul>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="kt">void</span> <span class="n">OnInit</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="n">UTI_Log</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="n">uint64</span> <span class="n">_delta</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">UTI_Exit</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">OnRender</span><span class="p">(</span><span class="n">uint64</span> <span class="n">_delta</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">OnShutdown</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You must provide at least those 4 functions , they will be automatically called by T.R.P. during the execution of your game.</p>
+<ul class="simple">
+<li>OnInit is called only once at the beginning of the game (or each time you restart the game )</li>
+<li>OnUpdate is called every engine frame before OnRender</li>
+<li>OnRender is called every engine frame</li>
+<li>OnShutdown is called only once at the end of the game (when the window close or if you call UTI_Exit)</li>
+</ul>
+<div class="section" id="enhanced-helloworld-version-2">
+<h2>Enhanced HelloWorld (Version 2)<a class="headerlink" href="#enhanced-helloworld-version-2" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s do the same HelloWorld program but this time by using the scene manager provided in the samples
+and with a Label (to have something more graphical than the system logs)</p>
+<p>In the gamedata directory you will find a minimal scene manager.
+So let&#8217;s open the file scene_manager.rsc to see what&#8217;s inside ;-)</p>
+<p>We have 2 classes :</p>
+<ul class="simple">
+<li>a SceneManager class</li>
+<li>a Scene class</li>
+</ul>
+<p>The SceneManager class includes a &#8220;ChangeScene&#8221; method
+void ChangeScene(Scene &#64; _newScene) wich is more interesting than the others.</p>
+<p>The global idea is to have multiple scenes, 1 for the game, 1 for menus, ... and to navigate from one to another by calling the ChangeScene method.</p>
+<p>Let&#8217;s do this 2 steps process :</p>
+<p>1. Write a game scene wich inherits from  Scene
+1. Write a new &#8220;main.rsc&#8221; file  to launch directly our new scene (e.g. by calling a changeScene with it)</p>
+<div class="section" id="create-our-game-scene">
+<h3>Create our game scene<a class="headerlink" href="#create-our-game-scene" title="Permalink to this headline">¶</a></h3>
+<p>Create a text file called &#8220;game_scene.rsc&#8221;
+paste the following code into it:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">class</span> <span class="nc">GameScene</span><span class="o">:</span><span class="n">Scene</span>
+        <span class="p">{</span>
+
+
+        <span class="kt">void</span> <span class="n">Init</span><span class="p">()</span>
+                <span class="p">{</span>
+                <span class="n">maFonte</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&quot;casual.ttf&quot;</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+
+                <span class="n">monLabel</span><span class="p">.</span><span class="n">SetFont</span><span class="p">(</span><span class="n">maFonte</span><span class="p">);</span>
+                <span class="n">monLabel</span><span class="p">.</span><span class="n">SetText</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">);</span>
+
+                <span class="p">}</span>
+
+        <span class="kt">void</span> <span class="n">OnUpdate</span><span class="p">(</span><span class="n">uint64</span> <span class="n">_delta</span><span class="p">)</span>
+                <span class="p">{</span>
+
+                <span class="p">}</span>
+
+        <span class="kt">void</span> <span class="n">OnRender</span><span class="p">(</span><span class="n">uint64</span> <span class="n">_delta</span><span class="p">)</span>
+                <span class="p">{</span>
+                <span class="n">monLabel</span><span class="p">.</span><span class="n">Render</span><span class="p">();</span>
+                <span class="p">}</span>
+
+        <span class="n">CFont</span>   <span class="n">maFonte</span><span class="p">;</span>
+        <span class="n">CLabel</span>  <span class="n">monLabel</span><span class="p">;</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<p>[Font](#class-font)
+[Label](#class-label)</p>
+<p>Of course, you noticed that the scene manager provides is minimalist, nothing prevents you to create your own with more features
+(of pushScenes / Popscene example)</p>
+</div>
+<div class="section" id="create-the-new-main-rsc-file">
+<h3>Create the new main.rsc file<a class="headerlink" href="#create-the-new-main-rsc-file" title="Permalink to this headline">¶</a></h3>
+<p>create a text file called main.rsc. Paste the code below.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tuto2-sprite.html" class="btn btn-neutral float-right" title="Your first Sprite" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, DomDom.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.05',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

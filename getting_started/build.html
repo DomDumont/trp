@@ -1,0 +1,281 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Build &mdash; TRP 1.05 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="TRP 1.05 documentation" href="../index.html"/>
+        <link rel="up" title="Getting Started" href="index.html"/>
+        <link rel="next" title="install" href="install.html"/>
+        <link rel="prev" title="Download and install" href="download.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TRP
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.05
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introducing_trp/index.html">Introducing T.R.P.</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="download.html">Download and install</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#emscripten">Emscripten</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xcode">XCode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ratata/index.html">Ratata : the I.D.E.</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">TRP</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Getting Started</a> &raquo;</li>
+      
+    <li>Build</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="build">
+<span id="trp-build"></span><h1>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="emscripten">
+<h2>Emscripten<a class="headerlink" href="#emscripten" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Install Emscripten</li>
+<li>On Windows install also MinGW</li>
+</ul>
+<blockquote>
+<div><div class="highlight-python"><pre>mkdir Build
+cd Build
+emconfigure cmake -G "MinGW Makefiles" ..
+cmake --build .</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="windows">
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h2>
+<p>First you have to install SDL2 visual dev libraries.
+and add an environment variable called &#8220;SDL2&#8221; to your system</p>
+<p><a class="reference external" href="https://www.libsdl.org/download-2.0.php">SDL2</a></p>
+<p>and SDL2-Net dev libraries for visual also</p>
+<p><a class="reference external" href="https://www.libsdl.org/projects/SDL_net/">SDL2_NET</a></p>
+<p>Then, in order to build Ratata (the I.D.E.) you must install QT5</p>
+<p><a class="reference external" href="http://www.qt.io/download/">QT5</a></p>
+<p>if you don&#8217;t use the regular install directory, you may need to change the cmake files;</p>
+<blockquote>
+<div><div class="highlight-python"><pre>mkdir Build
+cd Build
+cmake -G "Visual Studio 12 2013 Win64" ..</pre>
+</div>
+</div></blockquote>
+<p>If visual is the only ins available on your machine
+use a simple cmake otherwise you may have to specify the generator
+with the -G option .
+In order to build a 64 bits version, it&#8217;s also done through the generator.
+On windows cmake have difficulties to find sdl2 so please add a SDL2 environment
+variable on your system to indicate cmake where your sdl2 library is installed</p>
+<blockquote>
+<div><div class="highlight-python"><pre>mkdir Build
+cd Build
+cmake ..
+cmake --build .</pre>
+</div>
+</div></blockquote>
+<p>You can also clean</p>
+<blockquote>
+<div><div class="highlight-python"><pre>cmake --build . --target clean</pre>
+</div>
+</div></blockquote>
+<p>or install TRP</p>
+<blockquote>
+<div><div class="highlight-python"><pre>cmake --build . --target install</pre>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xcode">
+<h2>XCode<a class="headerlink" href="#xcode" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>mkdir Build
+cd Build
+cmake -G "XCode" ..
+cmake --build .</pre>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="install" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="download.html" class="btn btn-neutral" title="Download and install" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, DomDom.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.05',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
